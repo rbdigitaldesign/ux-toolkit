@@ -262,3 +262,41 @@ footer img {
   position: relative;
   display: inline-block;
 }
+.banner-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.tagline {
+  flex: 1;
+  min-width: 250px;
+}
+
+.uxie-wrapper {
+  flex-shrink: 0;
+}
+
+.uxie-icon {
+  width: 140px; /* adjust size here */
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.uxie-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+}
+
+/* Optional: prevent UXie from wrapping awkwardly on small viewports */
+@media (max-width: 720px) {
+  .banner-flex {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+}
+
