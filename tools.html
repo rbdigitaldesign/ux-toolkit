@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX tools | Higher Education Toolkit</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="methodologies.html">Methodologies</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <h1>UX tools for higher education</h1>
+  </header>
+  <main class="container">
+    <nav>
+      <ul>
+        <li><a href="#jotform">Jotform</a></li>
+        <li><a href="#optimal-workshop">Optimal Workshop</a></li>
+        <li><a href="#hotjar">Hotjar</a></li>
+        <li><a href="#typeform">Typeform</a></li>
+        <li><a href="#google-forms">Google Forms</a></li>
+      </ul>
+    </nav>
+
+    <section id="jotform">
+      <h2>Jotform</h2>
+      <p><strong>Use case:</strong> Surveys, feedback forms, consent forms.</p>
+      <p>Drag-and-drop interface with templates. Great for student feedback. Auto-generates reports and integrates with Google Sheets and MS Teams.</p>
+      <a href="https://www.jotform.com" target="_blank">Visit Jotform</a>
+    </section>
+
+    <section id="optimal-workshop">
+      <h2>Optimal Workshop</h2>
+      <p><strong>Use case:</strong> Card sorting, tree testing, first-click tests.</p>
+      <p>Excellent toolset for information architecture validation and navigation usability. Offers clean analytics and session recording.</p>
+      <a href="https://www.optimalworkshop.com/" target="_blank">Visit Optimal Workshop</a>
+    </section>
+
+    <section id="hotjar">
+      <h2>Hotjar</h2>
+      <p><strong>Use case:</strong> Heatmaps, session recordings, user behaviour insights.</p>
+      <p>Visualise where students click, scroll, and drop off. Useful for diagnosing usability pain points.</p>
+      <a href="https://www.hotjar.com/" target="_blank">Visit Hotjar</a>
+    </section>
+
+    <section id="typeform">
+      <h2>Typeform</h2>
+      <p><strong>Use case:</strong> Conversational-style surveys and feedback.</p>
+      <p>Slick, mobile-friendly form layouts ideal for engaging UX-style quizzes or mid-course polls.</p>
+      <a href="https://www.typeform.com/" target="_blank">Visit Typeform</a>
+    </section>
+
+    <section id="google-forms">
+      <h2>Google Forms</h2>
+      <p><strong>Use case:</strong> Simple, quick surveys with auto-linked results to Google Sheets.</p>
+      <p>Best for low-friction form delivery in environments already using Google Workspace. Customisable but limited styling.</p>
+      <a href="https://forms.google.com" target="_blank">Visit Google Forms</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById(\"topBtn\");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ?
