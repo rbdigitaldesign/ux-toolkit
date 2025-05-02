@@ -14,17 +14,8 @@
       <p>Your shortcut to smarter testing, better design, and stronger student experiences across digital learning.</p>
       <div class="search-wrapper">
   <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
-  <ul id="searchSuggestions" class="suggestion-list hidden">
-    <li>Card sorting</li>
-    <li>Usability testing</li>
-    <li>Heatmaps</li>
-    <li>Jotform</li>
-    <li>Typeform</li>
-    <li>Hotjar</li>
-    <li>Accessibility checklist</li>
-    <li>UX for media</li>
-    <li>Use in courses</li>
-  </ul>
+  <ul id="searchSuggestions" class="suggestion-list hidden" style="display: none;">
+$1</ul>
 </div>
 
 <script>
@@ -33,6 +24,7 @@
 
   searchInput.addEventListener("focus", () => {
     suggestionList.classList.remove("hidden");
+suggestionList.style.display = "block";
   });
 
   searchInput.addEventListener("input", () => {
@@ -48,6 +40,7 @@
     if (e.target.tagName === "LI") {
       searchInput.value = e.target.textContent;
       suggestionList.classList.add("hidden");
+suggestionList.style.display = "none";
     }
   });
 
