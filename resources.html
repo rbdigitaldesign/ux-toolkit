@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX resources | Higher Education Toolkit</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="methodologies.html">Methodologies</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <h1>UX resources and downloads</h1>
+  </header>
+
+  <main class="container">
+    <section id="templates">
+      <h2>Templates</h2>
+      <ul>
+        <li><a href="https://www.nngroup.com/articles/ux-research-template/" target="_blank">UX research planning template (NN/g)</a></li>
+        <li><a href="https://www.optimalworkshop.com/resources/templates/" target="_blank">Information architecture study templates</a></li>
+        <li><a href="https://www.jotform.com/table-templates/" target="_blank">Student survey & feedback form templates (Jotform)</a></li>
+      </ul>
+    </section>
+
+    <section id="reading">
+      <h2>Further reading</h2>
+      <ul>
+        <li><a href="https://www.interaction-design.org/literature/topics/user-research" target="_blank">Interaction Design Foundation – UX research</a></li>
+        <li><a href="https://www.nngroup.com/topic/usability-testing/" target="_blank">NN/g – Usability testing articles</a></li>
+        <li><a href="https://www.smashingmagazine.com/category/user-experience" target="_blank">Smashing Magazine – UX category</a></li>
+      </ul>
+    </section>
+
+    <section id="accessibility">
+      <h2>Accessibility checklists</h2>
+      <ul>
+        <li><a href="https://webaim.org/standards/wcag/checklist" target="_blank">WCAG 2.1 Checklist – WebAIM</a></li>
+        <li><a href="https://accessibility.huit.harvard.edu/digital-accessibility-checklist" target="_blank">Harvard Digital Accessibility Checklist</a></li>
+      </ul>
+    </section>
+
+    <section id="consent">
+      <h2>Sample consent forms</h2>
+      <ul>
+        <li><a href="https://www.nngroup.com/articles/informed-consent-user-research/" target="_blank">NN/g – Informed Consent for UX Research</a></li>
+        <li><a href="https://docs.google.com/document/d/1ZK-w7eMw0fG9sl_y5pIY5tHZCLqyeAJvMf3gRTaF9eE" target="_blank">Google Doc – UX Participant Consent Template</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
