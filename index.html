@@ -9,27 +9,26 @@
 </head>
 <body>
   <header class="hero-banner">
-    <div class="container banner-header">
-      <img src="uxie-icon.png" alt="UXie mascot icon" class="uxie-icon" />
-      <h1>UXie</h1>
-      <p>UXie is your shortcut to smarter testing, better design, and stronger student experiences — your UX-savvy sidekick for learning design teams.</p>
-      <form class="search-wrapper" id="searchForm">
-        <input type="text" id="searchInput" class="hero-search" placeholder="Search tools, methods, tips..." autocomplete="off" />
-        <button type="submit" class="search-button">Search</button>
-        <ul id="searchSuggestions" class="suggestion-list hidden">
-          <li>Card sorting</li>
-          <li>Usability testing</li>
-          <li>Heatmaps</li>
-          <li>Jotform</li>
-          <li>Typeform</li>
-          <li>Hotjar</li>
-          <li>Accessibility checklist</li>
-          <li>UX for media</li>
-          <li>Use in courses</li>
-          <li>User personas</li>
-        </ul>
-      </form>
-    </div>
+    <img src="uxie-icon.png" alt="UXie icon" class="uxie-icon" />
+    <h1>UXie</h1>
+    <p>UXie is your shortcut to smarter testing, better design, and stronger student experiences —<br> your UX-savvy sidekick for learning design teams.</p>
+
+    <form id="searchForm" class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
+      <button type="submit" class="search-button">Search</button>
+      <ul id="searchSuggestions" class="suggestion-list">
+        <li>Card sorting</li>
+        <li>Usability testing</li>
+        <li>Heatmaps</li>
+        <li>Jotform</li>
+        <li>Typeform</li>
+        <li>Hotjar</li>
+        <li>Accessibility checklist</li>
+        <li>UX for media</li>
+        <li>Use in courses</li>
+        <li>User personas</li>
+      </ul>
+    </form>
   </header>
 
   <main class="container">
@@ -64,9 +63,6 @@
       <h3>🎬 Coming Soon: How to run a UX test in Canvas</h3>
       <p>We’re preparing a short walkthrough showing you how to embed and evaluate UX tests directly inside your Canvas modules.</p>
     </section>
-    <img src="https://via.placeholder.com/800x450?text=UX+Test+in+Canvas+Video+Coming+Soon"
-         alt="Placeholder for UX test walkthrough video"
-         style="display: block; margin: 2em auto; border-radius: 8px; max-width: 100%; height: auto;" />
   </main>
 
   <footer>
@@ -75,5 +71,15 @@
   </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 </body>
 </html>
