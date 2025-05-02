@@ -46,8 +46,8 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: #E6E1FF;
 }
 
-.hero-banner img.uxie-icon {
-  max-width: 100%;
+hero-banner img.uxie-icon {
+  width: 64px;
   height: auto;
   margin-bottom: 0.5em;
   transition: transform 0.3s ease, filter 0.3s ease;
