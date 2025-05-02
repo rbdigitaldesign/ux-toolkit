@@ -1,20 +1,33 @@
+/* Base palette */
+:root {
+  --white: #FFFFFF;
+  --dark-blue: #140F50;
+  --bright-blue: #1448FF;
+  --north-terrace-purple: #836BFF;
+  --south-east-limestone: #F8EFE0;
+  --limestone-tint: #FEFCF9;
+}
+
+/* Layout */
 body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #F8EFE0; /* South East Limestone */
-  color: #140F50; /* Dark Blue */
+  background-color: var(--south-east-limestone);
+  color: var(--dark-blue);
 }
 
+/* Header */
 header {
-  background-color: #140F50;
-  color: #FFFFFF;
-  padding: 1em;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  padding: 1.5em 1em 1em;
+  border-bottom: 4px solid var(--north-terrace-purple);
 }
 
 nav ul {
   display: flex;
-  gap: 1em;
+  gap: 1.5em;
   list-style: none;
   padding: 0;
   margin: 0 0 1em 0;
@@ -22,37 +35,61 @@ nav ul {
 }
 
 nav a {
-  color: #FFFFFF;
+  color: var(--white);
   text-decoration: none;
   font-weight: bold;
+  font-size: 1em;
 }
 
 nav a:hover {
-  color: #836BFF; /* North Terrace Purple */
+  color: var(--north-terrace-purple);
 }
 
+/* Main content */
 .container {
   padding: 2em;
   max-width: 960px;
   margin: auto;
 }
 
+section {
+  background-color: var(--limestone-tint);
+  padding: 1.5em;
+  margin-bottom: 2em;
+  border-left: 6px solid var(--north-terrace-purple);
+  border-radius: 6px;
+}
+
+h1, h2 {
+  color: var(--dark-blue);
+}
+
+h2 {
+  border-bottom: 2px solid var(--bright-blue);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.5em;
+}
+
 input[type="search"] {
   width: 100%;
   padding: 0.8em;
   font-size: 1em;
-  border: 2px solid #1448FF;
-  border-radius: 5px;
+  border: 2px solid var(--bright-blue);
+  border-radius: 6px;
+  margin-bottom: 2em;
 }
 
+/* Footer */
 footer {
-  background-color: #140F50;
-  color: #FFFFFF;
+  background-color: var(--dark-blue);
+  color: var(--white);
   text-align: center;
-  padding: 1em;
-  margin-top: 3em;
+  padding: 1.2em;
+  font-size: 0.9em;
+  border-top: 3px solid var(--bright-blue);
 }
 
+/* Scroll-to-top button */
 #topBtn {
   display: none;
   position: fixed;
@@ -60,7 +97,7 @@ footer {
   right: 24px;
   z-index: 1000;
   font-size: 16px;
-  background-color: #1448FF;
+  background-color: var(--bright-blue);
   color: white;
   border: none;
   border-radius: 30px;
@@ -71,5 +108,5 @@ footer {
 }
 
 #topBtn:hover {
-  background-color: #836BFF;
+  background-color: var(--north-terrace-purple);
 }
