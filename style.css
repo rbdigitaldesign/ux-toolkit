@@ -28,43 +28,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 /* Hero Banner */
 .hero-banner {
   background:
-    url('tux-icon-banner.png') no-repeat right bottom / auto 100%,
-    linear-gradient(to right, rgba(20, 15, 80, 0.9), rgba(131, 107, 255, 0.4)),
-    linear-gradient(135deg, #140F50 40%, #836BFF);
-  color: var(--white);
-  text-align: center;
-  padding: 5em 1.5em 4em;
-  position: relative;
-  background-blend-mode: normal, normal, overlay;
-}
-
-.hero-banner h1 {
-  font-size: 2.8em;
-  margin: 0.3em 0 0.2em;
-}
-
-.hero-banner p {
-  font-size: 1.15em;
-  margin: 0 auto 1.5em;
-  max-width: 720px;
-  color: #E6E1FF;
-}
-
-.tux-mobile-top {
-  display: none;
-  width: 100px;
-  margin: 0 auto 1em;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.tux-mobile-top:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-
-@media (max-width: 700px) {
-.hero-banner {
-  background:
     linear-gradient(to right, rgba(20, 15, 80, 0.9), rgba(131, 107, 255, 0.4)),
     linear-gradient(135deg, #140F50 40%, #836BFF);
   background-color: #140F50;
@@ -96,3 +59,191 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   z-index: 1;
 }
 
+.hero-banner h1 {
+  font-size: 2.8em;
+  margin: 0.3em 0 0.2em;
+}
+
+.hero-banner p {
+  font-size: 1.15em;
+  margin: 0 auto 1.5em;
+  max-width: 720px;
+  color: #E6E1FF;
+}
+
+.tux-mobile-top {
+  display: none;
+  width: 100px;
+  margin: 0 auto 1em;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.tux-mobile-top:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+}
+
+@media (max-width: 700px) {
+  .hero-banner::after {
+    display: none;
+  }
+
+  .tux-mobile-top {
+    display: block;
+  }
+}
+
+/* Search */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.hero-search {
+  width: 100%;
+  padding: 0.8em;
+  font-size: 1em;
+  border: 2px solid var(--bright-blue);
+  border-radius: 8px;
+  font-family: inherit;
+  background-color: var(--white);
+  color: var(--dark-blue);
+  box-sizing: border-box;
+}
+
+.search-button {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  padding: 0 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.search-button:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+/* Suggestions dropdown */
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+
+.suggestion-list.visible {
+  display: block;
+}
+
+.suggestion-list li {
+  padding: 0.75em 1em;
+  cursor: pointer;
+  font-size: 1em;
+  border-bottom: 1px solid #eee;
+  color: var(--dark-blue);
+  background-color: var(--white);
+}
+
+.suggestion-list li:hover {
+  background-color: var(--limestone-tint);
+  color: var(--bright-blue);
+}
+
+/* Main layout */
+.container {
+  max-width: 1024px;
+  margin: auto;
+  padding: 2em 1em;
+}
+
+.grid-section {
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-radius: 10px;
+  padding: 1.5em;
+  text-align: left;
+  color: var(--dark-blue);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: var(--bright-blue);
+}
+
+/* Highlight Section */
+.highlight {
+  background-color: var(--limestone-tint);
+  padding: 2em;
+  margin-top: 3em;
+  border-radius: 8px;
+  border-left: 6px solid var(--north-terrace-purple);
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-blue);
+  color: white;
+  text-align: center;
+  padding: 1.5em 1em;
+  font-size: 0.9em;
+  border-top: 4px solid var(--bright-blue);
+}
+
+footer img {
+  max-width: 180px;
+  margin-top: 1em;
+}
+
+/* Scroll Button */
+#topBtn {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  font-size: 16px;
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#topBtn:hover {
+  background-color: var(--north-terrace-purple);
+}
