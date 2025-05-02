@@ -2,65 +2,156 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UX resources | Higher Education Toolkit</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Resources | Ctrl+Toolkit</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+  <style>
+    .resource-section {
+      margin-bottom: 3em;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5em;
+    }
+
+    .resource-card {
+      background-color: var(--white);
+      border: 2px solid var(--bright-blue);
+      border-radius: 8px;
+      padding: 1em;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .resource-card:hover {
+      box-shadow: 0 4px 12px rgba(20, 15, 80, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .resource-card h3 {
+      margin-top: 0;
+      font-size: 1.2em;
+      color: var(--bright-blue);
+    }
+
+    .resource-card p {
+      font-size: 0.95em;
+      color: var(--dark-blue);
+    }
+
+    .resource-card a {
+      display: inline-block;
+      margin-top: 0.5em;
+      font-weight: bold;
+      color: var(--north-terrace-purple);
+    }
+
+    .resource-card a:hover {
+      text-decoration: underline;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 2em;
+      text-align: center;
+      font-weight: bold;
+      color: var(--bright-blue);
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodologies.html">Methodologies</a></li>
-        <li><a href="tools.html">Tools</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="global-search">
-  <input type="search" id="searchInput" placeholder="Search tools, methods, resources..." />
-</div>
-    <h1>UX resources and downloads</h1>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>UX Resources</h1>
+      <p>Browse curated tools, templates and reading to support your UX and learning design practice.</p>
+    </div>
   </header>
 
   <main class="container">
-    <section id="templates">
-      <h2>Templates</h2>
-      <ul>
-        <li><a href="https://www.nngroup.com/articles/ux-research-template/" target="_blank">UX research planning template (NN/g)</a></li>
-        <li><a href="https://www.optimalworkshop.com/resources/templates/" target="_blank">Information architecture study templates</a></li>
-        <li><a href="https://www.jotform.com/table-templates/" target="_blank">Student survey & feedback form templates (Jotform)</a></li>
-      </ul>
+    <section class="resource-section" id="templates">
+      <h2>📁 Templates</h2>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <h3>UX research planning (NN/g)</h3>
+          <p>A downloadable structure to plan your goals, participants, tasks and test script.</p>
+          <a href="https://www.nngroup.com/articles/ux-research-template/" target="_blank">View template ↗</a>
+        </div>
+        <div class="resource-card">
+          <h3>IA study templates (Optimal Workshop)</h3>
+          <p>Download guides for card sorting and tree testing to evaluate navigation structure.</p>
+          <a href="https://www.optimalworkshop.com/resources/templates/" target="_blank">Explore templates ↗</a>
+        </div>
+        <div class="resource-card">
+          <h3>Jotform student feedback tables</h3>
+          <p>Pre-built tables and form templates for collecting survey data from learners.</p>
+          <a href="https://www.jotform.com/table-templates/" target="_blank">Browse Jotform ↗</a>
+        </div>
+      </div>
     </section>
 
-    <section id="reading">
-      <h2>Further reading</h2>
-      <ul>
-        <li><a href="https://www.interaction-design.org/literature/topics/user-research" target="_blank">Interaction Design Foundation – UX research</a></li>
-        <li><a href="https://www.nngroup.com/topic/usability-testing/" target="_blank">NN/g – Usability testing articles</a></li>
-        <li><a href="https://www.smashingmagazine.com/category/user-experience" target="_blank">Smashing Magazine – UX category</a></li>
-      </ul>
+    <section class="resource-section" id="reading">
+      <h2>📚 Further reading</h2>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <h3>Interaction Design Foundation</h3>
+          <p>Comprehensive articles and courses on user research, UX testing and HCI principles.</p>
+          <a href="https://www.interaction-design.org/literature/topics/user-research" target="_blank">Read more ↗</a>
+        </div>
+        <div class="resource-card">
+          <h3>Usability Testing (NN/g)</h3>
+          <p>A library of articles and videos from NN/g covering moderated, remote and think-aloud testing.</p>
+          <a href="https://www.nngroup.com/topic/usability-testing/" target="_blank">Browse NN/g ↗</a>
+        </div>
+        <div class="resource-card">
+          <h3>Smashing Magazine UX</h3>
+          <p>Insightful design thinking, accessibility and front-end UX tips from global contributors.</p>
+          <a href="https://www.smashingmagazine.com/category/user-experience" target="_blank">Explore articles ↗</a>
+        </div>
+      </div>
     </section>
 
-    <section id="accessibility">
-      <h2>Accessibility checklists</h2>
-      <ul>
-        <li><a href="https://webaim.org/standards/wcag/checklist" target="_blank">WCAG 2.1 Checklist – WebAIM</a></li>
-        <li><a href="https://accessibility.huit.harvard.edu/digital-accessibility-checklist" target="_blank">Harvard Digital Accessibility Checklist</a></li>
-      </ul>
+    <section class="resource-section" id="accessibility">
+      <h2>♿ Accessibility checklists</h2>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <h3>WCAG 2.1 Checklist</h3>
+          <p>WebAIM’s full checklist for accessible web development and design compliance.</p>
+          <a href="https://webaim.org/standards/wcag/checklist" target="_blank">View checklist ↗</a>
+        </div>
+        <div class="resource-card">
+          <h3>Harvard digital checklist</h3>
+          <p>Detailed guidance on building inclusive learning and web environments.</p>
+          <a href="https://accessibility.huit.harvard.edu/digital-accessibility-checklist" target="_blank">See Harvard guide ↗</a>
+        </div>
+      </div>
     </section>
 
-    <section id="consent">
-      <h2>Sample consent forms</h2>
-      <ul>
-        <li><a href="https://www.nngroup.com/articles/informed-consent-user-research/" target="_blank">NN/g – Informed Consent for UX Research</a></li>
-        <li><a href="https://docs.google.com/document/d/1ZK-w7eMw0fG9sl_y5pIY5tHZCLqyeAJvMf3gRTaF9eE" target="_blank">Google Doc – UX Participant Consent Template</a></li>
-      </ul>
+    <section class="resource-section" id="consent">
+      <h2>📝 Consent form samples</h2>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <h3>Informed Consent – NN/g</h3>
+          <p>Overview of ethical requirements and structure for consent in UX studies.</p>
+          <a href="https://www.nngroup.com/articles/informed-consent-user-research/" target="_blank">Read guidance ↗</a>
+        </div>
+        <div class="resource-card">
+          <h3>Google Docs template</h3>
+          <p>A ready-to-copy editable form for use in your own participant recruitment.</p>
+          <a href="https://docs.google.com/document/d/1ZK-w7eMw0fG9sl_y5pIY5tHZCLqyeAJvMf3gRTaF9eE" target="_blank">Open template ↗</a>
+        </div>
+      </div>
     </section>
+
+    <a href="index.html" class="back-link">← Return to Ctrl+Toolkit Home</a>
   </main>
 
   <footer>
-    <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
+    <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett</p>
   </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
