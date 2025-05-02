@@ -148,7 +148,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   max-height: 220px;
   overflow-y: auto;
   display: none;
-  z-index: 10;
+  z-index: **9999**;
 }
 
 .suggestion-list.visible {
