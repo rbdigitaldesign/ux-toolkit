@@ -32,16 +32,16 @@ function handleSearch(value) {
   } else if (query.includes('tips')) {
     window.location.href = 'tips.html';
   } else {
-    alert('Sorry, we couldn’t find a matching tool or method.');
+    alert('Sorry, TUX couldn’t find a matching tool or method.');
   }
 }
 
-// Show suggestions on input focus
+// Show suggestions when input is focused
 searchInput.addEventListener('focus', () => {
   suggestionList.classList.add('visible');
 });
 
-// Filter suggestions live as the user types
+// Filter visible suggestions
 searchInput.addEventListener('input', () => {
   const val = searchInput.value.toLowerCase();
   const options = suggestionList.querySelectorAll('li');
@@ -51,14 +51,14 @@ searchInput.addEventListener('input', () => {
   });
 });
 
-// Hide dropdown when clicking outside
+// Hide suggestions when clicking outside
 document.addEventListener('click', (e) => {
   if (!searchForm.contains(e.target)) {
     suggestionList.classList.remove('visible');
   }
 });
 
-// Allow click-to-select on suggestions
+// Click on a suggestion
 suggestionList.addEventListener('click', (e) => {
   if (e.target.tagName === 'LI') {
     searchInput.value = e.target.textContent;
@@ -67,7 +67,7 @@ suggestionList.addEventListener('click', (e) => {
   }
 });
 
-// Trigger search on Enter key
+// Submit with Enter
 searchInput.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -75,7 +75,7 @@ searchInput.addEventListener('keydown', function (e) {
   }
 });
 
-// Trigger search on form submit (button press)
+// Submit with button
 searchForm.addEventListener('submit', function (e) {
   e.preventDefault();
   handleSearch(searchInput.value);
