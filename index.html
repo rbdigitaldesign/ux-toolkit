@@ -4,30 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ctrl+Toolkit</title>
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=4" />
+  <script defer src="search.js"></script>
 </head>
 <body>
   <header class="hero-banner">
     <div class="container">
       <h1>Ctrl+Toolkit</h1>
       <p>Your shortcut to smarter testing, better design, and stronger student experiences across digital learning.</p>
-     <div class="search-wrapper">
-  <form id="searchForm" role="search">
-    <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
-    <button type="submit" id="searchButton" class="search-button">🔍</button>
-  </form>
-  <ul id="searchSuggestions" class="suggestion-list">
-    <li>Card sorting</li>
-    <li>Usability testing</li>
-    <li>Heatmaps</li>
-    <li>Jotform</li>
-    <li>Typeform</li>
-    <li>Hotjar</li>
-    <li>Accessibility checklist</li>
-    <li>UX for media</li>
-    <li>Use in courses</li>
-  </ul>
-</div>
+
+      <div class="search-wrapper">
+        <form id="searchForm" role="search">
+          <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
+          <button type="submit" id="searchButton" class="search-button">🔍</button>
+        </form>
+        <ul id="searchSuggestions" class="suggestion-list">
+          <li>Card sorting</li>
+          <li>Usability testing</li>
+          <li>Heatmaps</li>
+          <li>Jotform</li>
+          <li>Typeform</li>
+          <li>Hotjar</li>
+          <li>Accessibility checklist</li>
+          <li>UX for media</li>
+          <li>Use in courses</li>
+          <li>User personas</li>
+        </ul>
+      </div>
     </div>
   </header>
 
@@ -49,6 +52,10 @@
         <h2>📽️ Media UX Tips</h2>
         <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
       </a>
+      <a href="personas.html" class="card">
+        <h2>🧍‍♀️ User Personas</h2>
+        <p>Reference real-world learner personas created by Kelli Knuth to design more inclusive and accessible experiences.</p>
+      </a>
     </section>
 
     <section class="highlight">
@@ -56,17 +63,6 @@
       <p>We’re preparing a short walkthrough showing you how to embed and evaluate UX tests directly inside your Canvas modules.</p>
     </section>
   </main>
-
-  <section class="personas-box">
-  <h2>🧍‍♀️ User Personas</h2>
-  <p>This embedded presentation by <strong>Kelli Knuth</strong> provides a set of real-world user personas to help design more inclusive and accessible learning experiences across our digital environments.</p>
-
-  <div class="ppt-embed">
-    <iframe src="https://uao365-my.sharepoint.com/personal/a1237010_adelaide_edu_au/_layouts/15/Doc.aspx?sourcedoc={34c86711-24bb-4389-9709-c40c5a0b09ee}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="100%" height="360" frameborder="0" title="Accessibility Personas by Kelli Knuth">
-      This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation.
-    </iframe>
-  </div>
-</section>
 
   <footer>
     <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett</p>
@@ -76,33 +72,79 @@
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
 
   <script>
-    const searchInput = document.getElementById("searchInput");
-    const suggestionList = document.getElementById("searchSuggestions");
-    const topBtn = document.getElementById("topBtn");
+    const searchInput = document.getElementById('searchInput');
+    const suggestionList = document.getElementById('searchSuggestions');
+    const searchForm = document.getElementById('searchForm');
+    const topBtn = document.getElementById('topBtn');
 
-    searchInput.addEventListener("focus", () => {
-      suggestionList.classList.add("visible");
+    function handleSearch(value) {
+      const query = value.toLowerCase().trim();
+
+      if (query.includes('jotform')) {
+        window.location.href = 'tools.html#jotform';
+      } else if (query.includes('card')) {
+        window.location.href = 'methodologies.html#card-sorting';
+      } else if (query.includes('usability')) {
+        window.location.href = 'methodologies.html#usability-testing';
+      } else if (query.includes('tree testing')) {
+        window.location.href = 'methodologies.html#tree-testing';
+      } else if (query.includes('heatmap') || query.includes('hotjar')) {
+        window.location.href = 'tools.html#hotjar';
+      } else if (query.includes('accessibility')) {
+        window.location.href = 'resources.html#accessibility';
+      } else if (query.includes('template')) {
+        window.location.href = 'resources.html#templates';
+      } else if (query.includes('consent')) {
+        window.location.href = 'resources.html#consent';
+      } else if (query.includes('survey') || query.includes('typeform') || query.includes('google forms')) {
+        window.location.href = 'tools.html#google-forms';
+      } else if (query.includes('media')) {
+        window.location.href = 'resources.html#media';
+      } else if (query.includes('courses')) {
+        window.location.href = 'resources.html#use-in-courses';
+      } else if (query.includes('personas')) {
+        window.location.href = 'personas.html';
+      } else {
+        alert('Sorry, we couldn’t find a matching tool or method.');
+      }
+    }
+
+    searchForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleSearch(searchInput.value);
     });
 
-    searchInput.addEventListener("input", () => {
-      const val = searchInput.value.toLowerCase();
-      const options = suggestionList.querySelectorAll("li");
-      options.forEach(option => {
-        const show = option.textContent.toLowerCase().includes(val);
-        option.style.display = show ? "block" : "none";
-      });
-    });
-
-    suggestionList.addEventListener("click", (e) => {
-      if (e.target.tagName === "LI") {
-        searchInput.value = e.target.textContent;
-        suggestionList.classList.remove("visible");
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSearch(searchInput.value);
       }
     });
 
-    document.addEventListener("click", (e) => {
+    searchInput.addEventListener('focus', () => {
+      suggestionList.classList.add('visible');
+    });
+
+    searchInput.addEventListener('input', () => {
+      const val = searchInput.value.toLowerCase();
+      const options = suggestionList.querySelectorAll('li');
+      options.forEach(option => {
+        const show = option.textContent.toLowerCase().includes(val);
+        option.style.display = show ? 'block' : 'none';
+      });
+    });
+
+    suggestionList.addEventListener('click', (e) => {
+      if (e.target.tagName === 'LI') {
+        searchInput.value = e.target.textContent;
+        suggestionList.classList.remove('visible');
+        handleSearch(e.target.textContent);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
       if (!searchInput.contains(e.target) && !suggestionList.contains(e.target)) {
-        suggestionList.classList.remove("visible");
+        suggestionList.classList.remove('visible');
       }
     });
 
