@@ -242,20 +242,19 @@ footer img {
     padding: 1.5em;
   }
 }
-.uxie-banner-icon {
-  position: absolute;
-  top: 1.5em;
-  right: 1.5em;
-  z-index: 2;
+.uxie-banner-icon.centered {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
-.uxie-banner-icon img.uxie-icon {
-  width: 150px; /* approx. fills the red circle */
+.uxie-banner-icon.centered img.uxie-icon {
+  width: 172px; /* approx. 15% bigger than 150px */
   height: auto;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.uxie-banner-icon img.uxie-icon:hover {
+.uxie-banner-icon.centered img.uxie-icon:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
 }
