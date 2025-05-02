@@ -133,7 +133,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 /* Suggestions dropdown */
 .suggestion-list {
-  position: fixed;
+  position: absolute;
   top: 100%;
   left: 0;
   right: 0;
