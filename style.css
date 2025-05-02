@@ -1,8 +1,6 @@
 @font-face {
   font-family: 'Codegun';
   src: url('codegun.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }
 
 :root {
@@ -23,72 +21,138 @@ body {
   color: var(--dark-blue);
 }
 
+h1, h2, h3, h4, .card h2, .highlight h3 {
+  font-family: 'Codegun', sans-serif;
+}
+
 /* Hero Banner */
 .hero-banner {
   background: linear-gradient(135deg, var(--dark-blue) 70%, var(--north-terrace-purple));
   color: var(--white);
   text-align: center;
-  padding: 4em 1.5em 3em;
-  position: relative;
+  padding: 3em 1em 2em;
 }
 
 .hero-banner h1 {
   font-size: 3em;
-  font-weight: normal;
-  letter-spacing: 1px;
+  margin: 0.5em 0 0.25em;
 }
 
 .hero-banner p {
-  font-size: 1.25em;
-  max-width: 700px;
-  margin: 0 auto 1.5em;
+  font-size: 1.1em;
+  margin: 0 auto;
+  max-width: 720px;
   color: #E6E1FF;
 }
 
+.banner-header img.uxie-icon {
+  width: 64px;
+  margin-bottom: 0.4em;
+  transition: box-shadow 0.3s ease;
+}
+
+.banner-header img.uxie-icon:hover {
+  box-shadow: 0 0 16px var(--north-terrace-purple);
+}
+
+/* Search */
+.search-wrapper {
+  margin-top: 1em;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 .hero-search {
-  width: 80%;
+  width: 100%;
   max-width: 520px;
   padding: 0.8em;
+  font-size: 1em;
   border: 2px solid var(--bright-blue);
   border-radius: 8px;
+}
+
+.search-button {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  bottom: 8px;
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  padding: 0 1em;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+/* Suggestions dropdown */
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+.suggestion-list.visible {
+  display: block;
+}
+
+.suggestion-list li {
+  padding: 0.75em 1em;
+  cursor: pointer;
   font-size: 1em;
 }
 
-/* Container */
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 1.5em 1em;
-  box-sizing: border-box;
+.suggestion-list li:hover {
+  background-color: var(--limestone-tint);
+  color: var(--bright-blue);
 }
 
-/* Grid Section */
+/* Main layout */
+.container {
+  max-width: 1024px;
+  margin: auto;
+  padding: 2em 1em;
+}
+
 .grid-section {
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin-top: 2em;
 }
 
 .card {
-  background-color: var(--white);
+  background: var(--white);
   border: 2px solid var(--bright-blue);
   border-radius: 10px;
   padding: 1.5em;
   text-align: left;
-  text-decoration: none;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
   color: var(--dark-blue);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.2);
   transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.15);
 }
 
 .card h2 {
   margin-top: 0;
-  font-size: 1.4em;
   color: var(--bright-blue);
 }
 
@@ -104,7 +168,7 @@ body {
 /* Footer */
 footer {
   background-color: var(--dark-blue);
-  color: var(--white);
+  color: white;
   text-align: center;
   padding: 1.5em 1em;
   font-size: 0.9em;
@@ -112,11 +176,11 @@ footer {
 }
 
 footer img {
-  margin-top: 1em;
   max-width: 180px;
+  margin-top: 1em;
 }
 
-/* Scroll-to-top Button */
+/* Scroll Button */
 #topBtn {
   display: none;
   position: fixed;
@@ -131,224 +195,8 @@ footer img {
   padding: 10px 16px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
 }
 
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
 }
-/* Match the search bar style */
-.hero-search {
-  width: 100%;
-  max-width: 520px;
-  padding: 0.8em;
-  font-size: 1em;
-  border: 2px solid var(--bright-blue);
-  border-radius: 8px;
-  font-family: inherit;
-  background-color: var(--white);
-  color: var(--dark-blue);
-}
-
-/* Prevent default datalist weird border appearance */
-input::-webkit-calendar-picker-indicator {
-  display: none !important;
-}
-.search-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-.suggestion-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background-color: var(--white);
-  border: 2px solid var(--bright-blue);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  max-height: 220px;
-  overflow-y: auto;
-}
-
-.suggestion-list li {
-  padding: 0.75em 1em;
-  cursor: pointer;
-  font-size: 1em;
-  border-bottom: 1px solid #eee;
-}
-
-.suggestion-list li:hover {
-  background-color: var(--limestone-tint);
-  color: var(--bright-blue);
-}
-
-.hidden {
-  display: none;
-}
-.suggestion-list li {
-  padding: 0.75em 1em;
-  cursor: pointer;
-  font-size: 1em;
-  border-bottom: 1px solid #eee;
-  color: var(--dark-blue); /* ensure text is visible */
-  background-color: var(--white);
-}
-.suggestion-list {
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none;
-}
-
-.suggestion-list.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.search-wrapper form {
-  position: relative;
-  display: flex;
-}
-
-.hero-search {
-  flex: 1;
-  padding-right: 3.2em; /* space for button */
-}
-
-.search-button {
-  position: absolute;
-  right: 6px;
-  top: 6px;
-  bottom: 6px;
-  background-color: var(--bright-blue);
-  color: white;
-  border: none;
-  padding: 0 1em;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.search-button:hover {
-  background-color: var(--north-terrace-purple);
-}
-
-@font-face {
-  font-family: 'Codegun';
-  src: url('codegun.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-h1, h2, h3, h4, .card h2, .highlight h3, footer h4 {
-  font-family: 'Codegun', sans-serif;
-  letter-spacing: 0.5px;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  text-wrap: balance;
-}
-
-}
-.personas-box {
-  background-color: var(--limestone-tint);
-  padding: 2em;
-  margin: 3em auto;
-  border-left: 6px solid var(--north-terrace-purple);
-  border-radius: 8px;
-  max-width: 960px;
-}
-
-.personas-box h2 {
-  font-size: 1.8em;
-  margin-bottom: 0.5em;
-  color: var(--dark-blue);
-}
-
-.ppt-embed iframe {
-  width: 100%;
-  height: 360px;
-  border: none;
-  border-radius: 6px;
-  margin-top: 1em;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.back-link {
-  display: block;
-  margin-top: 2em;
-  text-align: center;
-  font-weight: bold;
-  color: var(--bright-blue);
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-.ppt-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 2em auto;
-  height: 600px; /* Adjust this as needed */
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.ppt-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-.back-button {
-  display: block;
-  width: fit-content;
-  margin: 3em auto 4em;
-  padding: 0.75em 1.5em;
-  background-color: var(--bright-blue);
-  color: white;
-  font-weight: bold;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 1em;
-  transition: background-color 0.2s ease;
-  text-align: center;
-}
-
-
-.back-button:hover {
-  background-color: var(--north-terrace-purple);
-  text-decoration: none;
-}
-.card h2, .hero-banner h1 {
-  font-size: clamp(1.4rem, 5vw, 2rem);
-}
-.hero-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75em;
-  flex-wrap: wrap;
-  margin-bottom: 0.5em;
-}
-
-.uxie-icon {
-  height: 48px;
-  width: 48px;
-  object-fit: contain;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.uxie-icon:hover {
-  box-shadow: 0 0 12px rgba(131, 107, 255, 0.6); /* soft North Terrace Purple glow */
-  transform: scale(1.05);
-}
-
-
