@@ -248,7 +248,9 @@ input::-webkit-calendar-picker-indicator {
   font-weight: normal;
   font-style: normal;
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, .card h2, .highlight h3, footer h4 {
+  font-family: 'Codegun', sans-serif;
+  letter-spacing: 0.5px;
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
