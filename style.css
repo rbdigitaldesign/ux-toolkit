@@ -205,5 +205,32 @@ input::-webkit-calendar-picker-indicator {
   transform: translateY(0);
   pointer-events: auto;
 }
+.search-wrapper form {
+  position: relative;
+  display: flex;
+}
+
+.hero-search {
+  flex: 1;
+  padding-right: 3.2em; /* space for button */
+}
+
+.search-button {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  padding: 0 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.search-button:hover {
+  background-color: var(--north-terrace-purple);
+}
 
 
