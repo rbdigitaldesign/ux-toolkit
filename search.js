@@ -2,7 +2,7 @@ const searchInput = document.getElementById('searchInput');
 const searchForm = document.getElementById('searchForm');
 const suggestionList = document.getElementById('searchSuggestions');
 
-// Handles enter key OR button click
+// Keyword routing logic
 function handleSearch(value) {
   const query = value.toLowerCase().trim();
 
@@ -28,12 +28,16 @@ function handleSearch(value) {
     window.location.href = 'resources.html#media';
   } else if (query.includes('use in courses')) {
     window.location.href = 'resources.html#use-in-courses';
+  } else if (query.includes('personas')) {
+    window.location.href = 'personas.html';
+  } else if (query.includes('tips') || query.includes('testing tips')) {
+    window.location.href = 'tips.html';
   } else {
     alert('Sorry, we couldn’t find a matching tool or method.');
   }
 }
 
-// When user presses enter in the input
+// Enter key triggers search
 searchInput.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -41,26 +45,29 @@ searchInput.addEventListener('keydown', function (e) {
   }
 });
 
-// When user clicks the search button
+// Form submit triggers search (via Search button)
 searchForm.addEventListener('submit', function (e) {
   e.preventDefault();
   handleSearch(searchInput.value);
 });
 
-// Show/hide suggestions on focus/blur
+// Show suggestions on input focus
 searchInput.addEventListener('focus', () => {
   suggestionList.classList.add('visible');
 });
 
+// Filter visible suggestions as user types
 searchInput.addEventListener('input', () => {
   const val = searchInput.value.toLowerCase();
   const options = suggestionList.querySelectorAll('li');
+
   options.forEach(option => {
-    const show = option.textContent.toLowerCase().includes(val);
-    option.style.display = show ? 'block' : 'none';
+    const match = option.textContent.toLowerCase().includes(val);
+    option.style.display = match ? 'block' : 'none';
   });
 });
 
+// Click on suggestion sets value and hides list
 suggestionList.addEventListener('click', (e) => {
   if (e.target.tagName === 'LI') {
     searchInput.value = e.target.textContent;
@@ -68,8 +75,9 @@ suggestionList.addEventListener('click', (e) => {
   }
 });
 
+// Hide suggestions when clicking outside
 document.addEventListener('click', (e) => {
-  if (!searchInput.contains(e.target) && !suggestionList.contains(e.target)) {
+  if (!searchForm.contains(e.target)) {
     suggestionList.classList.remove('visible');
   }
 });
