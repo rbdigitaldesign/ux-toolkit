@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Testing Tips | Ctrl+Toolkit</title>
+  <link rel="stylesheet" href="style.css?v=4" />
+  <style>
+    .accordion {
+      margin-bottom: 1em;
+      border: 1px solid var(--bright-blue);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--white);
+    }
+
+    .accordion summary {
+      cursor: pointer;
+      padding: 1em;
+      font-weight: bold;
+      background-color: var(--limestone-tint);
+      border-bottom: 1px solid var(--bright-blue);
+    }
+
+    .accordion p {
+      padding: 1em;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 2em;
+      text-align: center;
+      font-weight: bold;
+      color: var(--bright-blue);
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>UX Testing Tips</h1>
+      <p>Evidence-based advice to get the most value from usability testing in learning design.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="highlight">
+      <h2>✨ Summary</h2>
+      <p>Good UX testing doesn’t have to be complicated. Below are curated tips from leading UX researchers like Jakob Nielsen, Hoa Loranger, and industry best practices — tailored to help you test smarter within the constraints of higher education and learning design environments.</p>
+    </section>
+
+    <section class="highlight">
+      <h2>🔁 Core testing strategy</h2>
+      <details class="accordion" open>
+        <summary>🎯 Why you only need to test with 5 users</summary>
+        <p>Jakob Nielsen's research shows that testing with 5 users often uncovers 85% of usability issues. Additional users yield diminishing returns. Instead, run multiple small tests and iterate often. <a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank">Read full article ↗</a></p>
+      </details>
+
+      <details class="accordion">
+        <summary>📉 Avoid "monster" tests</summary>
+        <p>Rather than blowing your whole UX budget on a single big test, spread it out. Three rounds of 5 users will uncover more problems and let you continuously improve. <em>Test, fix, retest.</em></p>
+      </details>
+    </section>
+
+    <section class="highlight">
+      <h2>🧪 Testing techniques</h2>
+      <details class="accordion">
+        <summary>🗣️ Thinking Aloud Protocol</summary>
+        <p>Ask users to verbalise what they’re doing and why. This provides deep insight into their decision-making and confusion points. <a href="https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/" target="_blank">See NN/g's guide ↗</a></p>
+      </details>
+
+      <details class="accordion">
+        <summary>📋 Task-based testing</summary>
+        <p>Give users realistic tasks like “find where you’d submit your assignment” or “locate the help button.” Observe where they pause, click, or struggle.</p>
+      </details>
+
+      <details class="accordion">
+        <summary>📷 Remote testing via screen recording</summary>
+        <p>Use tools like Loom, Lookback, or Zoom recordings to observe real interactions without needing face-to-face sessions.</p>
+      </details>
+    </section>
+
+    <section class="highlight">
+      <h2>📚 Resources & references</h2>
+      <ul>
+        <li><a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank">Why You Only Need to Test with 5 Users — Jakob Nielsen</a></li>
+        <li><a href="https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/" target="_blank">Thinking Aloud: The #1 Usability Tool</a></li>
+        <li><a href="https://www.nngroup.com/topic/usability-testing/" target="_blank">NN/g Usability Testing Topic Index</a></li>
+        <li><a href="https://baymard.com/blog" target="_blank">Baymard Institute UX research blog</a></li>
+      </ul>
+    </section>
+
+    <a href="index.html" class="back-link">← Return to Ctrl+Toolkit Home</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett · Tip sources: NN/g, Baymard Institute</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
