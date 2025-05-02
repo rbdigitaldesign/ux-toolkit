@@ -36,6 +36,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   padding: 6em 1.5em 5em;
   position: relative;
   overflow: hidden;
+  z-index: 1; /* ✅ fixes stacking issue */
 }
 
 .hero-banner::after {
