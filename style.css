@@ -343,6 +343,12 @@ h1, h2, h3, h4, .card h2, .highlight h3, footer h4 {
   height: 48px;
   width: 48px;
   object-fit: contain;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.uxie-icon:hover {
+  box-shadow: 0 0 12px rgba(131, 107, 255, 0.6); /* soft North Terrace Purple glow */
+  transform: scale(1.05);
 }
 
 
