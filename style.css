@@ -330,4 +330,19 @@ h1, h2, h3, h4, .card h2, .highlight h3, footer h4 {
 .card h2, .hero-banner h1 {
   font-size: clamp(1.4rem, 5vw, 2rem);
 }
+.hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75em;
+  flex-wrap: wrap;
+  margin-bottom: 0.5em;
+}
+
+.uxie-icon {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+}
+
 
