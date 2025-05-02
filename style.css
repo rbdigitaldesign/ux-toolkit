@@ -258,3 +258,38 @@ footer img {
   transform: scale(1.1);
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
 }
+.uxie-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.wink-overlay {
+  position: absolute;
+  top: 36%;   /* adjust depending on eye position */
+  left: 58%;  /* adjust depending on eye position */
+  width: 18px;
+  height: 6px;
+  background-color: var(--dark-blue);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scaleX(1);
+  animation: wink 5s infinite ease-in-out;
+}
+
+@keyframes wink {
+  0%, 90%, 100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+  92% {
+    opacity: 1;
+    transform: scaleX(1.5) scaleY(0.3);
+  }
+  94% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  96% {
+    opacity: 0;
+  }
+}
