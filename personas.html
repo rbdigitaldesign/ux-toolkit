@@ -4,51 +4,74 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>User Personas | Ctrl+Toolkit</title>
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=5" />
+  <style>
+    .ppt-container {
+      width: 100%;
+      max-width: 1000px;
+      height: 600px;
+      margin: 2em auto;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .ppt-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .back-link {
+      display: block;
+      margin: 2em auto 3em;
+      text-align: center;
+      font-weight: bold;
+      color: var(--bright-blue);
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .personas-highlight {
+      background-color: var(--limestone-tint);
+      padding: 2em;
+      border-left: 6px solid var(--north-terrace-purple);
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+
+    .personas-highlight h2 {
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
   <header class="hero-banner">
     <div class="container">
       <h1>User Personas</h1>
-      <p>Designing for inclusion starts with understanding the diverse people we support.</p>
+      <p>Explore inclusive learning personas to better design and test for diverse needs in higher education.</p>
     </div>
   </header>
 
   <main class="container">
-    <section class="highlight">
-      <h2>About these personas</h2>
-      <p>This embedded deck was created by <strong>Kelli Knuth</strong> to support staff in designing learning experiences with empathy, accessibility, and inclusion in mind.</p>
-      <p>The personas represent diverse students across life stages, learning needs, and lived experiences. They reflect real challenges students face in navigating university systems and engaging with digital learning environments.</p>
-      <p><em>Use these personas to frame your UX tests, accessibility reviews, or design decisions in ways that reflect authentic student journeys.</em></p>
+    <section class="personas-highlight">
+      <h2>About the personas</h2>
+      <p>This embedded deck was created by <strong>Kelli Knuth</strong> to support inclusive, learner-centred design. It presents realistic student profiles that reflect different goals, challenges, and access needs.</p>
+      <p><em>Use these personas to test ideas, identify barriers, and build empathy across diverse student journeys.</em></p>
     </section>
 
-    <section class="personas-box">
-      <h2>🎥 Embedded presentation</h2>
-      <p>Explore the personas directly in the deck below:</p>
-
-      <div class="ppt-container">
-  <iframe 
-    src="https://uao365-my.sharepoint.com/personal/a1237010_adelaide_edu_au/_layouts/15/Doc.aspx?sourcedoc={34c86711-24bb-4389-9709-c40c5a0b09ee}&amp;action=embedview&amp;wdAr=1.7777777777777777" 
-    frameborder="0" 
-    allowfullscreen 
-    title="Accessibility Personas by Kelli Knuth">
-  </iframe>
-</div>
-
-
-    <section class="highlight">
-      <h2>Accessibility insight from the PDF</h2>
-      <ul>
-        <li>Accessibility is not only about disability — it’s also about clarity, predictability, and inclusion.</li>
-        <li>Navigation structure matters: numbered topics help students using screen readers or working across second languages.</li>
-        <li>Designs that reduce cognitive load benefit everyone, especially students with ADHD, dyslexia, or anxiety.</li>
-        <li>Universal Design for Learning (UDL) principles should guide your layout, flow, and language.</li>
-      </ul>
+    <section class="ppt-container">
+      <iframe 
+        src="https://uao365-my.sharepoint.com/personal/a1237010_adelaide_edu_au/_layouts/15/Doc.aspx?sourcedoc={34c86711-24bb-4389-9709-c40c5a0b09ee}&action=embedview&wdAr=1.7777777777777777"
+        title="Accessibility Personas by Kelli Knuth"
+        allowfullscreen>
+      </iframe>
     </section>
+
+    <a href="index.html" class="back-link">← Return to Ctrl+Toolkit Home</a>
   </main>
-
-  <a href="index.html" class="back-link">← Return to Ctrl+Toolkit Home</a>
-
 
   <footer>
     <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett · Personas content by Kelli Knuth</p>
