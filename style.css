@@ -233,4 +233,10 @@ input::-webkit-calendar-picker-indicator {
   background-color: var(--north-terrace-purple);
 }
 
+@font-face {
+  font-family: 'Codegun';
+  src: url('codegun.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
