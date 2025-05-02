@@ -56,7 +56,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 .hero-banner p,
 .search-wrapper {
   position: relative;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .hero-banner h1 {
