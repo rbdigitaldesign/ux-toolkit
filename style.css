@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: 'Codegun';
   src: url('codegun.ttf') format('truetype');
@@ -28,26 +27,14 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 /* Hero Banner */
 .hero-banner {
-  background: 
-    url('uxie-icon-banner.png') no-repeat right bottom / auto 100%, 
+  background:
+    url('uxie-icon-banner.png') no-repeat right bottom / auto 100%,
     linear-gradient(135deg, #140F50 40%, #836BFF);
   color: var(--white);
   text-align: center;
   padding: 5em 1.5em 4em;
   position: relative;
   background-blend-mode: overlay;
-}
-
-.hero-banner img.uxie-icon {
-  width: 80px;
-  height: auto;
-  margin-bottom: 1em;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.hero-banner img.uxie-icon:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
 }
 
 .hero-banner h1 {
@@ -244,146 +231,5 @@ footer img {
 
   .highlight {
     padding: 1.5em;
-  }
-}
-.uxie-banner-icon.centered {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1em;
-}
-
-.uxie-banner-icon.centered img.uxie-icon {
-  width: 172px; /* approx. 15% bigger than 150px */
-  height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.uxie-banner-icon.centered img.uxie-icon:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-.uxie-wrapper {
-  position: relative;
-  display: inline-block;
-}
-.banner-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2em;
-  flex-wrap: wrap;
-  text-align: left;
-}
-
-.tagline {
-  flex: 1;
-  min-width: 250px;
-}
-
-.uxie-wrapper {
-  flex-shrink: 0;
-}
-
-.uxie-icon {
-  width: 140px; /* adjust size here */
-  height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.uxie-icon:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-
-/* Optional: prevent UXie from wrapping awkwardly on small viewports */
-@media (max-width: 720px) {
-  .banner-flex {
-    flex-direction: column-reverse;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-.search-bar-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5em;
-  flex-wrap: wrap;
-  margin-top: 2em;
-}
-
-.search-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  flex-grow: 1;
-}
-
-.uxie-wrapper {
-  flex-shrink: 0;
-}
-
-.uxie-icon {
-  width: 150px;
-  height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.uxie-icon:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-
-/* UXie and Search Layout */
-.search-flex-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 2em;
-  max-width: 960px;
-  margin: 2em auto 0;
-}
-
-.search-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  flex-grow: 1;
-}
-
-.uxie-search-icon {
-  flex-shrink: 0;
-  padding-right: 2em;
-}
-
-.uxie-search-icon img.uxie-icon {
-  width: 120px;
-  height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.uxie-search-icon img.uxie-icon:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-
-/* Responsive tweaks */
-@media (max-width: 700px) {
-  .search-flex-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-  }
-
-  .uxie-search-icon {
-    padding-right: 0;
-  }
-
-  .search-button {
-    position: static;
-    width: 100%;
-    margin-top: 0.5em;
   }
 }
