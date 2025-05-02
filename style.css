@@ -27,29 +27,17 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 /* Hero Banner */
 .hero-banner {
-  background: linear-gradient(135deg, #140F50 60%, #836BFF);
+  background: linear-gradient(135deg, #140F50 40%, #836BFF);
   color: var(--white);
   text-align: center;
-  padding: 6em 1.5em 4em;
+  padding: 5em 1.5em 4em;
   position: relative;
 }
 
-.hero-banner h1 {
-  font-size: 3em;
-  margin: 0.5em 0 0.25em;
-}
-
-.hero-banner p {
-  font-size: 1.1em;
-  margin: 0 auto;
-  max-width: 720px;
-  color: #E6E1FF;
-}
-
-hero-banner img.uxie-icon {
-  width: 64px;
+.hero-banner img.uxie-icon {
+  width: 80px;
   height: auto;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -58,23 +46,28 @@ hero-banner img.uxie-icon {
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
 }
 
+.hero-banner h1 {
+  font-size: 2.8em;
+  margin: 0.3em 0 0.2em;
+}
+
+.hero-banner p {
+  font-size: 1.15em;
+  margin: 0 auto 1.5em;
+  max-width: 720px;
+  color: #E6E1FF;
+}
 
 /* Search */
 .search-wrapper {
-  margin-top: 1em;
-  display: flex;
-  justify-content: center;
-}
-
-.search-form {
   position: relative;
-  display: flex;
   width: 100%;
   max-width: 520px;
+  margin: 0 auto;
 }
 
 .hero-search {
-  flex: 1;
+  width: 100%;
   padding: 0.8em;
   font-size: 1em;
   border: 2px solid var(--bright-blue);
@@ -82,22 +75,26 @@ hero-banner img.uxie-icon {
   font-family: inherit;
   background-color: var(--white);
   color: var(--dark-blue);
+  box-sizing: border-box;
 }
 
 .search-button {
   position: absolute;
-  top: 6px;
   right: 6px;
+  top: 6px;
   bottom: 6px;
-  padding: 0 1em;
   background-color: var(--bright-blue);
   color: white;
   border: none;
+  padding: 0 1em;
   border-radius: 6px;
-  font-size: 1em;
   cursor: pointer;
+  font-size: 1em;
 }
 
+.search-button:hover {
+  background-color: var(--north-terrace-purple);
+}
 
 /* Suggestions dropdown */
 .suggestion-list {
@@ -105,9 +102,7 @@ hero-banner img.uxie-icon {
   top: 100%;
   left: 0;
   right: 0;
-  max-height: 220px;
-  overflow-y: auto;
-  background: var(--white);
+  background-color: var(--white);
   border: 2px solid var(--bright-blue);
   border-top: none;
   border-radius: 0 0 8px 8px;
@@ -115,8 +110,10 @@ hero-banner img.uxie-icon {
   margin: 0;
   padding: 0;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-height: 220px;
+  overflow-y: auto;
   display: none;
-  z-index: 99;
+  z-index: 10;
 }
 
 .suggestion-list.visible {
@@ -127,10 +124,15 @@ hero-banner img.uxie-icon {
   padding: 0.75em 1em;
   cursor: pointer;
   font-size: 1em;
+  border-bottom: 1px solid #eee;
   color: var(--dark-blue);
   background-color: var(--white);
 }
 
+.suggestion-list li:hover {
+  background-color: var(--limestone-tint);
+  color: var(--bright-blue);
+}
 
 /* Main layout */
 .container {
@@ -210,6 +212,8 @@ footer img {
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
 }
+
+/* Responsive */
 @media (max-width: 600px) {
   .hero-banner h1 {
     font-size: 2em;
@@ -225,8 +229,8 @@ footer img {
   }
 
   .search-button {
+    position: static;
     width: 100%;
-    margin-left: 0;
     margin-top: 0.5em;
   }
 
