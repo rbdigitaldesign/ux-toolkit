@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | UX Toolkit</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="methodologies.html">Methodologies</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <h1>Contact the UX support team</h1>
+  </header>
+
+  <main class="container">
+    <section>
+      <p>If you need help getting started with UX testing or have feedback about this site, reach out to one of the team members below.</p>
+    </section>
+
+    <section>
+      <h2>Team contacts</h2>
+      <ul>
+        <li><strong>Tim Churchill</strong> – <a href="mailto:tim.churchill@example.edu">tim.churchill@example.edu</a></li>
+        <li><strong>Kelli Knuth</strong> – <a href="mailto:kelli.knuth@example.edu">kelli.knuth@example.edu</a></li>
+        <li><strong>Alex Price</strong> – <a href="mailto:alex.price@example.edu">alex.price@example.edu</a></li>
+        <li><strong>Rich Bartlett</strong> – <a href="mailto:rich.bartlett@example.edu">rich.bartlett@example.edu</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Group support email</h2>
+      <p>Email us at <a href="mailto:uxsupport@university.edu">uxsupport@university.edu</a> and we’ll get back to you within 2 business days.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
