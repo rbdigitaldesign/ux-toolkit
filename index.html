@@ -13,19 +13,50 @@
       <h1>Ctrl+Toolkit</h1>
       <p>Your shortcut to smarter testing, better design, and stronger student experiences across digital learning.</p>
       <div class="search-wrapper">
-  <input type="search" id="searchInput" list="searchOptions" placeholder="Search tools, methods, tips..." class="hero-search" />
-  <datalist id="searchOptions">
-    <option value="Card sorting">
-    <option value="Usability testing">
-    <option value="Heatmaps">
-    <option value="Jotform">
-    <option value="Typeform">
-    <option value="Hotjar">
-    <option value="Accessibility checklist">
-    <option value="UX for media">
-    <option value="Use in courses">
-  </datalist>
+  <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
+  <ul id="searchSuggestions" class="suggestion-list hidden">
+    <li>Card sorting</li>
+    <li>Usability testing</li>
+    <li>Heatmaps</li>
+    <li>Jotform</li>
+    <li>Typeform</li>
+    <li>Hotjar</li>
+    <li>Accessibility checklist</li>
+    <li>UX for media</li>
+    <li>Use in courses</li>
+  </ul>
 </div>
+
+<script>
+  const searchInput = document.getElementById("searchInput");
+  const suggestionList = document.getElementById("searchSuggestions");
+
+  searchInput.addEventListener("focus", () => {
+    suggestionList.classList.remove("hidden");
+  });
+
+  searchInput.addEventListener("input", () => {
+    const val = searchInput.value.toLowerCase();
+    const options = suggestionList.querySelectorAll("li");
+    options.forEach(option => {
+      const show = option.textContent.toLowerCase().includes(val);
+      option.style.display = show ? "block" : "none";
+    });
+  });
+
+  suggestionList.addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+      searchInput.value = e.target.textContent;
+      suggestionList.classList.add("hidden");
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target) && !suggestionList.contains(e.target)) {
+      suggestionList.classList.add("hidden");
+    }
+  });
+</script>
     </div>
   </header>
 
