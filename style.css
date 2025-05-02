@@ -135,3 +135,18 @@ footer img {
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
 }
+.global-search {
+  background-color: var(--limestone-tint);
+  padding: 1em;
+  text-align: center;
+  border-bottom: 2px solid var(--bright-blue);
+}
+
+.global-search input[type="search"] {
+  width: 80%;
+  max-width: 600px;
+  padding: 0.8em;
+  font-size: 1em;
+  border: 2px solid var(--bright-blue);
+  border-radius: 6px;
+}
