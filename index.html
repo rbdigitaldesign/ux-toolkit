@@ -11,20 +11,23 @@
     <div class="container">
       <h1>Ctrl+Toolkit</h1>
       <p>Your shortcut to smarter testing, better design, and stronger student experiences across digital learning.</p>
-      <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off"/>
-        <ul id="searchSuggestions" class="suggestion-list">
-          <li>Card sorting</li>
-          <li>Usability testing</li>
-          <li>Heatmaps</li>
-          <li>Jotform</li>
-          <li>Typeform</li>
-          <li>Hotjar</li>
-          <li>Accessibility checklist</li>
-          <li>UX for media</li>
-          <li>Use in courses</li>
-        </ul>
-      </div>
+     <div class="search-wrapper">
+  <form id="searchForm" role="search">
+    <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
+    <button type="submit" id="searchButton" class="search-button">🔍</button>
+  </form>
+  <ul id="searchSuggestions" class="suggestion-list">
+    <li>Card sorting</li>
+    <li>Usability testing</li>
+    <li>Heatmaps</li>
+    <li>Jotform</li>
+    <li>Typeform</li>
+    <li>Hotjar</li>
+    <li>Accessibility checklist</li>
+    <li>UX for media</li>
+    <li>Use in courses</li>
+  </ul>
+</div>
     </div>
   </header>
 
