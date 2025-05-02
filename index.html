@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX Toolkit for Higher Education</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background: #446cff;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    .container {
+      max-width: 960px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    h2 {
+      color: #333;
+      border-bottom: 2px solid #836bff;
+      padding-bottom: 0.3em;
+    }
+    input[type="search"] {
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1em;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .resource {
+      margin-bottom: 2em;
+      padding: 1em;
+      border-left: 4px solid #836bff;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UX toolkit for higher education</h1>
+  </header>
+  <div class="container">
+    <input type="search" id="searchInput" placeholder="Search tools, methods, or tips..." />
+
+    <div class="resource">
+      <h2>Usability testing</h2>
+      <p>Moderated or unmoderated sessions to assess how users interact with your site. Tools: Maze, Lookback, Zoom.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Surveys and questionnaires</h2>
+      <p>Create student-friendly feedback forms with Jotform, Google Forms or Typeform. Use short, focused questions.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Card sorting</h2>
+      <p>Use Optimal Workshop to understand how users expect content to be grouped and labelled.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Heatmaps & analytics</h2>
+      <p>Visualise interaction patterns with Hotjar or Microsoft Clarity. Identify pain points and content blind spots.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Testing tips</h2>
+      <p>Define clear objectives, pilot your tests, and iterate based on results. Use NN/g guidelines for best practice.</p>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("searchInput");
+    input.addEventListener("input", function () {
+      const filter = input.value.toLowerCase();
+      const resources = document.querySelectorAll(".resource");
+      resources.forEach((res) => {
+        const match = res.textContent.toLowerCase().includes(filter);
+        res.classList.toggle("hidden", !match);
+      });
+    });
+  </script>
+</body>
+</html>
