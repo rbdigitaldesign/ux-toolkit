@@ -1,58 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UX toolkit for higher education</title>
-  <link rel="stylesheet" href="style.css?v=2">
-  <script defer src="search.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Toolkit for Higher Education</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodologies.html">Methodologies</a></li>
-        <li><a href="tools.html">Tools</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="hero-banner">
-      <h1>UX toolkit for higher education</h1>
-      <p>Empowering TALAS staff with practical methods and tools for testing and improving student experience.</p>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Enhancing Student Experience Through UX</h1>
+      <p>Empowering educators with tools and methodologies to refine user experiences in higher education.</p>
+      <input type="search" id="searchInput" placeholder="Search tools, methods, resources..." />
     </div>
   </header>
-  <main class="container">
-    <section style="background-color: #FEFCF9; padding: 1.5em; border-radius: 6px;">
-      <h2>Welcome</h2>
-      <p>This site helps higher education staff confidently explore and apply UX testing methods with students. It draws on best practices from Nielsen Norman Group, Interaction Design Foundation, and includes tools like Jotform.</p>
+
+  <main class="features">
+    <section class="feature">
+      <h2>Methodologies</h2>
+      <p>Explore proven UX research methods tailored for academic settings.</p>
     </section>
-    <section style="background-color: #FFFFFF; padding: 1.5em; border-radius: 6px; margin-top: 1.5em;">
-      <h2>Search for help</h2>
-      <input type="search" id="searchInput" placeholder="e.g. card sorting, Jotform, usability">
+    <section class="feature">
+      <h2>Tools</h2>
+      <p>Discover user-friendly tools to implement and analyze UX strategies.</p>
+    </section>
+    <section class="feature">
+      <h2>Resources</h2>
+      <p>Access templates, guides, and further readings to support your UX journey.</p>
     </section>
   </main>
-  <footer style="border-top: 4px solid #1448FF; padding-top: 1em;">
+
+  <footer>
     <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
-    <img src="au-logo-placeholder.png" alt="Adelaide University logo" style="max-width: 180px; margin-top: 1em;" />
+    <img src="uoa-logo.png" alt="University of Adelaide Logo" />
   </footer>
 
-  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
-
-  <script>
-    const topBtn = document.getElementById("topBtn");
-    window.onscroll = function () {
-      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        topBtn.style.display = "block";
-      } else {
-        topBtn.style.display = "none";
-      }
-    };
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  </script>
+  <script src="search.js"></script>
 </body>
 </html>
