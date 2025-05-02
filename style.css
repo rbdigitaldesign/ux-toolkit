@@ -1,33 +1,70 @@
-<!-- Hero Section -->
-<header class="hero">
-  <div class="hero-content">
-    <h1>UX Toolkit for Higher Education</h1>
-    <p>Empowering staff with practical methods and tools for enhancing student experiences.</p>
-    <a href="methodologies.html" class="cta-button">Explore Methodologies</a>
-  </div>
-</header>
+:root {
+  --uoa-red: #d40000;
+  --uoa-mid-blue: #005a9c;
+  --uoa-logo-gold: #b38808;
+  --black: #000000;
+  --white: #ffffff;
+  --font-primary: 'Source Sans Pro', sans-serif;
+}
 
-<!-- Search Section -->
-<section class="search-section">
-  <input type="search" id="searchInput" placeholder="Search tools, methods, resources..." />
-</section>
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  color: var(--black);
+  background-color: var(--white);
+}
 
-<!-- Featured Sections -->
-<section class="features">
-  <div class="feature-item">
-    <img src="icons/methodologies.svg" alt="Methodologies Icon">
-    <h2>Methodologies</h2>
-    <p>Explore various UX research methods tailored for higher education.</p>
-    <a href="methodologies.html">Learn More</a>
-  </div>
-  <!-- Repeat for Tools, Resources, Contact -->
-</section>
+.hero {
+  background-color: var(--uoa-mid-blue);
+  color: var(--white);
+  padding: 4rem 2rem;
+  text-align: center;
+}
 
-<!-- Footer -->
-<footer>
-  <img src="images/uofa-logo.png" alt="University of Adelaide Logo">
-  <p>&copy; 2025 UX Toolkit. Created by Rich Bartlett.</p>
-  <div class="social-links">
-    <!-- Social media icons -->
-  </div>
-</footer>
+.hero-content h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.hero-content p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.hero-content input[type="search"] {
+  padding: 0.8rem;
+  width: 60%;
+  max-width: 400px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.feature {
+  max-width: 300px;
+  text-align: center;
+}
+
+.feature h2 {
+  color: var(--uoa-mid-blue);
+  margin-bottom: 0.5rem;
+}
+
+footer {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+}
+
+footer img {
+  margin-top: 1rem;
+  max-width: 150px;
+}
