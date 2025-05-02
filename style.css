@@ -332,16 +332,7 @@ footer img {
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
 }
 
-/* Mobile fallback */
-@media (max-width: 600px) {
-  .search-bar-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .uxie-icon {
-    margin-top: 1em;
-  }
+/* UXie and Search Layout */
 .search-flex-row {
   display: flex;
   justify-content: center;
@@ -350,6 +341,13 @@ footer img {
   gap: 2em;
   max-width: 960px;
   margin: 2em auto 0;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  flex-grow: 1;
 }
 
 .uxie-search-icon {
@@ -368,6 +366,7 @@ footer img {
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
 }
 
+/* Responsive tweaks */
 @media (max-width: 700px) {
   .search-flex-row {
     flex-direction: column;
@@ -378,5 +377,10 @@ footer img {
   .uxie-search-icon {
     padding-right: 0;
   }
-}
 
+  .search-button {
+    position: static;
+    width: 100%;
+    margin-top: 0.5em;
+  }
+}
