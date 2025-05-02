@@ -4,22 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UXie</title>
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
   <script defer src="search.js"></script>
 </head>
 <body>
-  <div class="hero-title">
-  <img src="images/uxie-icon.png" alt="UXie mascot icon" class="uxie-icon" />
-  <h1>UXie</h1>
-</div>
-<p>UXie is your shortcut to smarter testing, better design, and stronger student experiences — your UX-savvy sidekick for learning design teams.</p>
-
-
-      <div class="search-wrapper">
-        <form id="searchForm">
-          <input type="text" id="searchInput" placeholder="Search tools, methods, tips..." class="hero-search" autocomplete="off" />
-          <button type="submit" class="search-button">Search</button>
-        </form>
+  <header class="hero-banner">
+    <div class="container banner-header">
+      <img src="uxie-icon.png" alt="UXie mascot icon" class="uxie-icon" />
+      <h1>UXie</h1>
+      <p>UXie is your shortcut to smarter testing, better design, and stronger student experiences — your UX-savvy sidekick for learning design teams.</p>
+      <form class="search-wrapper" id="searchForm">
+        <input type="text" id="searchInput" class="hero-search" placeholder="Search tools, methods, tips..." autocomplete="off" />
+        <button type="submit" class="search-button">Search</button>
         <ul id="searchSuggestions" class="suggestion-list hidden">
           <li>Card sorting</li>
           <li>Usability testing</li>
@@ -32,7 +28,7 @@
           <li>Use in courses</li>
           <li>User personas</li>
         </ul>
-      </div>
+      </form>
     </div>
   </header>
 
@@ -50,17 +46,17 @@
         <h2>🎓 Use in Courses</h2>
         <p>Design practical learning activities informed by user-centred thinking.</p>
       </a>
-    <a href="resources.html#media" class="card">
-  <h2>📚 UX Resources</h2>
-  <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
-</a>
+      <a href="resources.html#media" class="card">
+        <h2>📚 UX Resources</h2>
+        <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
+      </a>
       <a href="personas.html" class="card">
         <h2>🧍‍♀️ User Personas</h2>
         <p>Reference real-world learner personas created by Kelli Knuth to design more inclusive and accessible experiences.</p>
       </a>
       <a href="tips.html" class="card">
         <h2>🧪 UX Testing Tips</h2>
-        <p>Discover bite-sized, evidence-based recommendations for running smarter usability tests, curated from trusted sources like NN/g.</p>
+        <p>Discover evidence-based recommendations for running smarter usability tests, curated from trusted sources like NN/g.</p>
       </a>
     </section>
 
@@ -68,34 +64,16 @@
       <h3>🎬 Coming Soon: How to run a UX test in Canvas</h3>
       <p>We’re preparing a short walkthrough showing you how to embed and evaluate UX tests directly inside your Canvas modules.</p>
     </section>
+    <img src="https://via.placeholder.com/800x450?text=UX+Test+in+Canvas+Video+Coming+Soon"
+         alt="Placeholder for UX test walkthrough video"
+         style="display: block; margin: 2em auto; border-radius: 8px; max-width: 100%; height: auto;" />
   </main>
 
   <footer>
-    <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett</p>
+    <p>&copy; 2025 UXie · Created by Rich Bartlett</p>
     <img src="au-logo-placeholder.png" alt="Adelaide University logo" />
   </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
-
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const suggestionList = document.getElementById('searchSuggestions');
-    const searchForm = document.getElementById('searchForm');
-    const topBtn = document.getElementById('topBtn');
-
-    function handleSearch(value) {
-      const query = value.toLowerCase().trim();
-
-      if (query.includes('jotform')) {
-        window.location.href = 'tools.html#jotform';
-      } else if (query.includes('card')) {
-        window.location.href = 'methodologies.html#card-sorting';
-      } else if (query.includes('usability')) {
-        window.location.href = 'methodologies.html#usability-testing';
-      } else if (query.includes('tree testing')) {
-        window.location.href = 'methodologies.html#tree-testing';
-      } else if (query.includes('heatmap') || query.includes('hotjar')) {
-        window.location.href = 'tools.html#hotjar';
-      } else if (query.includes('accessibility')) {
-        window.location.href = 'resources.html#accessibility';
-      } else if
+</body>
+</html>
