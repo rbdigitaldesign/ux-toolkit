@@ -242,3 +242,20 @@ footer img {
     padding: 1.5em;
   }
 }
+.uxie-banner-icon {
+  position: absolute;
+  top: 1.5em;
+  right: 1.5em;
+  z-index: 2;
+}
+
+.uxie-banner-icon img.uxie-icon {
+  width: 88px; /* ~10% bigger than 80px */
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.uxie-banner-icon img.uxie-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+}
