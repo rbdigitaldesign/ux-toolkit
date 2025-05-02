@@ -1,73 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UX methodologies | Higher Education Toolkit</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Methodologies | Ctrl+Toolkit</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+  <style>
+    .method-section {
+      margin-bottom: 3em;
+    }
+    .method-section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 1em;
+    }
+    .back-link {
+      display: block;
+      margin-top: 2em;
+      text-align: center;
+      font-weight: bold;
+      color: var(--bright-blue);
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodologies.html">Methodologies</a></li>
-        <li><a href="tools.html">Tools</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-<div class="global-search">
-  <input type="search" id="searchInput" placeholder="Search tools, methods, resources..." />
-</div>
-    <h1>UX research methodologies</h1>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>UX Research Methodologies</h1>
+      <p>Explore various UX research methods to enhance user experience in digital learning environments.</p>
+    </div>
   </header>
-  <nav>
-  <ul>
-    <li><a href="#usability-testing">Usability Testing</a></li>
-    <li><a href="#card-sorting">Card Sorting</a></li>
-    <li><a href="#tree-testing">Tree Testing</a></li>
-    <li><a href="#interviews">User Interviews</a></li>
-    <li><a href="#focus-groups">Focus Groups</a></li>
-    <li><a href="#diary-studies">Diary Studies</a></li>
-  </ul>
-</nav>
+
   <main class="container">
-    <section id="usability-testing">
-      <h2>Usability testing</h2>
-      <p>Observe how real students interact with your system to identify usability issues. Choose moderated or unmoderated formats depending on context.</p>
-      <p><strong>Moderated:</strong> conducted live, often via Zoom or Teams.<br>
-         <strong>Unmoderated:</strong> task-based with screen capture (e.g. Maze or Lookback).</p>
+    <section class="method-section" id="usability-testing">
+      <h2>Usability Testing</h2>
+      <p>Usability testing involves observing users as they interact with a product to identify usability issues. It can be conducted in two formats:</p>
+      <ul>
+        <li><strong>Moderated:</strong> Conducted live, often via platforms like Zoom or Teams, allowing real-time interaction and feedback.</li>
+        <li><strong>Unmoderated:</strong> Users complete tasks independently, with tools like Maze or Lookback capturing their interactions.</li>
+      </ul>
+      <img src="https://example.com/images/usability-testing.jpg" alt="Usability Testing Illustration" />
     </section>
 
-    <section id="card-sorting">
-      <h2>Card sorting</h2>
-      <p>Understand how users categorise information. Helps shape site navigation and labelling. Use digital tools like OptimalSort or physical index cards.</p>
+    <section class="method-section" id="card-sorting">
+      <h2>Card Sorting</h2>
+      <p>Card sorting helps understand how users categorize information, informing the design of intuitive navigation structures. It can be conducted using:</p>
+      <ul>
+        <li><strong>Open Card Sorting:</strong> Participants create their own categories.</li>
+        <li><strong>Closed Card Sorting:</strong> Participants sort cards into predefined categories.</li>
+      </ul>
+      <img src="https://example.com/images/card-sorting.jpg" alt="Card Sorting Example" />
     </section>
 
-    <section id="tree-testing">
-      <h2>Tree testing</h2>
-      <p>Assess how easily users can find items in a proposed site structure. Complements card sorting and validates IA decisions.</p>
+    <section class="method-section" id="tree-testing">
+      <h2>Tree Testing</h2>
+      <p>Tree testing evaluates the findability of topics in a website's structure. Participants are given tasks to locate items within a simplified text version of the site hierarchy, helping identify navigation issues.</p>
+      <img src="https://example.com/images/tree-testing.jpg" alt="Tree Testing Diagram" />
     </section>
 
-    <section id="interviews">
-      <h2>User interviews</h2>
-      <p>Collect qualitative insights from students. Explore motivations, challenges, and expectations. Use semi-structured guides for balance and flexibility.</p>
+    <section class="method-section" id="interviews">
+      <h2>User Interviews</h2>
+      <p>User interviews involve one-on-one sessions to gather in-depth insights into users' experiences, motivations, and challenges. They can be structured, semi-structured, or unstructured, depending on the research goals.</p>
+      <img src="https://example.com/images/user-interviews.jpg" alt="User Interview Session" />
     </section>
 
-    <section id="focus-groups">
-      <h2>Focus groups</h2>
-      <p>Facilitate structured discussions among small groups of students. Useful for exploring shared perceptions or surfacing divergent views.</p>
+    <section class="method-section" id="focus-groups">
+      <h2>Focus Groups</h2>
+      <p>Focus groups bring together a small group of users to discuss their experiences and perceptions. This method is useful for exploring shared attitudes and uncovering diverse viewpoints.</p>
+      <img src="https://example.com/images/focus-group.jpg" alt="Focus Group Discussion" />
     </section>
 
-    <section id="diary-studies">
-      <h2>Diary studies</h2>
-      <p>Ask students to document their experience over time, often during course use or interaction with learning platforms. Yields rich longitudinal data.</p>
+    <section class="method-section" id="diary-studies">
+      <h2>Diary Studies</h2>
+      <p>Diary studies involve participants recording their experiences over time, providing longitudinal insights into user behaviors and interactions. This method is valuable for understanding user engagement over extended periods.</p>
+      <img src="https://example.com/images/diary-study.jpg" alt="Diary Study Example" />
     </section>
+
+    <a href="index.html" class="back-link">← Return to Ctrl+Toolkit Home</a>
   </main>
+
   <footer>
-    <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
+    <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett</p>
   </footer>
+
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 </body>
 </html>
