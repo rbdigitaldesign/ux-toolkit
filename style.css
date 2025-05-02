@@ -36,7 +36,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   padding: 6em 1.5em 5em;
   position: relative;
   overflow: hidden;
-  z-index: 1; /* ✅ fixes stacking issue */
+  z-index: 1; /* ✅ Ensures mascot is behind interactive elements */
 }
 
 .hero-banner::after {
@@ -100,7 +100,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  z-index: 1001; /* ⬅️ this is key */
+  z-index: 1001;
 }
 
 .hero-search {
@@ -150,7 +150,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   max-height: 220px;
   overflow-y: auto;
   display: none;
-  z-index: 1002; /* updated */
+  z-index: 1002; /* ✅ Must sit above all search-wrapper content */
 }
 
 .suggestion-list.visible {
