@@ -342,4 +342,41 @@ footer img {
   .uxie-icon {
     margin-top: 1em;
   }
+.search-flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 2em;
+  max-width: 960px;
+  margin: 2em auto 0;
 }
+
+.uxie-search-icon {
+  flex-shrink: 0;
+  padding-right: 2em;
+}
+
+.uxie-search-icon img.uxie-icon {
+  width: 120px;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.uxie-search-icon img.uxie-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+}
+
+@media (max-width: 700px) {
+  .search-flex-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .uxie-search-icon {
+    padding-right: 0;
+  }
+}
+
