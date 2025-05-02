@@ -61,12 +61,16 @@ hero-banner img.uxie-icon {
 
 /* Search */
 .search-wrapper {
+  margin-top: 1em;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 1em;
-  gap: 1em;
+}
+
+.search-form {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 520px;
 }
 
 .hero-search {
@@ -81,17 +85,19 @@ hero-banner img.uxie-icon {
 }
 
 .search-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  padding: 0 1em;
   background-color: var(--bright-blue);
   color: white;
   border: none;
-  padding: 0 1em;
   border-radius: 6px;
+  font-size: 1em;
   cursor: pointer;
 }
 
-.search-button:hover {
-  background-color: var(--north-terrace-purple);
-}
 
 /* Suggestions dropdown */
 .suggestion-list {
@@ -108,7 +114,9 @@ hero-banner img.uxie-icon {
   list-style: none;
   margin: 0;
   padding: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   display: none;
+  z-index: 99;
 }
 
 .suggestion-list.visible {
@@ -119,12 +127,10 @@ hero-banner img.uxie-icon {
   padding: 0.75em 1em;
   cursor: pointer;
   font-size: 1em;
+  color: var(--dark-blue);
+  background-color: var(--white);
 }
 
-.suggestion-list li:hover {
-  background-color: var(--limestone-tint);
-  color: var(--bright-blue);
-}
 
 /* Main layout */
 .container {
