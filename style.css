@@ -233,4 +233,25 @@ footer img {
   .highlight {
     padding: 1.5em;
   }
+.uxie-mobile-top {
+  display: none;
+  width: 100px;
+  margin: 0 auto 1em;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
+
+.uxie-mobile-top:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+}
+
+@media (max-width: 700px) {
+  .hero-banner {
+    background: linear-gradient(135deg, #140F50 40%, #836BFF); /* fallback gradient only */
+  }
+
+  .uxie-mobile-top {
+    display: block;
+  }
+}
+
