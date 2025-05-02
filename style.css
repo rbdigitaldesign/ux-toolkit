@@ -250,7 +250,7 @@ footer img {
 }
 
 .uxie-banner-icon img.uxie-icon {
-  width: 88px; /* ~10% bigger than 80px */
+  width: 150px; /* approx. fills the red circle */
   height: auto;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
