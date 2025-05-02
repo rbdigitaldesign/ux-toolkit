@@ -28,13 +28,14 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 /* Hero Banner */
 .hero-banner {
   background:
+    linear-gradient(to right, rgba(20, 15, 80, 0.9), rgba(131, 107, 255, 0.4)),
     url('uxie-icon-banner.png') no-repeat right bottom / auto 100%,
     linear-gradient(135deg, #140F50 40%, #836BFF);
   color: var(--white);
   text-align: center;
   padding: 5em 1.5em 4em;
   position: relative;
-  background-blend-mode: overlay;
+  background-blend-mode: normal, normal, overlay;
 }
 
 .hero-banner h1 {
