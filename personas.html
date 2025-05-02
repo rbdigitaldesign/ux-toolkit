@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Personas | Ctrl+Toolkit</title>
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>User Personas</h1>
+      <p>Designing for inclusion starts with understanding the diverse people we support.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="highlight">
+      <h2>About these personas</h2>
+      <p>This embedded deck was created by <strong>Kelli Knuth</strong> to support staff in designing learning experiences with empathy, accessibility, and inclusion in mind.</p>
+      <p>The personas represent diverse students across life stages, learning needs, and lived experiences. They reflect real challenges students face in navigating university systems and engaging with digital learning environments.</p>
+      <p><em>Use these personas to frame your UX tests, accessibility reviews, or design decisions in ways that reflect authentic student journeys.</em></p>
+    </section>
+
+    <section class="personas-box">
+      <h2>🎥 Embedded presentation</h2>
+      <p>Explore the personas directly in the deck below:</p>
+
+      <div class="ppt-embed">
+        <iframe src="https://uao365-my.sharepoint.com/personal/a1237010_adelaide_edu_au/_layouts/15/Doc.aspx?sourcedoc={34c86711-24bb-4389-9709-c40c5a0b09ee}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="100%" height="400" frameborder="0" title="Accessibility Personas by Kelli Knuth">
+          This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation.
+        </iframe>
+      </div>
+    </section>
+
+    <section class="highlight">
+      <h2>Accessibility insight from the PDF</h2>
+      <ul>
+        <li>Accessibility is not only about disability — it’s also about clarity, predictability, and inclusion.</li>
+        <li>Navigation structure matters: numbered topics help students using screen readers or working across second languages.</li>
+        <li>Designs that reduce cognitive load benefit everyone, especially students with ADHD, dyslexia, or anxiety.</li>
+        <li>Universal Design for Learning (UDL) principles should guide your layout, flow, and language.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett · Personas content by Kelli Knuth</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
