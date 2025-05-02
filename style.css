@@ -128,3 +128,21 @@ footer img {
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
 }
+/* Match the search bar style */
+.hero-search {
+  width: 100%;
+  max-width: 520px;
+  padding: 0.8em;
+  font-size: 1em;
+  border: 2px solid var(--bright-blue);
+  border-radius: 8px;
+  font-family: inherit;
+  background-color: var(--white);
+  color: var(--dark-blue);
+}
+
+/* Prevent default datalist weird border appearance */
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
