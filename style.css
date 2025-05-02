@@ -37,7 +37,7 @@ nav a:hover {
   margin: auto;
 }
 
-input[type=\"search\"] {
+input[type="search"] {
   width: 100%;
   padding: 0.8em;
   font-size: 1em;
@@ -52,22 +52,24 @@ footer {
   padding: 1em;
   margin-top: 3em;
 }
+
 #topBtn {
   display: none;
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  font-size: 16px;
   background-color: #1448FF;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
+  border-radius: 30px;
+  padding: 10px 16px;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
 }
 
 #topBtn:hover {
   background-color: #836BFF;
 }
-
