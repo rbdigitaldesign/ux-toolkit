@@ -154,15 +154,16 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // Email protection
-    document.addEventListener("DOMContentLoaded", () => {
-      const emails = document.querySelectorAll(".email");
-      emails.forEach(el => {
-        const user = el.getAttribute("data-user");
-        const domain = el.getAttribute("data-domain");
-        el.innerHTML = `<a href="mailto:${user}.${domain}">${user}.${domain}</a>`;
-      });
+    <script>
+  // Protect email addresses
+  document.querySelectorAll('.email-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const user = btn.dataset.user;
+      const domain = btn.dataset.domain;
+      window.location.href = `mailto:${user}@${domain}`;
     });
-  </script>
+  });
+</script>
+    
 </body>
 </html>
