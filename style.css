@@ -1,41 +1,46 @@
+
 :root {
-  --bright-blue: #1448ff;
-  --dark-blue: #140f50;
-  --north-terrace-purple: #836bff;
-  --south-east-limestone: #f8efe0;
-  --white: #ffffff;
-  --limestone-tint: #fdf9f0;
+  --dark-blue: #140F50;
+  --bright-blue: #1448FF;
+  --north-terrace-purple: #836BFF;
+  --south-east-limestone: #F8EFE0;
+  --white: #FFFFFF;
+  --limestone-tint: #fef9f1;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: var(--south-east-limestone);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
+  padding: 0;
+  background-color: var(--south-east-limestone);
   color: var(--dark-blue);
 }
 
 .container {
+  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2em;
 }
 
 .hero-wrapper {
   background-color: var(--bright-blue);
-  color: white;
+  padding: 2em 1em;
   text-align: center;
-  padding: 3em 1em;
+  color: white;
+}
+
+.hero-banner img.tux-mobile-top {
+  width: 60px;
+  margin-bottom: 1em;
 }
 
 .hero-banner h1 {
-  font-size: 2.5em;
-  margin-bottom: 0.3em;
+  margin: 0.2em 0;
 }
 
 .hero-banner p {
-  max-width: 640px;
-  margin: 0 auto 1.5em;
-  font-size: 1.1em;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 .search-container {
@@ -43,56 +48,50 @@ body {
 }
 
 .hero-search {
-  padding: 0.75em;
   width: 60%;
-  max-width: 400px;
-  border: none;
+  padding: 0.5em;
   border-radius: 5px;
+  border: none;
   font-size: 1em;
 }
 
 .search-button {
-  padding: 0.75em 1.2em;
-  margin-left: 0.5em;
+  padding: 0.5em 1em;
   background-color: var(--north-terrace-purple);
-  color: white;
   border: none;
-  border-radius: 5px;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .search-suggestions {
   list-style: none;
   padding: 0;
-  margin-top: 1em;
-  text-align: center;
+  margin: 1em 0 0 0;
   font-size: 0.9em;
   color: white;
 }
 
 .grid-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
-  margin-top: 3em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5em;
+  margin: 3em 0;
 }
 
 .card {
-  flex: 1 1 250px;
-  background-color: var(--white);
+  background: white;
   padding: 1.5em;
-  border: 2px solid var(--bright-blue);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.03);
-  text-align: center;
+  border-left: 4px solid var(--bright-blue);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   text-decoration: none;
   color: var(--dark-blue);
-  transition: transform 0.2s;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.card h2 {
+  margin-top: 0;
 }
 
 .video-section {
@@ -131,13 +130,12 @@ body {
   font-size: 1.1em;
 }
 
-/* Profile Cards */
 .team-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2em;
-  margin-top: 3em;
+  margin: 2em 0;
 }
 
 .profile-card {
@@ -154,13 +152,6 @@ body {
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease forwards;
   color: var(--dark-blue);
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .profile-pic {
@@ -209,7 +200,6 @@ body {
   background-color: var(--north-terrace-purple);
 }
 
-/* Contact Form */
 .contact-form {
   margin: 4em auto;
   max-width: 600px;
@@ -232,8 +222,8 @@ body {
 }
 
 .contact-form input,
-.contact-form textarea,
-.contact-form select {
+.contact-form select,
+.contact-form textarea {
   width: 100%;
   padding: 0.8em;
   margin-top: 0.3em;
@@ -256,13 +246,12 @@ body {
   background-color: var(--north-terrace-purple);
 }
 
-/* Footer */
 footer {
+  margin-top: 4em;
   text-align: center;
   font-size: 0.9em;
-  padding: 2em 1em;
-  color: var(--dark-blue);
-  border-top: 2px solid var(--bright-blue);
+  padding: 2em;
+  border-top: 1px solid var(--bright-blue);
 }
 
 footer nav a {
@@ -273,4 +262,30 @@ footer nav a {
 
 footer nav a:hover {
   text-decoration: underline;
+}
+
+#topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: var(--bright-blue);
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 50%;
+}
+
+#topBtn:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
