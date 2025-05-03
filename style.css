@@ -251,31 +251,14 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--bright-blue);
   font-family: 'Codegun', sans-serif;
 }
-
-.team-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
-  align-items: stretch;
+.team-row::-webkit-scrollbar {
+  height: 8px;
 }
-
-.profile-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1 1 260px;
-  max-width: 260px;
-  background-color: var(--white);
-  border: 2px solid var(--bright-blue);
+.team-row::-webkit-scrollbar-thumb {
+  background-color: var(--bright-blue);
   border-radius: 10px;
-  padding: 1.5em;
-  text-align: center;
-  color: var(--dark-blue);
-  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
-  transition: transform 0.3s ease;
-  height: 100%;
 }
+
 
 .profile-card:hover {
   transform: translateY(-5px);
