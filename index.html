@@ -3,95 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>UX Methodologies | Ctrl+Toolkit</title>
-  <link rel="stylesheet" href="style.css?v=5" />
-  <style>
-    .method-section {
-      margin-bottom: 3em;
-    }
-    .method-section img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-top: 1em;
-    }
-    .back-link {
-      display: block;
-      margin-top: 2em;
-      text-align: center;
-      font-weight: bold;
-      color: var(--bright-blue);
-    }
-    .back-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <meta name="description" content="TUX is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>TUX</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="search.js"></script>
 </head>
 <body>
-  <header class="hero-banner">
-    <div class="container">
-      <h1>UX Research Methodologies</h1>
-      <p>Explore various UX research methods to enhance user experience in digital learning environments.</p>
-    </div>
-  </header>
+  <div class="hero-wrapper">
+    <header class="hero-banner">
+      <img src="tux-icon.png" alt="TUX mascot" class="tux-mobile-top" />
+      <h1>TUX</h1>
+      <p>TUX (Toolkit for UX) is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.</p>
+
+      <div class="search-container">
+        <form id="searchForm">
+          <input type="text" id="searchInput" class="hero-search" placeholder="Search tools, methods, tips..." autocomplete="off" />
+          <button type="submit" class="search-button">Search</button>
+          <ul id="searchSuggestions" class="search-suggestions">
+            <li class="suggestion">Card sorting</li>
+            <li class="suggestion">Usability testing</li>
+            <li class="suggestion">Heatmaps</li>
+            <li class="suggestion">Jotform</li>
+            <li class="suggestion">Typeform</li>
+            <li class="suggestion">Hotjar</li>
+            <li class="suggestion">Accessibility checklist</li>
+            <li class="suggestion">UX for media</li>
+            <li class="suggestion">Use in courses</li>
+            <li class="suggestion">User personas</li>
+            <li class="suggestion">UX testing tips</li>
+          </ul>
+        </form>
+      </div>
+    </header>
+  </div>
 
   <main class="container">
-    <section class="method-section" id="usability-testing">
-  <h2>Usability Testing</h2>
-  <p>Usability testing involves observing users as they interact with a product to identify usability issues. It can be conducted in two formats:</p>
-  <ul>
-    <li>
-      <strong>Moderated:</strong> Conducted live, often via platforms like Zoom or Teams, allowing real-time interaction and feedback.
-      <br />
-      <img src="images/moderated-test.svg" alt="Illustration of a moderated usability test" />
-    </li>
-    <li>
-      <strong>Unmoderated:</strong> Users complete tasks independently, with tools like Maze or Lookback capturing their interactions.
-      <br />
-      <img src="images/unmoderated-test.svg" alt="Illustration of an unmoderated usability test" />
-    </li>
-  </ul>
-</section>
-
-    <section class="method-section" id="card-sorting">
-      <h2>Card Sorting</h2>
-      <p>Card sorting helps understand how users categorize information, informing the design of intuitive navigation structures. It can be conducted using:</p>
-      <ul>
-        <li><strong>Open Card Sorting:</strong> Participants create their own categories.</li>
-        <li><strong>Closed Card Sorting:</strong> Participants sort cards into predefined categories.</li>
-      </ul>
-      <img src="https://example.com/images/card-sorting.jpg" alt="Card Sorting Example" />
+    <section class="grid-section">
+      <a href="methodologies.html" class="card">
+        <h2>💡 UX Methods</h2>
+        <p>Explore techniques and research frameworks for testing usability and engagement.</p>
+      </a>
+      <a href="tools.html" class="card">
+        <h2>🔧 UX Tools</h2>
+        <p>Browse recommended tools for surveys, heatmaps, testing and prototyping.</p>
+      </a>
+      <a href="resources.html#use-in-courses" class="card">
+        <h2>🎓 Use in Courses</h2>
+        <p>Design practical learning activities informed by user-centred thinking.</p>
+      </a>
+      <a href="resources.html#media" class="card">
+        <h2>📚 UX Resources</h2>
+        <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
+      </a>
+      <a href="personas.html" class="card">
+        <h2>🧍‍♀️ User Personas</h2>
+        <p>Reference real-world learner personas created by Kelli Knuth to design more inclusive and accessible experiences.</p>
+      </a>
+      <a href="tips.html" class="card">
+        <h2>🧪 UX Testing Tips</h2>
+        <p>Discover evidence-based recommendations for running smarter usability tests, curated from trusted sources like NN/g.</p>
+      </a>
     </section>
 
-    <section class="method-section" id="tree-testing">
-      <h2>Tree Testing</h2>
-      <p>Tree testing evaluates the findability of topics in a website's structure. Participants are given tasks to locate items within a simplified text version of the site hierarchy, helping identify navigation issues.</p>
-      <img src="https://example.com/images/tree-testing.jpg" alt="Tree Testing Diagram" />
+    <section class="highlight">
+      <h3>🎬 Coming Soon: How to run a UX test in Canvas</h3>
+      <p>We’re preparing a short walkthrough showing you how to embed and evaluate UX tests directly inside your Canvas modules.</p>
     </section>
-
-    <section class="method-section" id="interviews">
-      <h2>User Interviews</h2>
-      <p>User interviews involve one-on-one sessions to gather in-depth insights into users' experiences, motivations, and challenges. They can be structured, semi-structured, or unstructured, depending on the research goals.</p>
-      <img src="https://example.com/images/user-interviews.jpg" alt="User Interview Session" />
-    </section>
-
-    <section class="method-section" id="focus-groups">
-      <h2>Focus Groups</h2>
-      <p>Focus groups bring together a small group of users to discuss their experiences and perceptions. This method is useful for exploring shared attitudes and uncovering diverse viewpoints.</p>
-      <img src="https://example.com/images/focus-group.jpg" alt="Focus Group Discussion" />
-    </section>
-
-    <section class="method-section" id="diary-studies">
-      <h2>Diary Studies</h2>
-      <p>Diary studies involve participants recording their experiences over time, providing longitudinal insights into user behaviors and interactions. This method is valuable for understanding user engagement over extended periods.</p>
-      <img src="https://example.com/images/diary-study.jpg" alt="Diary Study Example" />
-    </section>
-
-    <div style="text-align: center;">   <a href="index.html" class="back-button">← Return to Ctrl+Toolkit Home</a> </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Ctrl+Toolkit · Created by Rich Bartlett</p>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
+    <img src="au-logo-placeholder.png" alt="Adelaide University logo" />
   </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
