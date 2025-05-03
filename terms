@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms and Conditions | TUX</title>
+  <link rel="stylesheet" href="style.css?v=14" />
+  <style>
+    .terms-section {
+      background-color: var(--white);
+      padding: 2em;
+      border: 2px solid var(--bright-blue);
+      border-radius: 10px;
+      margin: 2em auto;
+      max-width: 800px;
+      box-shadow: 0 4px 12px rgba(20, 15, 80, 0.05);
+    }
+
+    .terms-section h2 {
+      font-size: 1.8em;
+      margin-bottom: 0.5em;
+      color: var(--bright-blue);
+    }
+
+    .terms-section p {
+      line-height: 1.7;
+      margin-bottom: 1.2em;
+    }
+
+    .terms-section ul {
+      padding-left: 1.2em;
+      margin-bottom: 1.5em;
+    }
+
+    .terms-section li {
+      margin-bottom: 0.6em;
+    }
+
+    .return-container {
+      text-align: center;
+      margin-top: 3em;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>Terms and conditions</h1>
+      <p>Understand how you can use and contribute to the TUX toolkit.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="terms-section">
+      <h2>1. Purpose of this site</h2>
+      <p>This site is an open educational resource created to support better UX practices in the design of digital learning experiences, with a particular focus on Canvas LMS. It is maintained by the TUX Subgroup and shared for collaborative improvement and knowledge exchange.</p>
+
+      <h2>2. Use of content</h2>
+      <ul>
+        <li>You are free to use, remix, and adapt the content for educational and professional purposes.</li>
+        <li>If you reuse or share any materials, please provide credit to the original source (TUX Toolkit by Rich Bartlett and collaborators).</li>
+        <li>Commercial use of the site’s materials is not permitted without explicit permission.</li>
+      </ul>
+
+      <h2>3. Accuracy and reliability</h2>
+      <p>While we aim to keep the information on this site current and accurate, we make no guarantees. Always evaluate methods and tools for your own teaching and learning context. Feedback and suggestions are welcome.</p>
+
+      <h2>4. External tools and links</h2>
+      <p>This site links to third-party tools and resources that are not affiliated with the TUX Subgroup. Use of those tools is subject to their own terms and conditions.</p>
+
+      <h2>5. Contact</h2>
+      <p>To get in touch with the TUX team for support or collaboration opportunities, please visit our <a href="contact.html">contact page</a>.</p>
+    </section>
+
+    <div class="return-container">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
+    <nav>
+      <a href="team.html">UX Subgroup team</a> ·
+      <a href="contact.html">Contact</a> ·
+      <a href="terms.html">Terms and Conditions</a>
+    </nav>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
