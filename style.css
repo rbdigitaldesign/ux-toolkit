@@ -366,3 +366,9 @@ body.index .hero-banner::after {
 body:not(.index) .hero-banner::after {
   content: none;
 }
+/* Smaller hero banner for subpages */
+body:not(.index) .hero-banner {
+  padding: 3.5em 1.5em 3em;
+  min-height: unset;
+}
+
