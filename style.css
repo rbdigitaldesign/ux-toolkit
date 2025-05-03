@@ -37,8 +37,8 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   background-color: #140F50;
   color: var(--white);
   text-align: center;
-  padding: 6em 1.5em 5em;
-  min-height: 500px;
+  padding: 4em 1.5em 3.5em;
+  min-height: 360px;
   overflow: hidden;
   z-index: 1;
 }
