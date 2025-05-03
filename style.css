@@ -43,7 +43,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   padding: 6em 1.5em 5em;
   overflow: hidden;
   z-index: 1;
-  min-height: 300px; /* Adjust as needed */
+  min-height: 300px;
 }
 
 .hero-banner::after {
@@ -107,7 +107,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 .hero-search {
   width: 100%;
-  padding: 0.8em 4em 0.8em 1em; /* padding-right for internal button */
+  padding: 0.8em 4em 0.8em 1em;
   font-size: 1em;
   border: 2px solid var(--bright-blue);
   border-radius: 8px;
@@ -187,6 +187,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
+/* Cards */
 .card {
   background: var(--white);
   border: 2px solid var(--bright-blue);
@@ -208,6 +209,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--bright-blue);
 }
 
+/* Highlight */
 .highlight {
   background-color: var(--limestone-tint);
   padding: 2em;
@@ -251,133 +253,8 @@ footer img {
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
 }
-.method-section {
-  margin-bottom: 3em;
-}
-.method-section img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 1em;
-}
-.return-container {
-  text-align: center;
-  margin-top: 3em;
-}
-.back-button {
-  display: inline-block;
-  background-color: var(--bright-blue);
-  color: var(--white);
-  padding: 0.75em 1.5em;
-  font-size: 1em;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-}
-.back-button:hover {
-  background-color: var(--north-terrace-purple);
-}
-.method-section {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2em;
-  margin-bottom: 4em;
-  background-color: var(--limestone-tint);
-  border-left: 5px solid var(--bright-blue);
-  border-radius: 8px;
-  padding: 2em;
-}
 
-.method-section:nth-child(even) {
-  flex-direction: row-reverse;
-}
-
-.method-img {
-  flex: 1 1 40%;
-  max-width: 400px;
-}
-
-.method-img img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-
-.method-text {
-  flex: 1 1 55%;
-}
-
-.method-text h2 {
-  font-size: 1.75em;
-  margin-bottom: 0.5em;
-}
-
-.method-text p,
-.method-text li {
-  font-size: 1.15em;
-  line-height: 1.6;
-}
-
-.method-text ul {
-  padding-left: 1.2em;
-}
-
-@media (max-width: 800px) {
-  .method-section {
-    flex-direction: column !important;
-    text-align: left;
-  }
-
-  .method-img,
-  .method-text {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-.method-section {
-  margin-bottom: 4em;
-}
-
-.method-card {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: var(--white);
-  border: 2px solid var(--bright-blue);
-  border-radius: 10px;
-  padding: 1.5em;
-  margin-top: 2em;
-  gap: 2em;
-}
-
-.method-card.right-image .method-img {
-  order: 2;
-}
-
-.method-card.left-image .method-img {
-  order: 0;
-}
-
-.method-img {
-  flex: 1 1 300px;
-  text-align: center;
-}
-
-.method-img img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-
-.method-text {
-  flex: 2 1 400px;
-}
-
-.method-card h3 {
-  margin-top: 0;
-  font-family: 'Codegun', sans-serif;
-  color: var(--bright-blue);
+/* Method sections */
 .method-section {
   margin-bottom: 4em;
 }
@@ -387,12 +264,17 @@ footer img {
   margin-bottom: 0.5em;
 }
 
-.method-section p {
-  font-size: 1.1em;
+.method-section p,
+.method-section li {
+  font-size: 1.15em;
   line-height: 1.6;
-  margin-bottom: 1em;
 }
 
+.method-section ul {
+  padding-left: 1.2em;
+}
+
+/* Method cards (with alternating layout) */
 .method-card {
   display: flex;
   flex-wrap: wrap;
@@ -434,4 +316,38 @@ footer img {
   color: var(--bright-blue);
 }
 
+/* Responsive fallback */
+@media (max-width: 800px) {
+  .method-card {
+    flex-direction: column !important;
+    text-align: left;
+  }
 
+  .method-card .method-img,
+  .method-card .method-text {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* Return link */
+.return-container {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.back-button {
+  display: inline-block;
+  background-color: var(--bright-blue);
+  color: var(--white);
+  padding: 0.75em 1.5em;
+  font-size: 1em;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: var(--north-terrace-purple);
+}
