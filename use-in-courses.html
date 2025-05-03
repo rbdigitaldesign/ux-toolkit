@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Use in courses | TUX</title>
+  <link rel="stylesheet" href="style.css?v=7" />
+</head>
+<body>
+  <header class="hero-banner no-banner-image">
+    <div class="container">
+      <h1>UX in courses</h1>
+      <p>Practical guidance for designing clear, accessible, and user-friendly Canvas LMS experiences.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="method-section">
+      <h2>🧭 Canvas LMS UX design checklist</h2>
+      <p>Use this checklist to improve the usability and accessibility of Canvas course pages. Tick items as you go to track what you've implemented.</p>
+
+      <div class="checklist-grid">
+        <div class="checklist-box">
+          <h3>✅ Make navigation visible and predictable</h3>
+          <ul>
+            <li><input type="checkbox" /> Avoid hiding core links in collapsible menus.</li>
+            <li><input type="checkbox" /> Position core navigation consistently (e.g. left-side modules).</li>
+            <li><input type="checkbox" /> Minimise clutter in global navigation.</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>🧠 Communicate where users are</h3>
+          <ul>
+            <li><input type="checkbox" /> Use clear H1/H2 headings and breadcrumbs.</li>
+            <li><input type="checkbox" /> Highlight the current module/topic visually.</li>
+            <li><input type="checkbox" /> Avoid jumping users to unexpected locations.</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>🧾 Use clear and scannable labels</h3>
+          <ul>
+            <li><input type="checkbox" /> Avoid internal jargon; use familiar terms.</li>
+            <li><input type="checkbox" /> Be concise and front-load keywords.</li>
+            <li><input type="checkbox" /> Standardise terminology across pages.</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>🎨 Support contrast and visibility</h3>
+          <ul>
+            <li><input type="checkbox" /> Ensure button and link colours meet WCAG standards.</li>
+            <li><input type="checkbox" /> Use bold or headings for emphasis, not just colour.</li>
+            <li><input type="checkbox" /> Limit pages to a single clear call-to-action.</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>📱 Design for interaction and accessibility</h3>
+          <ul>
+            <li><input type="checkbox" /> Use click-based reveals (not hover only).</li>
+            <li><input type="checkbox" /> Avoid deeply nested navigation.</li>
+            <li><input type="checkbox" /> Use large tap/click areas on mobile.</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>📌 Keep important navigation sticky</h3>
+          <ul>
+            <li><input type="checkbox" /> Use pinned headers or floating menus if possible.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="return-container">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
