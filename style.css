@@ -331,14 +331,14 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .linkedin-logo {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   transition: transform 0.2s ease;
 }
 
 .email-button {
-  background-color: var(--bright-blue);
-  color: white;
+  background-color: var(--bright-blue); /* vibrant blue background */
+  color: white;                         /* white text */
   border-radius: 5px;
   padding: 0.6em 1.2em;
   font-size: 0.9em;
@@ -348,11 +348,11 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   transition: background-color 0.2s ease;
 }
 
-
 .email-button:hover {
-  background-color: var(--north-terrace-purple);
-  color: white; /* keep text white to maintain visibility */
+  background-color: var(--north-terrace-purple); /* subtle purple shift */
+  color: white;                                  /* keep text white */
 }
+
 
 
 /* Contact Form */
