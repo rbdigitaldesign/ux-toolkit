@@ -1,5 +1,3 @@
-// SEARCH BAR FUNCTIONALITY
-
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const searchSuggestions = document.getElementById('searchSuggestions');
@@ -31,7 +29,7 @@ searchInput.addEventListener('input', () => {
 
 function filterSuggestions(val) {
   const lowerVal = val.toLowerCase();
-  document.querySelectorAll('#searchSuggestions li').forEach(item => {
+  document.querySelectorAll('.suggestion').forEach(item => {
     const match = item.textContent.toLowerCase().includes(lowerVal);
     item.style.display = match ? 'block' : 'none';
   });
@@ -43,8 +41,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-document.querySelectorAll('#searchSuggestions li').forEach(item => {
-  item.classList.add('suggestion');
+document.querySelectorAll('.suggestion').forEach(item => {
   item.addEventListener('click', () => {
     searchInput.value = item.textContent;
     searchSuggestions.style.display = 'none';
@@ -52,22 +49,9 @@ document.querySelectorAll('#searchSuggestions li').forEach(item => {
   });
 });
 
-searchBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+searchBtn.addEventListener('click', () => {
   handleSearch(searchInput.value);
 });
-
-// SCROLL TO TOP FUNCTIONALITY
-
-const topBtn = document.getElementById("topBtn");
-window.onscroll = function () {
-  topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
-};
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-// EMAIL BUTTON OBFUSCATION
 
 document.querySelectorAll('.email-button').forEach(btn => {
   btn.addEventListener('click', () => {
