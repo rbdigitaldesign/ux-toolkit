@@ -3,103 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="TUX is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.">
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <title>TUX</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="search.js"></script>
-</head>
-<body>
-<div class="hero-wrapper">
-  <header class="hero-banner">
-    <img src="tux-icon.png" alt="TUX mascot" class="tux-mobile-top" />
-    <h1>TUX</h1>
-    <p>TUX (Toolkit for UX) is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.</p>
-
-    <div class="search-container">
-      <form id="searchForm">
-        <input type="text" id="searchInput" class="hero-search" placeholder="Search tools, methods, tips..." autocomplete="off" />
-        <button type="submit" class="search-button">Search</button>
-        <ul id="searchSuggestions" class="search-suggestions">
-          <li>Card sorting</li>
-          <li>Usability testing</li>
-          <li>Heatmaps</li>
-          <li>Jotform</li>
-          <li>Typeform</li>
-          <li>Hotjar</li>
-          <li>Accessibility checklist</li>
-          <li>UX for media</li>
-          <li>Use in courses</li>
-          <li>User personas</li>
-          <li>UX testing tips</li>
-        </ul>
-      </form>
-    </div>
-  </header>
-</div>
-
-  <main class="container">
-    <section class="grid-section">
-      <a href="methodologies.html" class="card">
-        <h2>💡 UX Methods</h2>
-        <p>Explore techniques and research frameworks for testing usability and engagement.</p>
-      </a>
-      <a href="tools.html" class="card">
-        <h2>🔧 UX Tools</h2>
-        <p>Browse recommended tools for surveys, heatmaps, testing and prototyping.</p>
-      </a>
-      <a href="resources.html#use-in-courses" class="card">
-        <h2>🎓 Use in Courses</h2>
-        <p>Design practical learning activities informed by user-centred thinking.</p>
-      </a>
-      <a href="resources.html#media" class="card">
-        <h2>📚 UX Resources</h2>
-        <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
-      </a>
-      <a href="personas.html" class="card">
-        <h2>🧍‍♀️ User Personas</h2>
-        <p>Reference real-world learner personas created by Kelli Knuth to design more inclusive and accessible experiences.</p>
-      </a>
-      <a href="tips.html" class="card">
-        <h2>🧪 UX Testing Tips</h2>
-        <p>Discover evidence-based recommendations for running smarter usability tests, curated from trusted sources like NN/g.</p>
-      </a>
-    </section>
-
-    <section class="highlight">
-      <h3>🎬 Coming Soon: How to run a UX test in Canvas</h3>
-      <p>We’re preparing a short walkthrough showing you how to embed and evaluate UX tests directly inside your Canvas modules.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
-    <img src="au-logo-placeholder.png" alt="Adelaide University logo" />
-  </footer>
-
-  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
-
-  <script>
-    const topBtn = document.getElementById("topBtn");
-    window.onscroll = function () {
-      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
-    };
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  </script>
-</body>
-</html>
-
-HTML for Methods: 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UX Methodologies | Ctrl+Toolkit</title>
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=5" />
+  <style>
+    .method-section {
+      margin-bottom: 3em;
+    }
+    .method-section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 1em;
+    }
+    .back-link {
+      display: block;
+      margin-top: 2em;
+      text-align: center;
+      font-weight: bold;
+      color: var(--bright-blue);
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header class="hero-banner">
@@ -111,21 +37,21 @@ HTML for Methods:
 
   <main class="container">
     <section class="method-section" id="usability-testing">
-      <h2>Usability Testing</h2>
-      <p>Usability testing involves observing users as they interact with a product to identify usability issues. It can be conducted in two formats:</p>
-      <ul>
-        <li>
-          <strong>Moderated:</strong> Conducted live, often via platforms like Zoom or Teams, allowing real-time interaction and feedback.
-          <br />
-          <img src="images/moderated-test.svg" alt="Illustration of a moderated usability test" />
-        </li>
-        <li>
-          <strong>Unmoderated:</strong> Users complete tasks independently, with tools like Maze or Lookback capturing their interactions.
-          <br />
-          <img src="images/unmoderated-test.svg" alt="Illustration of an unmoderated usability test" />
-        </li>
-      </ul>
-    </section>
+  <h2>Usability Testing</h2>
+  <p>Usability testing involves observing users as they interact with a product to identify usability issues. It can be conducted in two formats:</p>
+  <ul>
+    <li>
+      <strong>Moderated:</strong> Conducted live, often via platforms like Zoom or Teams, allowing real-time interaction and feedback.
+      <br />
+      <img src="images/moderated-test.svg" alt="Illustration of a moderated usability test" />
+    </li>
+    <li>
+      <strong>Unmoderated:</strong> Users complete tasks independently, with tools like Maze or Lookback capturing their interactions.
+      <br />
+      <img src="images/unmoderated-test.svg" alt="Illustration of an unmoderated usability test" />
+    </li>
+  </ul>
+</section>
 
     <section class="method-section" id="card-sorting">
       <h2>Card Sorting</h2>
@@ -134,36 +60,34 @@ HTML for Methods:
         <li><strong>Open Card Sorting:</strong> Participants create their own categories.</li>
         <li><strong>Closed Card Sorting:</strong> Participants sort cards into predefined categories.</li>
       </ul>
-      <img src="images/card-sorting.svg" alt="Card Sorting Example" />
+      <img src="https://example.com/images/card-sorting.jpg" alt="Card Sorting Example" />
     </section>
 
     <section class="method-section" id="tree-testing">
       <h2>Tree Testing</h2>
       <p>Tree testing evaluates the findability of topics in a website's structure. Participants are given tasks to locate items within a simplified text version of the site hierarchy, helping identify navigation issues.</p>
-      <img src="images/tree-testing.svg" alt="Tree Testing Diagram" />
+      <img src="https://example.com/images/tree-testing.jpg" alt="Tree Testing Diagram" />
     </section>
 
     <section class="method-section" id="interviews">
       <h2>User Interviews</h2>
       <p>User interviews involve one-on-one sessions to gather in-depth insights into users' experiences, motivations, and challenges. They can be structured, semi-structured, or unstructured, depending on the research goals.</p>
-      <img src="images/user-interviews.svg" alt="User Interview Session" />
+      <img src="https://example.com/images/user-interviews.jpg" alt="User Interview Session" />
     </section>
 
     <section class="method-section" id="focus-groups">
       <h2>Focus Groups</h2>
       <p>Focus groups bring together a small group of users to discuss their experiences and perceptions. This method is useful for exploring shared attitudes and uncovering diverse viewpoints.</p>
-      <img src="images/focus-group.svg" alt="Focus Group Discussion" />
+      <img src="https://example.com/images/focus-group.jpg" alt="Focus Group Discussion" />
     </section>
 
     <section class="method-section" id="diary-studies">
       <h2>Diary Studies</h2>
-      <p>Diary studies involve participants recording their experiences over time, providing longitudinal insights into user behaviours and interactions. This method is valuable for understanding user engagement over extended periods.</p>
-      <img src="images/diary-study.svg" alt="Diary Study Example" />
+      <p>Diary studies involve participants recording their experiences over time, providing longitudinal insights into user behaviors and interactions. This method is valuable for understanding user engagement over extended periods.</p>
+      <img src="https://example.com/images/diary-study.jpg" alt="Diary Study Example" />
     </section>
 
-    <div class="return-container">
-      <a href="index.html" class="back-button">← Return to Ctrl+Toolkit Home</a>
-    </div>
+    <div style="text-align: center;">   <a href="index.html" class="back-button">← Return to Ctrl+Toolkit Home</a> </div>
   </main>
 
   <footer>
@@ -183,285 +107,3 @@ HTML for Methods:
   </script>
 </body>
 </html>
-
-CSS:
-@font-face {
-  font-family: 'Codegun';
-  src: url('codegun.ttf') format('truetype');
-}
-
-:root {
-  --white: #FFFFFF;
-  --dark-blue: #140F50;
-  --bright-blue: #1448FF;
-  --north-terrace-purple: #836BFF;
-  --south-east-limestone: #F8EFE0;
-  --limestone-tint: #FEFCF9;
-}
-
-/* Base */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--south-east-limestone);
-  color: var(--dark-blue);
-}
-
-h1, h2, h3, h4, .card h2, .highlight h3 {
-  font-family: 'Codegun', sans-serif;
-}
-
-/* Hero wrapper */
-.hero-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-/* Hero banner */
-.hero-banner {
-  position: relative;
-  background:
-    linear-gradient(to right, rgba(20, 15, 80, 0.9), rgba(131, 107, 255, 0.4)),
-    linear-gradient(135deg, #140F50 40%, #836BFF);
-  background-color: #140F50;
-  color: var(--white);
-  text-align: center;
-  padding: 6em 1.5em 5em;
-  overflow: hidden;
-  z-index: 1;
-  min-height: 300px; /* Adjust as needed */
-}
-
-.hero-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('tux-icon-banner.png') no-repeat right bottom;
-  background-size: auto 100%;
-  opacity: 0.9;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-banner h1,
-.hero-banner p {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-banner h1 {
-  font-size: 2.8em;
-  margin: 0.3em 0 0.2em;
-}
-
-.hero-banner p {
-  font-size: 1.15em;
-  margin: 0 auto 1.5em;
-  max-width: 720px;
-  color: #E6E1FF;
-}
-
-.tux-mobile-top {
-  display: none;
-  width: 100px;
-  margin: 0 auto 1em;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.tux-mobile-top:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-
-@media (max-width: 700px) {
-  .hero-banner::after {
-    display: none;
-  }
-
-  .tux-mobile-top {
-    display: block;
-  }
-}
-
-/* Search container */
-.search-container {
-  position: relative;
-  max-width: 520px;
-  margin: 0 auto;
-  z-index: 9998;
-}
-
-.hero-search {
-  width: 100%;
-  padding: 0.8em 4em 0.8em 1em; /* padding-right for internal button */
-  font-size: 1em;
-  border: 2px solid var(--bright-blue);
-  border-radius: 8px;
-  background-color: var(--white);
-  color: var(--dark-blue);
-  box-sizing: border-box;
-  font-family: inherit;
-}
-
-.search-button {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  bottom: 6px;
-  padding: 0 1em;
-  background-color: var(--bright-blue);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1em;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.search-button:hover {
-  background-color: var(--north-terrace-purple);
-}
-
-/* Suggestions dropdown */
-.search-suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: var(--white);
-  border: 2px solid var(--bright-blue);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  max-height: 220px;
-  overflow-y: auto;
-  display: none;
-  z-index: 9999;
-}
-
-.search-suggestions.visible {
-  display: block;
-}
-
-.search-suggestions li {
-  padding: 0.75em 1em;
-  cursor: pointer;
-  font-size: 1em;
-  border-bottom: 1px solid #eee;
-  color: var(--dark-blue);
-  background-color: var(--white);
-}
-
-.search-suggestions li:hover {
-  background-color: var(--limestone-tint);
-  color: var(--bright-blue);
-}
-
-/* Layout */
-.container {
-  max-width: 1024px;
-  margin: auto;
-  padding: 2em 1em;
-}
-
-.grid-section {
-  display: grid;
-  gap: 2em;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.card {
-  background: var(--white);
-  border: 2px solid var(--bright-blue);
-  border-radius: 10px;
-  padding: 1.5em;
-  text-align: left;
-  color: var(--dark-blue);
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.15);
-}
-
-.card h2 {
-  margin-top: 0;
-  color: var(--bright-blue);
-}
-
-.highlight {
-  background-color: var(--limestone-tint);
-  padding: 2em;
-  margin-top: 3em;
-  border-radius: 8px;
-  border-left: 6px solid var(--north-terrace-purple);
-}
-
-/* Footer */
-footer {
-  background-color: var(--dark-blue);
-  color: white;
-  text-align: center;
-  padding: 1.5em 1em;
-  font-size: 0.9em;
-  border-top: 4px solid var(--bright-blue);
-}
-
-footer img {
-  max-width: 180px;
-  margin-top: 1em;
-}
-
-/* Scroll to top */
-#topBtn {
-  display: none;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 999;
-  font-size: 16px;
-  background-color: var(--bright-blue);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#topBtn:hover {
-  background-color: var(--north-terrace-purple);
-}
-.method-section {
-  margin-bottom: 3em;
-}
-.method-section img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 1em;
-}
-.return-container {
-  text-align: center;
-  margin-top: 3em;
-}
-.back-button {
-  display: inline-block;
-  background-color: var(--bright-blue);
-  color: var(--white);
-  padding: 0.75em 1.5em;
-  font-size: 1em;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-}
-.back-button:hover {
-  background-color: var(--north-terrace-purple);
-}
