@@ -400,4 +400,40 @@ body:not(.index) .hero-banner {
 .card .button-link:hover {
   background-color: var(--north-terrace-purple);
 }
+/* Checklist layout */
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2em;
+  margin-top: 2em;
+}
+
+.checklist-box {
+  background-color: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-radius: 10px;
+  padding: 1.5em;
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.05);
+}
+
+.checklist-box h3 {
+  margin-top: 0;
+  font-family: 'Codegun', sans-serif;
+  color: var(--bright-blue);
+}
+
+.checklist-box ul {
+  padding-left: 1em;
+  list-style: none;
+}
+
+.checklist-box li {
+  font-size: 1em;
+  margin-bottom: 0.8em;
+}
+
+.checklist-box input[type="checkbox"] {
+  margin-right: 0.5em;
+  transform: scale(1.2);
+}
 
