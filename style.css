@@ -337,22 +337,22 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .email-button {
-  background-color: var(--bright-blue);
-  color: #ffffff;
+  background-color: #836BFF; /* Always purple */
+  color: #ffffff; /* Always white text */
+  border: none;
   border-radius: 5px;
   padding: 0.6em 1.2em;
   font-size: 0.9em;
   text-decoration: none;
-  border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   display: inline-block;
-  visibility: visible;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .email-button:hover {
-  background-color: var(--north-terrace-purple);
-  color: #ffffff;
+  background-color: #5e4bd1; /* Slightly darker purple on hover */
+  color: #ffffff; /* Still white text */
+  transform: scale(1.05);
 }
 
 /* Contact Form */
