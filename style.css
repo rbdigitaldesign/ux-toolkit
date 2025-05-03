@@ -351,3 +351,18 @@ footer img {
 .back-button:hover {
   background-color: var(--north-terrace-purple);
 }
+/* Only show TUX banner image on homepage */
+body.index .hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('tux-icon-banner.png') no-repeat right bottom;
+  background-size: auto 100%;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body:not(.index) .hero-banner::after {
+  content: none;
+}
