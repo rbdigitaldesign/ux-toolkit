@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Sub Group | TUX</title>
+  <link rel="stylesheet" href="style.css?v=8" />
+  <style>
+    .team-section {
+      margin: 3em 0;
+    }
+
+    .team-grid {
+      display: grid;
+      gap: 2em;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .team-card {
+      background-color: var(--white);
+      border: 2px solid var(--bright-blue);
+      border-radius: 10px;
+      padding: 1.5em;
+      text-align: center;
+    }
+
+    .team-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1em;
+      border: 2px solid var(--north-terrace-purple);
+    }
+
+    .team-card h3 {
+      margin: 0.3em 0;
+      font-family: 'Codegun', sans-serif;
+      color: var(--bright-blue);
+    }
+
+    .team-card p {
+      font-size: 0.95em;
+      line-height: 1.4;
+      margin: 0.5em 0;
+    }
+
+    .team-card a {
+      display: inline-block;
+      margin-top: 0.5em;
+      font-weight: bold;
+      color: var(--north-terrace-purple);
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-banner slim-banner">
+    <div class="container">
+      <h1>UX Sub Group</h1>
+      <p>Meet the team leading UX testing and learning experience design innovation across higher education in South Australia.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="team-section">
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="Rich.jpg" alt="Rich Bartlett profile photo" />
+          <h3>Rich Bartlett</h3>
+          <p>Learning Designer at the University of Adelaide. Rich focuses on user experience, curriculum design, and prototyping better digital learning experiences. Formerly in software sales and support, with a UX/UI design diploma.</p>
+          <a href="mailto:richard.bartlett@adelaide.edu.au">richard.bartlett@adelaide.edu.au</a>
+        </div>
+
+        <div class="team-card">
+          <img src="Tim.jpg" alt="Tim Churchward profile photo" />
+          <h3>Tim Churchward</h3>
+          <p>Digital Education Developer with a Master of Teaching. Tim brings deep experience in VCE, H5P, Storyline, and web technologies, blending teaching with tech integration across learning platforms.</p>
+          <a href="mailto:tim.churchward@adelaide.edu.au">tim.churchward@adelaide.edu.au</a>
+        </div>
+
+        <div class="team-card">
+          <img src="Kelli.jpg" alt="Kelli Knuth profile photo" />
+          <h3>Kelli Knuth</h3>
+          <p>Digital Education Designer and tech facilitator. Kelli has a strong background in adult education, UX design, LMS content development, and instructional video production. Based on the Gold Coast.</p>
+          <a href="mailto:kelli.knuth@adelaide.edu.au">kelli.knuth@adelaide.edu.au</a>
+        </div>
+
+        <div class="team-card">
+          <img src="Alex.jpg" alt="Alex profile photo" />
+          <h3>Alex Jurman</h3>
+          <p>Academic Developer at the University of South Australia. Alex is passionate about pedagogy, technology-enhanced learning, and driving digital transformation in higher education.</p>
+          <a href="mailto:alex.jurman@unisa.edu.au">alex.jurman@unisa.edu.au</a>
+        </div>
+      </div>
+    </section>
+
+    <div style="text-align: center; margin-top: 3em;">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
+    <nav style="margin-top: 1em;">
+      <a href="team.html">UX Subgroup team</a> | 
+      <a href="contact.html">Contact</a> | 
+      <a href="terms.html">Terms and Conditions</a>
+    </nav>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
