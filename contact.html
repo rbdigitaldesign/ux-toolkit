@@ -1,64 +1,120 @@
-<main class="container">
-  <h2 style="text-align:center; margin-top: 2em;">UX Sub Group</h2>
-  <div class="team-grid">
-    <div class="profile-card">
-      <div class="card-inner">
-        <div class="card-front">
-          <img src="Tim.jpg" alt="Tim Churchward">
-          <h3>Tim Churchward</h3>
-          <p class="title">Digital Education Developer</p>
-          <a href="https://www.linkedin.com/in/tim-churchward-432590206/" target="_blank">LinkedIn</a>
-        </div>
-        <div class="card-back">
-          <p>Tim brings 9 years of experience in digital learning, combining instructional design with interactive media. He’s worked across schools and universities developing rich VCE content with tools like H5P, HTML/CSS, and Storyline. His background spans teaching, IT support, and media production — and he holds a Master of Teaching from Monash.</p>
-          <p>Email: tim [dot] churchward [at] adelaide.edu.au</p>
-        </div>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | TUX</title>
+  <link rel="stylesheet" href="style.css?v=13" />
+  <style>
+    body {
+      background-color: var(--south-east-limestone);
+    }
 
-    <div class="profile-card">
-      <div class="card-inner">
-        <div class="card-front">
-          <img src="Kelli.jpg" alt="Kelli Knuth">
-          <h3>Kelli Knuth</h3>
-          <p class="title">Digital Education Developer</p>
-          <a href="https://www.linkedin.com/in/kelli-knuth-elearningdesigner/" target="_blank">LinkedIn</a>
-        </div>
-        <div class="card-back">
-          <p>Kelli is a digital education designer passionate about integrating technology in learning. She’s created and uplifted content using Canvas, SCORM, and H5P across universities and government agencies. She's experienced in LMS support and teacher training.</p>
-          <p>Email: kelli [dot] knuth [at] adelaide.edu.au</p>
-        </div>
-      </div>
-    </div>
+    form {
+      max-width: 600px;
+      margin: 2em auto;
+      background-color: var(--white);
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(20, 15, 80, 0.06);
+      border: 2px solid var(--bright-blue);
+    }
 
-    <div class="profile-card">
-      <div class="card-inner">
-        <div class="card-front">
-          <img src="Alex.jpg" alt="Alex Price">
-          <h3>Alex Price</h3>
-          <p class="title">Learning Designer</p>
-          <a href="https://www.linkedin.com/in/alexandra-price/" target="_blank">LinkedIn</a>
-        </div>
-        <div class="card-back">
-          <p>Alex has worked as a lecturer, instructional designer, and graphic designer. She’s led short-form credential development and excels at building engaging learning environments. She brings creativity and pedagogy together seamlessly.</p>
-          <p>Email: alex [dot] price [at] unisa.edu.au</p>
-        </div>
-      </div>
-    </div>
+    label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+      color: var(--dark-blue);
+    }
 
-    <div class="profile-card">
-      <div class="card-inner">
-        <div class="card-front">
-          <img src="Rich.jpg" alt="Rich Bartlett">
-          <h3>Rich Bartlett</h3>
-          <p class="title">Learning Designer</p>
-          <a href="https://www.linkedin.com/in/richbart11/" target="_blank">LinkedIn</a>
-        </div>
-        <div class="card-back">
-          <p>Rich is a UX-focused Learning Designer with a background in media, sales, and design. He works extensively with H5P and Canvas LMS to create human-centred and inclusive online courses. He champions collaboration and authentic learning.</p>
-          <p>Email: richard [dot] bartlett [at] adelaide.edu.au</p>
-        </div>
-      </div>
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8em;
+      margin-bottom: 1.5em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button[type="submit"] {
+      background-color: var(--bright-blue);
+      color: white;
+      border: none;
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--north-terrace-purple);
+    }
+
+    .return-container {
+      text-align: center;
+      margin-top: 3em;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>Contact the TUX team</h1>
+      <p>Need help with UX testing or Canvas design advice? Reach out using the form below.</p>
     </div>
-  </div>
-</main>
+  </header>
+
+  <main class="container">
+    <form name="tux-contact-form" netlify>
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="org">Organisation (optional)</label>
+      <input type="text" id="org" name="organisation">
+
+      <label for="reason">What do you need help with?</label>
+      <select id="reason" name="reason">
+        <option value="">Select an option</option>
+        <option value="ux-guidance">UX guidance</option>
+        <option value="usability-testing">Organising user testing</option>
+        <option value="canvas-ux-review">Review of Canvas course design</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="message">Your message</label>
+      <textarea id="message" name="message" rows="6" placeholder="Tell us more..."></textarea>
+
+      <button type="submit">Send message</button>
+    </form>
+
+    <div class="return-container">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
+    <nav>
+      <a href="team.html">UX Subgroup team</a> ·
+      <a href="contact.html">Contact</a> ·
+      <a href="terms.html">Terms and Conditions</a>
+    </nav>
+  </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
