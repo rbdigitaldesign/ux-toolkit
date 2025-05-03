@@ -265,7 +265,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   border-radius: 10px;
   padding: 1.5em;
   text-align: center;
-  width: 220px;
+  width: 260px;
   box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
   transition: transform 0.3s ease;
   color: var(--dark-blue);
