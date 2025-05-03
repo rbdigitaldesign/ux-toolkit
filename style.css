@@ -371,4 +371,33 @@ body:not(.index) .hero-banner {
   padding: 3.5em 1.5em 3em;
   min-height: unset;
 }
+/* Slim banner for tools page */
+.slim-banner {
+  padding: 4em 1.5em 2em;
+  min-height: auto;
+}
+
+/* Grid layout for tools */
+.grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2em;
+  margin-top: 2em;
+}
+
+.card .button-link {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.6em 1.2em;
+  background-color: var(--bright-blue);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.card .button-link:hover {
+  background-color: var(--north-terrace-purple);
+}
 
