@@ -455,65 +455,61 @@ footer nav a:hover {
   justify-content: center;
   margin-top: 2em;
 }
+
 .profile-card {
-  width: 260px;
-  height: 360px;
-  perspective: 1000px;
-}
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transition: transform 0.7s;
-  transform-style: preserve-3d;
-}
-.profile-card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  background-color: var(--white);
   border: 2px solid var(--bright-blue);
   border-radius: 10px;
-  backface-visibility: hidden;
-  background-color: var(--limestone-tint);
-  padding: 1.2em;
-  box-sizing: border-box;
+  padding: 1.5em;
+  max-width: 280px;
   text-align: center;
+  transition: box-shadow 0.2s ease;
 }
-.card-front img {
+
+.profile-card:hover {
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.1);
+}
+
+.profile-card img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
 }
-.card-front h3 {
+
+.profile-card h3 {
   margin: 0.3em 0 0.1em;
 }
-.card-front .title {
+
+.profile-card .title {
   font-weight: bold;
   color: var(--bright-blue);
-  margin-bottom: 0.4em;
+  margin-bottom: 0.6em;
 }
-.card-front a {
-  display: inline-block;
-  margin-top: 0.4em;
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  margin-top: 1em;
+  flex-wrap: wrap;
+}
+
+.button-link,
+.email-button {
+  background-color: var(--north-terrace-purple);
+  color: white;
+  padding: 0.5em 1em;
   text-decoration: none;
-  color: var(--north-terrace-purple);
-  font-weight: bold;
+  font-size: 0.9em;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-.card-back {
-  transform: rotateY(180deg);
-  font-size: 0.95em;
-  line-height: 1.4;
-}
-.card-back a {
-  color: var(--bright-blue);
-  text-decoration: none;
-  font-weight: bold;
-}
-.card-back a:hover {
-  text-decoration: underline;
+
+.button-link:hover,
+.email-button:hover {
+  background-color: var(--bright-blue);
 }
