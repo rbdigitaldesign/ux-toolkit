@@ -57,11 +57,11 @@
         <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
       </a>
       <a href="personas.html" class="card">
-        <h2>🧍‍♀️ User Personas</h2>
+        <h2>🧑‍♀️ User Personas</h2>
         <p>Reference real-world learner personas created by Kelli Knuth to design more inclusive and accessible experiences.</p>
       </a>
       <a href="tips.html" class="card">
-        <h2>🧪 UX Testing Tips</h2>
+        <h2>🦪 UX Testing Tips</h2>
         <p>Discover evidence-based recommendations for running smarter usability tests, curated from trusted sources like NN/g.</p>
       </a>
     </section>
@@ -69,6 +69,53 @@
     <section class="highlight">
       <h3>🎬 Coming Soon: How to run a UX test in Canvas</h3>
       <p>We’re preparing a short walkthrough showing you how to embed and evaluate UX tests directly inside your Canvas modules.</p>
+    </section>
+
+    <!-- New UX Subgroup Team section -->
+    <section class="team-section">
+      <h2>UX Subgroup Team</h2>
+      <div class="team-grid">
+        <div class="profile-card">
+          <img src="Tim.jpg" alt="Tim Churchward" class="profile-pic" />
+          <h3>Tim Churchward</h3>
+          <p class="job-title">Digital Education Developer</p>
+          <p>Tim brings 9 years of experience in digital learning, combining instructional design with interactive media...</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/tim-churchward-432590206/" target="_blank" class="button-link">LinkedIn</a>
+            <button class="email-button" data-user="tim.churchward" data-domain="adelaide.edu.au">Email</button>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img src="Kelli.jpg" alt="Kelli Knuth" class="profile-pic" />
+          <h3>Kelli Knuth</h3>
+          <p class="job-title">Digital Education Developer</p>
+          <p>Kelli is passionate about integrating technology in learning. She’s created content using Canvas, SCORM, and H5P...</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/kelli-knuth-elearningdesigner/" target="_blank" class="button-link">LinkedIn</a>
+            <button class="email-button" data-user="kelli.knuth" data-domain="adelaide.edu.au">Email</button>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img src="Alex.jpg" alt="Alex Price" class="profile-pic" />
+          <h3>Alex Price</h3>
+          <p class="job-title">Learning Designer</p>
+          <p>Alex is a creative learning designer with a background in graphic design and lecturing...</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/alexandra-price/" target="_blank" class="button-link">LinkedIn</a>
+            <button class="email-button" data-user="alex.price" data-domain="unisa.edu.au">Email</button>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img src="Rich.jpg" alt="Rich Bartlett" class="profile-pic" />
+          <h3>Rich Bartlett</h3>
+          <p class="job-title">Learning Designer</p>
+          <p>Rich blends UX design and learning design to build inclusive and practical online courses...</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/richbart11/" target="_blank" class="button-link">LinkedIn</a>
+            <button class="email-button" data-user="richard.bartlett" data-domain="adelaide.edu.au">Email</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -87,6 +134,14 @@
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    // Protect email addresses
+    document.querySelectorAll('.email-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const user = btn.dataset.user;
+        const domain = btn.dataset.domain;
+        window.location.href = `mailto:${user}@${domain}`;
+      });
+    });
   </script>
 </body>
 </html>
