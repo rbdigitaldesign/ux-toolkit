@@ -54,11 +54,11 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   z-index: 0;
 }
 
-.hero-banner h1,
-.hero-banner p,
-/* Search Wrapper */
 .search-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
   z-index: 1001;
 }
 
