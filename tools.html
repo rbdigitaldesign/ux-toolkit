@@ -2,80 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UX tools | Higher Education Toolkit</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Tools | TUX</title>
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodologies.html">Methodologies</a></li>
-        <li><a href="tools.html">Tools</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="global-search">
-  <input type="search" id="searchInput" placeholder="Search tools, methods, resources..." />
-</div>
-    <h1>UX tools for higher education</h1>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>UX tools for higher education</h1>
+      <p>Curated tools that support user-centred research and testing in digital learning environments.</p>
+    </div>
   </header>
+
   <main class="container">
-    <nav>
-      <ul>
-        <li><a href="#jotform">Jotform</a></li>
-        <li><a href="#optimal-workshop">Optimal Workshop</a></li>
-        <li><a href="#hotjar">Hotjar</a></li>
-        <li><a href="#typeform">Typeform</a></li>
-        <li><a href="#google-forms">Google Forms</a></li>
-      </ul>
-    </nav>
-
-    <section id="jotform">
-      <h2>Jotform</h2>
-      <p><strong>Use case:</strong> Surveys, feedback forms, consent forms.</p>
-      <p>Drag-and-drop interface with templates. Great for student feedback. Auto-generates reports and integrates with Google Sheets and MS Teams.</p>
-      <a href="https://www.jotform.com" target="_blank">Visit Jotform</a>
+    <section class="method-section">
+      <div class="method-card right-image">
+        <div class="method-text">
+          <h2>Accessible Web Helper</h2>
+          <p><strong>Use case:</strong> Accessibility audits and WCAG conformance checks.</p>
+          <p>This Chrome extension scans live webpages for accessibility issues, highlights them visually, and provides WCAG-aligned remediation tips. Great for auditing LMS interfaces or digital course content.</p>
+          <ul>
+            <li>Scan in real-time with element highlights</li>
+            <li>Check contrast ratios</li>
+            <li>Streamline audits with RAMP integration</li>
+          </ul>
+          <a class="back-button" href="https://chromewebstore.google.com/detail/accessible-web-helper/gdnpkbipbholkoaggmlblpbmgemddbgb" target="_blank">Install on Chrome</a>
+        </div>
+      </div>
     </section>
 
-    <section id="optimal-workshop">
-      <h2>Optimal Workshop</h2>
-      <p><strong>Use case:</strong> Card sorting, tree testing, first-click tests.</p>
-      <p>Excellent toolset for information architecture validation and navigation usability. Offers clean analytics and session recording.</p>
-      <a href="https://www.optimalworkshop.com/" target="_blank">Visit Optimal Workshop</a>
+    <section class="method-section">
+      <div class="method-card left-image">
+        <div class="method-text">
+          <h2>Jotform</h2>
+          <p><strong>Use case:</strong> Surveys, feedback, UX testing intake forms.</p>
+          <p>Drag-and-drop builder for capturing student input or consent forms during usability studies. Auto-analyses data and integrates with Google Sheets or MS Teams.</p>
+          <ul>
+            <li>Embed forms directly into LMS modules</li>
+            <li>Ideal for pre/post-test and pilot feedback</li>
+          </ul>
+          <a class="back-button" href="https://www.jotform.com" target="_blank">Visit Jotform</a>
+        </div>
+      </div>
     </section>
 
-    <section id="hotjar">
-      <h2>Hotjar</h2>
-      <p><strong>Use case:</strong> Heatmaps, session recordings, user behaviour insights.</p>
-      <p>Visualise where students click, scroll, and drop off. Useful for diagnosing usability pain points.</p>
-      <a href="https://www.hotjar.com/" target="_blank">Visit Hotjar</a>
+    <section class="method-section">
+      <div class="method-card right-image">
+        <div class="method-text">
+          <h2>Optimal Workshop</h2>
+          <p><strong>Use case:</strong> Card sorting, tree testing, first-click analysis.</p>
+          <p>Test student navigation behaviours in prototypes or course sites. Use card sorts and tree tests to validate content structure and menu labels.</p>
+          <ul>
+            <li>Run open/closed card sorts</li>
+            <li>Analyse success paths and click confidence</li>
+          </ul>
+          <a class="back-button" href="https://www.optimalworkshop.com/" target="_blank">Visit Optimal Workshop</a>
+        </div>
+      </div>
     </section>
 
-    <section id="typeform">
-      <h2>Typeform</h2>
-      <p><strong>Use case:</strong> Conversational-style surveys and feedback.</p>
-      <p>Slick, mobile-friendly form layouts ideal for engaging UX-style quizzes or mid-course polls.</p>
-      <a href="https://www.typeform.com/" target="_blank">Visit Typeform</a>
+    <section class="method-section">
+      <div class="method-card left-image">
+        <div class="method-text">
+          <h2>Hotjar</h2>
+          <p><strong>Use case:</strong> Heatmaps, scrollmaps, session recordings.</p>
+          <p>See how students interact with pages in real time—where they click, how far they scroll, and what elements they ignore. Ideal for auditing dashboards or homepage usability.</p>
+          <ul>
+            <li>Visualise attention zones</li>
+            <li>Flag pain points and dead zones</li>
+          </ul>
+          <a class="back-button" href="https://www.hotjar.com/" target="_blank">Visit Hotjar</a>
+        </div>
+      </div>
     </section>
 
-    <section id="google-forms">
-      <h2>Google Forms</h2>
-      <p><strong>Use case:</strong> Simple, quick surveys with auto-linked results to Google Sheets.</p>
-      <p>Best for low-friction form delivery in environments already using Google Workspace. Customisable but limited styling.</p>
-      <a href="https://forms.google.com" target="_blank">Visit Google Forms</a>
+    <section class="method-section">
+      <div class="method-card right-image">
+        <div class="method-text">
+          <h2>Typeform</h2>
+          <p><strong>Use case:</strong> Conversational-style surveys and student check-ins.</p>
+          <p>Use Typeform for more engaging, mobile-optimised survey experiences. Useful for gathering deeper feedback at key points in a student journey.</p>
+          <ul>
+            <li>Great for micro-polls or sentiment surveys</li>
+            <li>One-question-at-a-time interface</li>
+          </ul>
+          <a class="back-button" href="https://www.typeform.com/" target="_blank">Visit Typeform</a>
+        </div>
+      </div>
     </section>
+
+    <section class="method-section">
+      <div class="method-card left-image">
+        <div class="method-text">
+          <h2>Google Forms</h2>
+          <p><strong>Use case:</strong> Quick surveys, low-friction feedback.</p>
+          <p>Fast and familiar, Google Forms is perfect when your institution already uses Google Workspace. It syncs responses into Google Sheets for simple data analysis.</p>
+          <ul>
+            <li>Use branching logic for tailored UX tests</li>
+            <li>Embed in LMS or link externally</li>
+          </ul>
+          <a class="back-button" href="https://forms.google.com" target="_blank">Visit Google Forms</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="return-container">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 UX Toolkit · Created by Rich Bartlett</p>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
   </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
 
   <script>
-    const topBtn = document.getElementById(\"topBtn\");
+    const topBtn = document.getElementById("topBtn");
     window.onscroll = function () {
-      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ?
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
