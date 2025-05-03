@@ -322,7 +322,8 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  height: 40px; /* match the visual height of email button */
+  height: 40px;
+  min-width: 64px; /* roughly matches email button width */
 }
 
 .linkedin-button:hover {
@@ -330,8 +331,8 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .linkedin-logo {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .email-button {
