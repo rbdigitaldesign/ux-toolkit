@@ -6,10 +6,11 @@
   <meta name="description" content="TUX is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <title>TUX</title>
-  <link rel="stylesheet" href="style-rebuilt.css" />
+  <link rel="stylesheet" href="style.css?v=10" />
   <script defer src="search.js"></script>
 </head>
 <body>
+
   <div class="hero-wrapper">
     <header class="hero-banner">
       <img src="tux-icon.png" alt="TUX mascot" class="tux-mobile-top" />
@@ -17,13 +18,7 @@
       <p>TUX (Toolkit for UX) is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.</p>
 
       <form id="searchForm" class="search-wrapper">
-        <input
-          type="text"
-          id="searchInput"
-          class="hero-search"
-          placeholder="Search tools, methods, tips..."
-          autocomplete="off"
-        />
+        <input type="text" id="searchInput" class="hero-search" placeholder="Search tools, methods, tips..." autocomplete="off" />
         <button type="submit" class="search-button">Search</button>
         <ul id="searchSuggestions" class="suggestion-list">
           <li>Card sorting</li>
@@ -92,5 +87,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
+
 </body>
 </html>
