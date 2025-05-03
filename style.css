@@ -258,6 +258,12 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   justify-content: center;
   gap: 2em;
 }
+.team-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+}
 
 .profile-card {
   background-color: var(--white);
@@ -266,18 +272,22 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   padding: 1.5em;
   text-align: center;
   width: 260px;
+  flex: 1 1 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: auto;
   box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
   color: var(--dark-blue);
 }
 
-.profile-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(20, 15, 80, 0.15);
+.profile-card p {
+  margin-bottom: 1em;
+  flex-grow: 1;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
 }
 
 .profile-pic {
