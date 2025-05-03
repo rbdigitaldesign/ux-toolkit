@@ -4,95 +4,100 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UX Sub Group | TUX</title>
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=10" />
   <style>
-    .team-section {
-      margin: 3em 0;
-    }
-
     .team-grid {
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2em;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 2em;
     }
 
-    .team-card {
+    .profile-card {
       background-color: var(--white);
       border: 2px solid var(--bright-blue);
       border-radius: 10px;
       padding: 1.5em;
       text-align: center;
+      max-width: 250px;
+      flex: 1 1 200px;
+      box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
     }
 
-    .team-card img {
+    .profile-card:nth-child(1) { animation-delay: 0.1s; }
+    .profile-card:nth-child(2) { animation-delay: 0.2s; }
+    .profile-card:nth-child(3) { animation-delay: 0.3s; }
+    .profile-card:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-pic {
       width: 120px;
       height: 120px;
       object-fit: cover;
       border-radius: 50%;
       margin-bottom: 1em;
-      border: 2px solid var(--north-terrace-purple);
+      border: 3px solid var(--bright-blue);
     }
 
-    .team-card h3 {
-      margin: 0.3em 0;
-      font-family: 'Codegun', sans-serif;
+    .profile-card h3 {
+      margin: 0.2em 0;
       color: var(--bright-blue);
     }
 
-    .team-card p {
-      font-size: 0.95em;
-      line-height: 1.4;
-      margin: 0.5em 0;
-    }
-
-    .team-card a {
-      display: inline-block;
-      margin-top: 0.5em;
-      font-weight: bold;
-      color: var(--north-terrace-purple);
+    .profile-card p {
+      margin: 0.3em 0;
     }
   </style>
 </head>
 <body>
-  <header class="hero-banner slim-banner">
+  <header class="hero-banner">
     <div class="container">
       <h1>UX Sub Group</h1>
-      <p>Meet the team leading UX testing and learning experience design innovation across higher education in South Australia.</p>
+      <p>Meet the team behind the research and design tools in the TUX toolkit.</p>
     </div>
   </header>
 
   <main class="container">
-    <section class="team-section">
-      <div class="team-grid">
-        <div class="team-card">
-          <img src="Rich.jpg" alt="Rich Bartlett profile photo" />
-          <h3>Rich Bartlett</h3>
-          <p>Learning Designer at the University of Adelaide. Rich focuses on user experience, curriculum design, and prototyping better digital learning experiences. Formerly in software sales and support, with a UX/UI design diploma.</p>
-          <a href="mailto:richard.bartlett@adelaide.edu.au">richard.bartlett@adelaide.edu.au</a>
-        </div>
-
-        <div class="team-card">
-          <img src="Tim.jpg" alt="Tim Churchward profile photo" />
-          <h3>Tim Churchward</h3>
-          <p>Digital Education Developer with a Master of Teaching. Tim brings deep experience in VCE, H5P, Storyline, and web technologies, blending teaching with tech integration across learning platforms.</p>
-          <a href="mailto:tim.churchward@adelaide.edu.au">tim.churchward@adelaide.edu.au</a>
-        </div>
-
-        <div class="team-card">
-          <img src="Kelli.jpg" alt="Kelli Knuth profile photo" />
-          <h3>Kelli Knuth</h3>
-          <p>Digital Education Designer and tech facilitator. Kelli has a strong background in adult education, UX design, LMS content development, and instructional video production. Based on the Gold Coast.</p>
-          <a href="mailto:kelli.knuth@adelaide.edu.au">kelli.knuth@adelaide.edu.au</a>
-        </div>
-
-        <div class="team-card">
-          <img src="Alex.jpg" alt="Alex profile photo" />
-          <h3>Alex Jurman</h3>
-          <p>Academic Developer at the University of South Australia. Alex is passionate about pedagogy, technology-enhanced learning, and driving digital transformation in higher education.</p>
-          <a href="mailto:alex.jurman@unisa.edu.au">alex.jurman@unisa.edu.au</a>
-        </div>
+    <div class="team-grid">
+      <div class="profile-card">
+        <img src="Rich.jpg" alt="Photo of Rich Bartlett" class="profile-pic" />
+        <h3>Rich Bartlett</h3>
+        <p>Learning Designer<br>University of Adelaide</p>
+        <p><span class="email" data-user="rich" data-domain="adelaide.edu.au"></span></p>
       </div>
-    </section>
+
+      <div class="profile-card">
+        <img src="Tim.jpg" alt="Photo of Tim Klapdor" class="profile-pic" />
+        <h3>Tim Klapdor</h3>
+        <p>Manager, Digital Learning<br>University of Adelaide</p>
+        <p><span class="email" data-user="tim" data-domain="adelaide.edu.au"></span></p>
+      </div>
+
+      <div class="profile-card">
+        <img src="Kelli.jpg" alt="Photo of Kelli Norrish" class="profile-pic" />
+        <h3>Kelli Norrish</h3>
+        <p>Learning Designer<br>University of Adelaide</p>
+        <p><span class="email" data-user="kelli" data-domain="adelaide.edu.au"></span></p>
+      </div>
+
+      <div class="profile-card">
+        <img src="Alex.jpg" alt="Photo of Alex Carroll" class="profile-pic" />
+        <h3>Alex Carroll</h3>
+        <p>Learning Designer<br>University of South Australia</p>
+        <p><span class="email" data-user="alex" data-domain="unisa.edu.au"></span></p>
+      </div>
+    </div>
 
     <div style="text-align: center; margin-top: 3em;">
       <a href="index.html" class="back-button">← Return to TUX Home</a>
@@ -101,14 +106,15 @@
 
   <footer>
     <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
-    <nav style="margin-top: 1em;">
-      <a href="team.html">UX Subgroup team</a> | 
-      <a href="contact.html">Contact</a> | 
+    <nav>
+      <a href="team.html">UX Subgroup team</a> ·
+      <a href="contact.html">Contact</a> ·
       <a href="terms.html">Terms and Conditions</a>
     </nav>
   </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
   <script>
     const topBtn = document.getElementById("topBtn");
     window.onscroll = function () {
@@ -117,6 +123,16 @@
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+
+    // Email protection
+    document.addEventListener("DOMContentLoaded", () => {
+      const emails = document.querySelectorAll(".email");
+      emails.forEach(el => {
+        const user = el.getAttribute("data-user");
+        const domain = el.getAttribute("data-domain");
+        el.innerHTML = `<a href="mailto:${user}.${domain}">${user}.${domain}</a>`;
+      });
+    });
   </script>
 </body>
 </html>
