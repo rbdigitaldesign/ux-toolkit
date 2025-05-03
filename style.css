@@ -43,7 +43,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   padding: 6em 1.5em 5em;
   overflow: hidden;
   z-index: 1;
-  min-height: 3000px; /* Adjust as needed */
+  min-height: 300px; /* Adjust as needed */
 }
 
 .hero-banner::after {
