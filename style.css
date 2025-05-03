@@ -5,7 +5,7 @@
 
 :root {
   --white: #FFFFFF;
-  --dark-blue: #140F50;
+  --dark-blue: #140F50;e
   --bright-blue: #1448FF;
   --north-terrace-purple: #836BFF;
   --south-east-limestone: #F8EFE0;
@@ -252,12 +252,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   font-family: 'Codegun', sans-serif;
 }
 
-.team-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
-}
 .team-row {
   display: flex;
   flex-wrap: wrap;
