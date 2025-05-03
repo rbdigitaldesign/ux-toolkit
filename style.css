@@ -278,3 +278,45 @@ footer img {
 .back-button:hover {
   background-color: var(--north-terrace-purple);
 }
+.method-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2em;
+  margin-bottom: 3em;
+}
+
+.method-section h2 {
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+.method-text {
+  flex: 1 1 300px;
+  min-width: 250px;
+}
+
+.method-img {
+  flex: 1 1 300px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.method-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .method-section {
+    flex-direction: column;
+  }
+
+  .method-img,
+  .method-text {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
