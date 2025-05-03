@@ -251,20 +251,37 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--bright-blue);
   font-family: 'Codegun', sans-serif;
 }
-..team-row {
+.team-row {
   display: flex;
-  flex-wrap: nowrap; /* disables wrapping */
-  overflow-x: auto;   /* allows horizontal scrolling if needed */
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2em;
-  padding-bottom: 1em;
-  scroll-snap-type: x mandatory;
+  margin-top: 2em;
 }
 
 .profile-card {
-  flex: 0 0 260px; /* fixed width for all cards */
-  scroll-snap-align: start;
+  background-color: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-radius: 10px;
+  padding: 1.5em;
+  text-align: center;
+  width: 260px;
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
+  transition: transform 0.3s ease;
+  color: var(--dark-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 1em;
+  border: 3px solid var(--bright-blue);
+}
 
 .profile-card h3 {
   margin: 0.3em 0 0.2em;
@@ -277,28 +294,18 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   margin-bottom: 0.6em;
 }
 
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 1em;
-  border: 3px solid var(--bright-blue);
-}
-
 .profile-card p {
   margin-bottom: 1em;
-  flex-grow: 1;
+  flex-grow: 0;
   overflow: visible;
-  text-overflow: unset;
   white-space: normal;
-  display: block;
 }
 
 .card-buttons {
   display: flex;
   justify-content: center;
   gap: 1em;
+  margin-top: auto;
   padding-top: 1em;
   align-items: center;
   border-top: 1px solid #eee;
@@ -316,7 +323,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .email-button {
-  background-color: var(--bright-blue);
+  background-color: var(--north-terrace-purple);
   color: white;
   border-radius: 5px;
   padding: 0.6em 1.2em;
@@ -328,7 +335,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .email-button:hover {
-  background-color: var(--north-terrace-purple);
+  background-color: var(--bright-blue);
 }
 
 
