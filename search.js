@@ -2,6 +2,7 @@ const searchInput = document.getElementById('searchInput');
 const searchForm = document.getElementById('searchForm');
 const suggestionList = document.getElementById('searchSuggestions');
 
+// Search redirect logic
 function handleSearch(value) {
   const query = value.toLowerCase().trim();
 
@@ -36,6 +37,7 @@ function handleSearch(value) {
   }
 }
 
+// Show/hide suggestion box
 searchInput.addEventListener('focus', () => {
   suggestionList.classList.add('visible');
 });
@@ -74,12 +76,12 @@ searchForm.addEventListener('submit', function (e) {
   e.preventDefault();
   handleSearch(searchInput.value);
 });
-<script>
-  document.querySelectorAll('.email-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const user = btn.dataset.user;
-      const domain = btn.dataset.domain;
-      window.location.href = `mailto:${user}@${domain}`;
-    });
+
+// Email buttons in profile cards
+document.querySelectorAll('.email-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const user = btn.dataset.user;
+    const domain = btn.dataset.domain;
+    window.location.href = `mailto:${user}@${domain}`;
   });
-</script>
+});
