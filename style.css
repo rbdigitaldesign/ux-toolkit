@@ -255,7 +255,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2em;
+  gap: 1.5em;
   margin-top: 2em;
 }
 
@@ -265,7 +265,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   border-radius: 10px;
   padding: 1.5em;
   text-align: center;
-  width: 260px;
+  width: 220px;
   box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
   transition: transform 0.3s ease;
   color: var(--dark-blue);
@@ -332,8 +332,8 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .linkedin-logo {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.2s ease;
 }
 
