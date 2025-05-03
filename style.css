@@ -437,3 +437,14 @@ body:not(.index) .hero-banner {
   transform: scale(1.2);
 }
 
+footer nav a {
+  color: var(--white);
+  margin: 0 1em;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+footer nav a:hover {
+  color: var(--north-terrace-purple);
+  text-decoration: none;
+}
