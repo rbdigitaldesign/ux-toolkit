@@ -29,7 +29,10 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   z-index: 1;
 }
 
+/* Hero Banner */
 .hero-banner {
+  position: relative;
+  z-index: 1;
   background:
     linear-gradient(to right, rgba(20, 15, 80, 0.9), rgba(131, 107, 255, 0.4)),
     linear-gradient(135deg, #140F50 40%, #836BFF);
@@ -37,14 +40,13 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--white);
   text-align: center;
   padding: 6em 1.5em 5em;
-  position: relative;
   overflow: hidden;
 }
 
 .hero-banner::after {
   content: "";
   position: absolute;
-  inset: 0; /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
+  inset: 0;
   background: url('tux-icon-banner.png') no-repeat right bottom;
   background-size: auto 100%;
   opacity: 0.9;
@@ -54,6 +56,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 .hero-banner h1,
 .hero-banner p,
+/* Search Wrapper */
 .search-wrapper {
   position: relative;
   z-index: 1001;
@@ -131,7 +134,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   background-color: var(--north-terrace-purple);
 }
 
-/* Suggestions dropdown */
+/* Suggestion List */
 .suggestion-list {
   position: absolute;
   top: 100%;
@@ -148,7 +151,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   max-height: 220px;
   overflow-y: auto;
   display: none;
-  z-index: 1002;
+  z-index: 1002; /* Ensures dropdown appears above other content */
 }
 
 .suggestion-list.visible {
