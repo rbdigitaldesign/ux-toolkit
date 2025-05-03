@@ -1,70 +1,63 @@
 :root {
-  --dark-blue: #140F50;
-  --bright-blue: #1448FF;
+  --bright-blue: #1448ff;
+  --dark-blue: #140f50;
   --north-terrace-purple: #836bff;
-  --south-east-limestone: #F8EFE0;
-  --limestone-tint: #fdf8f0;
+  --south-east-limestone: #f8efe0;
   --white: #ffffff;
+  --limestone-tint: #fdf9f0;
 }
 
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   background-color: var(--south-east-limestone);
+  margin: 0;
   color: var(--dark-blue);
 }
 
 .container {
-  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2em;
 }
 
-/* --- Hero Banner --- */
-.hero-banner {
+.hero-wrapper {
   background-color: var(--bright-blue);
   color: white;
   text-align: center;
   padding: 3em 1em;
-  position: relative;
-}
-
-.hero-banner img.tux-mobile-top {
-  width: 90px;
-  margin-bottom: 1em;
 }
 
 .hero-banner h1 {
   font-size: 2.5em;
-  margin: 0.2em 0;
+  margin-bottom: 0.3em;
 }
 
 .hero-banner p {
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 640px;
+  margin: 0 auto 1.5em;
   font-size: 1.1em;
 }
 
-/* --- Search --- */
 .search-container {
   margin-top: 2em;
 }
 
 .hero-search {
-  padding: 0.8em;
+  padding: 0.75em;
   width: 60%;
-  max-width: 500px;
+  max-width: 400px;
   border: none;
   border-radius: 5px;
+  font-size: 1em;
 }
 
 .search-button {
-  padding: 0.8em 1.5em;
-  background-color: var(--north-terrace-purple);
-  border: none;
-  color: white;
-  border-radius: 5px;
+  padding: 0.75em 1.2em;
   margin-left: 0.5em;
+  background-color: var(--north-terrace-purple);
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -72,34 +65,36 @@ body {
   list-style: none;
   padding: 0;
   margin-top: 1em;
+  text-align: center;
   font-size: 0.9em;
   color: white;
 }
 
-/* --- UX Cards --- */
 .grid-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2em;
-  margin: 3em 0;
+  margin-top: 3em;
 }
 
 .card {
+  flex: 1 1 250px;
   background-color: var(--white);
-  border-left: 5px solid var(--bright-blue);
-  border-radius: 8px;
   padding: 1.5em;
+  border: 2px solid var(--bright-blue);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+  text-align: center;
   text-decoration: none;
   color: var(--dark-blue);
-  box-shadow: 0 4px 8px rgba(20, 15, 80, 0.05);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 }
 
 .card:hover {
   transform: translateY(-5px);
 }
 
-/* --- Video Section --- */
 .video-section {
   margin-top: 4em;
   background-color: var(--limestone-tint);
@@ -127,11 +122,6 @@ body {
   text-align: center;
 }
 
-.video-wrapper iframe {
-  width: 100%;
-  height: 315px;
-}
-
 .video-wrapper.placeholder {
   display: flex;
   align-items: center;
@@ -141,13 +131,13 @@ body {
   font-size: 1.1em;
 }
 
-/* --- Profile Cards --- */
+/* Profile Cards */
 .team-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2em;
-  margin-top: 4em;
+  margin-top: 3em;
 }
 
 .profile-card {
@@ -165,11 +155,6 @@ body {
   animation: fadeInUp 0.8s ease forwards;
   color: var(--dark-blue);
 }
-
-.profile-card:nth-child(1) { animation-delay: 0.1s; }
-.profile-card:nth-child(2) { animation-delay: 0.2s; }
-.profile-card:nth-child(3) { animation-delay: 0.3s; }
-.profile-card:nth-child(4) { animation-delay: 0.4s; }
 
 @keyframes fadeInUp {
   to {
@@ -224,7 +209,7 @@ body {
   background-color: var(--north-terrace-purple);
 }
 
-/* --- Contact Form (already styled inline, included here for completeness) --- */
+/* Contact Form */
 .contact-form {
   margin: 4em auto;
   max-width: 600px;
@@ -234,18 +219,58 @@ body {
   background-color: var(--white);
 }
 
-/* --- Footer --- */
-footer {
-  margin-top: 4em;
-  background-color: var(--limestone-tint);
+.contact-form h2 {
+  margin-bottom: 1em;
   text-align: center;
+  color: var(--bright-blue);
+}
+
+.contact-form label {
+  display: block;
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 0.8em;
+  margin-top: 0.3em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.contact-form button {
+  margin-top: 1.5em;
+  padding: 0.75em 2em;
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9em;
   padding: 2em 1em;
-  border-top: 2px solid var(--bright-blue);
   color: var(--dark-blue);
+  border-top: 2px solid var(--bright-blue);
 }
 
 footer nav a {
   color: var(--bright-blue);
   text-decoration: none;
   margin: 0 0.5em;
+}
+
+footer nav a:hover {
+  text-decoration: underline;
 }
