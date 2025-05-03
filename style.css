@@ -337,7 +337,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .email-button {
-  background-color: var(--north-terrace-purple);
+  background-color: var(--bright-blue);
   color: white;
   border-radius: 5px;
   padding: 0.6em 1.2em;
@@ -348,8 +348,10 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   transition: background-color 0.2s ease;
 }
 
+
 .email-button:hover {
-  background-color: var(--bright-blue);
+  background-color: var(--north-terrace-purple);
+  color: white; /* keep text white to maintain visibility */
 }
 
 
