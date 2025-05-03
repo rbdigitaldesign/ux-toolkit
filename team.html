@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UX Sub Group | TUX</title>
-  <link rel="stylesheet" href="style.css?v=11" />
+  <link rel="stylesheet" href="style.css?v=12" />
   <style>
+    body {
+      background-color: var(--south-east-limestone);
+    }
+
     .team-grid {
       display: flex;
       flex-wrap: wrap;
@@ -27,6 +31,7 @@
       opacity: 0;
       transform: translateY(30px);
       animation: fadeInUp 0.8s ease forwards;
+      color: var(--dark-blue);
     }
 
     .profile-card:nth-child(1) { animation-delay: 0.1s; }
@@ -57,84 +62,101 @@
 
     .profile-card .job-title {
       font-weight: bold;
-      margin-bottom: 0.5em;
       font-size: 1.05em;
+      margin-bottom: 0.5em;
     }
 
-    .profile-card p {
-      margin: 0.3em 0;
+    .card-buttons {
+      margin-top: 1em;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
     }
 
-    .linkedin-btn {
+    .button-link,
+    .email-button {
       display: inline-block;
-      margin-top: 0.75em;
       padding: 0.5em 1em;
-      background-color: #0077B5;
+      background-color: var(--bright-blue);
       color: white;
       border-radius: 5px;
-      font-size: 0.9em;
+      font-size: 0.85em;
       text-decoration: none;
       transition: background-color 0.2s ease;
+      cursor: pointer;
+      border: none;
     }
 
-    .linkedin-btn:hover {
-      background-color: #005f8d;
+    .button-link:hover,
+    .email-button:hover {
+      background-color: var(--north-terrace-purple);
+    }
+
+    .return-container {
+      text-align: center;
+      margin-top: 3em;
     }
   </style>
 </head>
 <body>
   <header class="hero-banner">
+    <div class="container">
+      <h1>UX Sub Group</h1>
+      <p>Meet the core team of learning designers and digital education developers collaborating to improve UX in higher education.</p>
+    </div>
+  </header>
+
   <main class="container">
-  <h2 style="text-align:center; margin-top: 2em;">UX Sub Group</h2>
-  <div class="team-grid">
-    <div class="profile-card">
-      <img src="Tim.jpg" alt="Tim Churchward">
-      <h3>Tim Churchward</h3>
-      <p class="title">Digital Education Developer</p>
-      <p>Tim brings 9 years of experience in digital learning, combining instructional design with interactive media. He’s worked across schools and universities developing rich VCE content with tools like H5P, HTML/CSS, and Storyline.</p>
-      <div class="card-buttons">
-        <a href="https://www.linkedin.com/in/tim-churchward-432590206/" target="_blank" class="button-link">LinkedIn</a>
-        <button class="email-button" data-user="tim.churchward" data-domain="adelaide.edu.au">Email</button>
+    <div class="team-grid">
+      <div class="profile-card">
+        <img src="Tim.jpg" alt="Tim Churchward" class="profile-pic" />
+        <h3>Tim Churchward</h3>
+        <p class="job-title">Digital Education Developer</p>
+        <p>Tim brings 9 years of experience in digital learning, combining instructional design with interactive media. He’s worked across schools and universities developing rich VCE content with tools like H5P, HTML/CSS, and Storyline.</p>
+        <div class="card-buttons">
+          <a href="https://www.linkedin.com/in/tim-churchward-432590206/" target="_blank" class="button-link">LinkedIn</a>
+          <button class="email-button" data-user="tim.churchward" data-domain="adelaide.edu.au">Email</button>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <img src="Kelli.jpg" alt="Kelli Knuth" class="profile-pic" />
+        <h3>Kelli Knuth</h3>
+        <p class="job-title">Digital Education Developer</p>
+        <p>Kelli is passionate about integrating technology in learning. She’s created content using Canvas, SCORM, and H5P for universities and government agencies, and supports educators with LMS best practices.</p>
+        <div class="card-buttons">
+          <a href="https://www.linkedin.com/in/kelli-knuth-elearningdesigner/" target="_blank" class="button-link">LinkedIn</a>
+          <button class="email-button" data-user="kelli.knuth" data-domain="adelaide.edu.au">Email</button>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <img src="Alex.jpg" alt="Alex Price" class="profile-pic" />
+        <h3>Alex Price</h3>
+        <p class="job-title">Learning Designer</p>
+        <p>Alex is a creative learning designer with a background in graphic design and lecturing. She develops credentialed short courses and user-centred learning experiences across UniSA and other institutions.</p>
+        <div class="card-buttons">
+          <a href="https://www.linkedin.com/in/alexandra-price/" target="_blank" class="button-link">LinkedIn</a>
+          <button class="email-button" data-user="alex.price" data-domain="unisa.edu.au">Email</button>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <img src="Rich.jpg" alt="Rich Bartlett" class="profile-pic" />
+        <h3>Rich Bartlett</h3>
+        <p class="job-title">Learning Designer</p>
+        <p>Rich blends UX design and learning design to build inclusive and practical online courses. He leads projects in Canvas LMS using H5P, design systems, and student-first thinking. He’s a proud dad and team player.</p>
+        <div class="card-buttons">
+          <a href="https://www.linkedin.com/in/richbart11/" target="_blank" class="button-link">LinkedIn</a>
+          <button class="email-button" data-user="richard.bartlett" data-domain="adelaide.edu.au">Email</button>
+        </div>
       </div>
     </div>
 
-    <div class="profile-card">
-      <img src="Kelli.jpg" alt="Kelli Knuth">
-      <h3>Kelli Knuth</h3>
-      <p class="title">Digital Education Developer</p>
-      <p>Kelli is passionate about integrating technology in learning. She’s created content using Canvas, SCORM, and H5P for universities and government agencies, and supports educators with LMS best practices.</p>
-      <div class="card-buttons">
-        <a href="https://www.linkedin.com/in/kelli-knuth-elearningdesigner/" target="_blank" class="button-link">LinkedIn</a>
-        <button class="email-button" data-user="kelli.knuth" data-domain="adelaide.edu.au">Email</button>
-      </div>
+    <div class="return-container">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
     </div>
-
-    <div class="profile-card">
-      <img src="Alex.jpg" alt="Alex Price">
-      <h3>Alex Price</h3>
-      <p class="title">Learning Designer</p>
-      <p>Alex is a creative learning designer with a background in graphic design and lecturing. She develops credentialed short courses and user-centred learning experiences across UniSA and other institutions.</p>
-      <div class="card-buttons">
-        <a href="https://www.linkedin.com/in/alexandra-price/" target="_blank" class="button-link">LinkedIn</a>
-        <button class="email-button" data-user="alex.price" data-domain="unisa.edu.au">Email</button>
-      </div>
-    </div>
-
-    <div class="profile-card">
-      <img src="Rich.jpg" alt="Rich Bartlett">
-      <h3>Rich Bartlett</h3>
-      <p class="title">Learning Designer</p>
-      <p>Rich blends UX design and learning design to build inclusive and practical online courses. He leads projects in Canvas LMS using H5P, design systems, and student-first thinking. He’s a proud dad and team player.</p>
-      <div class="card-buttons">
-        <a href="https://www.linkedin.com/in/richbart11/" target="_blank" class="button-link">LinkedIn</a>
-        <button class="email-button" data-user="richard.bartlett" data-domain="adelaide.edu.au">Email</button>
-      </div>
-    </div>
-  </div>
-</main>
-<div style="text-align: center; margin-top: 3em;">
-  <a href="index.html" class="back-button">← Return to TUX Home</a>
-</div>
+  </main>
 
   <footer>
     <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
@@ -156,16 +178,14 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    <script>
-  // Protect email addresses
-  document.querySelectorAll('.email-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const user = btn.dataset.user;
-      const domain = btn.dataset.domain;
-      window.location.href = `mailto:${user}@${domain}`;
+    // Protect email addresses
+    document.querySelectorAll('.email-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const user = btn.dataset.user;
+        const domain = btn.dataset.domain;
+        window.location.href = `mailto:${user}@${domain}`;
+      });
     });
-  });
-</script>
-    
+  </script>
 </body>
 </html>
