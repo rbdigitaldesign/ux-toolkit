@@ -158,5 +158,15 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
+  <script>
+  document.querySelectorAll('.email-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const user = btn.dataset.user;
+      const domain = btn.dataset.domain;
+      window.location.href = `mailto:${user}@${domain}`;
+    });
+  });
+</script>
+
 </body>
 </html>
