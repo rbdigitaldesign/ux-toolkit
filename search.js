@@ -1,62 +1,76 @@
 const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const searchSuggestions = document.getElementById('searchSuggestions');
+const searchForm = document.getElementById('searchForm');
+const suggestionList = document.getElementById('searchSuggestions');
 
-const handleSearch = (value) => {
+function handleSearch(value) {
   const query = value.toLowerCase().trim();
 
-  if (query.includes('jotform')) window.location.href = 'tools.html#jotform';
-  else if (query.includes('card')) window.location.href = 'methodologies.html#card-sorting';
-  else if (query.includes('usability')) window.location.href = 'methodologies.html#usability-testing';
-  else if (query.includes('heatmap') || query.includes('hotjar')) window.location.href = 'tools.html#hotjar';
-  else if (query.includes('accessibility')) window.location.href = 'resources.html#accessibility';
-  else if (query.includes('media')) window.location.href = 'resources.html#media';
-  else if (query.includes('use')) window.location.href = 'use-in-courses.html';
-  else if (query.includes('personas')) window.location.href = 'personas.html';
-  else if (query.includes('tips')) window.location.href = 'tips.html';
-  else alert('No matching tool found.');
-};
+  if (query.includes('jotform')) {
+    window.location.href = 'tools.html#jotform';
+  } else if (query.includes('card sorting')) {
+    window.location.href = 'methodologies.html#card-sorting';
+  } else if (query.includes('usability')) {
+    window.location.href = 'methodologies.html#usability-testing';
+  } else if (query.includes('tree testing')) {
+    window.location.href = 'methodologies.html#tree-testing';
+  } else if (query.includes('hotjar') || query.includes('heatmap')) {
+    window.location.href = 'tools.html#hotjar';
+  } else if (query.includes('accessibility')) {
+    window.location.href = 'resources.html#accessibility';
+  } else if (query.includes('template')) {
+    window.location.href = 'resources.html#templates';
+  } else if (query.includes('consent')) {
+    window.location.href = 'resources.html#consent';
+  } else if (query.includes('survey') || query.includes('typeform') || query.includes('google forms')) {
+    window.location.href = 'tools.html#google-forms';
+  } else if (query.includes('media')) {
+    window.location.href = 'resources.html#media';
+  } else if (query.includes('use in courses')) {
+    window.location.href = 'resources.html#use-in-courses';
+  } else if (query.includes('personas')) {
+    window.location.href = 'personas.html';
+  } else if (query.includes('tips')) {
+    window.location.href = 'tips.html';
+  } else {
+    alert('Sorry, TUX couldn’t find a matching tool or method.');
+  }
+}
 
 searchInput.addEventListener('focus', () => {
-  searchSuggestions.style.display = 'block';
-  filterSuggestions(searchInput.value);
+  suggestionList.classList.add('visible');
 });
 
 searchInput.addEventListener('input', () => {
-  filterSuggestions(searchInput.value);
-  searchSuggestions.style.display = 'block';
+  const val = searchInput.value.toLowerCase();
+  const options = suggestionList.querySelectorAll('li');
+  options.forEach(option => {
+    const match = option.textContent.toLowerCase().includes(val);
+    option.style.display = match ? 'block' : 'none';
+  });
 });
 
-function filterSuggestions(val) {
-  const lowerVal = val.toLowerCase();
-  document.querySelectorAll('.suggestion').forEach(item => {
-    const match = item.textContent.toLowerCase().includes(lowerVal);
-    item.style.display = match ? 'block' : 'none';
-  });
-}
-
 document.addEventListener('click', (e) => {
-  if (!document.querySelector('.search-container').contains(e.target)) {
-    searchSuggestions.style.display = 'none';
+  if (!searchForm.contains(e.target)) {
+    suggestionList.classList.remove('visible');
   }
 });
 
-document.querySelectorAll('.suggestion').forEach(item => {
-  item.addEventListener('click', () => {
-    searchInput.value = item.textContent;
-    searchSuggestions.style.display = 'none';
-    handleSearch(item.textContent);
-  });
+suggestionList.addEventListener('click', (e) => {
+  if (e.target.tagName === 'LI') {
+    searchInput.value = e.target.textContent;
+    suggestionList.classList.remove('visible');
+    handleSearch(searchInput.value);
+  }
 });
 
-searchBtn.addEventListener('click', () => {
+searchInput.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleSearch(searchInput.value);
+  }
+});
+
+searchForm.addEventListener('submit', function (e) {
+  e.preventDefault();
   handleSearch(searchInput.value);
-});
-
-document.querySelectorAll('.email-button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const user = btn.dataset.user;
-    const domain = btn.dataset.domain;
-    window.location.href = `mailto:${user}@${domain}`;
-  });
 });
