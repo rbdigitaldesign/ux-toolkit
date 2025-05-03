@@ -263,31 +263,39 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 2em;
+  align-items: stretch;
 }
 
 .profile-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 260px;
+  max-width: 260px;
   background-color: var(--white);
   border: 2px solid var(--bright-blue);
   border-radius: 10px;
   padding: 1.5em;
   text-align: center;
-  width: 260px;
-  flex: 1 1 240px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: auto;
+  color: var(--dark-blue);
   box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
   transition: transform 0.3s ease;
-  color: var(--dark-blue);
+  height: 100%;
 }
 
-.profile-card p {
-  margin-bottom: 1em;
-  flex-grow: 1;
-  overflow: visible;
-  text-overflow: unset;
-  white-space: normal;
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+.profile-card h3 {
+  margin: 0.3em 0 0.2em;
+  color: var(--bright-blue);
+}
+
+.profile-card .job-title {
+  font-weight: bold;
+  font-size: 1.05em;
+  margin-bottom: 0.6em;
 }
 
 .profile-pic {
@@ -299,24 +307,22 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   border: 3px solid var(--bright-blue);
 }
 
-.profile-card h3 {
-  margin: 0.3em 0 0.2em;
-  color: var(--bright-blue);
-}
-
-.job-title {
-  font-weight: bold;
-  font-size: 1.05em;
-  margin-bottom: 0.6em;
+.profile-card p {
+  margin-bottom: 1em;
+  flex-grow: 1;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+  display: block;
 }
 
 .card-buttons {
   display: flex;
   justify-content: center;
   gap: 1em;
-  margin-top: auto;
   padding-top: 1em;
   align-items: center;
+  border-top: 1px solid #eee;
 }
 
 .linkedin-logo {
@@ -345,6 +351,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 .email-button:hover {
   background-color: var(--north-terrace-purple);
 }
+
 
 /* Contact Form */
 .contact-section {
