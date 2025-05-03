@@ -2,64 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TUX – UX Toolkit</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preload" href="CodeGun.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <script src="script.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Testing Tips | TUX</title>
+  <link rel="stylesheet" href="style.css?v=4" />
+  <style>
+    .accordion {
+      margin-bottom: 1em;
+      border: 1px solid var(--bright-blue);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--white);
+    }
+
+    .accordion summary {
+      cursor: pointer;
+      padding: 1em;
+      font-weight: bold;
+      background-color: var(--limestone-tint);
+      border-bottom: 1px solid var(--bright-blue);
+    }
+
+    .accordion p {
+      padding: 1em;
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <img src="tux-mascot.svg" alt="TUX Mascot" class="logo" />
-    <h1>TUX</h1>
-    <p class="tagline">Your shortcut to smarter testing, better design, and stronger student experiences.</p>
-    <div class="search-container">
-      <input id="searchBar" type="text" placeholder="Search toolkit..." aria-label="Search" />
-      <ul id="suggestionsList" class="suggestions hidden"></ul>
+  <header class="hero-banner">
+    <div class="container">
+      <h1>UX Testing Tips</h1>
+      <p>Evidence-based advice to get the most value from usability testing in learning design.</p>
     </div>
   </header>
 
-  <main>
-    <section id="intro">
-      <h2>About this toolkit</h2>
-      <p>This site is a practical resource to support UX testing, consistency, and innovation in digital learning environments.</p>
+  <main class="container">
+    <section class="highlight">
+      <h2>✨ Summary</h2>
+      <p>Good UX testing doesn’t have to be complicated. Below are curated tips from leading UX researchers like Jakob Nielsen, Hoa Loranger, and industry best practices — tailored to help you test smarter within the constraints of higher education and learning design environments.</p>
     </section>
 
-    <section id="tools">
-      <h2>Toolkit features</h2>
-      <div class="tool-card">...</div> <!-- Assume populated tools follow -->
+    <section class="highlight">
+      <h2>🔁 Core testing strategy</h2>
+      <details class="accordion" open>
+        <summary>🎯 Why you only need to test with 5 users</summary>
+        <p>Jakob Nielsen's research shows that testing with 5 users often uncovers 85% of usability issues. Additional users yield diminishing returns. Instead, run multiple small tests and iterate often. <a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank">Read full article ↗</a></p>
+      </details>
+
+      <details class="accordion">
+        <summary>📉 Avoid "monster" tests</summary>
+        <p>Rather than blowing your whole UX budget on a single big test, spread it out. Three rounds of 5 users will uncover more problems and let you continuously improve. <em>Test, fix, retest.</em></p>
+      </details>
+
+      <details class="accordion">
+        <summary>⏳ Test early and often</summary>
+        <p>Don’t wait for a course to be complete before testing. Run tests on low-fidelity prototypes, storyboards, or clickable wireframes to save effort down the line.</p>
+      </details>
     </section>
 
-    <section id="team">
-      <h2>Meet the team</h2>
-      <div class="team-grid">
-        <div class="team-member">
-          <img src="rich.jpg" alt="Rich" />
-          <h3>Rich</h3>
-          <p>Learning Designer & UX Lead</p>
-        </div>
-        <!-- Add other team members here -->
-      </div>
+    <section class="highlight">
+      <h2>🧪 Testing techniques</h2>
+      <details class="accordion">
+        <summary>🗣️ Thinking Aloud Protocol</summary>
+        <p>Ask users to verbalise what they’re doing and why. This provides deep insight into their decision-making and confusion points. <a href="https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/" target="_blank">See NN/g's guide ↗</a></p>
+      </details>
+
+      <details class="accordion">
+        <summary>📋 Task-based testing</summary>
+        <p>Give users realistic tasks like “find where you’d submit your assignment” or “locate the help button.” Observe where they pause, click, or struggle.</p>
+      </details>
+
+      <details class="accordion">
+        <summary>📷 Remote testing via screen recording</summary>
+        <p>Use tools like Loom, Lookback, or Zoom recordings to observe real interactions without needing face-to-face sessions.</p>
+      </details>
+
+      <details class="accordion">
+        <summary>🎯 Use benchmarks or success metrics</summary>
+        <p>Track completion rates, time on task, and error rates for common actions (e.g. downloading readings or starting a quiz) to establish baseline usability and improvements over time.</p>
+      </details>
+
+      <details class="accordion">
+        <summary>💡 Try first-click testing</summary>
+        <p>Before the full course is built, test static pages to see if students click where you expect them to. Tools like Optimal Workshop can help here.</p>
+      </details>
     </section>
 
-    <section id="contact">
-      <h2>Contact us</h2>
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
-        <select name="reason">
-          <option value="feedback">Feedback</option>
-          <option value="bug">Bug Report</option>
-          <option value="other">Other</option>
-        </select>
-        <textarea name="message" placeholder="Your message..." required></textarea>
-        <button type="submit">Send</button>
-      </form>
+    <section class="highlight">
+      <h2>📚 Resources & references</h2>
+      <ul>
+        <li><a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank">Why You Only Need to Test with 5 Users — Jakob Nielsen</a></li>
+        <li><a href="https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/" target="_blank">Thinking Aloud: The #1 Usability Tool</a></li>
+        <li><a href="https://www.nngroup.com/topic/usability-testing/" target="_blank">NN/g Usability Testing Topic Index</a></li>
+        <li><a href="https://baymard.com/blog" target="_blank">Baymard Institute UX research blog</a></li>
+        <li><a href="https://www.optimalworkshop.com/learn/" target="_blank">Optimal Workshop Learning Hub</a></li>
+      </ul>
     </section>
+
+    <div style="text-align: center; margin-top: 3em;">
+      <a href="index.html" class="back-button">← Return to TUX Home</a>
+    </div>
   </main>
 
   <footer>
-    <p>© 2025 TUX Project. All rights reserved.</p>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett · Tip sources: NN/g, Baymard Institute</p>
   </footer>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
+
+  <script>
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 </body>
 </html>
