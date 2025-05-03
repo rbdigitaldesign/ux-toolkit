@@ -335,4 +335,48 @@ footer img {
     flex: 1 1 100%;
     max-width: 100%;
   }
+.method-section {
+  margin-bottom: 4em;
 }
+
+.method-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-radius: 10px;
+  padding: 1.5em;
+  margin-top: 2em;
+  gap: 2em;
+}
+
+.method-card.right-image .method-img {
+  order: 2;
+}
+
+.method-card.left-image .method-img {
+  order: 0;
+}
+
+.method-card .method-img {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.method-card .method-img img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.method-card .method-text {
+  flex: 2 1 400px;
+}
+
+.method-card h3 {
+  margin-top: 0;
+  font-family: 'Codegun', sans-serif;
+  color: var(--bright-blue);
+}
+
