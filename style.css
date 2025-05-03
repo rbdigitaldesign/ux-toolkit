@@ -326,13 +326,14 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   min-width: 64px; /* roughly matches email button width */
 }
 
-.linkedin-button:hover {
-  background-color: var(--north-terrace-purple);
+.linkedin-logo:hover {
+  transform: scale(1.1); /* keeps a subtle hover effect without colour change */
 }
 
 .linkedin-logo {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease;
 }
 
 .email-button {
