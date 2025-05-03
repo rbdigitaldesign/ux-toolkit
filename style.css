@@ -251,18 +251,20 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--bright-blue);
   font-family: 'Codegun', sans-serif;
 }
-.team-row::-webkit-scrollbar {
-  height: 8px;
-}
-.team-row::-webkit-scrollbar-thumb {
-  background-color: var(--bright-blue);
-  border-radius: 10px;
+..team-row {
+  display: flex;
+  flex-wrap: nowrap; /* disables wrapping */
+  overflow-x: auto;   /* allows horizontal scrolling if needed */
+  gap: 2em;
+  padding-bottom: 1em;
+  scroll-snap-type: x mandatory;
 }
 
-
-.profile-card:hover {
-  transform: translateY(-5px);
+.profile-card {
+  flex: 0 0 260px; /* fixed width for all cards */
+  scroll-snap-align: start;
 }
+
 
 .profile-card h3 {
   margin: 0.3em 0 0.2em;
