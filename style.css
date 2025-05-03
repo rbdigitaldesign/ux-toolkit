@@ -368,3 +368,20 @@ footer img {
 .email-button:hover {
   background-color: var(--north-terrace-purple);
 }
+.team-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 2em;
+  padding-bottom: 1em;
+  scroll-snap-type: x mandatory;
+}
+
+.team-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.team-row::-webkit-scrollbar-thumb {
+  background-color: var(--bright-blue);
+  border-radius: 10px;
+}
+
