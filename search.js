@@ -1,76 +1,50 @@
-const searchInput = document.getElementById('searchInput');
-const searchForm = document.getElementById('searchForm');
-const suggestionList = document.getElementById('searchSuggestions');
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchBar');
+  const suggestionsList = document.getElementById('suggestionsList');
 
-function handleSearch(value) {
-  const query = value.toLowerCase().trim();
+  const suggestions = [
+    'Accessibility checklist',
+    'Heatmap testing',
+    'Card sorting',
+    'Canvas UX conventions',
+    'Design system guidelines'
+  ];
 
-  if (query.includes('jotform')) {
-    window.location.href = 'tools.html#jotform';
-  } else if (query.includes('card sorting')) {
-    window.location.href = 'methodologies.html#card-sorting';
-  } else if (query.includes('usability')) {
-    window.location.href = 'methodologies.html#usability-testing';
-  } else if (query.includes('tree testing')) {
-    window.location.href = 'methodologies.html#tree-testing';
-  } else if (query.includes('hotjar') || query.includes('heatmap')) {
-    window.location.href = 'tools.html#hotjar';
-  } else if (query.includes('accessibility')) {
-    window.location.href = 'resources.html#accessibility';
-  } else if (query.includes('template')) {
-    window.location.href = 'resources.html#templates';
-  } else if (query.includes('consent')) {
-    window.location.href = 'resources.html#consent';
-  } else if (query.includes('survey') || query.includes('typeform') || query.includes('google forms')) {
-    window.location.href = 'tools.html#google-forms';
-  } else if (query.includes('media')) {
-    window.location.href = 'resources.html#media';
-  } else if (query.includes('use in courses')) {
-    window.location.href = 'resources.html#use-in-courses';
-  } else if (query.includes('personas')) {
-    window.location.href = 'personas.html';
-  } else if (query.includes('tips')) {
-    window.location.href = 'tips.html';
-  } else {
-    alert('Sorry, TUX couldn’t find a matching tool or method.');
-  }
-}
+  searchInput.addEventListener('input', function () {
+    const input = this.value.trim().toLowerCase();
+    suggestionsList.innerHTML = '';
 
-searchInput.addEventListener('focus', () => {
-  suggestionList.classList.add('visible');
-});
+    if (input === '') {
+      suggestionsList.classList.add('hidden');
+      return;
+    }
 
-searchInput.addEventListener('input', () => {
-  const val = searchInput.value.toLowerCase();
-  const options = suggestionList.querySelectorAll('li');
-  options.forEach(option => {
-    const match = option.textContent.toLowerCase().includes(val);
-    option.style.display = match ? 'block' : 'none';
+    const filtered = suggestions.filter(item => item.toLowerCase().includes(input));
+    if (filtered.length > 0) {
+      filtered.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        li.addEventListener('click', function () {
+          searchInput.value = item;
+          suggestionsList.classList.add('hidden');
+        });
+        suggestionsList.appendChild(li);
+      });
+      suggestionsList.classList.remove('hidden');
+    } else {
+      suggestionsList.classList.add('hidden');
+    }
   });
-});
 
-document.addEventListener('click', (e) => {
-  if (!searchForm.contains(e.target)) {
-    suggestionList.classList.remove('visible');
-  }
-});
+  document.addEventListener('click', function (e) {
+    if (!document.querySelector('.search-container').contains(e.target)) {
+      suggestionsList.classList.add('hidden');
+    }
+  });
 
-suggestionList.addEventListener('click', (e) => {
-  if (e.target.tagName === 'LI') {
-    searchInput.value = e.target.textContent;
-    suggestionList.classList.remove('visible');
-    handleSearch(searchInput.value);
-  }
-});
-
-searchInput.addEventListener('keydown', function (e) {
-  if (e.key === 'Enter') {
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    handleSearch(searchInput.value);
-  }
-});
-
-searchForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  handleSearch(searchInput.value);
+    alert('Thank you for your message!');
+    this.reset();
+  });
 });
