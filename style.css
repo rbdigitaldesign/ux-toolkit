@@ -1,101 +1,39 @@
-
-@font-face {
-  font-family: 'Codegun';
-  src: url('codegun.ttf') format('truetype');
+/* Adjusted styles for search bar visibility */
+.search-wrapper {
+  position: relative;
+  z-index: 10; /* Ensure it's above other content */
 }
 
-:root {
-  --white: #FFFFFF;
-  --dark-blue: #140F50;
-  --bright-blue: #1448FF;
-  --north-terrace-purple: #836BFF;
-  --south-east-limestone: #F8EFE0;
-  --limestone-tint: #FEFCF9;
-}
-
-/* Base */
-body {
-  font-family: 'Segoe UI', sans-serif;
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  list-style: none;
   margin: 0;
   padding: 0;
-  background-color: var(--south-east-limestone);
-  color: var(--dark-blue);
+  border: 1px solid var(--dark-blue);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 15; /* Ensure suggestions appear above everything else */
 }
 
-h1, h2, h3, h4, .card h2, .highlight h3 {
-  font-family: 'Codegun', sans-serif;
+.suggestion-list li {
+  padding: 0.5em;
+  cursor: pointer;
 }
 
-/* Hero Banner */
+.suggestion-list li:hover {
+  background: var(--south-east-limestone);
+}
+
+/* Ensure hero banner content doesn't overlap */
 .hero-wrapper {
   position: relative;
   z-index: 1;
 }
 
 .hero-banner {
-  background:
-    linear-gradient(to right, rgba(20, 15, 80, 0.9), rgba(131, 107, 255, 0.4)),
-    linear-gradient(135deg, #140F50 40%, #836BFF);
-  background-color: #140F50;
-  color: var(--white);
-  text-align: center;
-  padding: 6em 1.5em 5em;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.hero-banner::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: url('tux-icon-banner.png') no-repeat right bottom;
-  background-size: auto 100%;
-  opacity: 0.9;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-banner h1,
-.hero-banner p,
-.search-wrapper {
   position: relative;
   z-index: 2;
-}
-
-.hero-banner h1 {
-  font-size: 2.8em;
-  margin: 0.3em 0 0.2em;
-}
-
-.hero-banner p {
-  font-size: 1.15em;
-  margin: 0 auto 1.5em;
-  max-width: 720px;
-  color: #E6E1FF;
-}
-
-.tux-mobile-top {
-  display: none;
-  width: 100px;
-  margin: 0 auto 1em;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.tux-mobile-top:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
-}
-
-@media (max-width: 700px) {
-  .hero-banner::after {
-    display: none;
-  }
-
-  .tux-mobile-top {
-    display: block;
-  }
 }
