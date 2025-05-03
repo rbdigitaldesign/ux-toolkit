@@ -154,11 +154,11 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   list-style: none;
   margin: 0;
   padding: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   max-height: 220px;
   overflow-y: auto;
   display: none;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  z-index: 10000; /* MASSIVELY high */
+  z-index: 1002; /* ✅ Must be high enough to appear above mascot */
 }
 
 .suggestion-list.visible {
