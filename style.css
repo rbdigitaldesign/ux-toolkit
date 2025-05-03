@@ -359,18 +359,18 @@ footer img {
   order: 0;
 }
 
-.method-card .method-img {
+.method-img {
   flex: 1 1 300px;
   text-align: center;
 }
 
-.method-card .method-img img {
+.method-img img {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
 }
 
-.method-card .method-text {
+.method-text {
   flex: 2 1 400px;
 }
 
