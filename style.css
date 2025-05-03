@@ -246,3 +246,8 @@ footer img {
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
 }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
