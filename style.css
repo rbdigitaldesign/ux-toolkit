@@ -311,15 +311,27 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   border-top: 1px solid #eee;
 }
 
-.linkedin-logo {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  transition: transform 0.3s ease;
+.linkedin-button {
+  background-color: var(--bright-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 0.6em 1.2em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  height: 40px; /* match the visual height of email button */
 }
 
-.linkedin-logo:hover {
-  transform: scale(1.1);
+.linkedin-button:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+.linkedin-logo {
+  width: 20px;
+  height: 20px;
 }
 
 .email-button {
