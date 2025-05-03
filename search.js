@@ -74,3 +74,12 @@ searchForm.addEventListener('submit', function (e) {
   e.preventDefault();
   handleSearch(searchInput.value);
 });
+<script>
+  document.querySelectorAll('.email-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const user = btn.dataset.user;
+      const domain = btn.dataset.domain;
+      window.location.href = `mailto:${user}@${domain}`;
+    });
+  });
+</script>
