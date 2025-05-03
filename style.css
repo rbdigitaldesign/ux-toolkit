@@ -484,7 +484,7 @@ footer nav a:hover {
 
 .profile-card .title {
   font-weight: bold;
-  color: var(--bright-blue);
+  color: var(--dark-blue);
   margin-bottom: 0.6em;
 }
 
