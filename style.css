@@ -410,15 +410,19 @@ footer img {
   right: 24px;
   z-index: 999;
   font-size: 16px;
-  background-color: var(--bright-blue);
+  font-weight: bold;
+  background-color: #000000e0; /* higher contrast by default */
   color: white;
   border: none;
   border-radius: 30px;
   padding: 10px 16px;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #topBtn:hover {
   background-color: var(--north-terrace-purple);
+  transform: scale(1.05);
 }
+
