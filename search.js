@@ -3,7 +3,8 @@ const searchBtn = document.getElementById('searchBtn');
 const searchSuggestions = document.getElementById('searchSuggestions');
 
 const handleSearch = (value) => {
-  const query = value.toLowerCase();
+  const query = value.toLowerCase().trim();
+
   if (query.includes('jotform')) window.location.href = 'tools.html#jotform';
   else if (query.includes('card')) window.location.href = 'methodologies.html#card-sorting';
   else if (query.includes('usability')) window.location.href = 'methodologies.html#usability-testing';
@@ -16,28 +17,43 @@ const handleSearch = (value) => {
   else alert('No matching tool found.');
 };
 
+// Show suggestions on input focus
+searchInput.addEventListener('focus', () => {
+  searchSuggestions.style.display = 'block';
+  filterSuggestions(searchInput.value);
+});
+
+// Filter suggestions based on input
 searchInput.addEventListener('input', () => {
-  const val = searchInput.value.toLowerCase();
+  filterSuggestions(searchInput.value);
+  searchSuggestions.style.display = 'block';
+});
+
+function filterSuggestions(val) {
+  const lowerVal = val.toLowerCase();
   document.querySelectorAll('.suggestion').forEach(item => {
-    item.style.display = item.textContent.toLowerCase().includes(val) ? 'block' : 'none';
+    const match = item.textContent.toLowerCase().includes(lowerVal);
+    item.style.display = match ? 'block' : 'none';
   });
-  searchSuggestions.style.display = val ? 'block' : 'none';
-});
+}
 
-searchBtn.addEventListener('click', () => {
-  handleSearch(searchInput.value);
-});
-
+// Hide suggestions when clicking outside
 document.addEventListener('click', (e) => {
   if (!document.querySelector('.search-container').contains(e.target)) {
     searchSuggestions.style.display = 'none';
   }
 });
 
+// Handle suggestion click
 document.querySelectorAll('.suggestion').forEach(item => {
   item.addEventListener('click', () => {
     searchInput.value = item.textContent;
     searchSuggestions.style.display = 'none';
     handleSearch(item.textContent);
   });
+});
+
+// Trigger search on button click
+searchBtn.addEventListener('click', () => {
+  handleSearch(searchInput.value);
 });
