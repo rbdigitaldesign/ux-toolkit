@@ -5,13 +5,22 @@ function generateReport() {
   const designer = document.getElementById('designerName').value.trim();
   const notes = document.getElementById('notes').value.trim();
   const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+  const mode = document.getElementById('checkMode').value;
 
   const implemented = [];
   const recommended = [];
 
   checkboxes.forEach(checkbox => {
-    (checkbox.checked ? implemented : recommended).push(checkbox.value);
+    if (mode === 'checked-implemented') {
+      (checkbox.checked ? implemented : recommended).push(checkbox.value);
+    } else {
+      (checkbox.checked ? recommended : implemented).push(checkbox.value);
+    }
   });
+
+  const modeExplanation = mode === 'checked-implemented'
+    ? "In this mode, checked items are considered implemented. Unchecked items are recommendations for improvement."
+    : "In this mode, checked items are flagged as needing improvement. Unchecked items are considered satisfactory.";
 
   const output = `
 Canvas UX Review Summary
@@ -20,13 +29,13 @@ This report was created by ${designer || '[Designer Name]'} to support the revie
 
 Page reviewed: ${url || '[Page URL]'}
 
-The checklist highlights areas that are currently implemented and areas that could be improved to support better student navigation, accessibility, and user experience.
+Interpretation mode: ${modeExplanation}
 
 ✅ Implemented UX features:
-${implemented.map(i => '- ' + i).join('\n') || '- None yet checked.'}
+${implemented.map(i => '- ' + i).join('\n') || '- None listed.'}
 
 🔧 Recommended improvements:
-${recommended.map(i => '- ' + i).join('\n') || '- None. All items are checked.'}
+${recommended.map(i => '- ' + i).join('\n') || '- None listed.'}
 
 📝 Additional suggestions from the designer:
 ${notes || '[No additional notes provided]'}
@@ -50,7 +59,7 @@ function downloadPDF() {
 
   logo.onload = () => {
     // Header section
-    doc.setFillColor(22, 12, 80); // dark blue background
+    doc.setFillColor(22, 12, 80); // #160c50
     doc.rect(0, 0, 210, 35, 'F');
     doc.addImage(logo, 'PNG', 10, 6, 40, 20);
 
@@ -80,3 +89,17 @@ function downloadPDF() {
     doc.save('UX-checklist-report.pdf');
   };
 }
+
+// Toggle mode description updater
+document.addEventListener('DOMContentLoaded', function () {
+  const modeSelect = document.getElementById('checkMode');
+  const desc = document.getElementById('modeDescription');
+
+  if (modeSelect && desc) {
+    modeSelect.addEventListener('change', function () {
+      desc.textContent = this.value === 'checked-implemented'
+        ? 'When you tick a box, it will be counted as an implemented UX feature. Unticked boxes will be considered recommended improvements.'
+        : 'When you tick a box, it will be flagged as needing improvement. Unticked boxes will be considered satisfactory.';
+    });
+  }
+});
