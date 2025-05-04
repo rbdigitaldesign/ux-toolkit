@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UX Checklist Tool</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero-banner no-banner-image">
+    <div class="container">
+      <h1>Canvas UX Design Checklist</h1>
+      <p>Complete this virtual form to assess a Canvas course page and export a summary.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <label>Course name: <input type="text" id="courseName" /></label>
+      <label>Page URL: <input type="url" id="pageURL" /></label>
+      <label>Course builder: <input type="text" id="builderName" /></label>
+      <label>Additional notes: <textarea id="notes"></textarea></label>
+    </section>
+
+    <section class="checklist-section">
+      <h2>Checklist</h2>
+      <div class="checklist-box">
+        <h3>Navigation</h3>
+        <label><input type="checkbox" /> Avoid collapsible menus for core links</label>
+        <label><input type="checkbox" /> Use consistent navigation placement</label>
+        <label><input type="checkbox" /> Minimise clutter</label>
+      </div>
+      <div class="checklist-box">
+        <h3>Visual cues</h3>
+        <label><input type="checkbox" /> Clear headings & breadcrumbs</label>
+        <label><input type="checkbox" /> Current module/topic visually highlighted</label>
+      </div>
+    </section>
+
+    <button onclick="exportReport()">Export Summary</button>
+  </main>
+
+  <footer>
+    <p>© 2025 TUX | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
