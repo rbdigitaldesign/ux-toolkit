@@ -264,7 +264,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
     flex-wrap: wrap;
     justify-content: center;
   }
-}
 
 .profile-card {
   background-color: var(--white);
