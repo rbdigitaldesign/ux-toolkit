@@ -3,49 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Canvas UX Checklist Tool</title>
-  <link rel="stylesheet" href="tips-style.css?v=15" />
+  <title>Canvas UX Review Tool | TUX</title>
+  <link rel="stylesheet" href="tips-2.css?v=14" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-
-  <!-- Banner -->
+  <!-- Page banner -->
   <header class="banner">
-    <img src="AU logo primary_white.png" alt="University of Adelaide logo" class="logo">
-    <h1>Canvas UX Checklist Tool</h1>
-    <p class="intro">Review and report on user experience elements in Canvas course pages</p>
+    <img src="AU logo primary_white.png" alt="Adelaide University logo" class="logo">
+    <h1>Canvas UX Review Tool</h1>
+    <p class="intro">Complete this form to generate a summary of the Canvas UX experience for your course page.</p>
   </header>
 
-  <!-- Form starts here -->
-  <div class="form-container">
-
-    <!-- Input fields for context -->
+  <main class="form-container">
+    <!-- Metadata collection -->
     <label for="courseName">Course name</label>
-    <input type="text" id="courseName" placeholder="e.g. Corporate Responsibility for Global Business" />
+    <input type="text" id="courseName" placeholder="e.g. Cyber Security Foundations" />
 
     <label for="pageUrl">Page URL</label>
-    <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/courses/123/pages/intro" />
+    <input type="url" id="pageUrl" placeholder="https://learn.adelaide.edu.au/courses/..." />
 
-    <label for="courseBuilder">Course Builder name</label>
-    <input type="text" id="courseBuilder" placeholder="e.g. Dr Jane Smith" />
+    <label for="courseBuilder">Course Builder (Academic)</label>
+    <input type="text" id="courseBuilder" placeholder="Dr Jane Smith" />
 
-    <label for="designerName">Your name</label>
-    <input type="text" id="designerName" placeholder="e.g. Rich Bartlett" />
+    <label for="designerName">Your name (Learning Designer or Developer)</label>
+    <input type="text" id="designerName" placeholder="Rich Bartlett" />
 
-    <!-- Interpretation mode -->
+    <!-- Mode toggle section -->
     <div class="mode-toggle">
-      <p><strong>How should checklist ticks be interpreted?</strong></p>
-      <label><input type="radio" name="interpretation" value="implemented" checked /> Ticked = Implemented</label>
-      <label><input type="radio" name="interpretation" value="needsImprovement" /> Ticked = Needs improvement</label>
+      <p><strong>How do you want to interpret the checklist?</strong></p>
+      <label><input type="radio" name="mode" value="implemented" checked /> Ticked = Implemented</label>
+      <label><input type="radio" name="mode" value="needsImprovement" /> Ticked = Needs Improvement</label>
     </div>
 
-    <!-- Checklist -->
-    <section class="checklist">
-
+    <!-- Checklist section -->
+    <div id="checklistWrapper" class="checklist">
       <fieldset>
         <legend>✅ Make navigation visible and predictable</legend>
         <label><input type="checkbox" value="Avoid hiding core links in collapsible menus." /> Avoid hiding core links in collapsible menus.</label>
-        <label><input type="checkbox" value="Position core navigation consistently." /> Position core navigation consistently.</label>
+        <label><input type="checkbox" value="Position core navigation consistently (e.g. left-side modules)." /> Position core navigation consistently (e.g. left-side modules).</label>
         <label><input type="checkbox" value="Minimise clutter in global navigation." /> Minimise clutter in global navigation.</label>
       </fieldset>
 
@@ -56,62 +52,32 @@
         <label><input type="checkbox" value="Avoid jumping users to unexpected locations." /> Avoid jumping users to unexpected locations.</label>
       </fieldset>
 
-      <fieldset>
-        <legend>🧾 Use clear and scannable labels</legend>
-        <label><input type="checkbox" value="Avoid internal jargon; use familiar terms." /> Avoid internal jargon; use familiar terms.</label>
-        <label><input type="checkbox" value="Be concise and front-load keywords." /> Be concise and front-load keywords.</label>
-        <label><input type="checkbox" value="Standardise terminology across pages." /> Standardise terminology across pages.</label>
-      </fieldset>
-
-      <fieldset>
-        <legend>🎨 Support contrast and visibility</legend>
-        <label><input type="checkbox" value="Ensure button and link colours meet WCAG standards." /> Ensure button and link colours meet WCAG standards.</label>
-        <label><input type="checkbox" value="Use bold or headings for emphasis, not just colour." /> Use bold or headings for emphasis, not just colour.</label>
-        <label><input type="checkbox" value="Limit pages to a single clear call-to-action." /> Limit pages to a single clear call-to-action.</label>
-      </fieldset>
-
-      <fieldset>
-        <legend>📱 Design for interaction and accessibility</legend>
-        <label><input type="checkbox" value="Use click-based reveals (not hover only)." /> Use click-based reveals (not hover only).</label>
-        <label><input type="checkbox" value="Avoid deeply nested navigation." /> Avoid deeply nested navigation.</label>
-        <label><input type="checkbox" value="Use large tap/click areas on mobile." /> Use large tap/click areas on mobile.</label>
-      </fieldset>
-
-      <fieldset>
-        <legend>📌 Keep important navigation sticky</legend>
-        <label><input type="checkbox" value="Use pinned headers or floating menus if possible." /> Use pinned headers or floating menus if possible.</label>
-      </fieldset>
-
-    </section>
+      <!-- Add your remaining categories back here -->
+    </div>
 
     <!-- Notes -->
     <div class="notes-section">
-      <label for="notes">Additional suggestions or context</label>
-      <textarea id="notes" rows="5" placeholder="Enter any other notes or findings..."></textarea>
+      <label for="notes">Any additional notes or comments?</label>
+      <textarea id="notes" rows="4" placeholder="E.g. navigation menu was confusing, text was too dense..."></textarea>
     </div>
 
-    <!-- Generate button -->
-    <button class="primary" onclick="generateReport()">Generate report</button>
+    <!-- Report buttons -->
+    <button onclick="generateReport()" class="primary">Generate Report</button>
 
-    <!-- Report output -->
+    <!-- Output section -->
     <div class="output-section">
-      <label for="output">Generated report</label>
-      <textarea id="output" rows="12" readonly></textarea>
+      <textarea id="output" rows="18" readonly placeholder="Your report will appear here..."></textarea>
       <div class="action-buttons">
-        <button onclick="copyReport()">Copy to clipboard</button>
-        <button onclick="downloadPDF()">Export to PDF</button>
+        <button onclick="copyReport()">Copy Report</button>
+        <button onclick="downloadPDF()">Export as PDF</button>
       </div>
     </div>
+  </main>
 
-  </div>
-
-  <!-- Footer -->
   <footer>
     <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="tips-script.js?v=16"></script>
-
+  <script src="tips-2.js?v=14"></script>
 </body>
 </html>
