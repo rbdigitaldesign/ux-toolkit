@@ -1,84 +1,83 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #FEFCF9;
+  font-family: Arial, sans-serif;
+  background-color: #f8efe0;
   margin: 0;
   padding: 2em;
-  color: #140F50;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
+  color: #140f50;
 }
 
 h1, h2 {
-  text-align: center;
-  color: #1448FF;
+  color: #1448ff;
+  font-family: 'Segoe UI', sans-serif;
+  margin-bottom: 1em;
 }
 
-form {
-  background: #ffffff;
-  padding: 2em;
-  border: 2px solid #1448FF;
-  border-radius: 8px;
-  margin-bottom: 2em;
-}
-
-label {
+.form-section label {
   display: block;
   margin-bottom: 1em;
   font-weight: bold;
 }
 
 input, textarea {
-  width: 100%;
-  padding: 0.7em;
-  margin-top: 0.3em;
-  border-radius: 5px;
+  padding: 0.5em;
+  margin-left: 0.5em;
   border: 1px solid #ccc;
-  font-size: 1em;
+  border-radius: 4px;
 }
 
-#checklistContainer {
+.checklist-section {
   margin-top: 2em;
 }
 
-fieldset {
-  border: 1px solid #ccc;
-  margin-bottom: 1.5em;
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5em;
+}
+
+.checklist-box {
+  background: #ffffff;
+  border: 2px solid #836bff;
+  border-radius: 8px;
   padding: 1em;
-  border-radius: 5px;
 }
 
-legend {
-  font-weight: bold;
-  color: #836BFF;
+.checklist-box h3 {
+  margin-top: 0;
+  color: #836bff;
 }
 
-.checkbox-item {
+.checklist-box label {
+  display: block;
   margin-bottom: 0.5em;
 }
 
+.actions {
+  margin-top: 2em;
+}
+
 button {
-  background-color: #1448FF;
-  color: white;
-  padding: 0.7em 1.5em;
+  padding: 0.7em 1.2em;
   border: none;
-  border-radius: 5px;
-  font-size: 1em;
+  background-color: #1448ff;
+  color: white;
+  border-radius: 4px;
   cursor: pointer;
-  margin-top: 1em;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color: #836BFF;
+  background-color: #836bff;
 }
 
-#reportOutput {
+.report-output {
+  margin-top: 2em;
+}
+
+#reportText {
   width: 100%;
-  font-family: monospace;
-  margin-top: 1em;
-  padding: 1em;
   border: 1px solid #ccc;
-  background: #f0f0ff;
+  padding: 1em;
+  border-radius: 4px;
+  font-family: monospace;
 }
