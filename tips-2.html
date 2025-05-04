@@ -3,91 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Canvas UX Checklist Tool | TUX</title>
-  <link rel="stylesheet" href="checklist.css?v=5" />
+  <title>Canvas UX Review Tool | TUX</title>
+  <link rel="stylesheet" href="tips-2.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+  <!-- Page banner with logo and intro -->
   <header class="banner">
-    <img src="AU logo primary_white.png" alt="Adelaide University logo" class="logo" />
-    <h1>Canvas UX Checklist Tool</h1>
-    <p class="intro">Use this tool to assess and improve the user experience of your Canvas course pages.</p>
+    <img src="AU logo primary_white.png" alt="Adelaide Uni logo" class="logo" />
+    <h1>Canvas UX Review Tool</h1>
+    <p class="intro">Use this tool to assess a Canvas page for student experience and generate a report for discussion with a course builder.</p>
   </header>
 
+  <!-- Main form for entering details and checking usability elements -->
   <main class="form-container">
-    <section class="metadata">
-      <label>Course Name <input type="text" id="courseName" /></label>
-      <label>Page URL <input type="url" id="pageUrl" /></label>
-      <label>Course Builder <input type="text" id="courseBuilder" /></label>
-      <label>Designer Name <input type="text" id="designerName" /></label>
-    </section>
+    <!-- Info fields -->
+    <label for="courseName">Course name</label>
+    <input type="text" id="courseName" placeholder="e.g. Ethics and Professionalism">
 
-    <section class="mode-toggle">
-      <p><strong>Choose how to interpret checked boxes:</strong></p>
-      <label><input type="radio" name="interpretation" value="implemented" checked /> Ticked = Implemented UX feature</label>
-      <label><input type="radio" name="interpretation" value="improvement" /> Ticked = Needs Improvement</label>
-      <p class="help-text">This helps clarify how the checklist is being used before sharing with a Course Builder.</p>
-    </section>
+    <label for="pageUrl">Page URL</label>
+    <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/...">
 
+    <label for="courseBuilder">Course builder (academic)</label>
+    <input type="text" id="courseBuilder" placeholder="e.g. Dr Jane Smith">
+
+    <label for="designerName">Your name</label>
+    <input type="text" id="designerName" placeholder="e.g. Rich Bartlett">
+
+    <!-- Toggle to define interpretation of checkboxes -->
+    <div class="mode-toggle">
+      <p><strong>Checklist interpretation mode:</strong> Choose how the checkboxes are interpreted in the report:</p>
+      <label><input type="radio" name="mode" value="implemented" checked /> Ticked = Implemented</label>
+      <label><input type="radio" name="mode" value="needsImprovement" /> Ticked = Needs improvement</label>
+    </div>
+
+    <!-- Checklist categories -->
     <section class="checklist">
-      <h2>Canvas UX checklist</h2>
       <fieldset>
         <legend>✅ Make navigation visible and predictable</legend>
         <label><input type="checkbox" value="Avoid hiding core links in collapsible menus." /> Avoid hiding core links in collapsible menus.</label>
         <label><input type="checkbox" value="Position core navigation consistently." /> Position core navigation consistently.</label>
         <label><input type="checkbox" value="Minimise clutter in global navigation." /> Minimise clutter in global navigation.</label>
       </fieldset>
+
       <fieldset>
         <legend>🧠 Communicate where users are</legend>
         <label><input type="checkbox" value="Use clear H1/H2 headings and breadcrumbs." /> Use clear H1/H2 headings and breadcrumbs.</label>
         <label><input type="checkbox" value="Highlight the current module/topic visually." /> Highlight the current module/topic visually.</label>
         <label><input type="checkbox" value="Avoid jumping users to unexpected locations." /> Avoid jumping users to unexpected locations.</label>
       </fieldset>
-      <fieldset>
-        <legend>🧾 Use clear and scannable labels</legend>
-        <label><input type="checkbox" value="Avoid internal jargon; use familiar terms." /> Avoid internal jargon; use familiar terms.</label>
-        <label><input type="checkbox" value="Be concise and front-load keywords." /> Be concise and front-load keywords.</label>
-        <label><input type="checkbox" value="Standardise terminology across pages." /> Standardise terminology across pages.</label>
-      </fieldset>
-      <fieldset>
-        <legend>🎨 Support contrast and visibility</legend>
-        <label><input type="checkbox" value="Ensure button and link colours meet WCAG standards." /> Ensure button and link colours meet WCAG standards.</label>
-        <label><input type="checkbox" value="Use bold or headings for emphasis, not just colour." /> Use bold or headings for emphasis, not just colour.</label>
-        <label><input type="checkbox" value="Limit pages to a single clear call-to-action." /> Limit pages to a single clear call-to-action.</label>
-      </fieldset>
-      <fieldset>
-        <legend>📱 Design for interaction and accessibility</legend>
-        <label><input type="checkbox" value="Use click-based reveals (not hover only)." /> Use click-based reveals (not hover only).</label>
-        <label><input type="checkbox" value="Avoid deeply nested navigation." /> Avoid deeply nested navigation.</label>
-        <label><input type="checkbox" value="Use large tap/click areas on mobile." /> Use large tap/click areas on mobile.</label>
-      </fieldset>
-      <fieldset>
-        <legend>📌 Keep important navigation sticky</legend>
-        <label><input type="checkbox" value="Use pinned headers or floating menus if possible." /> Use pinned headers or floating menus if possible.</label>
-      </fieldset>
+
+      <!-- Add other checklists following this format... -->
     </section>
 
-    <section class="notes-section">
-      <label for="notes">Additional notes from the designer</label>
-      <textarea id="notes" rows="4" placeholder="Enter any extra comments or suggestions here..."></textarea>
-    </section>
+    <!-- Button to create the text report -->
+    <button class="primary" onclick="generateReport()">Generate report</button>
 
-    <button onclick="generateReport()" class="primary">Generate Report</button>
+    <!-- Generated report textarea -->
+    <div class="output-section">
+      <textarea id="output" rows="16" placeholder="Your report will appear here..."></textarea>
 
-    <section class="output-section">
-      <label for="output">Generated Report</label>
-      <textarea id="output" rows="15" readonly></textarea>
+      <!-- Buttons for copying and exporting the report -->
       <div class="action-buttons">
-        <button onclick="copyReport()">Copy Report</button>
+        <button onclick="copyReport()">Copy report text</button>
         <button onclick="downloadPDF()">Export as PDF</button>
       </div>
-    </section>
+    </div>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>© 2025 TUX | <a href="terms.html">Terms of Use</a></p>
+    <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <script src="checklist.js?v=5"></script>
+  <!-- Load custom JS for report generation -->
+  <script src="tips-2.js"></script>
 </body>
 </html>
