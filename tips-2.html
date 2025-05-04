@@ -3,77 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Canvas UX Review Tool</title>
-  <link rel="stylesheet" href="ratings-style.css">
+  <title>Canvas UX Review Tool | TUX</title>
+  <link rel="stylesheet" href="tips2-style.css?v=1" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header class="banner">
-    <!-- Adelaide University Logo -->
-    <img src="AU logo primary_white.png" class="logo" alt="Adelaide University logo">
+    <img src="AU logo primary_white.png" class="logo" alt="Adelaide University logo" />
     <h1>Canvas UX Review Tool</h1>
-    <p class="intro">Use the sliders to rate how well this course page supports good UX principles in Canvas LMS.</p>
+    <p class="intro">Use this tool to evaluate a course page and export a UX report to share with your Course Builder.</p>
   </header>
 
   <main class="form-container">
-    <!-- Form fields for context -->
+    <!-- Course information fields -->
     <label for="courseName">Course name</label>
-    <input type="text" id="courseName">
+    <input type="text" id="courseName" placeholder="e.g. Applied Machine Learning">
 
     <label for="pageUrl">Page URL</label>
-    <input type="url" id="pageUrl">
+    <input type="url" id="pageUrl" placeholder="https://canvas.adelaide.edu.au/...">
 
-    <label for="courseBuilder">Course builder name</label>
-    <input type="text" id="courseBuilder">
+    <label for="courseBuilder">Course Builder (Academic)</label>
+    <input type="text" id="courseBuilder" placeholder="e.g. Dr. Jane Smith">
 
     <label for="designerName">Your name</label>
-    <input type="text" id="designerName">
+    <input type="text" id="designerName" placeholder="e.g. Rich Bartlett">
 
-    <!-- Checklist with sliders -->
-    <section class="ratings">
-      <h2>Rate each UX practice from 1 (poor) to 10 (excellent)</h2>
-      <div class="rating-item">
-        <label>The page avoids hiding core links in collapsible menus.</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
-      <div class="rating-item">
-        <label>The page positions navigation consistently (e.g., left-side modules).</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
-      <div class="rating-item">
-        <label>The global navigation is uncluttered and purposeful.</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
-      <div class="rating-item">
-        <label>The page uses clear headings and breadcrumbs to indicate location.</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
-      <div class="rating-item">
-        <label>The current module or topic is visually highlighted.</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
-      <div class="rating-item">
-        <label>Course-specific terms are clear, familiar, and concise.</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
-      <div class="rating-item">
-        <label>Links and buttons meet WCAG contrast and visibility standards.</label>
-        <input type="range" min="1" max="10" value="5">
-      </div>
+    <!-- Checklist sliders start here -->
+    <section class="checklist">
+      <h2>UX evaluation ratings</h2>
+      
+      <!-- Example slider item -->
+      <fieldset>
+        <legend>The page avoids hiding core links in collapsible menus.</legend>
+        <input type="range" min="1" max="4" value="2" class="slider" data-labels='["Critical", "Needs Work", "Passable", "Ideal"]'>
+      </fieldset>
+
+      <fieldset>
+        <legend>The core navigation is positioned consistently (e.g. left-side modules).</legend>
+        <input type="range" min="1" max="4" value="2" class="slider" data-labels='["Critical", "Needs Work", "Passable", "Ideal"]'>
+      </fieldset>
+
+      <fieldset>
+        <legend>The global navigation is uncluttered and streamlined.</legend>
+        <input type="range" min="1" max="4" value="2" class="slider" data-labels='["Critical", "Needs Work", "Passable", "Ideal"]'>
+      </fieldset>
+
+      <fieldset>
+        <legend>The current module or topic is visually indicated to the user.</legend>
+        <input type="range" min="1" max="4" value="2" class="slider" data-labels='["Critical", "Needs Work", "Passable", "Ideal"]'>
+      </fieldset>
+      
+      <fieldset>
+        <legend>The page uses clear H1/H2 headings and breadcrumbs to show user location.</legend>
+        <input type="range" min="1" max="4" value="2" class="slider" data-labels='["Critical", "Needs Work", "Passable", "Ideal"]'>
+      </fieldset>
+
+      <fieldset>
+        <legend>The page avoids sending users to unexpected locations without clear cues.</legend>
+        <input type="range" min="1" max="4" value="2" class="slider" data-labels='["Critical", "Needs Work", "Passable", "Ideal"]'>
+      </fieldset>
+
+      <!-- You can add more fieldsets like this if needed -->
     </section>
 
-    <label for="notes">Additional notes or recommendations</label>
-    <textarea id="notes" rows="5"></textarea>
+    <!-- Notes section -->
+    <div class="notes-section">
+      <label for="notes">Additional notes or suggestions</label>
+      <textarea id="notes" rows="5" placeholder="Any extra thoughts for the Course Builder..."></textarea>
+    </div>
 
-    <!-- Generate report -->
-    <button class="primary" onclick="generateReport()">Generate Report</button>
+    <!-- Action buttons -->
+    <button class="primary" onclick="generateReport()">Generate report</button>
 
-    <!-- Output area -->
     <div class="output-section">
-      <textarea id="output" rows="12" readonly></textarea>
+      <textarea id="output" rows="16" placeholder="Report will appear here..."></textarea>
       <div class="action-buttons">
-        <button onclick="copyReport()">Copy Report</button>
-        <button onclick="downloadPDF()">Export PDF</button>
+        <button onclick="copyReport()">Copy</button>
+        <button onclick="downloadPDF()">Download PDF</button>
       </div>
     </div>
   </main>
@@ -82,6 +88,6 @@
     <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <script src="ratings-script.js"></script>
+  <script src="tips2-script.js?v=1"></script>
 </body>
 </html>
