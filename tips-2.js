@@ -9,24 +9,25 @@ function generateReport() {
   const builder = document.getElementById('courseBuilder').value.trim();
   const designer = document.getElementById('designerName').value.trim();
   const notes = document.getElementById('notes').value.trim();
-  const interpretation = document.getElementById('interpretationMode').value;
+  const mode = document.querySelector('input[name="interpretation"]:checked')?.value;
+
   const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+  const implemented = [];
+  const improvement = [];
+  const unassessed = [];
 
-  const checked = [], unchecked = [];
-
-  checkboxes.forEach(cb => {
-    (cb.checked ? checked : unchecked).push(cb.value);
+  checkboxes.forEach(checkbox => {
+    const label = checkbox.value;
+    if (checkbox.checked) {
+      if (mode === "implemented") {
+        implemented.push(label);
+      } else {
+        improvement.push(label);
+      }
+    } else {
+      unassessed.push(label);
+    }
   });
-
-  let implemented = [], recommended = [];
-
-  if (interpretation === 'implemented') {
-    implemented = checked;
-    recommended = unchecked;
-  } else if (interpretation === 'needsImprovement') {
-    implemented = unchecked;
-    recommended = checked;
-  }
 
   const output = `
 Canvas UX Review Summary
@@ -35,17 +36,20 @@ This report was created by ${designer || '[Designer Name]'} to support the revie
 
 Page reviewed: ${url || '[Page URL]'}
 
-The checklist highlights UX features already considered in the course design, as well as suggestions for future improvement based on the selected interpretation mode.
+The checklist highlights areas based on the selected interpretation mode: "${mode === 'implemented' ? 'Ticked = Implemented' : 'Ticked = Needs Improvement'}".
 
-✅ Implemented UX features:
-${implemented.map(i => '- ' + i).join('\n') || '- None'}
+✅ Marked as Implemented:
+${implemented.length ? implemented.map(i => '- ' + i).join('\n') : '- None'}
 
-🔧 Recommended improvements:
-${recommended.map(i => '- ' + i).join('\n') || '- None'}
+🔧 Marked as Needing Improvement:
+${improvement.length ? improvement.map(i => '- ' + i).join('\n') : '- None'}
 
-📝 Additional notes from the designer:
+❓ Not assessed in this review:
+${unassessed.length ? unassessed.map(i => '- ' + i).join('\n') : '- None'}
+
+📝 Additional suggestions from the designer:
 ${notes || '[No additional notes provided]'}
-`;
+  `;
 
   document.getElementById('output').value = output.trim();
 }
@@ -59,13 +63,15 @@ function copyReport() {
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
+
   const logo = new Image();
   logo.src = 'AU logo primary_white.png';
 
   logo.onload = () => {
-    doc.setFillColor(22, 12, 80);
+    doc.setFillColor(22, 12, 80); // dark blue background
     doc.rect(0, 0, 210, 35, 'F');
     doc.addImage(logo, 'PNG', 10, 6, 40, 20);
+
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
