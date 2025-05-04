@@ -1,100 +1,96 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #F8EFE0;
-  color: #140F50;
+  background-color: #fefcf9;
+  color: #140f50;
   margin: 0;
-  padding: 0;
+  padding: 2em;
 }
 
 .form-wrapper {
-  max-width: 960px;
+  max-width: 900px;
   margin: auto;
-  padding: 2em;
   background: white;
+  padding: 2em;
+  border: 3px solid #140f50;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
-h1, h2, h3 {
-  font-family: 'Codegun', sans-serif;
-  color: #1448FF;
-  margin-bottom: 0.5em;
+.logo {
+  display: block;
+  max-width: 220px;
+  margin: 0 auto 1em;
 }
 
-.intro-text {
-  font-size: 1em;
-  margin-bottom: 2em;
+h1 {
+  text-align: center;
+  font-size: 1.8em;
+  color: #160c50;
 }
 
-.input-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1em;
-  margin-bottom: 2em;
-}
-
-.input-grid label {
-  display: flex;
-  flex-direction: column;
+.input-group label {
+  margin-top: 1em;
+  display: block;
   font-weight: bold;
 }
 
-input, textarea {
+.input-group input, .input-group textarea {
+  width: 100%;
+  margin-bottom: 1em;
   padding: 0.6em;
   font-size: 1em;
-  border: 1px solid #ccc;
   border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-textarea {
-  resize: vertical;
-}
-
-.checklist-group {
-  margin-bottom: 2em;
-  padding: 1em;
-  background: #FEFCF9;
-  border: 1px solid #ddd;
+.checklist fieldset {
+  border: 1px solid #ccc;
+  margin-bottom: 1.5em;
   border-radius: 8px;
+  padding: 1em;
 }
 
-.checklist-group h3 {
-  margin-top: 0;
-  color: #836BFF;
+.checklist legend {
+  font-weight: bold;
+  padding: 0 10px;
 }
 
-.checklist-group label {
+.checklist label {
   display: block;
-  margin-bottom: 0.5em;
-  font-weight: normal;
+  padding: 0.5em;
+  font-size: 1em;
 }
 
-button {
-  background-color: #1448FF;
+.checklist input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 0.6em;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.actions button {
+  background: #1448ff;
   color: white;
-  border: none;
-  padding: 0.75em 1.5em;
+  padding: 0.8em 1.5em;
   font-size: 1em;
+  margin: 0.5em;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin-top: 1em;
 }
 
-button:hover {
-  background-color: #836BFF;
+.actions button:hover {
+  background-color: #836bff;
 }
 
-#output {
+textarea#output {
   width: 100%;
-  margin-top: 1em;
   padding: 1em;
+  font-family: monospace;
+  font-size: 0.95em;
+  margin-top: 1em;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-family: monospace;
-}
-
-.report-actions {
-  margin-top: 1em;
-  display: flex;
-  gap: 1em;
 }
