@@ -1,4 +1,4 @@
-/* Basic layout */
+/* Layout and general styling */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
@@ -6,7 +6,6 @@ body {
   color: #140F50;
 }
 
-/* Header and banner */
 .banner {
   background: #160c50;
   color: #fff;
@@ -14,34 +13,34 @@ body {
   text-align: center;
 }
 
-.logo {
+.banner .logo {
   max-width: 180px;
   margin-bottom: 1em;
 }
 
 h1 {
-  font-size: 2.2em;
   margin: 0.2em 0;
+  font-size: 2.2em;
 }
 
-.intro {
+p.intro {
   font-size: 1.1em;
+  margin-top: 0.5em;
 }
 
-/* Form and layout */
 .form-container {
   max-width: 900px;
   margin: 2em auto;
   padding: 0 1em;
 }
 
+/* Form elements */
 label {
   display: block;
-  margin-top: 1em;
+  margin: 1em 0 0.5em;
   font-weight: bold;
 }
 
-/* Inputs and textarea styling */
 input[type="text"],
 input[type="url"],
 textarea {
@@ -49,10 +48,13 @@ textarea {
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 1em;
 }
 
-/* Toggle section */
+textarea {
+  font-family: inherit;
+}
+
+/* Mode selection box */
 .mode-toggle {
   margin: 2em 0;
   padding: 1em;
@@ -61,13 +63,18 @@ textarea {
   border-radius: 8px;
 }
 
-/* Checklist blocks */
+.mode-toggle label {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+/* Checklist styling */
 .checklist fieldset {
   border: 2px solid #836bff;
   border-radius: 8px;
   padding: 1em;
   margin-bottom: 1em;
-  background: #fff;
+  background: #ffffff;
 }
 
 .checklist legend {
@@ -79,18 +86,20 @@ textarea {
   display: block;
   margin: 0.5em 0;
   font-weight: normal;
+  cursor: pointer;
 }
 
 .checklist input[type="checkbox"] {
-  transform: scale(1.5);
+  transform: scale(1.4);
   margin-right: 0.6em;
 }
 
-/* Primary CTA button */
+/* Buttons */
 .primary {
   background: #1448FF;
   color: white;
   font-weight: bold;
+  font-size: 1em;
   padding: 0.75em 1.5em;
   border: none;
   border-radius: 5px;
@@ -98,20 +107,6 @@ textarea {
   margin-top: 2em;
 }
 
-/* Output section */
-.output-section {
-  margin-top: 2em;
-}
-
-.output-section textarea {
-  width: 100%;
-  padding: 1em;
-  border-radius: 5px;
-  font-family: monospace;
-  border: 1px solid #ccc;
-}
-
-/* Buttons for PDF + Copy */
 .action-buttons {
   display: flex;
   gap: 1em;
@@ -130,10 +125,11 @@ textarea {
 
 /* Footer */
 footer {
+  text-align: center;
   background: #140F50;
   color: white;
-  text-align: center;
-  padding: 1.5em;
+  padding: 1em;
+  margin-top: 3em;
 }
 
 footer a {
