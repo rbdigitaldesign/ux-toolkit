@@ -19,6 +19,17 @@
       <label>Suggestions/Notes:</label><textarea id="notes"></textarea>
     </div>
 
+<div class="mode-toggle">
+  <label for="checkMode"><strong>Interpretation mode:</strong></label>
+  <select id="checkMode">
+    <option value="checked-implemented">✓ = Implemented | ☐ = Recommended</option>
+    <option value="checked-needs-improvement">✓ = Needs improvement | ☐ = Already fine</option>
+  </select>
+  <p class="mode-description" id="modeDescription">
+    When you tick a box, it will be counted as an implemented UX feature. Unticked boxes will be considered as recommended improvements.
+  </p>
+</div>
+
     <h2>UX Design Checklist</h2>
     <div class="checklist">
       <fieldset>
