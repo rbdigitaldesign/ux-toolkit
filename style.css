@@ -255,8 +255,15 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 1.5em;
+  gap: 2em;
   margin-top: 2em;
+}
+
+@media (max-width: 1000px) {
+  .team-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .profile-card {
