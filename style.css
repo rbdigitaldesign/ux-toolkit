@@ -391,7 +391,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .contact-section button[type="submit"] {
-  background-color: var(--bright-blue);
+  background-color: var(--bright-blue);e
   color: white;
   border: none;
   padding: 0.8em 1.5em;
@@ -408,22 +408,28 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 /* Footer */
 footer {
   background-color: var(--dark-blue);
-  color: ffffff;
+  color: #ffffff; /* Fix: added # */
   text-align: center;
   padding: 1.5em 1em;
   font-size: 0.9em;
   border-top: 4px solid var(--bright-blue);
+}
+
+footer a {
+  color: #ffffff;
   text-decoration: underline;
+}
+
+footer a:hover {
+  color: var(--north-terrace-purple);
+  text-decoration: none;
 }
 
 footer img {
   max-width: 180px;
   margin-top: 1em;
 }
-footer a:hover {
-  color: var(--north-terrace-purple);
-  text-decoration: none;
-}
+
 
 /* Scroll Button */
 #topBtn {
