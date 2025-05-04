@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const modeSelect = document.getElementById('checkMode');
+  const checklistSection = document.getElementById('checklistSection');
+  const modeDescription = document.getElementById('modeDescription');
+
+  modeSelect.addEventListener('change', function () {
+    checklistSection.classList.add('visible');
+    if (this.value === 'checked-implemented') {
+      modeDescription.textContent = "In this mode, any ticked checkbox is considered an already implemented UX feature.";
+    } else if (this.value === 'checked-recommended') {
+      modeDescription.textContent = "In this mode, any ticked checkbox is considered something that needs improvement.";
+    }
+  });
+});
+
 function generateReport() {
   const course = document.getElementById('courseName').value.trim();
   const url = document.getElementById('pageUrl').value.trim();
@@ -13,14 +28,10 @@ function generateReport() {
   checkboxes.forEach(checkbox => {
     if (mode === 'checked-implemented') {
       (checkbox.checked ? implemented : recommended).push(checkbox.value);
-    } else {
+    } else if (mode === 'checked-recommended') {
       (checkbox.checked ? recommended : implemented).push(checkbox.value);
     }
   });
-
-  const modeExplanation = mode === 'checked-implemented'
-    ? "In this mode, checked items are considered implemented. Unchecked items are recommendations for improvement."
-    : "In this mode, checked items are flagged as needing improvement. Unchecked items are considered satisfactory.";
 
   const output = `
 Canvas UX Review Summary
@@ -29,17 +40,19 @@ This report was created by ${designer || '[Designer Name]'} to support the revie
 
 Page reviewed: ${url || '[Page URL]'}
 
-Interpretation mode: ${modeExplanation}
+Interpretation mode: ${mode === 'checked-implemented' ? '✅ Ticked = Implemented' : '🔧 Ticked = Needs Improvement'}
+
+The checklist highlights areas that are currently implemented and areas that could be improved to support better student navigation, accessibility, and user experience.
 
 ✅ Implemented UX features:
-${implemented.map(i => '- ' + i).join('\n') || '- None listed.'}
+${implemented.map(i => '- ' + i).join('\n') || '- None yet identified.'}
 
 🔧 Recommended improvements:
-${recommended.map(i => '- ' + i).join('\n') || '- None listed.'}
+${recommended.map(i => '- ' + i).join('\n') || '- None noted. All are marked as implemented.'}
 
 📝 Additional suggestions from the designer:
 ${notes || '[No additional notes provided]'}
-  `;
+`;
 
   document.getElementById('output').value = output.trim();
 }
@@ -58,8 +71,7 @@ function downloadPDF() {
   logo.src = 'AU logo primary_white.png';
 
   logo.onload = () => {
-    // Header section
-    doc.setFillColor(22, 12, 80); // #160c50
+    doc.setFillColor(22, 12, 80);
     doc.rect(0, 0, 210, 35, 'F');
     doc.addImage(logo, 'PNG', 10, 6, 40, 20);
 
@@ -68,7 +80,6 @@ function downloadPDF() {
     doc.setFont('helvetica', 'bold');
     doc.text("Canvas UX Review Summary", 105, 25, { align: 'center' });
 
-    // Body setup
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
     doc.setFont('helvetica', 'normal');
@@ -89,17 +100,3 @@ function downloadPDF() {
     doc.save('UX-checklist-report.pdf');
   };
 }
-
-// Toggle mode description updater
-document.addEventListener('DOMContentLoaded', function () {
-  const modeSelect = document.getElementById('checkMode');
-  const desc = document.getElementById('modeDescription');
-
-  if (modeSelect && desc) {
-    modeSelect.addEventListener('change', function () {
-      desc.textContent = this.value === 'checked-implemented'
-        ? 'When you tick a box, it will be counted as an implemented UX feature. Unticked boxes will be considered recommended improvements.'
-        : 'When you tick a box, it will be flagged as needing improvement. Unticked boxes will be considered satisfactory.';
-    });
-  }
-});
