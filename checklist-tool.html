@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Canvas UX Review Tool</title>
+  <link rel="stylesheet" href="checklist-tool.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="banner">
+    <img src="AU logo primary_white.png" alt="Adelaide University logo" class="logo" />
+    <h1>Canvas UX Review Tool</h1>
+    <p class="intro">Use this form to assess the user experience of a Canvas LMS course page using proactive criteria and ratings.</p>
+  </header>
+
+  <main class="form-container">
+
+    <!-- Details section -->
+    <label for="courseName">Course Name</label>
+    <input type="text" id="courseName" placeholder="e.g. Data Ethics and AI (COMPSCI 7016)" />
+
+    <label for="pageUrl">Page URL</label>
+    <input type="url" id="pageUrl" placeholder="https://..." />
+
+    <label for="courseBuilder">Course Builder (Academic)</label>
+    <input type="text" id="courseBuilder" placeholder="e.g. Dr Jane Smith" />
+
+    <label for="designerName">Designer Name</label>
+    <input type="text" id="designerName" placeholder="e.g. Rich Bartlett" />
+
+    <!-- Checklist ratings -->
+    <section class="checklist">
+      <h2>UX Criteria Ratings</h2>
+
+      <!-- Example checklist item -->
+      <fieldset>
+        <legend>The page avoids hiding core links in collapsible menus.</legend>
+        <input type="range" min="1" max="5" step="1" value="3" data-label="nav-collapsible" />
+        <div class="rating-labels">
+          <span>Very Poor</span><span>Needs Work</span><span>Acceptable</span><span>Good</span><span>Excellent</span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Navigation is consistently placed throughout the course (e.g. left-side modules).</legend>
+        <input type="range" min="1" max="5" step="1" value="3" data-label="nav-consistent" />
+        <div class="rating-labels">
+          <span>Very Poor</span><span>Needs Work</span><span>Acceptable</span><span>Good</span><span>Excellent</span>
+        </div>
+      </fieldset>
+
+      <!-- Add additional fields here using the same structure -->
+
+    </section>
+
+    <!-- Notes field -->
+    <div class="notes-section">
+      <label for="notes">Additional Notes or Suggestions</label>
+      <textarea id="notes" rows="5" placeholder="Any contextual feedback or observations..."></textarea>
+    </div>
+
+    <!-- Generate + output -->
+    <button class="primary" onclick="generateReport()">Generate Report</button>
+
+    <div class="output-section">
+      <textarea id="output" rows="16" readonly></textarea>
+
+      <div class="action-buttons">
+        <button onclick="copyReport()">Copy Report</button>
+        <button onclick="downloadPDF()">Export to PDF</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
+  </footer>
+
+  <script src="checklist-tool.js"></script>
+</body>
+</html>
