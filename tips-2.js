@@ -1,17 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const modeSelect = document.getElementById('checkMode');
-  const checklistSection = document.getElementById('checklistSection');
-  const modeDescription = document.getElementById('modeDescription');
-
-  modeSelect.addEventListener('change', function () {
-    checklistSection.classList.add('visible');
-    if (this.value === 'checked-implemented') {
-      modeDescription.textContent = "In this mode, any ticked checkbox is considered an already implemented UX feature.";
-    } else if (this.value === 'checked-recommended') {
-      modeDescription.textContent = "In this mode, any ticked checkbox is considered something that needs improvement.";
-    }
-  });
-});
+function revealChecklist() {
+  const selected = document.getElementById('interpretationMode').value;
+  document.getElementById('checklistSection').style.display = selected ? 'block' : 'none';
+}
 
 function generateReport() {
   const course = document.getElementById('courseName').value.trim();
@@ -19,19 +9,24 @@ function generateReport() {
   const builder = document.getElementById('courseBuilder').value.trim();
   const designer = document.getElementById('designerName').value.trim();
   const notes = document.getElementById('notes').value.trim();
+  const interpretation = document.getElementById('interpretationMode').value;
   const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-  const mode = document.getElementById('checkMode').value;
 
-  const implemented = [];
-  const recommended = [];
+  const checked = [], unchecked = [];
 
-  checkboxes.forEach(checkbox => {
-    if (mode === 'checked-implemented') {
-      (checkbox.checked ? implemented : recommended).push(checkbox.value);
-    } else if (mode === 'checked-recommended') {
-      (checkbox.checked ? recommended : implemented).push(checkbox.value);
-    }
+  checkboxes.forEach(cb => {
+    (cb.checked ? checked : unchecked).push(cb.value);
   });
+
+  let implemented = [], recommended = [];
+
+  if (interpretation === 'implemented') {
+    implemented = checked;
+    recommended = unchecked;
+  } else if (interpretation === 'needsImprovement') {
+    implemented = unchecked;
+    recommended = checked;
+  }
 
   const output = `
 Canvas UX Review Summary
@@ -40,17 +35,15 @@ This report was created by ${designer || '[Designer Name]'} to support the revie
 
 Page reviewed: ${url || '[Page URL]'}
 
-Interpretation mode: ${mode === 'checked-implemented' ? '✅ Ticked = Implemented' : '🔧 Ticked = Needs Improvement'}
-
-The checklist highlights areas that are currently implemented and areas that could be improved to support better student navigation, accessibility, and user experience.
+The checklist highlights UX features already considered in the course design, as well as suggestions for future improvement based on the selected interpretation mode.
 
 ✅ Implemented UX features:
-${implemented.map(i => '- ' + i).join('\n') || '- None yet identified.'}
+${implemented.map(i => '- ' + i).join('\n') || '- None'}
 
 🔧 Recommended improvements:
-${recommended.map(i => '- ' + i).join('\n') || '- None noted. All are marked as implemented.'}
+${recommended.map(i => '- ' + i).join('\n') || '- None'}
 
-📝 Additional suggestions from the designer:
+📝 Additional notes from the designer:
 ${notes || '[No additional notes provided]'}
 `;
 
@@ -66,7 +59,6 @@ function copyReport() {
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-
   const logo = new Image();
   logo.src = 'AU logo primary_white.png';
 
@@ -74,7 +66,6 @@ function downloadPDF() {
     doc.setFillColor(22, 12, 80);
     doc.rect(0, 0, 210, 35, 'F');
     doc.addImage(logo, 'PNG', 10, 6, 40, 20);
-
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
