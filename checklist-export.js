@@ -1,108 +1,105 @@
-const checklistData = {
-  "Make navigation visible and predictable": [
-    "Avoid hiding core links in collapsible menus.",
-    "Position core navigation consistently (e.g. left-side modules).",
-    "Minimise clutter in global navigation."
-  ],
-  "Communicate where users are": [
-    "Use clear H1/H2 headings and breadcrumbs.",
-    "Highlight the current module/topic visually.",
-    "Avoid jumping users to unexpected locations."
-  ],
-  "Use clear and scannable labels": [
-    "Avoid internal jargon; use familiar terms.",
-    "Be concise and front-load keywords.",
-    "Standardise terminology across pages."
-  ],
-  "Support contrast and visibility": [
-    "Ensure button and link colours meet WCAG standards.",
-    "Use bold or headings for emphasis, not just colour.",
-    "Limit pages to a single clear call-to-action."
-  ],
-  "Design for interaction and accessibility": [
-    "Use click-based reveals (not hover only).",
-    "Avoid deeply nested navigation.",
-    "Use large tap/click areas on mobile."
-  ],
-  "Keep important navigation sticky": [
-    "Use pinned headers or floating menus if possible."
-  ]
-};
+const checklistItems = [
+  {
+    category: "✅ Make navigation visible and predictable",
+    items: [
+      "Avoid hiding core links in collapsible menus.",
+      "Position core navigation consistently (e.g. left-side modules).",
+      "Minimise clutter in global navigation."
+    ]
+  },
+  {
+    category: "🧠 Communicate where users are",
+    items: [
+      "Use clear H1/H2 headings and breadcrumbs.",
+      "Highlight the current module/topic visually.",
+      "Avoid jumping users to unexpected locations."
+    ]
+  },
+  {
+    category: "🧾 Use clear and scannable labels",
+    items: [
+      "Avoid internal jargon; use familiar terms.",
+      "Be concise and front-load keywords.",
+      "Standardise terminology across pages."
+    ]
+  },
+  {
+    category: "🎨 Support contrast and visibility",
+    items: [
+      "Ensure button and link colours meet WCAG standards.",
+      "Use bold or headings for emphasis, not just colour.",
+      "Limit pages to a single clear call-to-action."
+    ]
+  },
+  {
+    category: "📱 Design for interaction and accessibility",
+    items: [
+      "Use click-based reveals (not hover only).",
+      "Avoid deeply nested navigation.",
+      "Use large tap/click areas on mobile."
+    ]
+  },
+  {
+    category: "📌 Keep important navigation sticky",
+    items: [
+      "Use pinned headers or floating menus if possible."
+    ]
+  }
+];
 
 window.onload = () => {
-  const container = document.getElementById("checklistContainer");
-  for (let section in checklistData) {
-    const fieldset = document.createElement("fieldset");
-    const legend = document.createElement("legend");
-    legend.textContent = section;
-    fieldset.appendChild(legend);
+  const container = document.getElementById('checklistContainer');
+  checklistItems.forEach(section => {
+    const box = document.createElement('div');
+    box.className = 'checklist-box';
+    const title = document.createElement('h3');
+    title.textContent = section.category;
+    box.appendChild(title);
 
-    checklistData[section].forEach((item, idx) => {
-      const label = document.createElement("label");
-      label.className = "checkbox-item";
-      const input = document.createElement("input");
-      input.type = "checkbox";
-      input.dataset.section = section;
-      input.dataset.label = item;
-      label.appendChild(input);
+    section.items.forEach(item => {
+      const label = document.createElement('label');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.dataset.label = item;
+      label.appendChild(checkbox);
       label.append(` ${item}`);
-      fieldset.appendChild(label);
+      box.appendChild(label);
     });
 
-    container.appendChild(fieldset);
-  }
+    container.appendChild(box);
+  });
 };
 
 function generateReport() {
-  const course = document.getElementById("courseName").value;
-  const url = document.getElementById("pageUrl").value;
-  const builder = document.getElementById("builder").value;
-  const designer = document.getElementById("designer").value;
+  const courseName = document.getElementById("courseName").value;
+  const pageURL = document.getElementById("pageURL").value;
+  const courseBuilder = document.getElementById("courseBuilder").value;
+  const designerName = document.getElementById("designerName").value;
   const notes = document.getElementById("notes").value;
-  const checkboxes = document.querySelectorAll("input[type='checkbox']");
 
-  let passed = [];
-  let missing = [];
+  const checkboxes = document.querySelectorAll('#checklistContainer input[type="checkbox"]');
+  const checked = [];
+  const unchecked = [];
 
   checkboxes.forEach(cb => {
-    const entry = `• ${cb.dataset.label} (${cb.dataset.section})`;
-    if (cb.checked) {
-      passed.push(entry);
-    } else {
-      missing.push(entry);
-    }
+    (cb.checked ? checked : unchecked).push(cb.dataset.label);
   });
 
-  const report = `Canvas UX Checklist Report
+  let report = `Canvas UX Review Report\n\n`;
+  report += `Course: ${courseName}\nPage URL: ${pageURL}\nCourse Builder: ${courseBuilder}\nReviewed by: ${designerName}\n\n`;
 
-Course: ${course}
-Page: ${url}
-Course Builder: ${builder}
-Designer: ${designer}
+  report += `✅ Implemented:\n${checked.map(item => `- ${item}`).join('\n')}\n\n`;
+  report += `⚠️ Recommended improvements:\n${unchecked.map(item => `- ${item}`).join('\n')}\n\n`;
+  if (notes.trim()) {
+    report += `📝 Additional notes:\n${notes.trim()}\n`;
+  }
 
-Summary:
-This report was generated using the Canvas UX checklist. The purpose is to guide a conversation with the Course Builder about current strengths and potential areas of improvement on the page.
-
-✅ Implemented items:
-${passed.length ? passed.join("\n") : "None selected."}
-
-⚠️ Areas to consider improving:
-${missing.length ? missing.join("\n") : "None"}
-
-💬 Additional suggestions:
-${notes || "None"}
-
-—
-
-End of report.
-`;
-
-  document.getElementById("reportOutput").value = report;
+  document.getElementById("reportText").value = report;
 }
 
-function copyToClipboard() {
-  const output = document.getElementById("reportOutput");
-  output.select();
+function copyReport() {
+  const textArea = document.getElementById("reportText");
+  textArea.select();
   document.execCommand("copy");
-  alert("Report copied to clipboard!");
+  alert("Report copied to clipboard.");
 }
