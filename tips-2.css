@@ -94,3 +94,22 @@ textarea#output {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+.mode-toggle {
+  margin-bottom: 2em;
+  background: var(--limestone-tint);
+  padding: 1em;
+  border-left: 4px solid var(--bright-blue);
+  border-radius: 6px;
+}
+
+.mode-toggle select {
+  margin-left: 0.5em;
+  padding: 0.4em;
+  font-size: 1em;
+}
+
+.mode-description {
+  margin-top: 0.5em;
+  font-size: 0.95em;
+  color: #333;
+}
