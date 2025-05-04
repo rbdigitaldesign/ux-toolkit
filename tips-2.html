@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Canvas UX Checklist Tool</title>
-  <link rel="stylesheet" href="tips-2.css" />
+  <title>Canvas UX Checklist Export Tool</title>
+  <link rel="stylesheet" href="tips-2.css?v=1" />
+  <script defer src="tips-2.js?v=1"></script>
 </head>
 <body>
-  <main class="container">
+  <header>
     <h1>Canvas UX Checklist Export Tool</h1>
+  </header>
 
-    <form id="uxForm">
-      <label>Course Name: <input type="text" id="courseName" required></label>
-      <label>Page URL: <input type="url" id="pageUrl" required></label>
-      <label>Course Builder: <input type="text" id="builder" required></label>
-      <label>Designer Name: <input type="text" id="designer" required></label>
-      <label>Suggestions/Notes:
-        <textarea id="notes" rows="4"></textarea>
-      </label>
+  <section class="form-section">
+    <label>Course Name: <input type="text" id="courseName" /></label>
+    <label>Page URL: <input type="text" id="pageURL" /></label>
+    <label>Course Builder: <input type="text" id="courseBuilder" /></label>
+    <label>Designer Name: <input type="text" id="designerName" /></label>
+    <label>Suggestions/Notes: <textarea id="notes" rows="2"></textarea></label>
+  </section>
 
-      <div id="checklistContainer">
-        <!-- Injected from JS -->
-      </div>
+  <section class="checklist-section">
+    <h2>Checklist</h2>
+    <div class="checklist-grid" id="checklistContainer"></div>
+  </section>
 
-      <button type="button" onclick="generateReport()">Generate Report</button>
-    </form>
+  <div class="actions">
+    <button onclick="generateReport()">Generate Report</button>
+  </div>
 
-    <section id="outputContainer">
-      <h2>Generated Report</h2>
-      <textarea id="reportOutput" readonly rows="20"></textarea>
-      <button onclick="copyToClipboard()">Copy Report</button>
-    </section>
-  </main>
-
-  <script src="tips-2.js"></script>
+  <section class="report-output">
+    <h2>Generated Report</h2>
+    <textarea id="reportText" rows="20"></textarea>
+    <button onclick="copyReport()">Copy Report</button>
+  </section>
 </body>
 </html>
