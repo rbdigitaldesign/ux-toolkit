@@ -408,16 +408,21 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 /* Footer */
 footer {
   background-color: var(--dark-blue);
-  color: white;
+  color: ffffff;
   text-align: center;
   padding: 1.5em 1em;
   font-size: 0.9em;
   border-top: 4px solid var(--bright-blue);
+  text-decoration: underline;
 }
 
 footer img {
   max-width: 180px;
   margin-top: 1em;
+}
+footer a:hover {
+  color: var(--north-terrace-purple);
+  text-decoration: none;
 }
 
 /* Scroll Button */
