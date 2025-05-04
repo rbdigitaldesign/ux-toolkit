@@ -5,7 +5,7 @@
 
 :root {
   --white: #FFFFFF;
-  --dark-blue: #140F50
+  --dark-blue: #140F50;
   --bright-blue: #1448FF;
   --north-terrace-purple: #836BFF;
   --south-east-limestone: #F8EFE0;
@@ -184,18 +184,19 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 .card {
   background: var(--white);
-  border: 2px solid var(--bright-blue);
+  border: none; /* Remove blue border */
   border-radius: 10px;
   padding: 1.5em;
   text-align: left;
   color: var(--dark-blue);
   text-decoration: none;
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.06); /* lighter shadow */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.15);
+  box-shadow: 0 6px 18px rgba(20, 15, 80, 0.1);
 }
 
 .card h2 {
@@ -219,11 +220,11 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   flex: 0 1 48%;
   max-width: 560px;
   background: var(--white);
-  border: 2px solid var(--bright-blue);
+  border: none; /* Remove border */
   border-radius: 8px;
   padding: 1em;
   box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.05);
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.06); /* softer shadow */
 }
 
 .video-wrapper iframe {
@@ -251,6 +252,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--bright-blue);
   font-family: 'Codegun', sans-serif;
 }
+
 .team-row {
   display: flex;
   flex-wrap: nowrap;
@@ -264,6 +266,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
     flex-wrap: wrap;
     justify-content: center;
   }
+}
 
 .profile-card {
   background-color: var(--white);
@@ -302,15 +305,13 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 
 .profile-card p {
   margin-bottom: 1em;
-  flex-grow: 0;
-  overflow: visible;
-  white-space: normal;
+  flex-grow: 1;
 }
 
 .card-buttons {
   display: flex;
   justify-content: center;
-  gap: 1em; /* controls horizontal space between buttons */
+  gap: 1em;
   margin-top: auto;
   padding-top: 1em;
   border-top: 1px solid #eee;
@@ -328,35 +329,31 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   cursor: pointer;
   transition: background-color 0.2s ease;
   height: 40px;
-  min-width: 64px; /* roughly matches email button width */
-}
-
-.linkedin-logo:hover {
-  transform: scale(1.1); /* keeps a subtle hover effect without colour change */
+  width: 40px;
 }
 
 .linkedin-logo {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.2s ease;
+  width: 24px;
+  height: 24px;
 }
 
 .email-button {
-  background-color: #836BFF; /* Always purple */
-  color: #ffffff; /* Always white text */
+  background-color: #836BFF;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   padding: 0 1.2em;
   font-size: 0.9em;
   text-decoration: none;
   cursor: pointer;
+  height: 40px;
+  line-height: 40px;
   display: inline-block;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .email-button:hover {
-  background-color: #5e4bd1; /* Slightly darker purple on hover */
-  color: #ffffff; /* Still white text */
+  background-color: #5e4bd1;
   transform: scale(1.05);
 }
 
@@ -432,7 +429,7 @@ footer img {
   z-index: 999;
   font-size: 16px;
   font-weight: bold;
-  background-color: #000000e0; /* higher contrast by default */
+  background-color: #000000e0;
   color: white;
   border: none;
   border-radius: 30px;
@@ -446,4 +443,3 @@ footer img {
   background-color: var(--north-terrace-purple);
   transform: scale(1.05);
 }
-
