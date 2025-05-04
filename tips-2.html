@@ -3,73 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Canvas UX Review Tool | TUX</title>
-  <link rel="stylesheet" href="tips-2.css?v=14" />
+  <title>Canvas UX Review Tool</title>
+  <link rel="stylesheet" href="ratings-style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-  <!-- Page banner -->
   <header class="banner">
-    <img src="AU logo primary_white.png" alt="Adelaide University logo" class="logo">
+    <!-- Adelaide University Logo -->
+    <img src="AU logo primary_white.png" class="logo" alt="Adelaide University logo">
     <h1>Canvas UX Review Tool</h1>
-    <p class="intro">Complete this form to generate a summary of the Canvas UX experience for your course page.</p>
+    <p class="intro">Use the sliders to rate how well this course page supports good UX principles in Canvas LMS.</p>
   </header>
 
   <main class="form-container">
-    <!-- Metadata collection -->
+    <!-- Form fields for context -->
     <label for="courseName">Course name</label>
-    <input type="text" id="courseName" placeholder="e.g. Cyber Security Foundations" />
+    <input type="text" id="courseName">
 
     <label for="pageUrl">Page URL</label>
-    <input type="url" id="pageUrl" placeholder="https://learn.adelaide.edu.au/courses/..." />
+    <input type="url" id="pageUrl">
 
-    <label for="courseBuilder">Course Builder (Academic)</label>
-    <input type="text" id="courseBuilder" placeholder="Dr Jane Smith" />
+    <label for="courseBuilder">Course builder name</label>
+    <input type="text" id="courseBuilder">
 
-    <label for="designerName">Your name (Learning Designer or Developer)</label>
-    <input type="text" id="designerName" placeholder="Rich Bartlett" />
+    <label for="designerName">Your name</label>
+    <input type="text" id="designerName">
 
-    <!-- Mode toggle section -->
-    <div class="mode-toggle">
-      <p><strong>How do you want to interpret the checklist?</strong></p>
-      <label><input type="radio" name="mode" value="implemented" checked /> Ticked = Implemented</label>
-      <label><input type="radio" name="mode" value="needsImprovement" /> Ticked = Needs Improvement</label>
-    </div>
+    <!-- Checklist with sliders -->
+    <section class="ratings">
+      <h2>Rate each UX practice from 1 (poor) to 10 (excellent)</h2>
+      <div class="rating-item">
+        <label>The page avoids hiding core links in collapsible menus.</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+      <div class="rating-item">
+        <label>The page positions navigation consistently (e.g., left-side modules).</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+      <div class="rating-item">
+        <label>The global navigation is uncluttered and purposeful.</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+      <div class="rating-item">
+        <label>The page uses clear headings and breadcrumbs to indicate location.</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+      <div class="rating-item">
+        <label>The current module or topic is visually highlighted.</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+      <div class="rating-item">
+        <label>Course-specific terms are clear, familiar, and concise.</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+      <div class="rating-item">
+        <label>Links and buttons meet WCAG contrast and visibility standards.</label>
+        <input type="range" min="1" max="10" value="5">
+      </div>
+    </section>
 
-    <!-- Checklist section -->
-    <div id="checklistWrapper" class="checklist">
-      <fieldset>
-        <legend>✅ Make navigation visible and predictable</legend>
-        <label><input type="checkbox" value="Avoid hiding core links in collapsible menus." /> Avoid hiding core links in collapsible menus.</label>
-        <label><input type="checkbox" value="Position core navigation consistently (e.g. left-side modules)." /> Position core navigation consistently (e.g. left-side modules).</label>
-        <label><input type="checkbox" value="Minimise clutter in global navigation." /> Minimise clutter in global navigation.</label>
-      </fieldset>
+    <label for="notes">Additional notes or recommendations</label>
+    <textarea id="notes" rows="5"></textarea>
 
-      <fieldset>
-        <legend>🧠 Communicate where users are</legend>
-        <label><input type="checkbox" value="Use clear H1/H2 headings and breadcrumbs." /> Use clear H1/H2 headings and breadcrumbs.</label>
-        <label><input type="checkbox" value="Highlight the current module/topic visually." /> Highlight the current module/topic visually.</label>
-        <label><input type="checkbox" value="Avoid jumping users to unexpected locations." /> Avoid jumping users to unexpected locations.</label>
-      </fieldset>
+    <!-- Generate report -->
+    <button class="primary" onclick="generateReport()">Generate Report</button>
 
-      <!-- Add your remaining categories back here -->
-    </div>
-
-    <!-- Notes -->
-    <div class="notes-section">
-      <label for="notes">Any additional notes or comments?</label>
-      <textarea id="notes" rows="4" placeholder="E.g. navigation menu was confusing, text was too dense..."></textarea>
-    </div>
-
-    <!-- Report buttons -->
-    <button onclick="generateReport()" class="primary">Generate Report</button>
-
-    <!-- Output section -->
+    <!-- Output area -->
     <div class="output-section">
-      <textarea id="output" rows="18" readonly placeholder="Your report will appear here..."></textarea>
+      <textarea id="output" rows="12" readonly></textarea>
       <div class="action-buttons">
         <button onclick="copyReport()">Copy Report</button>
-        <button onclick="downloadPDF()">Export as PDF</button>
+        <button onclick="downloadPDF()">Export PDF</button>
       </div>
     </div>
   </main>
@@ -78,6 +82,6 @@
     <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <script src="tips-2.js?v=14"></script>
+  <script src="ratings-script.js"></script>
 </body>
 </html>
