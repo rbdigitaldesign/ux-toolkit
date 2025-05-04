@@ -1,25 +1,27 @@
+/* Global styles */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #F8EFE0;
+  background: #F8EFE0; /* Limestone theme */
   color: #140F50;
 }
 
+/* Banner styling */
 .banner {
   background: #160c50;
-  color: #fff;
-  padding: 2em 1em;
+  color: white;
   text-align: center;
+  padding: 2em 1em;
 }
 
-.banner .logo {
+.logo {
   max-width: 180px;
   margin-bottom: 1em;
 }
 
 h1 {
-  margin: 0.2em 0;
   font-size: 2.2em;
+  margin: 0.2em 0;
 }
 
 p.intro {
@@ -27,6 +29,7 @@ p.intro {
   margin-top: 0.5em;
 }
 
+/* Main form layout */
 .form-container {
   max-width: 900px;
   margin: 2em auto;
@@ -34,9 +37,9 @@ p.intro {
 }
 
 label {
+  font-weight: bold;
   display: block;
   margin: 1em 0 0.5em;
-  font-weight: bold;
 }
 
 input[type="text"],
@@ -46,70 +49,56 @@ textarea {
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
-.notes-section textarea {
-  font-family: inherit;
-}
-
+/* Mode toggle section */
 .mode-toggle {
-  margin: 2em 0;
-  padding: 1em;
   background: #f4f0ff;
   border: 2px solid #836bff;
+  padding: 1em;
   border-radius: 8px;
-}
-
-.mode-toggle p {
-  margin-bottom: 0.5em;
+  margin: 2em 0;
 }
 
 .mode-toggle label {
-  display: inline-block;
   margin-right: 1em;
-  font-weight: normal;
 }
 
-.checklist h2 {
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
-}
-
+/* Checklist sections */
 .checklist fieldset {
+  background: white;
   border: 2px solid #836bff;
   border-radius: 8px;
   padding: 1em;
-  margin-bottom: 1em;
-  background: #ffffff;
+  margin-bottom: 1.5em;
 }
 
 .checklist legend {
   font-weight: bold;
-  padding: 0 0.5em;
 }
 
 .checklist label {
   display: block;
   margin: 0.5em 0;
-  font-weight: normal;
   cursor: pointer;
 }
 
 .checklist input[type="checkbox"] {
-  transform: scale(1.4);
+  transform: scale(1.5);
   margin-right: 0.6em;
 }
 
+/* Buttons */
 .primary {
   background: #1448FF;
   color: white;
-  font-weight: bold;
-  font-size: 1em;
   padding: 0.75em 1.5em;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   margin-top: 2em;
+  cursor: pointer;
 }
 
 .output-section {
@@ -118,11 +107,11 @@ textarea {
 
 .output-section textarea {
   width: 100%;
-  border: 1px solid #ccc;
   padding: 1em;
-  font-family: monospace;
-  background: #fff;
   border-radius: 5px;
+  font-family: monospace;
+  background: white;
+  border: 1px solid #ccc;
 }
 
 .action-buttons {
@@ -134,19 +123,18 @@ textarea {
 .action-buttons button {
   background: #836BFF;
   color: white;
-  font-weight: bold;
   padding: 0.6em 1.2em;
-  border: none;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
 }
 
+/* Footer styling */
 footer {
   text-align: center;
   background: #140F50;
   color: white;
   padding: 1em;
-  margin-top: 3em;
 }
 
 footer a {
