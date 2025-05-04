@@ -1,17 +1,17 @@
-/* Global styles */
+/* Basic layout */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #F8EFE0; /* Limestone theme */
+  background: #F8EFE0;
   color: #140F50;
 }
 
-/* Banner styling */
+/* Header and banner */
 .banner {
   background: #160c50;
-  color: white;
-  text-align: center;
+  color: #fff;
   padding: 2em 1em;
+  text-align: center;
 }
 
 .logo {
@@ -24,12 +24,11 @@ h1 {
   margin: 0.2em 0;
 }
 
-p.intro {
+.intro {
   font-size: 1.1em;
-  margin-top: 0.5em;
 }
 
-/* Main form layout */
+/* Form and layout */
 .form-container {
   max-width: 900px;
   margin: 2em auto;
@@ -37,11 +36,12 @@ p.intro {
 }
 
 label {
-  font-weight: bold;
   display: block;
-  margin: 1em 0 0.5em;
+  margin-top: 1em;
+  font-weight: bold;
 }
 
+/* Inputs and textarea styling */
 input[type="text"],
 input[type="url"],
 textarea {
@@ -49,39 +49,36 @@ textarea {
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
+  font-size: 1em;
 }
 
-/* Mode toggle section */
+/* Toggle section */
 .mode-toggle {
+  margin: 2em 0;
+  padding: 1em;
   background: #f4f0ff;
   border: 2px solid #836bff;
-  padding: 1em;
   border-radius: 8px;
-  margin: 2em 0;
 }
 
-.mode-toggle label {
-  margin-right: 1em;
-}
-
-/* Checklist sections */
+/* Checklist blocks */
 .checklist fieldset {
-  background: white;
   border: 2px solid #836bff;
   border-radius: 8px;
   padding: 1em;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
+  background: #fff;
 }
 
 .checklist legend {
   font-weight: bold;
+  padding: 0 0.5em;
 }
 
 .checklist label {
   display: block;
   margin: 0.5em 0;
-  cursor: pointer;
+  font-weight: normal;
 }
 
 .checklist input[type="checkbox"] {
@@ -89,18 +86,19 @@ textarea {
   margin-right: 0.6em;
 }
 
-/* Buttons */
+/* Primary CTA button */
 .primary {
   background: #1448FF;
   color: white;
-  padding: 0.75em 1.5em;
   font-weight: bold;
+  padding: 0.75em 1.5em;
   border: none;
   border-radius: 5px;
-  margin-top: 2em;
   cursor: pointer;
+  margin-top: 2em;
 }
 
+/* Output section */
 .output-section {
   margin-top: 2em;
 }
@@ -110,10 +108,10 @@ textarea {
   padding: 1em;
   border-radius: 5px;
   font-family: monospace;
-  background: white;
   border: 1px solid #ccc;
 }
 
+/* Buttons for PDF + Copy */
 .action-buttons {
   display: flex;
   gap: 1em;
@@ -123,18 +121,19 @@ textarea {
 .action-buttons button {
   background: #836BFF;
   color: white;
-  padding: 0.6em 1.2em;
-  border-radius: 5px;
   font-weight: bold;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-/* Footer styling */
+/* Footer */
 footer {
-  text-align: center;
   background: #140F50;
   color: white;
-  padding: 1em;
+  text-align: center;
+  padding: 1.5em;
 }
 
 footer a {
