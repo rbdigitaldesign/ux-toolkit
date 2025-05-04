@@ -3,47 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>UX Checklist Tool</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Canvas UX Checklist Tool</title>
+  <link rel="stylesheet" href="checklist-prototype.css" />
 </head>
 <body>
-  <header class="hero-banner no-banner-image">
-    <div class="container">
-      <h1>Canvas UX Design Checklist</h1>
-      <p>Complete this virtual form to assess a Canvas course page and export a summary.</p>
-    </div>
-  </header>
+  <main class="form-container">
+    <h1>Canvas UX checklist export tool</h1>
 
-  <main class="container">
-    <section class="form-section">
-      <label>Course name: <input type="text" id="courseName" /></label>
-      <label>Page URL: <input type="url" id="pageURL" /></label>
-      <label>Course builder: <input type="text" id="builderName" /></label>
-      <label>Additional notes: <textarea id="notes"></textarea></label>
-    </section>
+    <form id="uxChecklistForm">
+      <label>Course name: <input type="text" name="courseName" required /></label>
+      <label>Page URL: <input type="url" name="pageURL" required /></label>
+      <label>Course Builder: <input type="text" name="courseBuilder" /></label>
+      <label>Notes:<br><textarea name="notes" rows="4" placeholder="Add any improvement suggestions..."></textarea></label>
 
-    <section class="checklist-section">
-      <h2>Checklist</h2>
-      <div class="checklist-box">
-        <h3>Navigation</h3>
-        <label><input type="checkbox" /> Avoid collapsible menus for core links</label>
-        <label><input type="checkbox" /> Use consistent navigation placement</label>
-        <label><input type="checkbox" /> Minimise clutter</label>
+      <div class="checklist-section">
+        <h2>Checklist</h2>
+        <label><input type="checkbox" name="items" value="Navigation is visible and consistent" /> Navigation is visible and consistent</label>
+        <label><input type="checkbox" name="items" value="Headings are used properly (H1/H2)" /> Headings are used properly (H1/H2)</label>
+        <label><input type="checkbox" name="items" value="Contrast and colour use meets accessibility" /> Contrast and colour use meets accessibility</label>
+        <label><input type="checkbox" name="items" value="Clear button labels and call-to-actions" /> Clear button labels and call-to-actions</label>
       </div>
-      <div class="checklist-box">
-        <h3>Visual cues</h3>
-        <label><input type="checkbox" /> Clear headings & breadcrumbs</label>
-        <label><input type="checkbox" /> Current module/topic visually highlighted</label>
-      </div>
-    </section>
 
-    <button onclick="exportReport()">Export Summary</button>
+      <button type="button" id="exportBtn">Export Report</button>
+    </form>
+
+    <pre id="output"></pre>
   </main>
 
-  <footer>
-    <p>© 2025 TUX | <a href="terms.html">Terms of Use</a></p>
-  </footer>
-
-  <script src="script.js"></script>
+  <script src="checklist-export.js"></script>
 </body>
 </html>
