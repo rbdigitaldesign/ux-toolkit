@@ -5,7 +5,7 @@
 
 :root {
   --white: #FFFFFF;
-  --dark-blue: #140F50;
+  --dark-blue: #140F50
   --bright-blue: #1448FF;
   --north-terrace-purple: #836BFF;
   --south-east-limestone: #F8EFE0;
@@ -30,7 +30,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   padding: 2em 1em;
 }
 
-/* Hero Banner */
 .hero-wrapper {
   position: relative;
   z-index: 1;
@@ -85,7 +84,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   margin: 0 auto 1em;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-
 .tux-mobile-top:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
@@ -97,6 +95,147 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   }
   .tux-mobile-top {
     display: block;
+  }
+}
+
+/* Search */
+.search-container {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  z-index: 1001;
+}
+
+.hero-search {
+  width: 100%;
+  padding: 0.8em 4em 0.8em 1em;
+  font-size: 1em;
+  border: 2px solid var(--bright-blue);
+  border-radius: 8px;
+  background-color: var(--white);
+  color: var(--dark-blue);
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.search-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  padding: 0 1em;
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.search-button:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1002;
+}
+
+.search-suggestions.visible {
+  display: block;
+}
+
+.suggestion {
+  padding: 0.75em 1em;
+  cursor: pointer;
+  font-size: 1em;
+  border-bottom: 1px solid #eee;
+  color: var(--dark-blue);
+  background-color: var(--white);
+}
+
+.suggestion:hover {
+  background-color: var(--limestone-tint);
+  color: var(--bright-blue);
+}
+
+/* Tiles */
+.row-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2em;
+  margin-bottom: 3em;
+}
+
+.card {
+  background: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-radius: 10px;
+  padding: 1.5em;
+  text-align: left;
+  color: var(--dark-blue);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: var(--bright-blue);
+}
+
+/* Videos */
+.video-section {
+  margin-top: 4em;
+}
+
+.video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+}
+
+.video-wrapper {
+  flex: 0 1 48%;
+  max-width: 560px;
+  background: var(--white);
+  border: 2px solid var(--bright-blue);
+  border-radius: 8px;
+  padding: 1em;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.05);
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .video-wrapper {
+    flex: 1 1 100%;
   }
 }
 
@@ -112,7 +251,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   color: var(--bright-blue);
   font-family: 'Codegun', sans-serif;
 }
-
 .team-row {
   display: flex;
   flex-wrap: nowrap;
@@ -126,7 +264,6 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
     flex-wrap: wrap;
     justify-content: center;
   }
-}
 
 .profile-card {
   background-color: var(--white);
@@ -136,10 +273,11 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   text-align: center;
   width: 260px;
   box-shadow: 0 4px 12px rgba(20, 15, 80, 0.08);
+  transition: transform 0.3s ease;
+  color: var(--dark-blue);
   display: flex;
   flex-direction: column;
-  color: var(--dark-blue);
-  transition: transform 0.3s ease;
+  justify-content: flex-start;
 }
 
 .profile-pic {
@@ -154,14 +292,12 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 .profile-card h3 {
   margin: 0.3em 0 0.2em;
   color: var(--bright-blue);
-  min-height: 1.8em;
 }
 
 .profile-card .job-title {
   font-weight: bold;
   font-size: 1.05em;
   margin-bottom: 0.6em;
-  min-height: 2.4em; /* Keeps all job titles + headings same height */
 }
 
 .profile-card p {
@@ -171,12 +307,10 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   white-space: normal;
 }
 
-/* Buttons in Cards */
 .card-buttons {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.75em;
+  gap: 1em; /* controls horizontal space between buttons */
   margin-top: auto;
   padding-top: 1em;
   border-top: 1px solid #eee;
@@ -189,43 +323,92 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
   justify-content: center;
   border-radius: 5px;
   padding: 0;
+  text-decoration: none;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease;
   height: 40px;
-  width: 40px;
-  transition: transform 0.2s ease;
+  min-width: 64px; /* roughly matches email button width */
+}
+
+.linkedin-logo:hover {
+  transform: scale(1.1); /* keeps a subtle hover effect without colour change */
 }
 
 .linkedin-logo {
-  width: 24px;
-  height: 24px;
-}
-
-.linkedin-button:hover {
-  transform: scale(1.05);
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
 }
 
 .email-button {
-  background-color: #836BFF;
-  color: #ffffff;
+  background-color: #836BFF; /* Always purple */
+  color: #ffffff; /* Always white text */
   border: none;
   border-radius: 5px;
   padding: 0 1.2em;
   font-size: 0.9em;
   text-decoration: none;
   cursor: pointer;
-  height: 40px;
-  line-height: 40px;
   display: inline-block;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .email-button:hover {
-  background-color: #5e4bd1;
+  background-color: #5e4bd1; /* Slightly darker purple on hover */
+  color: #ffffff; /* Still white text */
   transform: scale(1.05);
 }
 
-/* Footer & Scroll */
+/* Contact Form */
+.contact-section {
+  margin-top: 4em;
+}
+
+.contact-section form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--white);
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(20, 15, 80, 0.06);
+  border: 2px solid var(--bright-blue);
+}
+
+.contact-section label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  color: var(--dark-blue);
+}
+
+.contact-section input,
+.contact-section textarea,
+.contact-section select {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.contact-section button[type="submit"] {
+  background-color: var(--bright-blue);
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-section button[type="submit"]:hover {
+  background-color: var(--north-terrace-purple);
+}
+
+/* Footer */
 footer {
   background-color: var(--dark-blue);
   color: white;
@@ -240,6 +423,7 @@ footer img {
   margin-top: 1em;
 }
 
+/* Scroll Button */
 #topBtn {
   display: none;
   position: fixed;
@@ -248,7 +432,7 @@ footer img {
   z-index: 999;
   font-size: 16px;
   font-weight: bold;
-  background-color: #000000e0;
+  background-color: #000000e0; /* higher contrast by default */
   color: white;
   border: none;
   border-radius: 30px;
@@ -262,3 +446,4 @@ footer img {
   background-color: var(--north-terrace-purple);
   transform: scale(1.05);
 }
+
