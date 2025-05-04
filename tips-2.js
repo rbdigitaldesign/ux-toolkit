@@ -1,86 +1,93 @@
+// Get reference to jsPDF library
+const { jsPDF } = window.jspdf;
+
+// Function to generate the report text
 function generateReport() {
+  // Get form values
   const course = document.getElementById('courseName').value.trim();
   const url = document.getElementById('pageUrl').value.trim();
   const builder = document.getElementById('courseBuilder').value.trim();
   const designer = document.getElementById('designerName').value.trim();
   const notes = document.getElementById('notes').value.trim();
-  const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-  const mode = document.querySelector('input[name="mode"]:checked').value;
 
-  const implemented = [];
-  const recommended = [];
-  const notAssessed = [];
+  // Get all slider ratings and associated questions
+  const items = document.querySelectorAll('.rating-item');
+  let ratings = [];
 
-  checkboxes.forEach(cb => {
-    if (cb.checked && mode === "implemented") implemented.push(cb.value);
-    else if (cb.checked && mode === "needsImprovement") recommended.push(cb.value);
-    else notAssessed.push(cb.value);
+  items.forEach(item => {
+    const question = item.querySelector('label').innerText;
+    const score = item.querySelector('input').value;
+    ratings.push({ question, score: parseInt(score) });
   });
 
-  const date = new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' });
+  // Categorise by score
+  const green = ratings.filter(r => r.score >= 8);
+  const yellow = ratings.filter(r => r.score >= 5 && r.score < 8);
+  const red = ratings.filter(r => r.score < 5);
 
-  const report = `
+  // Format the report
+  const output = `
 Canvas UX Review Summary
 
-Date of review: ${date}
-
-This report was created by ${designer || '[Designer Name]'} to support a UX review of the Canvas LMS experience for "${course || '[Course Name]'}", developed by ${builder || '[Course Builder]'}.
+This report was prepared by ${designer || '[Designer Name]'} as a review of UX practices for the course "${course || '[Course Name]'}", developed by ${builder || '[Course Builder]'}.
 
 Page reviewed: ${url || '[Page URL]'}
 
-✅ Implemented UX features:
-${implemented.length ? implemented.map(i => '- ' + i).join('\n') : '- None ticked as implemented.'}
+The ratings below reflect the quality of user experience based on key Canvas LMS principles. Ratings are on a scale of 1 (poor) to 10 (excellent).
 
-🔧 Recommended improvements:
-${recommended.length ? recommended.map(i => '- ' + i).join('\n') : '- No improvements suggested.'}
+✅ Well-implemented areas (score 8–10):
+${green.map(i => `- ${i.question} (Score: ${i.score})`).join('\n') || '- None'}
 
-❓ Not assessed (neutral or unchecked):
-${notAssessed.length ? notAssessed.map(i => '- ' + i).join('\n') : '- All items were assessed.'}
+⚠️ Areas that could be improved (score 5–7):
+${yellow.map(i => `- ${i.question} (Score: ${i.score})`).join('\n') || '- None'}
 
-📝 Additional comments:
-${notes || '[No additional comments provided]'}
+❗ Critical areas needing attention (score 1–4):
+${red.map(i => `- ${i.question} (Score: ${i.score})`).join('\n') || '- None'}
+
+📝 Additional notes:
+${notes || '[No additional notes provided]'}
   `.trim();
 
-  document.getElementById('output').value = report;
+  document.getElementById('output').value = output;
 }
 
+// Copy report text to clipboard
 function copyReport() {
   const text = document.getElementById('output');
   text.select();
   document.execCommand('copy');
 }
 
+// Export report to PDF
 function downloadPDF() {
-  const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   const logo = new Image();
   logo.src = 'AU logo primary_white.png';
 
   logo.onload = () => {
-    doc.setFillColor(22, 12, 80);
+    // Header with background colour and logo
+    doc.setFillColor(22, 12, 80); // #160c50
     doc.rect(0, 0, 210, 35, 'F');
     doc.addImage(logo, 'PNG', 10, 6, 40, 20);
-
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
     doc.text("Canvas UX Review Summary", 105, 25, { align: 'center' });
 
-    doc.setFontSize(11);
-    doc.setTextColor(0, 0, 0);
+    // Report body text
+    doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0, 0, 0);
+    const lines = doc.splitTextToSize(document.getElementById('output').value, 180);
 
-    const text = document.getElementById('output').value;
-    const lines = doc.splitTextToSize(text, 180);
     let y = 45;
-
     lines.forEach(line => {
       if (y > 280) {
         doc.addPage();
         y = 20;
       }
       doc.text(line, 15, y);
-      y += 7;
+      y += 6;
     });
 
     doc.save('UX-checklist-report.pdf');
