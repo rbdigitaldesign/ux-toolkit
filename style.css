@@ -318,7 +318,7 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 }
 
 .linkedin-button {
-  background-color: var(--bright-blue);
+  background-color: var(--transparent);
   display: flex;
   align-items: center;
   justify-content: center;
