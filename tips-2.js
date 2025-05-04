@@ -41,38 +41,42 @@ function copyReport() {
   document.execCommand('copy');
 }
 
-async function downloadPDF() {
+function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  const logoUrl = 'AU logo primary_white.png';
 
-  try {
-    const response = await fetch(logoUrl);
-    const blob = await response.blob();
-    const reader = new FileReader();
+  const logo = new Image();
+  logo.src = 'AU logo primary_white.png';
 
-    reader.onloadend = function () {
-      const base64data = reader.result;
+  logo.onload = () => {
+    // Header section
+    doc.setFillColor(22, 12, 80); // dark blue background
+    doc.rect(0, 0, 210, 35, 'F');
+    doc.addImage(logo, 'PNG', 10, 6, 40, 20);
 
-      doc.setFillColor(22, 12, 80); // #160c50
-      doc.rect(0, 0, 210, 30, 'F');
-      doc.addImage(base64data, 'PNG', 75, 5, 60, 20);
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(12);
-      doc.text("Canvas UX Review Summary", 105, 28, { align: 'center' });
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text("Canvas UX Review Summary", 105, 25, { align: 'center' });
 
-      doc.setTextColor(0, 0, 0);
-      const text = document.getElementById('output').value;
-      const lines = doc.splitTextToSize(text, 180);
-      doc.setFontSize(10);
-      doc.text(lines, 15, 40);
+    // Body setup
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont('helvetica', 'normal');
 
-      doc.save('UX-checklist-report.pdf');
-    };
+    const text = document.getElementById('output').value;
+    const lines = doc.splitTextToSize(text, 180);
+    let y = 45;
 
-    reader.readAsDataURL(blob);
-  } catch (error) {
-    alert('Failed to load logo image. Please check the file path or hosting.');
-    console.error(error);
-  }
+    lines.forEach(line => {
+      if (y > 280) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.text(line, 15, y);
+      y += 7;
+    });
+
+    doc.save('UX-checklist-report.pdf');
+  };
 }
