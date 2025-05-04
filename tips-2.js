@@ -1,70 +1,62 @@
-// Capture interpretation mode for the report
-function getInterpretationMode() {
-  return document.querySelector('input[name="mode"]:checked').value;
-}
-
-// Generate the UX report content based on selections
 function generateReport() {
-  const mode = getInterpretationMode();
+  const interpretation = document.querySelector('input[name="interpretation"]:checked').value;
   const course = document.getElementById('courseName').value.trim();
   const url = document.getElementById('pageUrl').value.trim();
   const builder = document.getElementById('courseBuilder').value.trim();
   const designer = document.getElementById('designerName').value.trim();
-  const notes = document.getElementById('notes')?.value.trim() || '';
+  const notes = document.getElementById('notes').value.trim();
   const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
 
-  const implemented = [];
-  const recommended = [];
+  const checked = [];
+  const unchecked = [];
 
-  // Interpret checkboxes according to mode
-  checkboxes.forEach(cb => {
-    if (mode === 'needsImprovement') {
-      if (cb.checked) {
-        recommended.push(cb.value);
-      }
-    } else {
-      if (cb.checked) {
-        implemented.push(cb.value);
-      } else {
-        recommended.push(cb.value);
-      }
-    }
-  });
+  checkboxes.forEach(cb => (cb.checked ? checked : unchecked).push(cb.value));
 
-  // Format output with explanatory text
-  const report = `
+  let implemented = [];
+  let needsImprovement = [];
+  let notAssessed = [];
+
+  if (interpretation === 'implemented') {
+    implemented = checked;
+    notAssessed = unchecked;
+  } else {
+    needsImprovement = checked;
+    notAssessed = unchecked;
+  }
+
+  const output = `
 Canvas UX Review Summary
 
-This report was created by ${designer || '[Designer Name]'} to support a discussion around UX design in the Canvas LMS for the course "${course || '[Course Name]'}", developed by ${builder || '[Course Builder]'}.
+This report was created by ${designer || '[Designer Name]'} to support the review of user experience (UX) considerations in the Canvas LMS for the course "${course || '[Course Name]'}", developed by ${builder || '[Course Builder]'}.
 
 Page reviewed: ${url || '[Page URL]'}
 
-It highlights what has been implemented well, and what may be improved to better support student experience.
-
 ✅ Implemented UX features:
-${implemented.length ? implemented.map(i => '- ' + i).join('\n') : '- Not marked.'}
+${implemented.map(i => '- ' + i).join('\n') || '- None indicated.'}
 
 🔧 Recommended improvements:
-${recommended.length ? recommended.map(i => '- ' + i).join('\n') : '- None noted.'}
+${needsImprovement.map(i => '- ' + i).join('\n') || '- None identified in this review.'}
 
-📝 Additional notes:
-${notes || '[No additional notes]'}
-  `;
+❓ Not assessed:
+${notAssessed.map(i => '- ' + i).join('\n') || '- All items were reviewed.'}
 
-  document.getElementById('output').value = report.trim();
+📝 Additional suggestions from the designer:
+${notes || '[No additional notes provided]'}
+`;
+
+  document.getElementById('output').value = output.trim();
 }
 
-// Copy report to clipboard
 function copyReport() {
   const output = document.getElementById('output');
   output.select();
   document.execCommand('copy');
 }
 
-// Export to PDF with logo and header
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
+
   const logo = new Image();
   logo.src = 'AU logo primary_white.png';
 
@@ -73,11 +65,14 @@ function downloadPDF() {
     doc.rect(0, 0, 210, 30, 'F');
     doc.addImage(logo, 'PNG', 10, 5, 40, 20);
     doc.setTextColor(255, 255, 255);
-    doc.setFontSize(14);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
     doc.text("Canvas UX Review Summary", 105, 25, { align: 'center' });
 
     doc.setTextColor(0, 0, 0);
-    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+
     const text = document.getElementById('output').value;
     const lines = doc.splitTextToSize(text, 180);
     let y = 40;
