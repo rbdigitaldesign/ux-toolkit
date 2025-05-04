@@ -4,35 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Canvas UX Checklist Export Tool</title>
-  <link rel="stylesheet" href="tips-2.css?v=1" />
-  <script defer src="tips-2.js?v=1"></script>
+  <link rel="stylesheet" href="tips-2.css" />
 </head>
 <body>
-  <header>
+  <div class="form-wrapper">
     <h1>Canvas UX Checklist Export Tool</h1>
-  </header>
+    <p class="intro-text">This tool helps Learning Designers assess and improve Canvas course pages using user experience (UX) principles. Fill out the details below and check off what’s already implemented. You can export a summary to use in conversations with Course Builders.</p>
 
-  <section class="form-section">
-    <label>Course Name: <input type="text" id="courseName" /></label>
-    <label>Page URL: <input type="text" id="pageURL" /></label>
-    <label>Course Builder: <input type="text" id="courseBuilder" /></label>
-    <label>Designer Name: <input type="text" id="designerName" /></label>
-    <label>Suggestions/Notes: <textarea id="notes" rows="2"></textarea></label>
-  </section>
+    <div class="input-grid">
+      <label>Course Name: <input type="text" id="courseName"></label>
+      <label>Page URL: <input type="text" id="pageUrl"></label>
+      <label>Course Builder: <input type="text" id="courseBuilder"></label>
+      <label>Designer Name: <input type="text" id="designerName"></label>
+      <label>Suggestions/Notes: <textarea id="notes"></textarea></label>
+    </div>
 
-  <section class="checklist-section">
     <h2>Checklist</h2>
-    <div class="checklist-grid" id="checklistContainer"></div>
-  </section>
+    <div class="checklist">
+      <!-- Repeat for each category -->
+      <div class="checklist-group">
+        <h3>✅ Make navigation visible and predictable</h3>
+        <label><input type="checkbox" value="Avoid hiding core links in collapsible menus."> Avoid hiding core links in collapsible menus.</label>
+        <label><input type="checkbox" value="Position core navigation consistently."> Position core navigation consistently.</label>
+        <label><input type="checkbox" value="Minimise clutter in global navigation."> Minimise clutter in global navigation.</label>
+      </div>
 
-  <div class="actions">
+      <div class="checklist-group">
+        <h3>🧠 Communicate where users are</h3>
+        <label><input type="checkbox" value="Use clear H1/H2 headings and breadcrumbs."> Use clear H1/H2 headings and breadcrumbs.</label>
+        <label><input type="checkbox" value="Highlight current module/topic visually."> Highlight current module/topic visually.</label>
+        <label><input type="checkbox" value="Avoid jumping users to unexpected locations."> Avoid jumping users to unexpected locations.</label>
+      </div>
+
+      <!-- Add more checklist groups as needed -->
+    </div>
+
     <button onclick="generateReport()">Generate Report</button>
+
+    <h2>Generated Report</h2>
+    <textarea id="output" rows="16" readonly></textarea>
+    <div class="report-actions">
+      <button onclick="copyReport()">Copy Report</button>
+      <button onclick="exportPDF()">Export as PDF</button>
+    </div>
   </div>
 
-  <section class="report-output">
-    <h2>Generated Report</h2>
-    <textarea id="reportText" rows="20"></textarea>
-    <button onclick="copyReport()">Copy Report</button>
-  </section>
+  <script src="tips-2.js"></script>
 </body>
 </html>
