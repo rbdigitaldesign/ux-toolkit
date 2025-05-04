@@ -1,56 +1,65 @@
 function generateReport() {
-  const course = document.getElementById("courseName").value.trim();
-  const url = document.getElementById("pageUrl").value.trim();
-  const builder = document.getElementById("courseBuilder").value.trim();
-  const designer = document.getElementById("designerName").value.trim();
-  const notes = document.getElementById("notes").value.trim();
+  const course = document.getElementById('courseName').value.trim();
+  const url = document.getElementById('pageUrl').value.trim();
+  const builder = document.getElementById('courseBuilder').value.trim();
+  const designer = document.getElementById('designerName').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+  const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
 
-  const checks = document.querySelectorAll('.checklist input[type="checkbox"]');
   const implemented = [];
-  const missing = [];
+  const recommended = [];
 
-  checks.forEach(c => {
-    (c.checked ? implemented : missing).push(c.value);
+  checkboxes.forEach(checkbox => {
+    (checkbox.checked ? implemented : recommended).push(checkbox.value);
   });
 
-  const reportText = `
-Canvas UX Design Checklist Summary
+  const output = `
+Canvas UX Review Summary
 
-Course Name: ${course}
-Page URL: ${url}
-Course Builder: ${builder}
-Designer: ${designer}
+This report was created by ${designer || '[Designer Name]'} to support the review of user experience (UX) considerations in the Canvas LMS for the course "${course || '[Course Name]'}", developed by ${builder || '[Course Builder]'}.
 
-Purpose:
-This report summarises the user experience (UX) design elements reviewed for the above Canvas course page. It highlights what is currently in place and what is recommended for improvement, to help guide future iterations and discussions.
+Page reviewed: ${url || '[Page URL]'}
 
-✔️ Implemented Items:
-${implemented.length ? implemented.map(i => `- ${i}`).join('\n') : 'None yet.'}
+The checklist highlights areas that are currently implemented and areas that could be improved to support better student navigation, accessibility, and user experience.
 
-⚠️ Recommended Improvements:
-${missing.length ? missing.map(i => `- ${i}`).join('\n') : 'All checked!'}
+✅ Implemented UX features:
+${implemented.map(i => '- ' + i).join('\n') || '- None yet checked.'}
 
-Additional Notes:
-${notes || 'N/A'}
+🔧 Recommended improvements:
+${recommended.map(i => '- ' + i).join('\n') || '- None. All items are checked.'}
 
-This checklist can be used as a starting point in discussions with the Course Builder or program team to uplift clarity, consistency, and accessibility within Canvas.
-`;
+📝 Additional suggestions from the designer:
+${notes || '[No additional notes provided]'}
+  `;
 
-  document.getElementById("output").value = reportText;
+  document.getElementById('output').value = output.trim();
 }
 
 function copyReport() {
-  const output = document.getElementById("output");
-  output.select();
-  document.execCommand("copy");
-  alert("Report copied to clipboard!");
+  const text = document.getElementById('output');
+  text.select();
+  document.execCommand('copy');
 }
 
-function exportPDF() {
-  const text = document.getElementById("output").value;
-  const blob = new Blob([text], { type: "application/pdf" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "UX-checklist-report.pdf";
-  link.click();
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const logo = new Image();
+  logo.src = 'AU logo primary_white.png';
+  logo.onload = () => {
+    doc.setFillColor(22, 12, 80); // #160c50
+    doc.rect(0, 0, 210, 30, 'F');
+    doc.addImage(logo, 'PNG', 75, 5, 60, 20);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(12);
+    doc.text("Canvas UX Review Summary", 105, 28, { align: 'center' });
+
+    doc.setTextColor(0, 0, 0);
+    const text = document.getElementById('output').value;
+    const lines = doc.splitTextToSize(text, 180);
+    doc.setFontSize(10);
+    doc.text(lines, 15, 40);
+
+    doc.save('UX-checklist-report.pdf');
+  };
 }
