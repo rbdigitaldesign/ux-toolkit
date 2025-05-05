@@ -851,3 +851,24 @@ textarea:focus-visible {
 .hero-search:focus {
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
+/* increase hero title and subtext for large banners */
+#heroBanner .banner-content h1 {
+  font-size: 4rem;      /* bump this value up or down as needed */
+  line-height: 1.1;
+}
+
+#heroBanner .banner-content p {
+  font-size: 1.5rem;    /* adjust for readability in the big space */
+  max-width: 800px;     /* keeps the line length comfortable */
+  margin: 1rem auto;    /* centres the text block */
+}
+
+/* responsive scaling */
+@media (max-width: 768px) {
+  #heroBanner .banner-content h1 {
+    font-size: 2.5rem;
+  }
+  #heroBanner .banner-content p {
+    font-size: 1.125rem;
+  }
+}
