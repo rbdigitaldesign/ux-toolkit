@@ -79,13 +79,18 @@ searchForm.addEventListener('submit', function (e) {
 
 // Email buttons in profile cards
 document.querySelectorAll('.email-button').forEach(btn => {
-  const name = btn.dataset.user.replace('.', ' ');
+  // turn "tim.churchward" into "tim churchward"
+  const name = btn.dataset.user.replace(/\./g, ' ');
   btn.setAttribute('aria-label', `Email ${name}`);
+
+  // support keyboard activation
+  btn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') btn.click();
+  });
+
   btn.addEventListener('click', () => {
-    const user = btn.dataset.user;
-    const domain = btn.dataset.domain;
-    // open the mailto: in a new tab/window
-    window.open(`mailto:${user}@${domain}`, '_blank');
+    const mailto = `mailto:${btn.dataset.user}@${btn.dataset.domain}`;
+    // try to open in new tab, fallback to same window
+    window.open(mailto, '_blank') || (window.location.href = mailto);
   });
 });
-
