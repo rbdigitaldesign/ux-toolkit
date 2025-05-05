@@ -21,22 +21,8 @@
     <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/courses/1234/pages/topic-3" />
 
     <h3>Evaluate each area using the checklist and provide a score</h3>
-
     <section class="sliders">
-      <fieldset>
-        <legend>Clear</legend>
-        <p><em>Use this checklist to assess clarity of structure and presentation.</em></p>
-        <label><input type="checkbox" /> Navigation is visible and predictable</label>
-        <label><input type="checkbox" /> Headings and breadcrumbs indicate user location</label>
-        <label><input type="checkbox" /> Language avoids internal jargon and is concise</label>
-        <label><input type="checkbox" /> Buttons and links use consistent, visible styles</label>
-
-        <label style="margin-top:1em;">Overall score for 'Clear'</label>
-        <input type="range" min="0" max="3" value="0" class="slider" data-label="Clear" />
-        <div class="range-labels">
-          <span>0 = Fails</span><span>1 = Meets</span><span>2 = Progress</span><span>3 = Exemplary</span>
-        </div>
-      </fieldset>
+      <div id="descriptorContainer"></div>
     </section>
 
     <label for="comments">Additional comments or recommendations</label>
@@ -45,7 +31,7 @@
     <button class="primary" onclick="generateReport()">Generate Report</button>
 
     <div class="output-section">
-      <canvas id="chart" width="400" height="150" style="margin: 2em 0;"></canvas>
+      <canvas id="chart" width="400" height="150"></canvas>
       <textarea id="output" rows="20" readonly></textarea>
       <div class="action-buttons">
         <button onclick="copyReport()">Copy Report</button>
