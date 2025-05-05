@@ -19,8 +19,11 @@ body {
   padding: 0 1em;
 }
 
-/* Hide the executive summary until report is generated */
-#reportSummary {
+/* hide summary, dashboard, chart and output until report is generated */
+#reportSummary,
+#dashboard,
+#chart,
+#output {
   display: none;
 }
 
