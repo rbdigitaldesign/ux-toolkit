@@ -474,5 +474,34 @@ footer img {
 .return-home:hover {
   background-color: var(--north-terrace-purple);
 }
+/* ─── banner: allow overflow & remove ghost overlay ─── */
+.hero-banner {
+  overflow: visible;    /* let the koala hang out */
+}
+.hero-banner::after {
+  display: none;        /* remove the background pseudo-image */
+}
+
+/* ─── enlarge the mascot ─── */
+.tux-mobile-top {
+  /* grows between 150px and 400px based on viewport */
+  width: clamp(150px, 30vw, 400px);
+  height: auto;
+}
+
+/* ─── ensure search sits on top ─── */
+.search-container {
+  z-index: 10002;       /* above everything else in the banner */
+}
+
+/* ─── dropdown: flush-align under the 2px border ─── */
+.search-suggestions {
+  left: -2px;                           /* pull out by the 2px border */
+  width: calc(100% + 4px);              /* cover input + button + 2×border */
+  box-sizing: border-box;
+
+  /* match your 8px bottom corners */
+  border-radius: 0 0 8px 8px;
+}
 
 
