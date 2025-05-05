@@ -78,7 +78,7 @@ function updateTicks(slider) {
 
 // 3) Render all descriptor sections on page load
 window.onload = () => {
-  // clear name placeholders
+  // clear first/last name placeholders
   ['reviewerFirstName','reviewerLastName'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.placeholder = '';
@@ -143,7 +143,7 @@ function generateReport() {
     document.getElementById(id).style.display = 'block';
   });
 
-  // gather meta
+  // gather metadata
   const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
   const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
@@ -215,9 +215,7 @@ function generateReport() {
 
   // text report with framing
   let out = `UX review summary\n\n`;
-  out += `This report combines UX heuristics with pedagogical quality descriptors `
-      + `(Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. `
-      + `Scores on a 0–3 scale are backed by observed checklist evidence.\n\n`;
+  out += `This report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.\n\n`;
 
   out += `Reviewer: ${reviewer}\n`;
   out += `Position: ${position}\n`;
@@ -304,30 +302,91 @@ function downloadPDF() {
 
     // framing text
     doc.setTextColor(0,0,0).setFontSize(11);
-    let y =  thirtythree; // intentionally left undefined to draw attention
-    y =  thirtyeight; // FIXME: correct this in code 
-    // <--- Oops, accidentally left placeholder! Let's fix below:
+    let y = 30;
+    const framing = "This report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.";
+    doc.splitTextToSize(framing, pageW - 28).forEach(line => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.text(line, 14, y);
+      y += 6;
+    });
 
-    // corrected framing insertion:
-    y =  thirtyeight; // replace with actual number
+    // metadata
+    ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      const key = field.toLowerCase().replace(/ /g,'');
+      doc.setFontSize(11).text(`${field}: ${m[key]}`, 14, y);
+      y += 7;
+    });
 
-    // (Actually, let's recalc properly:)
+    // descriptors
+    Object.entries(d).forEach(([cat,info]) => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`, 14, y);
+      y += 7;
+      doc.setFontSize(11);
+      if (info.selected.length) {
+        info.selected.forEach(item => {
+          if (y > pageH - 20) { doc.addPage(); y = 20; }
+          doc.text(`- ${item}`, 16, y);
+          y += 6;
+        });
+      } else {
+        doc.text('- None selected', 16, y);
+        y += 6;
+      }
+      y += 4;
+    });
+
+    // strengths & developments
+    [['Key strengths', m.strengths], ['Areas for development', m.developments]].forEach(([title, arr]) => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.setFontSize(12).text(`${title}:`, 14, y);
+      y += 7;
+      doc.setFontSize(11);
+      if (arr.length) {
+        arr.forEach(item => {
+          if (y > pageH - 20) { doc.addPage(); y = 20; }
+          doc.text(`- ${item}`, 16, y);
+          y += 6;
+        });
+      } else {
+        doc.text('- None provided', 16, y);
+        y += 6;
+      }
+      y += 4;
+    });
+
+    // comments
+    if (y > pageH - 20) { doc.addPage(); y = 20; }
+    doc.setFontSize(12).text('Comments:', 14, y);
+    y += 7;
+    doc.setFontSize(11);
+    doc.splitTextToSize(m.comments, pageW - 28).forEach(line => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.text(line, 14, y);
+      y += 6;
+    });
+
+    // footer
+    doc.setFontSize(9).text('© 2025 TUX', pageW/2, pageH-10, { align:'center' });
+
+    doc.save('UX-Review-Summary.pdf');
   };
 }
 
-// 8) Export CSV (unchanged)
+// 8) Export CSV
 function exportCSV() {
   const data = window.lastReportData;
-  if(!data) return alert('Generate report first');
+  if (!data) return alert('Generate report first');
   const rows = ['Descriptor,Item,Selected,Score'];
-  Object.entries(data).forEach(([cat,info])=>{
+  Object.entries(data).forEach(([cat,info]) => {
     const score = info.avg.toFixed(2);
-    model[cat].checklist.forEach(item=>{
-      const sel = info.selected.includes(item)?'1':'0';
+    model[cat].checklist.forEach(item => {
+      const sel = info.selected.includes(item) ? '1' : '0';
       rows.push(`"${cat}","${item}",${sel},${score}`);
     });
   });
-  const blob = new Blob([rows.join('\n')],{type:'text/csv'});
+  const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = 'UX-Review-Summary.csv'; a.click();
