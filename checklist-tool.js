@@ -54,9 +54,14 @@ const model = {
   }
 };
 
-// render the form sections
+// ——————————————————————————————
+// 1) Render all criteria on page load
+// ——————————————————————————————
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
+  // clear out any leftover content
+  container.innerHTML = "";
+  // for each descriptor, build a fieldset with checklist + slider
   Object.entries(model).forEach(([category, info]) => {
     const fs = document.createElement("fieldset");
     fs.innerHTML = `
@@ -81,12 +86,17 @@ window.onload = () => {
   });
 };
 
+// ——————————————————————————————
+// 2) Generate report, unhide summary, dashboard, chart & output
+// ——————————————————————————————
 function generateReport() {
-  // unhide executive summary
-  const summary = document.getElementById('reportSummary');
-  summary.style.display = 'block';
+  // unhide summary & other output areas
+  document.getElementById('reportSummary').style.display = 'block';
+  document.getElementById('dashboard').style.display     = 'block';
+  document.getElementById('chart').style.display         = 'block';
+  document.getElementById('output').style.display        = 'block';
 
-  // gather meta
+  // gather reviewer info
   const first    = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last     = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
   const position = document.getElementById('positionDescription').value.trim() || '[Position]';
@@ -96,9 +106,9 @@ function generateReport() {
   const url      = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
   const comments = document.getElementById('comments').value.trim()            || '[No comments]';
 
-  // strengths & development
-  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l=>l);
-  const developments = document.getElementById('developments').value.trim().split('\n').filter(l=>l);
+  // strengths & developments
+  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l => l);
+  const developments = document.getElementById('developments').value.trim().split('\n').filter(l => l);
 
   // collect scores & selections
   const reportData = {};
@@ -115,109 +125,124 @@ function generateReport() {
     }
   });
 
-  // compute avgs
+  // compute averages
   Object.entries(reportData).forEach(([cat, info]) => {
-    info.avg = info.scores.reduce((a,b)=>a+b,0) / info.scores.length;
+    info.avg = info.scores.reduce((a, b) => a + b, 0) / info.scores.length;
   });
 
-  // executive summary
-  const avgs = Object.values(reportData).map(i=>i.avg);
-  const overallAvg = (avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2);
-  const urgent = Object.entries(reportData)
-    .sort((a,b)=>a[1].avg - b[1].avg)
-    .slice(0,2)
-    .map(([k,i])=>`${k} (${i.avg.toFixed(2)})`);
+  // build executive summary
+  const avgs       = Object.values(reportData).map(i => i.avg);
+  const overallAvg = (avgs.reduce((a, b) => a + b, 0) / avgs.length).toFixed(2);
+  const urgent     = Object.entries(reportData)
+    .sort((a, b) => a[1].avg - b[1].avg)
+    .slice(0, 2)
+    .map(([k, i]) => `${k} (${i.avg.toFixed(2)})`);
   document.getElementById('reportSummary').innerHTML = `
     <h4>Executive summary</h4>
     <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
   `;
 
-  // dashboard
-  const dashboard = document.getElementById('dashboard');
+  // build dashboard table
   let html = `<table class="dashboard-table"><thead>
-    <tr><th>Descriptor</th><th>Score</th><th>Status</th><th>Alert</th></tr>
-  </thead><tbody>`;
-  Object.entries(reportData).forEach(([cat,info]) => {
-    const avg = info.avg;
+      <tr><th>Descriptor</th><th>Score</th><th>Status</th><th>Alert</th></tr>
+    </thead><tbody>`;
+  Object.entries(reportData).forEach(([cat, info]) => {
+    const avg    = info.avg;
     const status = avg >= 2.5 ? '🟢' : avg >= 1.5 ? '🟡' : '🔴';
-    const alert = avg <= 1 ? '⚠️ below baseline' : '';
-    const cls = avg <= 1 ? 'low-score' : '';
-    html += `<tr class="${cls}"><td>${cat}</td><td>${avg.toFixed(2)}/3</td>
-      <td>${status}</td><td>${alert}</td></tr>`;
+    const alert  = avg <= 1 ? '⚠️ below baseline' : '';
+    const cls    = avg <= 1 ? 'low-score' : '';
+    html += `<tr class="${cls}">
+      <td>${cat}</td>
+      <td>${avg.toFixed(2)}/3</td>
+      <td>${status}</td>
+      <td>${alert}</td>
+    </tr>`;
   });
   html += `</tbody></table>`;
-  dashboard.innerHTML = html;
+  document.getElementById('dashboard').innerHTML = html;
 
-  // text report
+  // build full text report
   let out = `Canvas UX Review Summary\n\n`;
   out += `Reviewer: ${reviewer}\nPosition: ${position}\nCourse Builder: ${builder}\n`;
-  out += `Course: ${course}\nPage URL: ${url}\n\nThis report shows observed checklist items, scores, strengths, and areas for development.\n`;
-  Object.entries(reportData).forEach(([cat,info]) => {
-    const total = model[cat].checklist.length;
-    const count = info.selected.length;
-    const others = model[cat].checklist.filter(i=>!info.selected.includes(i));
+  out += `Course: ${course}\nPage URL: ${url}\n\nThis report shows observed checklist items, scores, strengths & development areas.\n`;
+  Object.entries(reportData).forEach(([cat, info]) => {
+    const total  = model[cat].checklist.length;
+    const count  = info.selected.length;
+    const others = model[cat].checklist.filter(i => !info.selected.includes(i));
     out += `\n📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
     out += `✔ Observed ${count} of ${total} items:\n`;
-    info.selected.forEach(i=> out += `- ${i}\n`);
-    if(count===0) out += `- None selected\n`;
+    info.selected.forEach(i => out += `- ${i}\n`);
+    if (count === 0) out += `- None selected\n`;
     out += `\nℹ️ Other checklist items:\n`;
-    others.forEach(i=> out += `- ${i}\n`);
+    others.forEach(i => out += `- ${i}\n`);
   });
   out += `\n💡 Key strengths:\n`;
-  strengths.forEach(s=> out += `- ${s}\n`) || out += `- None provided\n`;
+  strengths.forEach(s => out += `- ${s}\n`);
+  if (!strengths.length) out += `- None provided\n`;
   out += `\n🔧 Areas for development:\n`;
-  developments.forEach(d=> out += `- ${d}\n`) || out += `- None provided\n`;
+  developments.forEach(d => out += `- ${d}\n`);
+  if (!developments.length) out += `- None provided\n`;
   out += `\n📝 Comments:\n${comments}\n`;
   document.getElementById('output').value = out;
 
-  renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
+  // render chart & save data for CSV
+  renderChart(Object.keys(reportData), Object.values(reportData).map(i => i.avg));
   window.lastReportData = reportData;
 }
 
+// render bar chart
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if(window.uxChart) window.uxChart.destroy();
+  if (window.uxChart) window.uxChart.destroy();
   window.uxChart = new Chart(ctx, {
     type: 'bar',
-    data: { labels, datasets:[{ label:'Avg score', data:scores, backgroundColor:'#1448FF', borderRadius:5 }] },
-    options: { responsive:true, scales:{ y:{ suggestedMin:0, suggestedMax:3, ticks:{ stepSize:1 } } } }
+    data: {
+      labels,
+      datasets: [{ label:'Avg score', data:scores, backgroundColor:'#1448FF', borderRadius:5 }]
+    },
+    options: {
+      responsive: true,
+      scales: { y:{ suggestedMin:0, suggestedMax:3, ticks:{ stepSize:1 } } }
+    }
   });
 }
 
+// copy report
 function copyReport() {
   const t = document.getElementById('output');
   t.select();
   document.execCommand('copy');
 }
 
+// download PDF
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   const lines = document.getElementById('output').value.split('\n');
-  let y=15;
+  let y = 15;
   doc.setFontSize(16).text('Canvas UX Review Summary',105,y,{align:'center'});
-  y+=10; doc.setFontSize(11);
-  lines.forEach(line=>{
-    if(y>280){doc.addPage();y=10;}
-    doc.text(line,10,y); y+=7;
+  y += 10; doc.setFontSize(11);
+  lines.forEach(line => {
+    if (y > 280) { doc.addPage(); y = 10; }
+    doc.text(line,10,y); y += 7;
   });
   doc.save('Canvas-UX-Review.pdf');
 }
 
+// export CSV
 function exportCSV() {
   const data = window.lastReportData;
-  if(!data) return alert('Generate report first');
+  if (!data) return alert('Generate report first');
   const rows = ['Descriptor,Item,Selected,Score'];
-  Object.entries(data).forEach(([cat,info])=>{
+  Object.entries(data).forEach(([cat,info])=> {
     const score = info.avg.toFixed(2);
-    model[cat].checklist.forEach(item=>{
+    model[cat].checklist.forEach(item => {
       const sel = info.selected.includes(item) ? '1' : '0';
       rows.push(`"${cat}","${item}",${sel},${score}`);
     });
   });
-  const blob = new Blob([rows.join('\n')], {type:'text/csv'});
+  const blob = new Blob([rows.join('\n')],{type:'text/csv'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'Canvas-UX-Review.csv';
-  a.click();
+  a.href = url; a.download = 'Canvas-UX-Review.csv'; a.click();
 }
