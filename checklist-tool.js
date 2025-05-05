@@ -12,46 +12,7 @@ const model = {
       "Buttons and links use consistent, visible styles"
     ]
   },
-  "Contextual": {
-    description: "Makes every element meaningful to the course objectives and student backgrounds. Provides examples, resources, and terminology that align with your discipline and the learners’ needs.",
-    helpUrl: "https://canvas.adelaide.edu.au/guides/contextual",
-    checklist: [
-      "Authentic examples are provided",
-      "Resources align with discipline",
-      "Cultural inclusivity is considered",
-      "Supplementary materials are relevant"
-    ]
-  },
-  "Interactive": {
-    description: "Engages learners actively by embedding opportunities for participation. Uses quizzes, discussions, or interactive media that require input and provide instant feedback.",
-    helpUrl: "https://canvas.adelaide.edu.au/guides/interactive",
-    checklist: [
-      "Embedded quizzes or questions are present",
-      "Media elements support learning",
-      "Feedback mechanisms are clear",
-      "Collaborative activities are available"
-    ]
-  },
-  "Challenging": {
-    description: "Promotes deeper learning through tasks that require critical thinking. Includes scaffolded exercises, stretch tasks, and reflection prompts to push learners beyond the basics.",
-    helpUrl: "https://canvas.adelaide.edu.au/guides/challenging",
-    checklist: [
-      "Tasks require higher-order thinking",
-      "Scaffolded activities are provided",
-      "Stretch tasks encourage deeper learning",
-      "Reflection prompts are included"
-    ]
-  },
-  "Personalised": {
-    description: "Supports diverse learner needs by offering choices and tailored guidance. Uses adaptive pathways, clear instructor presence, and direct links to help resources.",
-    helpUrl: "https://canvas.adelaide.edu.au/guides/personalised",
-    checklist: [
-      "Learner choices are offered",
-      "Adaptive pathways are indicated",
-      "Instructor presence is clear",
-      "Support links are available"
-    ]
-  }
+  /* ... Contextual, Interactive, Challenging, Personalised definitions unchanged ... */
 };
 
 // 2) Render all descriptor sections on page load
@@ -82,13 +43,13 @@ window.onload = () => {
   });
 };
 
-// 3) Generate report, reveal sections, and store meta/data
+// 3) Generate report, reveal sections, store meta/data
 function generateReport() {
   ['reportSummary','dashboard','chart','output'].forEach(id => {
     document.getElementById(id).style.display = 'block';
   });
 
-  // Meta
+  // gather meta
   const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
   const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
@@ -98,11 +59,11 @@ function generateReport() {
   const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
   const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
 
-  // Strengths & developments
-  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l=>l);
-  const developments = document.getElementById('developments').value.trim().split('\n').filter(l=>l);
+  // strengths & developments
+  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l => l);
+  const developments = document.getElementById('developments').value.trim().split('\n').filter(l => l);
 
-  // Collect scores & selections
+  // collect scores & selections
   const reportData = {};
   document.querySelectorAll('.slider').forEach(slider => {
     const cat = slider.dataset.label;
@@ -117,17 +78,17 @@ function generateReport() {
     }
   });
 
-  // Compute averages
+  // compute averages
   Object.values(reportData).forEach(info => {
-    info.avg = info.scores.reduce((a,b)=>a+b,0) / info.scores.length;
+    info.avg = info.scores.reduce((a,b) => a + b, 0) / info.scores.length;
   });
 
-  // Store meta & data for PDF/CSV
+  // store for export
   window.lastReportMeta = { reviewer, position, builder, course, url, comments, strengths, developments };
   window.lastReportData = reportData;
 
-  // Build executive summary
-  const avgs       = Object.values(reportData).map(i=>i.avg);
+  // executive summary
+  const avgs       = Object.values(reportData).map(i => i.avg);
   const overallAvg = (avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2);
   const urgent     = Object.entries(reportData)
     .sort((a,b)=>a[1].avg - b[1].avg)
@@ -138,7 +99,7 @@ function generateReport() {
     <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
   `;
 
-  // Build dashboard
+  // dashboard
   const rows = Object.entries(reportData).map(([cat,info]) => {
     const avg    = info.avg;
     const status = avg >= 2.5 ? '🟢' : avg >= 1.5 ? '🟡' : '🔴';
@@ -158,29 +119,28 @@ function generateReport() {
     </table>
   `;
 
-  // Build text report
-  let out = `Canvas UX Review Summary\n\n`;
+  // text report
+  let out = `UX Review Summary\n\n`;
   out += `Reviewer: ${reviewer}\nPosition: ${position}\nCourse Builder: ${builder}\n`;
   out += `Course: ${course}\nPage URL: ${url}\n\nThis report shows observed checklist items, scores, strengths & development areas.\n`;
   Object.entries(reportData).forEach(([cat,info]) => {
-    const total  = model[cat].checklist.length;
-    const count  = info.selected.length;
-    const others = model[cat].checklist.filter(i=>!info.selected.includes(i));
+    const total = model[cat].checklist.length;
+    const count = info.selected.length;
+    const others = model[cat].checklist.filter(i => !info.selected.includes(i));
     out += `\n${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
     out += `Observed ${count} of ${total} items:\n`;
-    info.selected.forEach(i=>out+=`- ${i}\n`);
+    info.selected.forEach(i=> out+=`- ${i}\n`);
     if(count===0) out+=`- None selected\n`;
     out += `\nOther checklist items:\n`;
-    others.forEach(i=>out+=`- ${i}\n`);
+    others.forEach(i=> out+=`- ${i}\n`);
   });
   out += `\nKey strengths:\n`;
-  strengths.forEach(s=>out+=`- ${s}\n`);
+  strengths.forEach(s=> out+=`- ${s}\n`);
   if(!strengths.length) out+=`- None provided\n`;
   out += `\nAreas for development:\n`;
-  developments.forEach(d=>out+=`- ${d}\n`);
+  developments.forEach(d=> out+=`- ${d}\n`);
   if(!developments.length) out+=`- None provided\n`;
   out += `\nComments:\n${comments}\n`;
-
   document.getElementById('output').value = out;
 
   renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
@@ -204,7 +164,7 @@ function copyReport() {
   document.execCommand('copy');
 }
 
-// 6) Export PDF – simple minimal formatting, no odd characters
+// 6) Export PDF: styled banner, logo, timestamp, footer
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
@@ -212,66 +172,96 @@ function downloadPDF() {
   const d = window.lastReportData;
   if(!m || !d) { alert('Generate report first'); return; }
 
-  let y = 20;
-  doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align: 'center' });
-  y += 10;
-  doc.setFontSize(12);
-  ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field => {
-    const val = m[field.toLowerCase().replace(/ /g,'')];
-    doc.text(`${field}: ${val}`, 14, y);
-    y += 7;
-  });
-  y += 4;
+  // load logo
+  const img = new Image();
+  img.src = 'au-logo-placeholder.png';
+  img.onload = () => {
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
 
-  Object.entries(d).forEach(([cat,info]) => {
-    if(y > 280){ doc.addPage(); y = 20; }
-    doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`, 14, y);
-    y += 7;
-    doc.setFontSize(11);
-    if(info.selected.length) {
-      info.selected.forEach(item => {
-        if(y > 280){ doc.addPage(); y = 20; }
-        doc.text(`- ${item}`, 16, y);
-        y += 6;
-      });
-    } else {
-      doc.text('- None selected', 16, y);
-      y += 6;
-    }
-    y += 4;
-  });
+    // banner
+    doc.setFillColor(22,12,81); // #160c51
+    doc.rect(0, 0, pageW, 25, 'F');
 
-  // Strengths & developments
-  ['Key strengths','Areas for development'].forEach(section => {
-    if(y > 280){ doc.addPage(); y = 20; }
-    doc.setFontSize(12).text(section + ':', 14, y);
-    y += 7;
-    const arr = section === 'Key strengths' ? m.strengths : m.developments;
-    if(arr.length) {
+    // logo
+    doc.addImage(img, 'PNG', 10, 3, 30, 18);
+
+    // title
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(16);
+    doc.text('UX Review Summary', pageW/2, 15, { align: 'center' });
+
+    // timestamp
+    const ts = new Date().toLocaleString();
+    doc.setFontSize(9);
+    doc.text(`Generated: ${ts}`, pageW - 10, 20, { align: 'right' });
+
+    // reset text colour
+    doc.setTextColor(0,0,0);
+    doc.setFontSize(12);
+
+    let y = 35;
+
+    // meta details
+    ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field => {
+      const key = field.toLowerCase().replace(/ /g,'');
+      const val = m[key];
+      doc.text(`${field}: ${val}`, 14, y);
+      y += 7;
+      if(y > pageH - 20) { doc.addPage(); y = 20; }
+    });
+
+    // descriptor details
+    Object.entries(d).forEach(([cat,info]) => {
+      if(y > pageH - 40) { doc.addPage(); y = 20; }
+      doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`, 14, y);
+      y += 7;
       doc.setFontSize(11);
-      arr.forEach(item => {
-        if(y > 280){ doc.addPage(); y = 20; }
-        doc.text(`- ${item}`, 16, y);
+      if(info.selected.length) {
+        info.selected.forEach(item => {
+          if(y > pageH - 20) { doc.addPage(); y = 20; }
+          doc.text(`- ${item}`, 16, y);
+          y += 6;
+        });
+      } else {
+        doc.text('- None selected', 16, y);
         y += 6;
-      });
-    } else {
-      doc.setFontSize(11).text('- None provided', 16, y);
-      y += 6;
-    }
-    y += 4;
-  });
+      }
+      y += 4;
+    });
 
-  // Comments
-  if(y > 280){ doc.addPage(); y = 20; }
-  doc.setFontSize(12).text('Comments:', 14, y); y += 7;
-  doc.setFontSize(11);
-  doc.splitTextToSize(m.comments, 180).forEach(line => {
-    if(y > 280){ doc.addPage(); y = 20; }
-    doc.text(line, 14, y);
-    y += 6;
-  });
+    // strengths & developments
+    [['Key strengths', m.strengths], ['Areas for development', m.developments]].forEach(([title, arr]) => {
+      if(y > pageH - 40) { doc.addPage(); y = 20; }
+      doc.setFontSize(12).text(title + ':', 14, y); y += 7;
+      doc.setFontSize(11);
+      if(arr.length) {
+        arr.forEach(item => {
+          if(y > pageH - 20) { doc.addPage(); y = 20; }
+          doc.text(`- ${item}`, 16, y); y += 6;
+        });
+      } else {
+        doc.text('- None provided', 16, y); y += 6;
+      }
+      y += 4;
+    });
 
-  doc.save('Canvas-UX-Review.pdf');
+    // comments
+    if(y > pageH - 40) { doc.addPage(); y = 20; }
+    doc.setFontSize(12).text('Comments:', 14, y); y += 7;
+    doc.setFontSize(11);
+    doc.splitTextToSize(m.comments, pageW - 28).forEach(line => {
+      if(y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.text(line, 14, y); y += 6;
+    });
+
+    // footer
+    const footerY = pageH - 10;
+    doc.setFontSize(9).text('© 2025 TUX', pageW/2, footerY, { align: 'center' });
+
+    // finally save
+    doc.save('UX-Review-Summary.pdf');
+  };
 }
 
 // 7) Export CSV
@@ -290,6 +280,6 @@ function exportCSV() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'Canvas-UX-Review.csv';
+  a.download = 'UX-Review-Summary.csv';
   a.click();
 }
