@@ -1,389 +1,11 @@
-/* ==========================================================================
-   1. FONTS & BOX‐SIZING
-   ========================================================================== */
-@font-face {
-  font-family: 'Codegun';
-  src: url('codegun.ttf') format('truetype');
-}
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-/* ==========================================================================
-   2. CSS VARIABLES
-   ========================================================================== */
-:root {
-  --white: #FFFFFF;
-  --dark-blue: #140F50;
-  --bright-blue: #1448FF;
-  --north-terrace-purple: #836BFF;
-  --south-east-limestone: #F8EFE0;
-  --limestone-tint: #FEFCF9;
-}
-
-/* ==========================================================================
-   3. BASE TYPOGRAPHY & LAYOUT
-   ========================================================================== */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: var(--south-east-limestone);
-  color: var(--dark-blue);
-}
-
-h1, h2, h3, h4, .card h2, .highlight h3 {
-  font-family: 'Codegun', sans-serif;
-}
-
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 2em 1em;
-}
-
-/* ==========================================================================
-   4. HERO BANNER (for sub-pages)
-   ========================================================================== */
-.hero-banner {
-  position: relative;
-  background:
-    linear-gradient(to right, rgba(20,15,80,0.9), rgba(131,107,255,0.4)),
-    linear-gradient(135deg, #140F50 40%, #836BFF);
-  color: var(--white);
-  text-align: center;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.hero-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('tux-icon-banner.png') no-repeat right bottom;
-  background-size: auto 100%;
-  opacity: 0.9;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-banner h1,
-.hero-banner p {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-banner h1 {
-  font-size: 2.8em;
-  margin: 0.3em 0 0.2em;
-}
-
-.hero-banner p {
-  font-size: 1.15em;
-  margin: 0 auto 1.5em;
-  max-width: 720px;
-  color: #E6E1FF;
-}
-
-/* Decorative mascot only on mobile */
-.tux-mobile-top {
-  display: none;
-  width: 100px;
-  margin: 0 auto 1em;
-}
-@media (max-width: 700px) {
-  .hero-banner::after { display: none; }
-  .tux-mobile-top { display: block; }
-}
-
-/* ==========================================================================
-   5. SEARCH BAR
-   ========================================================================== */
-.search-container {
-  position: relative;
-  max-width: 520px;
-  margin: 0 auto;
-  z-index: 1001;
-}
-
-.hero-search {
-  width: 100%;
-  padding: 0.8em 4em 0.8em 1em;
-  font-size: 1em;
-  border: 2px solid var(--bright-blue);
-  border-radius: 8px;
-  background: var(--white);
-  color: var(--dark-blue);
-}
-
-.search-button {
-  position: absolute;
-  top: 6px; right: 6px; bottom: 6px;
-  padding: 0 1em;
-  background: var(--bright-blue);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.search-button:hover {
-  background: var(--north-terrace-purple);
-}
-
-.search-suggestions {
-  position: absolute;
-  top: 100%; left: 0; right: 0;
-  background: var(--white);
-  border: 2px solid var(--bright-blue);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  max-height: 220px;
-  overflow-y: auto;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  display: none;
-}
-.search-suggestions.visible {
-  display: block;
-}
-.suggestion {
-  padding: 0.75em 1em;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-}
-.suggestion:hover {
-  background: var(--limestone-tint);
-  color: var(--bright-blue);
-}
-
-/* ==========================================================================
-   6. GRID TILES & CARDS
-   ========================================================================== */
-.row-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 2em;
-  margin-bottom: 3em;
-}
-
-.card {
-  background: var(--white);
-  border-radius: 10px;
-  padding: 1.5em;
-  box-shadow: 0 4px 12px rgba(20,15,80,0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  text-decoration: none;
-  color: var(--dark-blue);
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(20,15,80,0.1);
-}
-.card h2 {
-  margin-top: 0;
-  color: var(--bright-blue);
-}
-
-/* ==========================================================================
-   7. VIDEO GRID
-   ========================================================================== */
-.video-section {
-  margin-top: 4em;
-}
-.video-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2em;
-  justify-content: center;
-}
-.video-wrapper {
-  flex: 0 1 48%;
-  max-width: 560px;
-  background: var(--white);
-  border-radius: 8px;
-  padding: 1em;
-  box-shadow: 0 4px 12px rgba(20,15,80,0.06);
-}
-.video-wrapper iframe {
-  width: 100%;
-  height: 315px;
-  border: none;
-  border-radius: 4px;
-}
-@media (max-width: 768px) {
-  .video-wrapper { flex: 1 1 100%; }
-}
-
-/* ==========================================================================
-   8. PROFILE CARDS
-   ========================================================================== */
-.team-section {
-  margin-top: 4em;
-}
-.section-heading {
-  text-align: center;
-  font-size: 1.8em;
-  margin-bottom: 1em;
-  color: var(--bright-blue);
-}
-.team-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
-}
-.profile-card {
-  background: var(--white);
-  border: 2px solid var(--bright-blue);
-  border-radius: 10px;
-  padding: 1.5em;
-  width: 260px;
-  box-shadow: 0 4px 12px rgba(20,15,80,0.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--bright-blue);
-  margin-bottom: 1em;
-}
-.profile-card h3 {
-  margin: 0.3em 0;
-  color: var(--bright-blue);
-}
-.job-title {
-  font-weight: bold;
-  margin-bottom: 0.6em;
-}
-.card-buttons {
-  display: flex;
-  gap: 1em;
-  margin-top: auto;
-  border-top: 1px solid #eee;
-  padding-top: 1em;
-}
-
-/* ==========================================================================
-   9. CONTACT FORM
-   ========================================================================== */
-.contact-section {
-  margin-top: 4em;
-}
-.contact-section form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2em;
-  background: var(--white);
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(20,15,80,0.06);
-  border: 2px solid var(--bright-blue);
-}
-.contact-section label {
-  display: block;
-  margin-bottom: 0.5em;
-}
-.contact-section input,
-.contact-section textarea,
-.contact-section select {
-  width: 100%;
-  padding: 0.8em;
-  margin-bottom: 1.5em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.contact-section button {
-  background: var(--bright-blue);
-  color: #fff;
-  border: none;
-  padding: 0.8em 1.5em;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.contact-section button:hover {
-  background: var(--north-terrace-purple);
-}
-
-/* ==========================================================================
-   10. FOOTER & SCROLL BUTTON
-   ========================================================================== */
-footer {
-  background: var(--dark-blue);
-  color: #fff;
-  text-align: center;
-  padding: 1.5em 1em;
-  border-top: 4px solid var(--bright-blue);
-}
-footer a {
-  color: #fff;
-  text-decoration: underline;
-}
-footer img {
-  max-width: 180px;
-  margin-top: 1em;
-}
-
-#topBtn {
-  display: none;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-#topBtn:hover {
-  background: var(--north-terrace-purple);
-}
-
-/* ==========================================================================
-   11. GENERIC OVERRIDES
-   ========================================================================== */
-/* focus outlines */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid var(--bright-blue);
-  outline-offset: 2px;
-}
-
-/* simple banners on sub-pages */
-.hero-banner.simple-banner {
-  padding: 1.5em 1em;
-  background:
-    linear-gradient(to right, rgba(20,15,80,0.9), rgba(131,107,255,0.4)),
-    linear-gradient(135deg,#140F50 40%,#836BFF);
-  text-align: left;
-}
-.hero-banner.simple-banner::after,
-.hero-banner.simple-banner .tux-mobile-top {
+/* home-banner.css */
+.hero-banner.home-banner::after {
   display: none !important;
 }
 
-/* methodology “paper” boxes */
-.method-box {
-  background: #fff;
-  border-left: 6px solid var(--north-terrace-purple);
-  border-radius: 8px;
-  padding: 1.5em;
-  margin: 2em 0;
-  box-shadow: 0 2px 8px rgba(20,15,80,0.05);
-}
-
-/* ==========================================================================
-   12. HOME PAGE OVERRIDES
-   ========================================================================== */
 .hero-banner.home-banner {
-  padding: 2rem 4%;
-  min-height: auto;
+  padding: 2rem 4% !important;
+  min-height: auto !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -391,6 +13,7 @@ textarea:focus-visible {
   text-align: left;
   overflow: visible;
 }
+
 .hero-banner.home-banner .banner-content {
   flex: 1 1 50%;
   max-width: 600px;
@@ -398,33 +21,41 @@ textarea:focus-visible {
   flex-direction: column;
   gap: 1.5rem;
 }
-.hero-banner.home-banner .banner-visual {
-  flex: 1 1 40%;
-  text-align: right;
-}
-.hero-banner.home-banner .banner-visual img {
-  max-width: 100%;
-  height: auto;
-}
+
 .hero-banner.home-banner .banner-content h1 {
-  font-size: clamp(3rem,10vw,6rem);
+  font-size: clamp(3rem, 10vw, 6rem);
   font-weight: 900;
   line-height: 1.1;
   margin: 0;
-  background: linear-gradient(90deg,#836BFF,#1448FF);
+  background: linear-gradient(90deg, #836BFF, #1448FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
+
 .hero-banner.home-banner .banner-content p {
-  font-size: clamp(1.2rem,3vw,1.5rem);
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   max-width: 36ch;
   margin: 0.75em 0 0;
+  opacity: 1 !important;
+  transform: none !important;
 }
+
 .hero-banner.home-banner .banner-content .search-container {
   width: 100%;
   max-width: 450px;
 }
+
+.hero-banner.home-banner .banner-visual {
+  flex: 1 1 40%;
+  text-align: right;
+}
+
+.hero-banner.home-banner .banner-visual img {
+  max-width: 100%;
+  height: auto;
+}
+
 @media (max-width: 768px) {
   .hero-banner.home-banner {
     flex-direction: column;
