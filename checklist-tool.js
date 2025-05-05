@@ -164,62 +164,66 @@ function copyReport() {
   document.execCommand('copy');
 }
 
-// 6) Export PDF: styled banner, logo, timestamp, footer
+// 6) Export PDF: banner, properly scaled logo, timestamp, footer
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   const m = window.lastReportMeta;
   const d = window.lastReportData;
-  if(!m || !d) { alert('Generate report first'); return; }
+  if (!m || !d) { alert('Generate report first'); return; }
 
-  // load logo
-  const img = new Image();
-  img.src = 'au-logo-placeholder.png';
-  img.onload = () => {
+  // load the logo
+  const logo = new Image();
+  logo.src = 'au-logo-placeholder.png';
+  logo.onload = () => {
     const pageW = doc.internal.pageSize.getWidth();
     const pageH = doc.internal.pageSize.getHeight();
 
-    // banner
-    doc.setFillColor(22,12,81); // #160c51
+    // draw banner
+    doc.setFillColor(22, 12, 81); // #160c51
     doc.rect(0, 0, pageW, 25, 'F');
 
-    // logo
-    doc.addImage(img, 'PNG', 10, 3, 30, 18);
+    // calculate logo dimensions to keep aspect ratio
+    const desiredLogoWidth = 40; // mm
+    const aspect = logo.height / logo.width;
+    const desiredLogoHeight = desiredLogoWidth * aspect;
+
+    // draw logo
+    doc.addImage(logo, 'PNG', 10, 3, desiredLogoWidth, desiredLogoHeight);
 
     // title
-    doc.setTextColor(255,255,255);
+    doc.setTextColor(255, 255, 255);
     doc.setFontSize(16);
-    doc.text('UX Review Summary', pageW/2, 15, { align: 'center' });
+    doc.text('UX review summary', pageW / 2, 15, { align: 'center' });
 
     // timestamp
     const ts = new Date().toLocaleString();
     doc.setFontSize(9);
     doc.text(`Generated: ${ts}`, pageW - 10, 20, { align: 'right' });
 
-    // reset text colour
-    doc.setTextColor(0,0,0);
+    // reset to black text
+    doc.setTextColor(0, 0, 0);
     doc.setFontSize(12);
-
     let y = 35;
 
-    // meta details
-    ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field => {
-      const key = field.toLowerCase().replace(/ /g,'');
+    // metadata
+    ['Reviewer', 'Position', 'Course Builder', 'Course', 'Page URL'].forEach(field => {
+      const key = field.toLowerCase().replace(/ /g, '');
       const val = m[key];
       doc.text(`${field}: ${val}`, 14, y);
       y += 7;
-      if(y > pageH - 20) { doc.addPage(); y = 20; }
+      if (y > pageH - 30) { doc.addPage(); y = 20; }
     });
 
-    // descriptor details
-    Object.entries(d).forEach(([cat,info]) => {
-      if(y > pageH - 40) { doc.addPage(); y = 20; }
+    // descriptors
+    Object.entries(d).forEach(([cat, info]) => {
+      if (y > pageH - 40) { doc.addPage(); y = 20; }
       doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`, 14, y);
       y += 7;
       doc.setFontSize(11);
-      if(info.selected.length) {
+      if (info.selected.length) {
         info.selected.forEach(item => {
-          if(y > pageH - 20) { doc.addPage(); y = 20; }
+          if (y > pageH - 20) { doc.addPage(); y = 20; }
           doc.text(`- ${item}`, 16, y);
           y += 6;
         });
@@ -231,38 +235,44 @@ function downloadPDF() {
     });
 
     // strengths & developments
-    [['Key strengths', m.strengths], ['Areas for development', m.developments]].forEach(([title, arr]) => {
-      if(y > pageH - 40) { doc.addPage(); y = 20; }
-      doc.setFontSize(12).text(title + ':', 14, y); y += 7;
-      doc.setFontSize(11);
-      if(arr.length) {
-        arr.forEach(item => {
-          if(y > pageH - 20) { doc.addPage(); y = 20; }
-          doc.text(`- ${item}`, 16, y); y += 6;
-        });
-      } else {
-        doc.text('- None provided', 16, y); y += 6;
-      }
-      y += 4;
-    });
+    [['Key strengths', m.strengths], ['Areas for development', m.developments]]
+      .forEach(([title, arr]) => {
+        if (y > pageH - 40) { doc.addPage(); y = 20; }
+        doc.setFontSize(12).text(title + ':', 14, y);
+        y += 7;
+        doc.setFontSize(11);
+        if (arr.length) {
+          arr.forEach(item => {
+            if (y > pageH - 20) { doc.addPage(); y = 20; }
+            doc.text(`- ${item}`, 16, y);
+            y += 6;
+          });
+        } else {
+          doc.text('- None provided', 16, y);
+          y += 6;
+        }
+        y += 4;
+      });
 
     // comments
-    if(y > pageH - 40) { doc.addPage(); y = 20; }
-    doc.setFontSize(12).text('Comments:', 14, y); y += 7;
+    if (y > pageH - 40) { doc.addPage(); y = 20; }
+    doc.setFontSize(12).text('Comments:', 14, y);
+    y += 7;
     doc.setFontSize(11);
     doc.splitTextToSize(m.comments, pageW - 28).forEach(line => {
-      if(y > pageH - 20) { doc.addPage(); y = 20; }
-      doc.text(line, 14, y); y += 6;
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.text(line, 14, y);
+      y += 6;
     });
 
     // footer
     const footerY = pageH - 10;
-    doc.setFontSize(9).text('© 2025 TUX', pageW/2, footerY, { align: 'center' });
+    doc.setFontSize(9).text('© 2025 TUX', pageW / 2, footerY, { align: 'center' });
 
-    // finally save
     doc.save('UX-Review-Summary.pdf');
   };
 }
+
 
 // 7) Export CSV
 function exportCSV() {
