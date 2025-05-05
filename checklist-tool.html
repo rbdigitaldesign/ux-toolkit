@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +7,23 @@
   <link rel="stylesheet" href="checklist-tool.css" />
 </head>
 <body>
-  <header class="banner">
-    <img src="AU logo primary_white.png" alt="University of Adelaide logo" class="logo">
-    <h1>Canvas UX Review Tool</h1>
-    <p class="intro">Rate each element of the student learning experience across key quality dimensions.</p>
-  </header>
-
   <main class="form-container">
+    <!-- Input fields -->
+    <label for="reviewerName">Your name</label>
+    <input type="text" id="reviewerName" placeholder="e.g. Rich Bartlett" />
+
+    <label for="builderName">Course builder (academic)</label>
+    <input type="text" id="builderName" placeholder="e.g. Dr. Jane Doe" />
+
     <label for="courseName">Course name</label>
     <input type="text" id="courseName" placeholder="e.g. Systems Thinking for a Complex World" />
 
     <label for="pageUrl">Canvas URL being reviewed</label>
     <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/courses/1234/pages/topic-3" />
 
+    <!-- Sliders section -->
     <section class="sliders">
-      <!-- Descriptor sliders (example with only one shown for brevity) -->
+      <!-- Example: Only "Clear" shown, others to be added similarly -->
       <fieldset>
         <legend>Clear</legend>
         <label>Accessibility and inclusion</label>
@@ -40,12 +41,18 @@
         <label>Interaction guidance</label>
         <input type="range" min="0" max="3" value="0" class="slider" data-label="Interaction guidance">
       </fieldset>
-      <!-- Repeat for other descriptors -->
     </section>
 
+    <!-- Feedback box -->
+    <label for="comments">Additional comments or recommendations</label>
+    <textarea id="comments" rows="5" placeholder="Summarise key recommendations..."></textarea>
+
+    <!-- Buttons -->
     <button class="primary" onclick="generateReport()">Generate Report</button>
 
+    <!-- Output -->
     <div class="output-section">
+      <canvas id="chart" width="400" height="150" style="margin: 2em 0;"></canvas>
       <textarea id="output" rows="20" readonly></textarea>
       <div class="action-buttons">
         <button onclick="copyReport()">Copy Report</button>
@@ -59,6 +66,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="checklist-tool.js"></script>
 </body>
 </html>
