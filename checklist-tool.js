@@ -1,4 +1,6 @@
-// model unchanged…
+// checklist-tool.js
+
+// Descriptor model remains unchanged
 const model = {
   "Clear": {
     description: "Assess clarity of structure and presentation.",
@@ -47,7 +49,7 @@ const model = {
   }
 };
 
-// render all fieldsets with checklist and slider (using "developing" for 2)
+// Render all fieldsets with checklist and slider
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
   Object.entries(model).forEach(([category, info]) => {
@@ -71,8 +73,9 @@ window.onload = () => {
   });
 };
 
-// generate report + chart
+// Generate the text report and render chart
 function generateReport() {
+  // Gather meta-data
   const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
   const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
@@ -82,10 +85,11 @@ function generateReport() {
   const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
   const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
 
+  // Collect scores and selections
   const reportData = {};
   document.querySelectorAll('.slider').forEach(slider => {
     const cat = slider.dataset.label;
-    reportData[cat] = reportData[cat] || { scores: [], selected: [] };
+    if (!reportData[cat]) reportData[cat] = { scores: [], selected: [] };
     reportData[cat].scores.push(+slider.value);
   });
   document.querySelectorAll('input[type=checkbox]').forEach(cb => {
@@ -95,63 +99,93 @@ function generateReport() {
     reportData[cat].selected.push(item);
   });
 
-  let out = `Canvas UX Review Summary\n\nReviewer: ${reviewer}\n` +
-            `Position: ${position}\n` +
-            `Course Builder: ${builder}\nCourse: ${course}\nPage URL: ${url}\n\n` +
-            `This report shows which checklist items were observed, plus category scores.\n`;
+  // Build report text
+  let out = `Canvas UX Review Summary\n\n`;
+  out += `Reviewer: ${reviewer}\n`;
+  out += `Position: ${position}\n`;
+  out += `Course Builder: ${builder}\n`;
+  out += `Course: ${course}\n`;
+  out += `Page URL: ${url}\n\n`;
+  out += `This report shows which checklist items were observed, which were not, and each category score.\n`;
 
   const labels = [], scores = [];
   Object.entries(reportData).forEach(([cat, info]) => {
-    const avg   = (info.scores.reduce((a,b)=>a+b,0)/info.scores.length).toFixed(2);
+    const avg   = (info.scores.reduce((a,b) => a + b, 0) / info.scores.length).toFixed(2);
     const total = model[cat].checklist.length;
-    const count = info.selected.length;
+    const selectedCount = info.selected.length;
+    const others = model[cat].checklist.filter(item => !info.selected.includes(item));
 
     out += `\n📘 ${cat} (Avg: ${avg}/3)\n`;
-    out += `✔ Observed ${count} of ${total} items:\n`;
-    if (count) {
+    labels.push(cat);
+    scores.push(+avg);
+
+    // Observed items
+    out += `\n✔ Observed ${selectedCount} of ${total} items:\n`;
+    if (selectedCount > 0) {
       info.selected.forEach(i => out += `- ${i}\n`);
     } else {
       out += `- None selected\n`;
     }
 
-    labels.push(cat);
-    scores.push(+avg);
+    // Other items
+    out += `\nℹ️ Other checklist items (confirm applicability):\n`;
+    others.forEach(i => out += `- ${i}\n`);
   });
 
   out += `\n📝 Comments:\n${comments}\n`;
   document.getElementById('output').value = out;
+
   renderChart(labels, scores);
 }
 
+// Render bar chart using Chart.js
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if(window.uxChart) window.uxChart.destroy();
+  if (window.uxChart) window.uxChart.destroy();
   window.uxChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels,
-      datasets: [{ label:'Avg score', data:scores, backgroundColor:'#1448FF', borderRadius:5 }]
+      datasets: [{
+        label: 'Avg score',
+        data: scores,
+        backgroundColor: '#1448FF',
+        borderRadius: 5
+      }]
     },
-    options: { responsive:true, scales:{ y:{ suggestedMin:0, suggestedMax:3, ticks:{ stepSize:1 } } } }
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 3,
+          ticks: { stepSize: 1 }
+        }
+      }
+    }
   });
 }
 
+// Copy report text to clipboard
 function copyReport() {
   const t = document.getElementById('output');
   t.select();
   document.execCommand('copy');
 }
 
+// Export report as styled PDF via jsPDF
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   const lines = document.getElementById('output').value.split('\n');
   let y = 15;
 
-  doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align:'center' });
+  // Title
+  doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align: 'center' });
   y += 10;
-  doc.setFontSize(11);
 
+  // Body
+  doc.setFontSize(11);
   lines.forEach(line => {
     if (y > 280) { doc.addPage(); y = 10; }
     doc.text(line, 10, y);
