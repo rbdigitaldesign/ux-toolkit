@@ -14,7 +14,8 @@ body {
 /* place first and last name side by side */
 .name-fields {
   display: flex;
-  gap: 1em;
+  gap: 2em;        /* increased from 1em to 2em */
+  margin-bottom: 1em;
 }
 
 .field-group {
