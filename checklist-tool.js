@@ -1,6 +1,6 @@
 // checklist-tool.js
 
-// descriptor model with plural-style guidance & help URLs
+// descriptor model with guidance and help URLs
 const model = {
   "Clear": {
     description: "Ensures learners can quickly understand where they are and what to do next. Uses consistent headings, logical flow, and clear labels so users never feel lost when navigating the page.",
@@ -54,14 +54,10 @@ const model = {
   }
 };
 
-// ——————————————————————————————
-// 1) Render all criteria on page load
-// ——————————————————————————————
+// render all descriptor sections on load
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
-  // clear out any leftover content
   container.innerHTML = "";
-  // for each descriptor, build a fieldset with checklist + slider
   Object.entries(model).forEach(([category, info]) => {
     const fs = document.createElement("fieldset");
     fs.innerHTML = `
@@ -86,27 +82,24 @@ window.onload = () => {
   });
 };
 
-// ——————————————————————————————
-// 2) Generate report, unhide summary, dashboard, chart & output
-// ——————————————————————————————
+// generate report and reveal hidden sections
 function generateReport() {
-  // unhide summary & other output areas
-  document.getElementById('reportSummary').style.display = 'block';
-  document.getElementById('dashboard').style.display     = 'block';
-  document.getElementById('chart').style.display         = 'block';
-  document.getElementById('output').style.display        = 'block';
+  // reveal summary, dashboard, chart, output
+  ['reportSummary','dashboard','chart','output'].forEach(id => {
+    document.getElementById(id).style.display = 'block';
+  });
 
   // gather reviewer info
-  const first    = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
-  const last     = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
-  const position = document.getElementById('positionDescription').value.trim() || '[Position]';
-  const reviewer = `${first} ${last}`;
-  const builder  = document.getElementById('builderName').value.trim()         || '[Builder]';
-  const course   = document.getElementById('courseName').value.trim()          || '[Course Name]';
-  const url      = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
-  const comments = document.getElementById('comments').value.trim()            || '[No comments]';
+  const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
+  const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
+  const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
+  const reviewer  = `${first} ${last}`;
+  const builder   = document.getElementById('builderName').value.trim()         || '[Builder]';
+  const course    = document.getElementById('courseName').value.trim()          || '[Course Name]';
+  const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
+  const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
 
-  // strengths & developments
+  // strengths & areas
   const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l => l);
   const developments = document.getElementById('developments').value.trim().split('\n').filter(l => l);
 
@@ -126,11 +119,11 @@ function generateReport() {
   });
 
   // compute averages
-  Object.entries(reportData).forEach(([cat, info]) => {
+  Object.values(reportData).forEach(info => {
     info.avg = info.scores.reduce((a, b) => a + b, 0) / info.scores.length;
   });
 
-  // build executive summary
+  // executive summary
   const avgs       = Object.values(reportData).map(i => i.avg);
   const overallAvg = (avgs.reduce((a, b) => a + b, 0) / avgs.length).toFixed(2);
   const urgent     = Object.entries(reportData)
@@ -142,30 +135,30 @@ function generateReport() {
     <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
   `;
 
-  // build dashboard table
-  let html = `<table class="dashboard-table"><thead>
-      <tr><th>Descriptor</th><th>Score</th><th>Status</th><th>Alert</th></tr>
-    </thead><tbody>`;
-  Object.entries(reportData).forEach(([cat, info]) => {
+  // dashboard table
+  const rows = Object.entries(reportData).map(([cat,info]) => {
     const avg    = info.avg;
     const status = avg >= 2.5 ? '🟢' : avg >= 1.5 ? '🟡' : '🔴';
     const alert  = avg <= 1 ? '⚠️ below baseline' : '';
     const cls    = avg <= 1 ? 'low-score' : '';
-    html += `<tr class="${cls}">
+    return `<tr class="${cls}">
       <td>${cat}</td>
       <td>${avg.toFixed(2)}/3</td>
       <td>${status}</td>
       <td>${alert}</td>
     </tr>`;
-  });
-  html += `</tbody></table>`;
-  document.getElementById('dashboard').innerHTML = html;
+  }).join('');
+  document.getElementById('dashboard').innerHTML = `
+    <table class="dashboard-table">
+      <thead><tr><th>Descriptor</th><th>Score</th><th>Status</th><th>Alert</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
 
-  // build full text report
-  let out = `Canvas UX Review Summary\n\n`;
-  out += `Reviewer: ${reviewer}\nPosition: ${position}\nCourse Builder: ${builder}\n`;
+  // full text report
+  let out = `Canvas UX Review Summary\n\nReviewer: ${reviewer}\nPosition: ${position}\nCourse Builder: ${builder}\n`;
   out += `Course: ${course}\nPage URL: ${url}\n\nThis report shows observed checklist items, scores, strengths & development areas.\n`;
-  Object.entries(reportData).forEach(([cat, info]) => {
+  Object.entries(reportData).forEach(([cat,info]) => {
     const total  = model[cat].checklist.length;
     const count  = info.selected.length;
     const others = model[cat].checklist.filter(i => !info.selected.includes(i));
@@ -176,16 +169,20 @@ function generateReport() {
     out += `\nℹ️ Other checklist items:\n`;
     others.forEach(i => out += `- ${i}\n`);
   });
+
   out += `\n💡 Key strengths:\n`;
   strengths.forEach(s => out += `- ${s}\n`);
   if (!strengths.length) out += `- None provided\n`;
+
   out += `\n🔧 Areas for development:\n`;
   developments.forEach(d => out += `- ${d}\n`);
   if (!developments.length) out += `- None provided\n`;
+
   out += `\n📝 Comments:\n${comments}\n`;
+
   document.getElementById('output').value = out;
 
-  // render chart & save data for CSV
+  // draw chart and store for CSV
   renderChart(Object.keys(reportData), Object.values(reportData).map(i => i.avg));
   window.lastReportData = reportData;
 }
@@ -207,7 +204,7 @@ function renderChart(labels, scores) {
   });
 }
 
-// copy report
+// copy report to clipboard
 function copyReport() {
   const t = document.getElementById('output');
   t.select();
@@ -220,11 +217,13 @@ function downloadPDF() {
   const doc = new jsPDF();
   const lines = document.getElementById('output').value.split('\n');
   let y = 15;
-  doc.setFontSize(16).text('Canvas UX Review Summary',105,y,{align:'center'});
-  y += 10; doc.setFontSize(11);
+  doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align: 'center' });
+  y += 10;
+  doc.setFontSize(11);
   lines.forEach(line => {
     if (y > 280) { doc.addPage(); y = 10; }
-    doc.text(line,10,y); y += 7;
+    doc.text(line, 10, y);
+    y += 7;
   });
   doc.save('Canvas-UX-Review.pdf');
 }
@@ -234,15 +233,17 @@ function exportCSV() {
   const data = window.lastReportData;
   if (!data) return alert('Generate report first');
   const rows = ['Descriptor,Item,Selected,Score'];
-  Object.entries(data).forEach(([cat,info])=> {
+  Object.entries(data).forEach(([cat,info]) => {
     const score = info.avg.toFixed(2);
     model[cat].checklist.forEach(item => {
       const sel = info.selected.includes(item) ? '1' : '0';
       rows.push(`"${cat}","${item}",${sel},${score}`);
     });
   });
-  const blob = new Blob([rows.join('\n')],{type:'text/csv'});
+  const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'Canvas-UX-Review.csv'; a.click();
+  a.href = url;
+  a.download = 'Canvas-UX-Review.csv';
+  a.click();
 }
