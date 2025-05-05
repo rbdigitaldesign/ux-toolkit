@@ -1,6 +1,6 @@
 // checklist-tool.js
 
-// 1) Descriptor model with guidance & help URLs
+// 1) Descriptor model
 const model = {
   "Clear": {
     description: "Ensures learners can quickly understand where they are and what to do next. Uses consistent headings, logical flow, and clear labels so users never feel lost when navigating the page.",
@@ -54,10 +54,11 @@ const model = {
   }
 };
 
-// 2) Render all descriptor sections on page load
+// 2) Render form sections with checkboxes, sliders, and ticks
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
   container.innerHTML = "";
+
   Object.entries(model).forEach(([category, info]) => {
     const fs = document.createElement("fieldset");
     fs.innerHTML = `
@@ -70,7 +71,15 @@ window.onload = () => {
         `<label><input type="checkbox" data-cat="${category}" data-item="${item}" /> ${item}</label>`
       ).join("")}
       <label style="margin-top:1em;">Overall score for '${category}'</label>
-      <input type="range" min="0" max="3" value="0" class="slider" data-label="${category}" />
+      <div class="slider-container">
+        <input type="range" min="0" max="3" value="0" class="slider" data-label="${category}" />
+        <div class="ticks">
+          <span data-value="0"></span>
+          <span data-value="1"></span>
+          <span data-value="2"></span>
+          <span data-value="3"></span>
+        </div>
+      </div>
       <div class="range-labels">
         <span>0 = fails baseline</span>
         <span>1 = meets baseline</span>
@@ -79,17 +88,26 @@ window.onload = () => {
       </div>
     `;
     container.appendChild(fs);
+
+    // attach click handlers to ticks
+    const slider = fs.querySelector('input[type="range"]');
+    fs.querySelectorAll('.ticks span').forEach(tick => {
+      tick.addEventListener('click', () => {
+        slider.value = tick.dataset.value;
+        slider.dispatchEvent(new Event('input'));
+      });
+    });
   });
 };
 
-// 3) Generate report, reveal sections, and store meta/data
+// 3) Generate report
 function generateReport() {
-  // reveal summary/dashboard/chart/output
+  // reveal report areas
   ['reportSummary','dashboard','chart','output'].forEach(id => {
     document.getElementById(id).style.display = 'block';
   });
 
-  // gather meta
+  // gather metadata
   const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
   const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
@@ -99,9 +117,9 @@ function generateReport() {
   const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
   const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
 
-  // strengths & developments
-  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l => l);
-  const developments = document.getElementById('developments').value.trim().split('\n').filter(l => l);
+  // strengths & development areas
+  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l=>l);
+  const developments = document.getElementById('developments').value.trim().split('\n').filter(l=>l);
 
   // collect scores & selections
   const reportData = {};
@@ -110,7 +128,7 @@ function generateReport() {
     if (!reportData[cat]) reportData[cat] = { scores: [], selected: [], avg: 0 };
     reportData[cat].scores.push(+slider.value);
   });
-  document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     if (cb.checked) {
       const cat  = cb.dataset.cat;
       const item = cb.dataset.item;
@@ -120,16 +138,16 @@ function generateReport() {
 
   // compute averages
   Object.values(reportData).forEach(info => {
-    info.avg = info.scores.reduce((a,b) => a + b, 0) / info.scores.length;
+    info.avg = info.scores.reduce((a,b)=>a+b,0) / info.scores.length;
   });
 
-  // store for export
+  // store for exports
   window.lastReportMeta = { reviewer, position, builder, course, url, comments, strengths, developments };
   window.lastReportData = reportData;
 
   // executive summary
-  const avgs       = Object.values(reportData).map(i => i.avg);
-  const overallAvg = (avgs.reduce((a,b)=>a + b, 0) / avgs.length).toFixed(2);
+  const avgs       = Object.values(reportData).map(i=>i.avg);
+  const overallAvg = (avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2);
   const urgent     = Object.entries(reportData)
     .sort((a,b)=>a[1].avg - b[1].avg)
     .slice(0,2)
@@ -139,7 +157,7 @@ function generateReport() {
     <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
   `;
 
-  // dashboard
+  // dashboard table
   const rows = Object.entries(reportData).map(([cat,info]) => {
     const avg    = info.avg;
     const status = avg >= 2.5 ? '🟢' : avg >= 1.5 ? '🟡' : '🔴';
@@ -159,11 +177,10 @@ function generateReport() {
     </table>
   `;
 
-  // text report with added framing
-  let out = `UX Review Summary\n\n`;
-  out += `This report offers a holistic evaluation by combining UX best practices with pedagogical quality dimensions. `
-      + `It uses a 0–3 scale across five domains—Clear, Contextual, Interactive, Challenging, Personalised—to quantify performance, `
-      + `and records observed checklist items as evidence to support actionable improvements.\n\n`;
+  // build text report with framing
+  let out = `UX review summary\n\n`;
+  out += `This report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) `
+      + `to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.\n\n`;
 
   out += `Reviewer: ${reviewer}\n`;
   out += `Position: ${position}\n`;
@@ -174,25 +191,25 @@ function generateReport() {
   Object.entries(reportData).forEach(([cat,info]) => {
     const total  = model[cat].checklist.length;
     const count  = info.selected.length;
-    const others = model[cat].checklist.filter(i => !info.selected.includes(i));
+    const others = model[cat].checklist.filter(i=>!info.selected.includes(i));
     out += `📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
     out += `✔ Observed ${count} of ${total} items:\n`;
     if (count) {
-      info.selected.forEach(i => out += `- ${i}\n`);
+      info.selected.forEach(i=> out += `- ${i}\n`);
     } else {
       out += `- None selected\n`;
     }
     out += `\nℹ️ Other checklist items (confirm applicability):\n`;
-    others.forEach(i => out += `- ${i}\n`);
+    others.forEach(i=> out += `- ${i}\n`);
     out += `\n`;
   });
 
   out += `💡 Key strengths:\n`;
-  strengths.forEach(s => out += `- ${s}\n`);
+  strengths.forEach(s=> out += `- ${s}\n`);
   if (!strengths.length) out += `- None provided\n`;
 
   out += `🔧 Areas for development:\n`;
-  developments.forEach(d => out += `- ${d}\n`);
+  developments.forEach(d=> out += `- ${d}\n`);
   if (!developments.length) out += `- None provided\n`;
 
   out += `\n📝 Comments:\n${comments}\n`;
@@ -201,7 +218,7 @@ function generateReport() {
   renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
 }
 
-// 4) Render bar chart
+// 4) render chart
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
   if (window.uxChart) window.uxChart.destroy();
@@ -212,14 +229,14 @@ function renderChart(labels, scores) {
   });
 }
 
-// 5) Copy report
+// 5) copy report
 function copyReport() {
   const t = document.getElementById('output');
   t.select();
   document.execCommand('copy');
 }
 
-// 6) Export PDF: banner, scaled logo, timestamp, footer
+// 6) export PDF with banner, logo, timestamp, footer
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
@@ -237,26 +254,25 @@ function downloadPDF() {
     doc.setFillColor(22,12,81);
     doc.rect(0,0,pageW,25,'F');
 
-    // logo (preserved aspect)
-    const desiredW = 40;
-    const aspect   = logo.height/logo.width;
-    const desiredH = desiredW * aspect;
-    doc.addImage(logo,'PNG',10,3,desiredW,desiredH);
+    // logo with preserved aspect
+    const w = 40;
+    const h = (logo.height/logo.width)*w;
+    doc.addImage(logo,'PNG',10,3,w,h);
 
     // title & timestamp
     doc.setTextColor(255,255,255).setFontSize(16)
-       .text('UX review summary', pageW/2, 15, {align:'center'});
+       .text('UX review summary',pageW/2,15,{align:'center'});
     doc.setFontSize(9)
-       .text(`Generated: ${new Date().toLocaleString()}`, pageW-10, 20, {align:'right'});
+       .text(`Generated: ${new Date().toLocaleString()}`,pageW-10,20,{align:'right'});
 
     // reset
     doc.setTextColor(0,0,0).setFontSize(12);
     let y = 35;
 
     // metadata
-    ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field=>{
-      const key = field.toLowerCase().replace(/ /g,'');
-      doc.text(`${field}: ${m[key]}`,14,y);
+    ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(f=>{
+      const key = f.toLowerCase().replace(/ /g,'');
+      doc.text(`${f}: ${m[key]}`,14,y);
       y+=7; if(y>pageH-30){doc.addPage();y=20;}
     });
 
@@ -266,9 +282,9 @@ function downloadPDF() {
       doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`,14,y);
       y+=7; doc.setFontSize(11);
       if(info.selected.length){
-        info.selected.forEach(item=>{
+        info.selected.forEach(i=>{
           if(y>pageH-20){doc.addPage();y=20;}
-          doc.text(`- ${item}`,16,y); y+=6;
+          doc.text(`- ${i}`,16,y); y+=6;
         });
       } else {
         doc.text('- None selected',16,y); y+=6;
@@ -278,9 +294,9 @@ function downloadPDF() {
 
     // strengths & developments
     [['Key strengths',m.strengths],['Areas for development',m.developments]]
-      .forEach(([title,arr])=>{
+      .forEach(([t,arr])=>{
         if(y>pageH-40){doc.addPage();y=20;}
-        doc.setFontSize(12).text(`${title}:`,14,y); y+=7;
+        doc.setFontSize(12).text(`${t}:`,14,y); y+=7;
         doc.setFontSize(11);
         if(arr.length){
           arr.forEach(item=>{
@@ -297,33 +313,9 @@ function downloadPDF() {
     if(y>pageH-40){doc.addPage();y=20;}
     doc.setFontSize(12).text('Comments:',14,y); y+=7;
     doc.setFontSize(11);
-    doc.splitTextToSize(m.comments, pageW-28).forEach(line=>{
+    doc.splitTextToSize(m.comments,pageW-28).forEach(line=>{
       if(y>pageH-20){doc.addPage();y=20;}
       doc.text(line,14,y); y+=6;
     });
 
     // footer
-    doc.setFontSize(9)
-       .text('© 2025 TUX', pageW/2, pageH-10, {align:'center'});
-
-    doc.save('UX-Review-Summary.pdf');
-  };
-}
-
-// 7) Export CSV
-function exportCSV() {
-  const data = window.lastReportData;
-  if(!data) return alert('Generate report first');
-  const rows = ['Descriptor,Item,Selected,Score'];
-  Object.entries(data).forEach(([cat,info])=>{
-    const score = info.avg.toFixed(2);
-    model[cat].checklist.forEach(item=>{
-      const sel = info.selected.includes(item)?'1':'0';
-      rows.push(`"${cat}","${item}",${sel},${score}`);
-    });
-  });
-  const blob = new Blob([rows.join('\n')],{type:'text/csv'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'UX-Review-Summary.csv'; a.click();
-}
