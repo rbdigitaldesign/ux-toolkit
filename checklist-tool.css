@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
@@ -50,6 +51,15 @@ input[type="range"] {
   margin-top: 0.5em;
 }
 
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  margin-top: 0.2em;
+  padding: 0 0.2em;
+  color: #555;
+}
+
 .primary {
   background: #1448FF;
   color: white;
@@ -77,3 +87,35 @@ input[type="range"] {
   padding: 1em;
   border-radius: 5px;
   background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.action-buttons button {
+  background: #836BFF;
+  color: white;
+  font-weight: bold;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  background: #140F50;
+  color: white;
+  padding: 1em;
+  margin-top: 3em;
+}
+
+footer a {
+  color: white;
+  text-decoration: underline;
+}
