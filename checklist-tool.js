@@ -1,4 +1,4 @@
-// Sliders for each descriptor category
+// Descriptor categories and sub-criteria
 const descriptors = {
   "Clear": [
     "Accessibility and inclusion",
@@ -33,7 +33,7 @@ const descriptors = {
   ]
 };
 
-// Render all descriptors with sliders
+// On page load: dynamically render all sliders grouped by descriptor
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
   for (const [title, items] of Object.entries(descriptors)) {
@@ -67,6 +67,7 @@ window.onload = () => {
   }
 };
 
+// Report generation logic
 function generateReport() {
   const reviewer = document.getElementById('reviewerName').value.trim() || '[Reviewer]';
   const builder = document.getElementById('builderName').value.trim() || '[Builder]';
@@ -86,7 +87,9 @@ function generateReport() {
     grouped[category].push({ label, score });
   });
 
-  let output = `Canvas UX Review Summary\n\nReviewer: ${reviewer}\nCourse Builder: ${builder}\nCourse: ${course}\nURL: ${url}\n\nThis review assesses both the usability and pedagogical quality of the Canvas course using five descriptors: Clear, Contextual, Interactive, Challenging, and Personalised.\n`;
+  let output = `Canvas UX Review Summary\n\n`;
+  output += `Reviewer: ${reviewer}\nCourse Builder: ${builder}\nCourse: ${course}\nPage URL: ${url}\n\n`;
+  output += `This report evaluates the user experience and pedagogical quality of a Canvas course page. Ratings are based on five quality descriptors: Clear, Contextual, Interactive, Challenging, and Personalised. Each category includes multiple sub-criteria scored on a scale from 0 (Fails baseline) to 3 (Exemplary practice).\n`;
 
   const labels = [], scores = [];
 
@@ -101,20 +104,23 @@ function generateReport() {
   });
 
   output += `\n📝 Reviewer Comments:\n${comments}\n`;
+
   document.getElementById('output').value = output;
 
   renderChart(labels, scores);
 }
 
+// Chart rendering using Chart.js
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if (window.uxChart) window.uxChart.destroy();
+  if (window.uxChart) window.uxChart.destroy(); // Avoid duplicates
+
   window.uxChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
       datasets: [{
-        label: 'Avg Score',
+        label: 'Average Score',
         data: scores,
         backgroundColor: '#1448FF',
         borderRadius: 5
@@ -125,20 +131,24 @@ function renderChart(labels, scores) {
       scales: {
         y: {
           suggestedMin: 0,
-          suggestedMax: 3
+          suggestedMax: 3,
+          ticks: {
+            stepSize: 1
+          }
         }
       }
     }
   });
 }
 
+// Copy report text
 function copyReport() {
   const text = document.getElementById('output');
   text.select();
   document.execCommand('copy');
 }
 
-// Word doc export with table layout
+// Export to Word using docx.js
 function downloadWord() {
   const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, HeadingLevel } = window.docx;
   const outputText = document.getElementById('output').value;
@@ -146,3 +156,34 @@ function downloadWord() {
 
   const doc = new Document({
     sections: [{
+      properties: {},
+      children: [
+        new Paragraph({ text: "Canvas UX Review Summary", heading: HeadingLevel.HEADING_1 }),
+        ...lines.slice(1, 5).map(line => new Paragraph(line)),
+        new Paragraph(""),
+        new Paragraph({ text: "Score Summary", heading: HeadingLevel.HEADING_2 }),
+        new Table({
+          rows: lines.filter(l => l.startsWith("📘")).map(line => {
+            const [category, avg] = line.replace("📘", "").split("(Average Score:");
+            return new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph(category.trim())] }),
+                new TableCell({ children: [new Paragraph(avg.replace(")", "").trim())] })
+              ]
+            });
+          })
+        }),
+        new Paragraph(""),
+        new Paragraph({ text: "Reviewer Comments", heading: HeadingLevel.HEADING_2 }),
+        new Paragraph(lines[lines.length - 1])
+      ]
+    }]
+  });
+
+  Packer.toBlob(doc).then(blob => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Canvas-UX-Review.docx";
+    a.click();
+  });
+}
