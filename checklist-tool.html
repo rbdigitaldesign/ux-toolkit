@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Canvas UX Review Tool</title>
-  <link rel="stylesheet" href="checklist-tool.css" />
+  <link rel="stylesheet" href="checklist-tool-updated.css" />
 </head>
 <body>
   <main class="form-container">
-    <!-- Input fields -->
     <label for="reviewerName">Your name</label>
     <input type="text" id="reviewerName" placeholder="e.g. Rich Bartlett" />
 
@@ -21,42 +20,24 @@
     <label for="pageUrl">Canvas URL being reviewed</label>
     <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/courses/1234/pages/topic-3" />
 
-    <!-- Sliders section -->
+    <h3>Evaluate each area using the sliders below</h3>
+
     <section class="sliders">
-      <!-- Example: Only "Clear" shown, others to be added similarly -->
-      <fieldset>
-        <legend>Clear</legend>
-        <label>Accessibility and inclusion</label>
-        <input type="range" min="0" max="3" value="0" class="slider" data-label="Accessibility and inclusion">
-
-        <label>Navigation and clarity</label>
-        <input type="range" min="0" max="3" value="0" class="slider" data-label="Navigation and clarity">
-
-        <label>Goals and expectations</label>
-        <input type="range" min="0" max="3" value="0" class="slider" data-label="Goals and expectations">
-
-        <label>Technology use</label>
-        <input type="range" min="0" max="3" value="0" class="slider" data-label="Technology use">
-
-        <label>Interaction guidance</label>
-        <input type="range" min="0" max="3" value="0" class="slider" data-label="Interaction guidance">
-      </fieldset>
+      <!-- Template for 5 descriptors -->
+      <div id="descriptorContainer"></div>
     </section>
 
-    <!-- Feedback box -->
     <label for="comments">Additional comments or recommendations</label>
     <textarea id="comments" rows="5" placeholder="Summarise key recommendations..."></textarea>
 
-    <!-- Buttons -->
     <button class="primary" onclick="generateReport()">Generate Report</button>
 
-    <!-- Output -->
     <div class="output-section">
       <canvas id="chart" width="400" height="150" style="margin: 2em 0;"></canvas>
       <textarea id="output" rows="20" readonly></textarea>
       <div class="action-buttons">
         <button onclick="copyReport()">Copy Report</button>
-        <button onclick="downloadPDF()">Export to PDF</button>
+        <button onclick="downloadWord()">Export to Word</button>
       </div>
     </div>
   </main>
@@ -65,8 +46,8 @@
     <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
   <script src="checklist-tool.js"></script>
 </body>
 </html>
