@@ -765,4 +765,45 @@ textarea:focus-visible {
   position: absolute;    /* ensure it’s absolutely positioned within .search-container */
   z-index: 10000 !important;
 }
+/* Hero Heading */
+.hero-banner.simple-banner h1 {
+  /* Responsive size: min 2.5rem, ideal 8vh, max 5rem */
+  font-size: clamp(2.5rem, 8vh, 5rem);
+  font-weight: 900; /* heavy display weight */
+  line-height: 1.1;
+  margin: 0;
+  
+  /* Gradient text */
+  background: linear-gradient(90deg, #836BFF, #1448FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Subtle drop shadow for legibility */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  
+  /* Entrance animation */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: hero-reveal 0.8s ease-out 0.2s forwards;
+}
+
+/* Hero Sub-text */
+.hero-banner.simple-banner p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  max-width: 36ch;
+  margin-top: 0.75em;
+  color: #E6E1FF;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hero-reveal 0.8s ease-out 0.4s forwards;
+}
+
+/* Keyframes for both */
+@keyframes hero-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
