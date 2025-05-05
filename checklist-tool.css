@@ -11,10 +11,9 @@ body {
   padding: 0 1em;
 }
 
-/* place first and last name side by side */
 .name-fields {
   display: flex;
-  gap: 2em;        /* increased from 1em to 2em */
+  gap: 2em;
   margin-bottom: 1em;
 }
 
@@ -39,7 +38,12 @@ textarea {
 
 textarea {
   font-family: monospace;
-  min-height: 100px;
+}
+
+.strengths-areas {
+  display: flex;
+  gap: 1em;
+  margin: 1em 0;
 }
 
 fieldset {
@@ -54,6 +58,21 @@ legend {
   font-weight: bold;
   padding: 0 0.5em;
   font-size: 1.1em;
+}
+
+.help-icon {
+  margin-left: 0.5em;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #140F50;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  color: #140F50;
 }
 
 input[type="range"] {
@@ -84,6 +103,27 @@ input[type="range"] {
 
 .output-section {
   margin-top: 2em;
+}
+
+#reportSummary h4 {
+  margin-bottom: 0.5em;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+  text-align: left;
+}
+
+.dashboard-table tr.low-score {
+  background: #ffe6e6;
 }
 
 .output-section canvas {
