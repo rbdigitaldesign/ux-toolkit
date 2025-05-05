@@ -11,6 +11,16 @@ body {
   padding: 0 1em;
 }
 
+/* place first and last name side by side */
+.name-fields {
+  display: flex;
+  gap: 1em;
+}
+
+.field-group {
+  flex: 1;
+}
+
 label {
   display: block;
   margin: 1em 0 0.5em;
