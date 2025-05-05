@@ -82,6 +82,8 @@ document.querySelectorAll('.email-button').forEach(btn => {
   btn.addEventListener('click', () => {
     const user = btn.dataset.user;
     const domain = btn.dataset.domain;
-    window.location.href = `mailto:${user}@${domain}`;
+    // open the mailto: in a new tab/window
+    window.open(`mailto:${user}@${domain}`, '_blank');
   });
 });
+
