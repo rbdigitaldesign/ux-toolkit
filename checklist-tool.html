@@ -34,7 +34,8 @@
       <canvas id="chart" width="400" height="150"></canvas>
       <textarea id="output" rows="20" readonly></textarea>
       <div class="action-buttons">
-        <button onclick="copyReport()">Copy Report</button>
+        <button onclick="copyReport()">Copy report</button>
+        <button onclick="downloadPDF()">Export to PDF</button>
       </div>
     </div>
   </main>
@@ -43,6 +44,8 @@
     <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
+  <!-- libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="checklist-tool.js"></script>
 </body>
