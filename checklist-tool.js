@@ -1,6 +1,6 @@
 // checklist-tool.js
 
-// 1) Descriptor model with plural-style guidance & help URLs
+// 1) Descriptor model with guidance & help URLs
 const model = {
   "Clear": {
     description: "Ensures learners can quickly understand where they are and what to do next. Uses consistent headings, logical flow, and clear labels so users never feel lost when navigating the page.",
@@ -82,7 +82,7 @@ window.onload = () => {
   });
 };
 
-// 3) Generate report, reveal sections, store meta/data
+// 3) Generate report, reveal sections, and store meta/data
 function generateReport() {
   // reveal summary/dashboard/chart/output
   ['reportSummary','dashboard','chart','output'].forEach(id => {
@@ -129,11 +129,11 @@ function generateReport() {
 
   // executive summary
   const avgs       = Object.values(reportData).map(i => i.avg);
-  const overallAvg = (avgs.reduce((a,b) => a + b, 0) / avgs.length).toFixed(2);
+  const overallAvg = (avgs.reduce((a,b)=>a + b, 0) / avgs.length).toFixed(2);
   const urgent     = Object.entries(reportData)
-    .sort((a,b) => a[1].avg - b[1].avg)
-    .slice(0, 2)
-    .map(([k,i]) => `${k} (${i.avg.toFixed(2)})`);
+    .sort((a,b)=>a[1].avg - b[1].avg)
+    .slice(0,2)
+    .map(([k,i])=>`${k} (${i.avg.toFixed(2)})`);
   document.getElementById('reportSummary').innerHTML = `
     <h4>Executive summary</h4>
     <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
@@ -159,31 +159,46 @@ function generateReport() {
     </table>
   `;
 
-  // text report
+  // text report with added framing
   let out = `UX Review Summary\n\n`;
-  out += `Reviewer: ${reviewer}\nPosition: ${position}\nCourse Builder: ${builder}\n`;
-  out += `Course: ${course}\nPage URL: ${url}\n\nThis report shows observed checklist items, scores, strengths & development areas.\n`;
+  out += `This report offers a holistic evaluation by combining UX best practices with pedagogical quality dimensions. `
+      + `It uses a 0–3 scale across five domains—Clear, Contextual, Interactive, Challenging, Personalised—to quantify performance, `
+      + `and records observed checklist items as evidence to support actionable improvements.\n\n`;
+
+  out += `Reviewer: ${reviewer}\n`;
+  out += `Position: ${position}\n`;
+  out += `Course Builder: ${builder}\n`;
+  out += `Course: ${course}\n`;
+  out += `Page URL: ${url}\n\n`;
+
   Object.entries(reportData).forEach(([cat,info]) => {
     const total  = model[cat].checklist.length;
     const count  = info.selected.length;
     const others = model[cat].checklist.filter(i => !info.selected.includes(i));
-    out += `\n${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
-    out += `Observed ${count} of ${total} items:\n`;
-    info.selected.forEach(i => out += `- ${i}\n`);
-    if (count === 0) out += `- None selected\n`;
-    out += `\nOther checklist items:\n`;
+    out += `📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
+    out += `✔ Observed ${count} of ${total} items:\n`;
+    if (count) {
+      info.selected.forEach(i => out += `- ${i}\n`);
+    } else {
+      out += `- None selected\n`;
+    }
+    out += `\nℹ️ Other checklist items (confirm applicability):\n`;
     others.forEach(i => out += `- ${i}\n`);
+    out += `\n`;
   });
-  out += `\nKey strengths:\n`;
+
+  out += `💡 Key strengths:\n`;
   strengths.forEach(s => out += `- ${s}\n`);
   if (!strengths.length) out += `- None provided\n`;
-  out += `\nAreas for development:\n`;
+
+  out += `🔧 Areas for development:\n`;
   developments.forEach(d => out += `- ${d}\n`);
   if (!developments.length) out += `- None provided\n`;
-  out += `\nComments:\n${comments}\n`;
-  document.getElementById('output').value = out;
 
-  renderChart(Object.keys(reportData), Object.values(reportData).map(i => i.avg));
+  out += `\n📝 Comments:\n${comments}\n`;
+
+  document.getElementById('output').value = out;
+  renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
 }
 
 // 4) Render bar chart
@@ -222,22 +237,23 @@ function downloadPDF() {
     doc.setFillColor(22,12,81);
     doc.rect(0,0,pageW,25,'F');
 
-    // logo with aspect
+    // logo (preserved aspect)
     const desiredW = 40;
-    const aspect = logo.height / logo.width;
+    const aspect   = logo.height/logo.width;
     const desiredH = desiredW * aspect;
     doc.addImage(logo,'PNG',10,3,desiredW,desiredH);
 
     // title & timestamp
     doc.setTextColor(255,255,255).setFontSize(16)
-       .text('UX review summary',pageW/2,15,{align:'center'});
-    doc.setFontSize(9).text(`Generated: ${new Date().toLocaleString()}`,pageW-10,20,{align:'right'});
+       .text('UX review summary', pageW/2, 15, {align:'center'});
+    doc.setFontSize(9)
+       .text(`Generated: ${new Date().toLocaleString()}`, pageW-10, 20, {align:'right'});
 
-    // reset text
+    // reset
     doc.setTextColor(0,0,0).setFontSize(12);
     let y = 35;
 
-    // meta
+    // metadata
     ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field=>{
       const key = field.toLowerCase().replace(/ /g,'');
       doc.text(`${field}: ${m[key]}`,14,y);
@@ -250,9 +266,9 @@ function downloadPDF() {
       doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`,14,y);
       y+=7; doc.setFontSize(11);
       if(info.selected.length){
-        info.selected.forEach(i=>{
+        info.selected.forEach(item=>{
           if(y>pageH-20){doc.addPage();y=20;}
-          doc.text(`- ${i}`,16,y); y+=6;
+          doc.text(`- ${item}`,16,y); y+=6;
         });
       } else {
         doc.text('- None selected',16,y); y+=6;
@@ -261,20 +277,21 @@ function downloadPDF() {
     });
 
     // strengths & developments
-    [['Key strengths',m.strengths],['Areas for development',m.developments]].forEach(([title,arr])=>{
-      if(y>pageH-40){doc.addPage();y=20;}
-      doc.setFontSize(12).text(`${title}:`,14,y); y+=7;
-      doc.setFontSize(11);
-      if(arr.length){
-        arr.forEach(item=>{
-          if(y>pageH-20){doc.addPage();y=20;}
-          doc.text(`- ${item}`,16,y); y+=6;
-        });
-      } else {
-        doc.text('- None provided',16,y); y+=6;
-      }
-      y+=4;
-    });
+    [['Key strengths',m.strengths],['Areas for development',m.developments]]
+      .forEach(([title,arr])=>{
+        if(y>pageH-40){doc.addPage();y=20;}
+        doc.setFontSize(12).text(`${title}:`,14,y); y+=7;
+        doc.setFontSize(11);
+        if(arr.length){
+          arr.forEach(item=>{
+            if(y>pageH-20){doc.addPage();y=20;}
+            doc.text(`- ${item}`,16,y); y+=6;
+          });
+        } else {
+          doc.text('- None provided',16,y); y+=6;
+        }
+        y+=4;
+      });
 
     // comments
     if(y>pageH-40){doc.addPage();y=20;}
@@ -287,7 +304,7 @@ function downloadPDF() {
 
     // footer
     doc.setFontSize(9)
-       .text('© 2025 TUX',pageW/2,pageH-10,{align:'center'});
+       .text('© 2025 TUX', pageW/2, pageH-10, {align:'center'});
 
     doc.save('UX-Review-Summary.pdf');
   };
