@@ -82,6 +82,10 @@ window.onload = () => {
 };
 
 function generateReport() {
+  // unhide executive summary
+  const summary = document.getElementById('reportSummary');
+  summary.style.display = 'block';
+
   // gather meta
   const first    = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last     = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
@@ -100,7 +104,7 @@ function generateReport() {
   const reportData = {};
   document.querySelectorAll('.slider').forEach(slider => {
     const cat = slider.dataset.label;
-    if (!reportData[cat]) reportData[cat] = { scores: [], selected: [], avg:0 };
+    if (!reportData[cat]) reportData[cat] = { scores: [], selected: [], avg: 0 };
     reportData[cat].scores.push(+slider.value);
   });
   document.querySelectorAll('input[type=checkbox]').forEach(cb => {
@@ -113,89 +117,66 @@ function generateReport() {
 
   // compute avgs
   Object.entries(reportData).forEach(([cat, info]) => {
-    const sum = info.scores.reduce((a,b)=>a+b,0);
-    info.avg = sum / info.scores.length;
+    info.avg = info.scores.reduce((a,b)=>a+b,0) / info.scores.length;
   });
 
   // executive summary
   const avgs = Object.values(reportData).map(i=>i.avg);
   const overallAvg = (avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2);
-  const sorted = Object.entries(reportData)
+  const urgent = Object.entries(reportData)
     .sort((a,b)=>a[1].avg - b[1].avg)
     .slice(0,2)
-    .map(e=>`${e[0]} (${e[1].avg.toFixed(2)})`);
+    .map(([k,i])=>`${k} (${i.avg.toFixed(2)})`);
   document.getElementById('reportSummary').innerHTML = `
     <h4>Executive summary</h4>
-    <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${sorted.join(', ')}.</p>
+    <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
   `;
 
-  // dashboard table
+  // dashboard
   const dashboard = document.getElementById('dashboard');
-  let table = `
-    <table class="dashboard-table">
-      <thead>
-        <tr><th>Descriptor</th><th>Score</th><th>Status</th><th>Alert</th></tr>
-      </thead><tbody>
-  `;
+  let html = `<table class="dashboard-table"><thead>
+    <tr><th>Descriptor</th><th>Score</th><th>Status</th><th>Alert</th></tr>
+  </thead><tbody>`;
   Object.entries(reportData).forEach(([cat,info]) => {
     const avg = info.avg;
     const status = avg >= 2.5 ? '🟢' : avg >= 1.5 ? '🟡' : '🔴';
-    const alert = avg <= 1 ? '⚠️ score below baseline' : '';
-    const rowClass = avg <= 1 ? 'low-score' : '';
-    table += `
-      <tr class="${rowClass}">
-        <td>${cat}</td>
-        <td>${avg.toFixed(2)}/3</td>
-        <td>${status}</td>
-        <td>${alert}</td>
-      </tr>
-    `;
+    const alert = avg <= 1 ? '⚠️ below baseline' : '';
+    const cls = avg <= 1 ? 'low-score' : '';
+    html += `<tr class="${cls}"><td>${cat}</td><td>${avg.toFixed(2)}/3</td>
+      <td>${status}</td><td>${alert}</td></tr>`;
   });
-  table += `</tbody></table>`;
-  dashboard.innerHTML = table;
+  html += `</tbody></table>`;
+  dashboard.innerHTML = html;
 
-  // build full text report
+  // text report
   let out = `Canvas UX Review Summary\n\n`;
-  out += `Reviewer: ${reviewer}\n`;
-  out += `Position: ${position}\n`;
-  out += `Course Builder: ${builder}\n`;
-  out += `Course: ${course}\n`;
-  out += `Page URL: ${url}\n\n`;
-  out += `This report shows observed checklist items, each category score, strengths, and development areas.\n`;
-
+  out += `Reviewer: ${reviewer}\nPosition: ${position}\nCourse Builder: ${builder}\n`;
+  out += `Course: ${course}\nPage URL: ${url}\n\nThis report shows observed checklist items, scores, strengths, and areas for development.\n`;
   Object.entries(reportData).forEach(([cat,info]) => {
     const total = model[cat].checklist.length;
     const count = info.selected.length;
     const others = model[cat].checklist.filter(i=>!info.selected.includes(i));
-
     out += `\n📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
     out += `✔ Observed ${count} of ${total} items:\n`;
     info.selected.forEach(i=> out += `- ${i}\n`);
     if(count===0) out += `- None selected\n`;
-    out += `\nℹ️ Other checklist items (confirm applicability):\n`;
+    out += `\nℹ️ Other checklist items:\n`;
     others.forEach(i=> out += `- ${i}\n`);
   });
-
   out += `\n💡 Key strengths:\n`;
-  strengths.forEach(s=> out += `- ${s}\n`);
-  if(strengths.length===0) out += `- None provided\n`;
-
+  strengths.forEach(s=> out += `- ${s}\n`) || out += `- None provided\n`;
   out += `\n🔧 Areas for development:\n`;
-  developments.forEach(d=> out += `- ${d}\n`);
-  if(developments.length===0) out += `- None provided\n`;
-
+  developments.forEach(d=> out += `- ${d}\n`) || out += `- None provided\n`;
   out += `\n📝 Comments:\n${comments}\n`;
   document.getElementById('output').value = out;
 
   renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
-  // store for CSV
   window.lastReportData = reportData;
 }
 
-// chart rendering
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if(window.uxChart) uxChart.destroy();
+  if(window.uxChart) window.uxChart.destroy();
   window.uxChart = new Chart(ctx, {
     type: 'bar',
     data: { labels, datasets:[{ label:'Avg score', data:scores, backgroundColor:'#1448FF', borderRadius:5 }] },
@@ -203,17 +184,16 @@ function renderChart(labels, scores) {
   });
 }
 
-// copy to clipboard
 function copyReport() {
   const t = document.getElementById('output');
   t.select();
   document.execCommand('copy');
 }
 
-// export PDF
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF(), lines = document.getElementById('output').value.split('\n');
+  const doc = new jsPDF();
+  const lines = document.getElementById('output').value.split('\n');
   let y=15;
   doc.setFontSize(16).text('Canvas UX Review Summary',105,y,{align:'center'});
   y+=10; doc.setFontSize(11);
@@ -224,7 +204,6 @@ function downloadPDF() {
   doc.save('Canvas-UX-Review.pdf');
 }
 
-// export CSV
 function exportCSV() {
   const data = window.lastReportData;
   if(!data) return alert('Generate report first');
