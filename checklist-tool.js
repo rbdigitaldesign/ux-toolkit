@@ -1,9 +1,12 @@
 // checklist-tool.js
 
 // Descriptor model remains unchanged
+// checklist-tool.js
+
+// Descriptor model with updated, plural-style guidance
 const model = {
   "Clear": {
-    description: "Ensure learners can quickly understand where they are and what to do next. Use consistent headings, logical flow, and clear labels so users never feel lost when navigating the page.",
+    description: "Ensures learners can quickly understand where they are and what to do next. Uses consistent headings, logical flow, and clear labels so users never feel lost when navigating the page.",
     checklist: [
       "Navigation is visible and predictable",
       "Headings and breadcrumbs indicate user location",
@@ -12,7 +15,7 @@ const model = {
     ]
   },
   "Contextual": {
-    description: "Make every element meaningful to the course objectives and student backgrounds. Provide examples, resources, and terminology that align with your discipline and the learners’ needs.",
+    description: "Makes every element meaningful to the course objectives and student backgrounds. Provides examples, resources, and terminology that align with your discipline and the learners’ needs.",
     checklist: [
       "Authentic examples are provided",
       "Resources align with discipline",
@@ -21,7 +24,7 @@ const model = {
     ]
   },
   "Interactive": {
-    description: "Engage learners actively by embedding opportunities for participation. Use quizzes, discussions, or interactive media that require input and provide instant feedback.",
+    description: "Engages learners actively by embedding opportunities for participation. Uses quizzes, discussions, or interactive media that require input and provide instant feedback.",
     checklist: [
       "Embedded quizzes or questions are present",
       "Media elements support learning",
@@ -30,7 +33,7 @@ const model = {
     ]
   },
   "Challenging": {
-    description: "Promote deeper learning through tasks that require critical thinking. Include scaffolded exercises, stretch tasks, and reflection prompts to push learners beyond the basics.",
+    description: "Promotes deeper learning through tasks that require critical thinking. Includes scaffolded exercises, stretch tasks, and reflection prompts to push learners beyond the basics.",
     checklist: [
       "Tasks require higher-order thinking",
       "Scaffolded activities are provided",
@@ -39,7 +42,7 @@ const model = {
     ]
   },
   "Personalised": {
-    description: "Support diverse learner needs by offering choices and tailored guidance. Use adaptive pathways, clear instructor presence, and direct links to help resources.",
+    description: "Supports diverse learner needs by offering choices and tailored guidance. Uses adaptive pathways, clear instructor presence, and direct links to help resources.",
     checklist: [
       "Learner choices are offered",
       "Adaptive pathways are indicated",
@@ -63,10 +66,10 @@ window.onload = () => {
       <label style="margin-top:1em;">Overall score for '${category}'</label>
       <input type="range" min="0" max="3" value="0" class="slider" data-label="${category}" />
       <div class="range-labels">
-        <span>0 = Fails</span>
-        <span>1 = Meets</span>
-        <span>2 = Developing</span>
-        <span>3 = Exemplary</span>
+        <span>0 = fails baseline</span>
+        <span>1 = meets baseline</span>
+        <span>2 = developing</span>
+        <span>3 = exemplary</span>
       </div>
     `;
     container.appendChild(fs);
@@ -75,7 +78,7 @@ window.onload = () => {
 
 // Generate the text report and render chart
 function generateReport() {
-  // Gather meta-data
+  // Gather reviewer info
   const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
   const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
   const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
@@ -112,7 +115,7 @@ function generateReport() {
   Object.entries(reportData).forEach(([cat, info]) => {
     const avg   = (info.scores.reduce((a,b) => a + b, 0) / info.scores.length).toFixed(2);
     const total = model[cat].checklist.length;
-    const selectedCount = info.selected.length;
+    const count = info.selected.length;
     const others = model[cat].checklist.filter(item => !info.selected.includes(item));
 
     out += `\n📘 ${cat} (Avg: ${avg}/3)\n`;
@@ -120,8 +123,8 @@ function generateReport() {
     scores.push(+avg);
 
     // Observed items
-    out += `\n✔ Observed ${selectedCount} of ${total} items:\n`;
-    if (selectedCount > 0) {
+    out += `\n✔ Observed ${count} of ${total} items:\n`;
+    if (count > 0) {
       info.selected.forEach(i => out += `- ${i}\n`);
     } else {
       out += `- None selected\n`;
@@ -180,12 +183,10 @@ function downloadPDF() {
   const lines = document.getElementById('output').value.split('\n');
   let y = 15;
 
-  // Title
   doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align: 'center' });
   y += 10;
-
-  // Body
   doc.setFontSize(11);
+
   lines.forEach(line => {
     if (y > 280) { doc.addPage(); y = 10; }
     doc.text(line, 10, y);
@@ -193,4 +194,6 @@ function downloadPDF() {
   });
 
   doc.save('Canvas-UX-Review.pdf');
+}
+
 }
