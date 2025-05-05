@@ -3,78 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Canvas UX & Course Quality Review | TUX</title>
-  <link rel="stylesheet" href="checklist-tool.css" />
+  <title>Canvas UX Assessment Tool</title>
+  <link rel="stylesheet" href="checklist-tool.css?v=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-  <header class="banner">
-    <img src="AU logo primary_white.png" alt="Adelaide University logo" class="logo" />
-    <h1>Canvas UX & Course Quality Review</h1>
-    <p class="intro">Use this tool to evaluate a course’s user experience and quality of learning design. Each item is rated from 0 (Not met) to 3 (Best practice).</p>
-  </header>
+  <div class="banner">
+    <img src="AU logo primary_white.png" class="logo" alt="Adelaide logo">
+    <h1>Canvas UX Review Tool</h1>
+    <p class="intro">Use this tool to assess the quality of your Canvas course using both UX and learning experience indicators.</p>
+  </div>
 
   <main class="form-container">
+    <label for="designerName">Designer name</label>
+    <input type="text" id="designerName" />
+
     <label for="courseName">Course name</label>
-    <input type="text" id="courseName" placeholder="e.g. Systems Thinking for a Complex World" />
+    <input type="text" id="courseName" />
 
     <label for="pageUrl">Page URL</label>
-    <input type="url" id="pageUrl" placeholder="https://canvas.example.com/courses/1234/pages/home" />
+    <input type="url" id="pageUrl" />
 
-    <label for="courseBuilder">Course Builder (Academic)</label>
-    <input type="text" id="courseBuilder" placeholder="e.g. Dr Jane Smith" />
+    <label for="courseBuilder">Course builder name</label>
+    <input type="text" id="courseBuilder" />
 
-    <label for="designerName">Your name</label>
-    <input type="text" id="designerName" placeholder="e.g. Rich Bartlett" />
+    <div class="criteria">
+      <!-- Example block for Clear -->
+      <div class="category-block">
+        <h2>Clear</h2>
+        <div class="sub-criteria">
+          <label>Accessible and inclusive to all students
+            <input type="range" min="0" max="3" value="0" data-label="Accessible and inclusive to all students">
+          </label>
+          <label>Easy to understand and navigate
+            <input type="range" min="0" max="3" value="0" data-label="Easy to understand and navigate">
+          </label>
+          <label>Has defined goals and expectations
+            <input type="range" min="0" max="3" value="0" data-label="Has defined goals and expectations">
+          </label>
+        </div>
+      </div>
+
+      <!-- Repeat similar blocks for Contextual, Interactive, Challenging, Personalised -->
+    </div>
 
     <label for="notes">Additional notes or suggestions</label>
-    <textarea id="notes" rows="4" placeholder="Add any context, clarification or ideas you’d like to share..."></textarea>
-
-    <section class="checklist">
-      <h2>Review criteria</h2>
-
-      <fieldset>
-        <legend>Navigation is clear and consistent</legend>
-        <input type="range" min="0" max="3" step="1" value="0" data-label="Navigation" />
-        <div class="scale-labels"><span>❌ Not met</span><span>Minimum</span><span>Improved</span><span>✅ Best practice</span></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Content is accessible and readable</legend>
-        <input type="range" min="0" max="3" step="1" value="0" data-label="Accessibility" />
-        <div class="scale-labels"><span>❌ Not met</span><span>Minimum</span><span>Improved</span><span>✅ Best practice</span></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Course supports student interaction</legend>
-        <input type="range" min="0" max="3" step="1" value="0" data-label="Interaction" />
-        <div class="scale-labels"><span>❌ Not met</span><span>Minimum</span><span>Improved</span><span>✅ Best practice</span></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Content is contextualised and relevant</legend>
-        <input type="range" min="0" max="3" step="1" value="0" data-label="Contextualisation" />
-        <div class="scale-labels"><span>❌ Not met</span><span>Minimum</span><span>Improved</span><span>✅ Best practice</span></div>
-      </fieldset>
-    </section>
+    <textarea id="notes" rows="5"></textarea>
 
     <button class="primary" onclick="generateReport()">Generate report</button>
 
     <div class="output-section">
-      <label for="output">Report output</label>
-      <textarea id="output" rows="14" readonly></textarea>
-
+      <textarea id="output" rows="15" readonly></textarea>
       <div class="action-buttons">
-        <button onclick="copyReport()">Copy text</button>
+        <button onclick="copyReport()">Copy report</button>
         <button onclick="downloadPDF()">Export to PDF</button>
       </div>
     </div>
   </main>
 
   <footer>
-    <p>© 2025 TUX Toolkit. <a href="terms.html">Terms of use</a></p>
+    <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <script src="checklist-tool.js"></script>
+  <script src="checklist-tool.js?v=1"></script>
 </body>
 </html>
