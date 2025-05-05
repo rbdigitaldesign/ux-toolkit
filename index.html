@@ -2,53 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="TUX is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams."/>
-  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="TUX is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <title>TUX</title>
-  <link rel="stylesheet" href="style.css?v=100"/>
+  <link rel="stylesheet" href="style.css?v=100" />
   <script defer src="search.js"></script>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
+<a href="#main-content" class="skip-link">Skip to content</a>
   <div class="hero-wrapper">
-    <header class="hero-banner" role="banner">
-      <div class="container">
-        <div class="banner-text">
-          <h1>TUX</h1>
-          <p>
-            TUX (Toolkit for UX) is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.
-          </p>
-          <div class="search-container">
-            <form id="searchForm">
-              <input type="text" id="searchInput" class="hero-search"
-                placeholder="Search tools, methods, tips…" autocomplete="off"
-                aria-label="Search UX toolkit"/>
-              <button type="submit" class="search-button">Search</button>
-              <ul id="searchSuggestions" class="search-suggestions" role="listbox">
-                <li class="suggestion" role="option">Card sorting</li>
-                <li class="suggestion" role="option">Usability testing</li>
-                <li class="suggestion" role="option">Heatmaps</li>
-                <li class="suggestion" role="option">Jotform</li>
-                <li class="suggestion" role="option">Typeform</li>
-                <li class="suggestion" role="option">Hotjar</li>
-                <li class="suggestion" role="option">Accessibility checklist</li>
-                <li class="suggestion" role="option">UX for media</li>
-                <li class="suggestion" role="option">Use in courses</li>
-                <li class="suggestion" role="option">User personas</li>
-                <li class="suggestion" role="option">UX testing tips</li>
-              </ul>
-            </form>
-          </div>
-        </div>
-        <img src="tux-icon.png" alt="" class="banner-mascot" aria-hidden="true"/>
+    <header class="hero-banner">
+      <img src="tux-icon.png" alt="TUX mascot" class="tux-mobile-top" />
+      <h1>TUX</h1>
+      <p>TUX (Toolkit for UX) is your shortcut to smarter testing, better design, and stronger student experiences — a UX-savvy sidekick for TALAS learning design teams.</p>
+
+      <div class="search-container">
+        <form id="searchForm">
+          <input type="text" id="searchInput" class="hero-search" placeholder="Search tools, methods, tips..." autocomplete="off" />
+          <button type="submit" class="search-button">Search</button>
+          <ul id="searchSuggestions" class="search-suggestions">
+            <li class="suggestion">Card sorting</li>
+            <li class="suggestion">Usability testing</li>
+            <li class="suggestion">Heatmaps</li>
+            <li class="suggestion">Jotform</li>
+            <li class="suggestion">Typeform</li>
+            <li class="suggestion">Hotjar</li>
+            <li class="suggestion">Accessibility checklist</li>
+            <li class="suggestion">UX for media</li>
+            <li class="suggestion">Use in courses</li>
+            <li class="suggestion">User personas</li>
+            <li class="suggestion">UX testing tips</li>
+          </ul>
+        </form>
       </div>
     </header>
   </div>
 
-  <main id="main-content" role="main" class="container">
-    <!-- tiles -->
+  <main class="container">
+
+    <!-- Tiles Section -->
     <section class="row-section">
       <a href="methodologies.html" class="card">
         <h2>💡 UX Methods</h2>
@@ -58,10 +51,10 @@
         <h2>🔧 UX Tools</h2>
         <p>Browse recommended tools for surveys, heatmaps, testing and prototyping.</p>
       </a>
-      <a href="use-in-courses.html" class="card">
-        <h2>📝 UX review checklist</h2>
-        <p>Use this interactive form to systematically assess and enhance your Canvas course across five key dimensions — Clear, Contextual, Interactive, Challenging and Personalised.</p>
-      </a>
+     <a href="use-in-courses.html" class="card">
+  <h2>📝 UX review checklist</h2>
+  <p>Use this interactive form to systematically assess and enhance your Canvas course across five key dimensions — Clear, Contextual, Interactive, Challenging and Personalised.</p>
+</a>
       <a href="resources.html" class="card">
         <h2>📚 UX Resources</h2>
         <p>Get advice on scripting, layout, timing and visual clarity for educational media.</p>
@@ -76,49 +69,89 @@
       </a>
     </section>
 
-    <!-- videos -->
+    <!-- Video Section -->
     <section class="video-section">
-      <h3 class="section-heading">UX Videos worth watching</h3>
+     <h3 class="section-heading">UX Videos worth watching</h3>
       <div class="video-grid">
         <div class="video-wrapper">
           <iframe src="https://www.youtube.com/embed/LKaCtvvhbcg?si=CD9zdgx5ldQvzZPP"
-                  title="UX Overview Video" allowfullscreen loading="lazy"></iframe>
+            title="UX Overview Video" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="video-wrapper">
           <iframe src="https://www.youtube.com/embed/n8MnoJyl3W4?si=-W5QEs4Sm76pbqoG"
-                  title="Accessibility UX Video" allowfullscreen loading="lazy"></iframe>
+            title="Accessibility UX Video" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </section>
 
-    <!-- profiles -->
+    <!-- Profile Cards -->
     <section class="team-section">
       <h3 class="section-heading">UX sub group members</h3>
       <div class="team-row">
         <div class="profile-card">
-          <img src="Tim.jpg" alt="Tim Churchward" class="profile-pic"/>
+          <img src="Tim.jpg" alt="Tim Churchward" class="profile-pic" />
           <h3>Tim Churchward</h3>
           <p class="job-title">Digital Education Developer</p>
-          <p class="bio">Tim brings 9 years of experience in digital learning, combining instructional design with interactive media. He’s worked across schools and universities developing rich VCE content with tools like H5P, HTML/CSS, and Storyline.</p>
+    <p class="bio">Tim brings 9 years of experience in digital learning, combining instructional design with interactive media. He’s worked across schools and universities developing rich VCE content with tools like H5P, HTML/CSS, and Storyline.</p>
           <div class="card-buttons">
-            <a href="#" class="linkedin-button"><img src="linkedin-logo.png" alt="" class="linkedin-logo"/></a>
+            <a href="https://www.linkedin.com/in/tim-churchward-432590206/" target="_blank" class="linkedin-button">
+              <img src="linkedin-logo.png" alt="LinkedIn" class="linkedin-logo" />
+            </a>
             <button class="email-button" data-user="tim.churchward" data-domain="adelaide.edu.au">Email</button>
           </div>
         </div>
-        <!-- repeat similar profile-cards for others -->
+        <div class="profile-card">
+          <img src="Kelli.jpg" alt="Kelli Knuth" class="profile-pic" />
+          <h3>Kelli Knuth</h3>
+          <p class="job-title">Digital Education Developer</p>
+        <p class="bio">Kelli is passionate about integrating technology in learning. She’s created content using Canvas, SCORM, and H5P for universities and government agencies, and supports educators with LMS best practices.</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/kelli-knuth-elearningdesigner/" target="_blank" class="linkedin-button">
+              <img src="linkedin-logo.png" alt="LinkedIn" class="linkedin-logo" />
+            </a>
+            <button class="email-button" data-user="kelli.knuth" data-domain="adelaide.edu.au">Email</button>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img src="Alex.jpg" alt="Alex Price" class="profile-pic" />
+          <h3>Alex Price</h3>
+          <p class="job-title">Learning Designer</p>
+   <p class="bio">Alex is a creative learning designer with a background in graphic design and lecturing. She develops credentialed short courses and user-centred learning experiences across UniSA and other institutions.</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/alexandra-price/" target="_blank" class="linkedin-button">
+              <img src="linkedin-logo.png" alt="LinkedIn" class="linkedin-logo" />
+            </a>
+            <button class="email-button" data-user="alex.price" data-domain="unisa.edu.au">Email</button>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img src="Rich.jpg" alt="Rich Bartlett" class="profile-pic" />
+          <h3>Rich Bartlett</h3>
+          <p class="job-title">Learning Designer</p>
+  <p class="bio">Rich blends UX design and learning design to build inclusive and practical online courses. He leads projects in Canvas LMS using H5P, design systems, and student-first thinking. He’s a proud dad and team player.</p>
+          <div class="card-buttons">
+            <a href="https://www.linkedin.com/in/richbart11/" target="_blank" class="linkedin-button">
+              <img src="linkedin-logo.png" alt="LinkedIn" class="linkedin-logo" />
+            </a>
+            <button class="email-button" data-user="richard.bartlett" data-domain="adelaide.edu.au">Email</button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- contact form -->
+    <!-- Contact Form -->
     <section class="contact-section">
       <h3 class="section-heading">Contact the UX Subgroup team</h3>
       <form name="tux-contact-form" netlify>
         <label for="name">Your name</label>
         <input type="text" id="name" name="name" required>
+
         <label for="email">Your email</label>
         <input type="email" id="email" name="email" required>
+
         <label for="org">Organisation (optional)</label>
         <input type="text" id="org" name="organisation">
+
         <label for="reason">What do you need help with?</label>
         <select id="reason" name="reason">
           <option value="">Select an option</option>
@@ -127,31 +160,42 @@
           <option value="canvas-ux-review">Review of Canvas course design</option>
           <option value="other">Other</option>
         </select>
+
         <label for="message">Your message</label>
         <textarea id="message" name="message" rows="6" placeholder="Tell us more..."></textarea>
+
         <button type="submit">Send message</button>
       </form>
     </section>
   </main>
 
-  <footer role="contentinfo">
-    <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
-    <img src="au-logo-placeholder.png" alt="Adelaide University logo"/>
-  </footer>
+ <footer>
+  <p>
+    © 2025 TUX. <a href="terms.html" style="color: #ffffff; text-decoration: underline;">Terms of use</a>
+  </p>
+  <img src="au-logo-placeholder.png" alt="Adelaide University logo">
+</footer>
+
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
 
   <script>
-    // scroll-to-top
     const topBtn = document.getElementById("topBtn");
-    window.onscroll = () => topBtn.style.display = (window.scrollY > 100 ? "block" : "none");
+    window.onscroll = function () {
+      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+    };
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    // email pucks
-    document.querySelectorAll('.email-button').forEach(btn =>
-      btn.addEventListener('click', () => location.href = `mailto:${btn.dataset.user}@${btn.dataset.domain}`)
-    );
+  </script>
+  <script>
+    document.querySelectorAll('.email-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const user = btn.dataset.user;
+        const domain = btn.dataset.domain;
+        window.location.href = mailto:${user}@${domain};
+      });
+    });
   </script>
 </body>
 </html>
