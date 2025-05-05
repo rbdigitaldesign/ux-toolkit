@@ -1,4 +1,4 @@
-// Descriptor model unchanged…
+// model unchanged…
 const model = {
   "Clear": {
     description: "Assess clarity of structure and presentation.",
@@ -47,7 +47,7 @@ const model = {
   }
 };
 
-// Render all fieldsets with checklist and slider
+// render all fieldsets with checklist and slider (using "developing" for 2)
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
   Object.entries(model).forEach(([category, info]) => {
@@ -55,7 +55,7 @@ window.onload = () => {
     fs.innerHTML = `
       <legend>${category}</legend>
       <p><em>${info.description}</em></p>
-      ${info.checklist.map(item => 
+      ${info.checklist.map(item =>
         `<label><input type="checkbox" data-cat="${category}" data-item="${item}" /> ${item}</label>`
       ).join("")}
       <label style="margin-top:1em;">Overall score for '${category}'</label>
@@ -63,7 +63,7 @@ window.onload = () => {
       <div class="range-labels">
         <span>0 = Fails</span>
         <span>1 = Meets</span>
-        <span>2 = Progress</span>
+        <span>2 = Developing</span>
         <span>3 = Exemplary</span>
       </div>
     `;
@@ -71,23 +71,21 @@ window.onload = () => {
   });
 };
 
-// Generate the text report and render chart
+// generate report + chart
 function generateReport() {
-  // gather reviewer name and position
-  const first     = document.getElementById('reviewerFirstName').value.trim()     || '[First]';
-  const last      = document.getElementById('reviewerLastName').value.trim()      || '[Last]';
-  const position  = document.getElementById('positionDescription').value.trim()  || '[Position]';
+  const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
+  const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
+  const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
   const reviewer  = `${first} ${last}`;
-  const builder   = document.getElementById('builderName').value.trim()          || '[Builder]';
-  const course    = document.getElementById('courseName').value.trim()           || '[Course Name]';
-  const url       = document.getElementById('pageUrl').value.trim()              || '[Page URL]';
-  const comments  = document.getElementById('comments').value.trim()             || '[No comments]';
+  const builder   = document.getElementById('builderName').value.trim()         || '[Builder]';
+  const course    = document.getElementById('courseName').value.trim()          || '[Course Name]';
+  const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
+  const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
 
-  // collect scores and selections
   const reportData = {};
   document.querySelectorAll('.slider').forEach(slider => {
     const cat = slider.dataset.label;
-    if (!reportData[cat]) reportData[cat] = { scores: [], selected: [] };
+    reportData[cat] = reportData[cat] || { scores: [], selected: [] };
     reportData[cat].scores.push(+slider.value);
   });
   document.querySelectorAll('input[type=checkbox]').forEach(cb => {
@@ -97,7 +95,6 @@ function generateReport() {
     reportData[cat].selected.push(item);
   });
 
-  // build report text
   let out = `Canvas UX Review Summary\n\nReviewer: ${reviewer}\n` +
             `Position: ${position}\n` +
             `Course Builder: ${builder}\nCourse: ${course}\nPage URL: ${url}\n\n` +
@@ -105,13 +102,13 @@ function generateReport() {
 
   const labels = [], scores = [];
   Object.entries(reportData).forEach(([cat, info]) => {
-    const avg   = (info.scores.reduce((a,b) => a + b, 0) / info.scores.length).toFixed(2);
+    const avg   = (info.scores.reduce((a,b)=>a+b,0)/info.scores.length).toFixed(2);
     const total = model[cat].checklist.length;
     const count = info.selected.length;
 
     out += `\n📘 ${cat} (Avg: ${avg}/3)\n`;
     out += `✔ Observed ${count} of ${total} items:\n`;
-    if (count > 0) {
+    if (count) {
       info.selected.forEach(i => out += `- ${i}\n`);
     } else {
       out += `- None selected\n`;
@@ -126,42 +123,25 @@ function generateReport() {
   renderChart(labels, scores);
 }
 
-// Render bar chart using Chart.js
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if (window.uxChart) window.uxChart.destroy();
+  if(window.uxChart) window.uxChart.destroy();
   window.uxChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels,
-      datasets: [{
-        label: 'Avg score',
-        data: scores,
-        backgroundColor: '#1448FF',
-        borderRadius: 5
-      }]
+      datasets: [{ label:'Avg score', data:scores, backgroundColor:'#1448FF', borderRadius:5 }]
     },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          suggestedMin: 0,
-          suggestedMax: 3,
-          ticks: { stepSize: 1 }
-        }
-      }
-    }
+    options: { responsive:true, scales:{ y:{ suggestedMin:0, suggestedMax:3, ticks:{ stepSize:1 } } } }
   });
 }
 
-// Copy report text to clipboard
 function copyReport() {
   const t = document.getElementById('output');
   t.select();
   document.execCommand('copy');
 }
 
-// Export report as styled PDF via jsPDF
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
