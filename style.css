@@ -705,4 +705,18 @@ footer img {
 .return-home:hover {
   background: var(--north-terrace-purple);
 }
+/* ─── unified “return home” button ─── */
+.return-home {
+  display: inline-block;
+  background: var(--bright-blue);
+  color: var(--white);
+  padding: 0.75em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+.return-home:hover {
+  background: var(--north-terrace-purple);
+}
 
