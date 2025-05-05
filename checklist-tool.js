@@ -1,8 +1,11 @@
 function generateReport() {
-  const course = document.getElementById('courseName').value.trim();
-  const url = document.getElementById('pageUrl').value.trim();
-  const sliders = document.querySelectorAll('.slider');
+  const reviewer = document.getElementById('reviewerName').value.trim() || '[Reviewer]';
+  const builder = document.getElementById('builderName').value.trim() || '[Builder]';
+  const course = document.getElementById('courseName').value.trim() || '[Course Name]';
+  const url = document.getElementById('pageUrl').value.trim() || '[Page URL]';
+  const comments = document.getElementById('comments').value.trim() || '[No additional comments]';
 
+  const sliders = document.querySelectorAll('.slider');
   const grouped = {};
 
   sliders.forEach(slider => {
@@ -15,17 +18,53 @@ function generateReport() {
     grouped[category].push({ label, score });
   });
 
-  let output = `Canvas UX Review Summary\n\nCourse: ${course || '[Course Name]'}\nURL: ${url || '[Page URL]'}\n`;
+  let output = `Canvas UX Review Summary\n\n`;
+  output += `Reviewer: ${reviewer}\nCourse Builder: ${builder}\nCourse: ${course}\nURL: ${url}\n`;
+
+  const labels = [];
+  const scores = [];
 
   Object.entries(grouped).forEach(([category, items]) => {
     const avg = (items.reduce((sum, i) => sum + i.score, 0) / items.length).toFixed(2);
     output += `\n📘 ${category} (Avg: ${avg})\n`;
+    labels.push(category);
+    scores.push(parseFloat(avg));
     items.forEach(i => {
       output += `- ${i.label}: ${i.score}/3\n`;
     });
   });
 
+  output += `\n📝 Reviewer Comments:\n${comments}\n`;
+
   document.getElementById('output').value = output;
+
+  renderChart(labels, scores);
+}
+
+function renderChart(labels, scores) {
+  const ctx = document.getElementById('chart').getContext('2d');
+  if (window.uxChart) window.uxChart.destroy(); // Prevent duplicates
+  window.uxChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Avg Score',
+        data: scores,
+        backgroundColor: '#1448FF',
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 3
+        }
+      }
+    }
+  });
 }
 
 function copyReport() {
