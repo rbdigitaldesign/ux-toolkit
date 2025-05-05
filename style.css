@@ -454,25 +454,44 @@ footer img {
   background-color: var(--north-terrace-purple);
   transform: scale(1.05);
 }
-/* global “return home” button */
-.return-container {
-  text-align: center;
-  margin: 2em 0;
+/* ─── banner tweaks ─── */
+/* let the mascot show and text/search align left */
+.hero-banner {
+  overflow: visible !important;    /* allow the koala to hang out */
+  text-align: left !important;     /* move heading, paragraph and search to the left */
+}
+.hero-banner .container {
+  justify-items: start !important; /* ensure grid items sit at the left */
+}
+/* kill the old pseudo-image overlay */
+.hero-banner::after {
+  display: none !important;
 }
 
-.return-home {
-  display: inline-block;
-  background-color: var(--bright-blue);
-  color: var(--white);
-  padding: 0.75em 1.5em;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+/* ─── mascot sizing & positioning ─── */
+/* show on desktop and enlarge */
+.tux-mobile-top {
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: 2% !important;
+  transform: translateY(-50%) !important;
+  width: clamp(180px, 35vw, 400px) !important;
+  height: auto !important;
+  animation: float 12s ease-in-out infinite !important;
+  z-index: 1 !important;
 }
 
-.return-home:hover {
-  background-color: var(--north-terrace-purple);
+/* ─── search dropdown fixes ─── */
+/* keep it above everything and flush-align under the 2px border */
+.search-container {
+  z-index: 10000 !important;
+}
+.search-suggestions {
+  left: -2px !important;                   /* offset by your 2px border */
+  width: calc(100% + 4px) !important;      /* cover input + button + 2×border */
+  box-sizing: border-box !important;
+  border-radius: 0 0 8px 8px !important;   /* match your input’s bottom corners */
 }
 
 
