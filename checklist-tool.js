@@ -54,7 +54,7 @@ const model = {
   }
 };
 
-// helper to style the filled portion of each slider
+// 2) Helpers to style & hide ticks
 function updateSliderColor(slider) {
   const min = +slider.min;
   const max = +slider.max;
@@ -69,13 +69,20 @@ function updateSliderColor(slider) {
   )`;
 }
 
-// 2) Render all form sections on load and clear name placeholders
+function updateTicks(slider) {
+  const container = slider.closest('.slider-container');
+  container.querySelectorAll('.ticks span').forEach(tick => {
+    tick.style.visibility = tick.dataset.value === slider.value ? 'hidden' : 'visible';
+  });
+}
+
+// 3) Render all form sections on load and clear name placeholders
 window.onload = () => {
   // clear first/last name placeholders
-  const fn = document.getElementById('reviewerFirstName');
-  const ln = document.getElementById('reviewerLastName');
-  if (fn) fn.placeholder = '';
-  if (ln) ln.placeholder = '';
+  ['reviewerFirstName','reviewerLastName'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = '';
+  });
 
   const container = document.getElementById("descriptorContainer");
   container.innerHTML = "";
@@ -111,11 +118,15 @@ window.onload = () => {
     container.appendChild(fs);
 
     const slider = fs.querySelector('input[type="range"]');
-    // initial fill
+    // initial styling
     updateSliderColor(slider);
-    // update on input
-    slider.addEventListener('input', () => updateSliderColor(slider));
-    // clickable ticks
+    updateTicks(slider);
+    // on drag or tick-click, restyle & hide the underlying tick
+    slider.addEventListener('input', () => {
+      updateSliderColor(slider);
+      updateTicks(slider);
+    });
+    // make the white ticks clickable
     fs.querySelectorAll('.ticks span').forEach(tick => {
       tick.addEventListener('click', () => {
         slider.value = tick.dataset.value;
@@ -125,4 +136,5 @@ window.onload = () => {
   });
 };
 
-// 3) generateReport, renderChart, copyReport, downloadPDF, exportCSV remain unchanged
+// 4) The rest of your generateReport(), renderChart(), copyReport(),
+//    downloadPDF(), and exportCSV() functions remain exactly as before.
