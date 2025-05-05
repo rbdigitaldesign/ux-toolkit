@@ -49,7 +49,7 @@ input[type="url"] {
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
-  /* removed text-transform so input appears as typed */
+  /* no text-transform */
 }
 
 textarea {
@@ -100,6 +100,7 @@ input[type="range"] {
   margin: 0;
 }
 
+/* slider-container with clickable ticks */
 .slider-container {
   position: relative;
   margin-top: 0.5em;
@@ -124,6 +125,7 @@ input[type="range"] {
   cursor: pointer;
 }
 
+/* ticks at 0%, 33.3%, 66.6%, 100% */
 .slider-container .ticks span:nth-child(1) { left:   0%; }
 .slider-container .ticks span:nth-child(2) { left:  33.333%; }
 .slider-container .ticks span:nth-child(3) { left:  66.666%; }
