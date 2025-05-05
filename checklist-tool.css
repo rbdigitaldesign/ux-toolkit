@@ -1,5 +1,4 @@
 /* checklist-tool.css */
-/* (unchanged except hiding output until report is generated) */
 
 *,
 *::before,
@@ -20,7 +19,7 @@ body {
   padding: 0 1em;
 }
 
-/* hide summary, dashboard, chart, and output until report is generated */
+/* hide report areas until report is generated */
 #reportSummary,
 #dashboard,
 #chart,
@@ -98,8 +97,39 @@ legend {
 
 input[type="range"] {
   width: 100%;
+  margin: 0; /* slider-container handles spacing */
+}
+
+/* slider-container with clickable ticks */
+.slider-container {
+  position: relative;
   margin-top: 0.5em;
 }
+
+.slider-container .ticks {
+  position: relative;
+  width: 100%;
+  height: 0;
+  margin-top: -10px;
+}
+
+.slider-container .ticks span {
+  position: absolute;
+  top: 100%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #140F50;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+/* four ticks at equal intervals */
+.slider-container .ticks span:nth-child(1) { left:   0%; }
+.slider-container .ticks span:nth-child(2) { left:  33.333%; }
+.slider-container .ticks span:nth-child(3) { left:  66.666%; }
+.slider-container .ticks span:nth-child(4) { left: 100%; }
 
 .range-labels {
   display: flex;
