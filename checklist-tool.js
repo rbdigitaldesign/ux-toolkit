@@ -1,6 +1,4 @@
-// checklist-tool.js
-
-// Descriptor model with descriptions and checklist items
+// Descriptor model unchanged…
 const model = {
   "Clear": {
     description: "Assess clarity of structure and presentation.",
@@ -75,12 +73,15 @@ window.onload = () => {
 
 // Generate the text report and render chart
 function generateReport() {
-  // gather meta
-  const reviewer = document.getElementById('reviewerName').value.trim() || '[Reviewer]';
-  const builder  = document.getElementById('builderName').value.trim()  || '[Builder]';
-  const course   = document.getElementById('courseName').value.trim()   || '[Course Name]';
-  const url      = document.getElementById('pageUrl').value.trim()      || '[Page URL]';
-  const comments = document.getElementById('comments').value.trim()     || '[No comments]';
+  // gather reviewer name and position
+  const first     = document.getElementById('reviewerFirstName').value.trim()     || '[First]';
+  const last      = document.getElementById('reviewerLastName').value.trim()      || '[Last]';
+  const position  = document.getElementById('positionDescription').value.trim()  || '[Position]';
+  const reviewer  = `${first} ${last}`;
+  const builder   = document.getElementById('builderName').value.trim()          || '[Builder]';
+  const course    = document.getElementById('courseName').value.trim()           || '[Course Name]';
+  const url       = document.getElementById('pageUrl').value.trim()              || '[Page URL]';
+  const comments  = document.getElementById('comments').value.trim()             || '[No comments]';
 
   // collect scores and selections
   const reportData = {};
@@ -96,14 +97,15 @@ function generateReport() {
     reportData[cat].selected.push(item);
   });
 
-  // build output text
+  // build report text
   let out = `Canvas UX Review Summary\n\nReviewer: ${reviewer}\n` +
+            `Position: ${position}\n` +
             `Course Builder: ${builder}\nCourse: ${course}\nPage URL: ${url}\n\n` +
             `This report shows which checklist items were observed, plus category scores.\n`;
 
   const labels = [], scores = [];
   Object.entries(reportData).forEach(([cat, info]) => {
-    const avg = (info.scores.reduce((a, b) => a + b, 0) / info.scores.length).toFixed(2);
+    const avg   = (info.scores.reduce((a,b) => a + b, 0) / info.scores.length).toFixed(2);
     const total = model[cat].checklist.length;
     const count = info.selected.length;
 
@@ -163,21 +165,15 @@ function copyReport() {
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  const text = document.getElementById('output').value;
-  const lines = doc.splitTextToSize(text, 180);
+  const lines = document.getElementById('output').value.split('\n');
   let y = 15;
 
-  // Title
-  doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align: 'center' });
+  doc.setFontSize(16).text('Canvas UX Review Summary', 105, y, { align:'center' });
   y += 10;
   doc.setFontSize(11);
 
-  // Body
   lines.forEach(line => {
-    if (y > 280) {
-      doc.addPage();
-      y = 10;
-    }
+    if (y > 280) { doc.addPage(); y = 10; }
     doc.text(line, 10, y);
     y += 7;
   });
