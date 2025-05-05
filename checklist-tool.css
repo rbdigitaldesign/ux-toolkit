@@ -1,17 +1,15 @@
-/* General layout */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #F8EFE0;
+  background: #ffffff;
   color: #140F50;
 }
 
-/* Banner/header styling */
 .banner {
   background: #160c50;
-  color: #fff;
-  text-align: center;
+  color: white;
   padding: 2em 1em;
+  text-align: center;
 }
 
 .banner .logo {
@@ -20,66 +18,60 @@ body {
 }
 
 h1 {
-  margin: 0.2em 0;
-  font-size: 2.2em;
+  margin: 0;
 }
 
-p.intro {
-  font-size: 1.1em;
-}
-
-/* Form container */
 .form-container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 2em auto;
   padding: 0 1em;
 }
 
 label {
+  font-weight: bold;
+  margin-top: 1em;
   display: block;
-  margin: 1.2em 0 0.5em;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.6em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.slider-group {
+  margin-bottom: 2em;
+  padding: 1em;
+  background: #f9f9f9;
+  border-left: 5px solid #836bff;
+  border-radius: 5px;
+}
+
+.slider-label {
+  margin-bottom: 0.5em;
   font-weight: bold;
 }
 
-input[type="text"],
-input[type="url"],
-textarea {
-  width: 100%;
-  padding: 0.7em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-/* Criteria styling */
-.category-block {
-  margin-top: 2em;
-  padding: 1em;
-  border: 2px solid #836bff;
-  background: #fff;
-  border-radius: 10px;
-}
-
-.category-block h2 {
-  margin-bottom: 0.8em;
-  font-size: 1.4em;
-}
-
-.sub-criteria label {
+.range-wrap {
   display: flex;
-  flex-direction: column;
-  margin: 1em 0;
-  font-weight: normal;
+  align-items: center;
+  margin-bottom: 1em;
 }
 
-.sub-criteria input[type="range"] {
-  width: 100%;
-  margin-top: 0.4em;
-  accent-color: #836bff;
-  background: linear-gradient(to right, red, orange, green);
+.range-wrap input[type="range"] {
+  flex-grow: 1;
+  margin: 0 1em;
+  accent-color: #1448FF;
 }
 
-/* Output and buttons */
+.range-wrap span {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .output-section {
   margin-top: 2em;
 }
@@ -87,20 +79,19 @@ textarea {
 .output-section textarea {
   width: 100%;
   padding: 1em;
-  font-family: monospace;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background: white;
+  font-family: monospace;
 }
 
 .primary {
-  background: #1448FF;
+  margin-top: 2em;
+  padding: 0.8em 1.2em;
+  background-color: #1448FF;
   color: white;
-  font-weight: bold;
-  padding: 0.8em 1.5em;
-  font-size: 1em;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -111,20 +102,20 @@ textarea {
 }
 
 .action-buttons button {
-  background: #836bff;
+  background: #836BFF;
   color: white;
-  padding: 0.7em 1.2em;
+  font-weight: bold;
+  padding: 0.6em 1.2em;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-/* Footer */
 footer {
-  text-align: center;
-  padding: 1em;
   background: #140F50;
   color: white;
+  text-align: center;
+  padding: 1em;
 }
 
 footer a {
