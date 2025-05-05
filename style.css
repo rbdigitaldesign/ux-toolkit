@@ -806,3 +806,48 @@ textarea:focus-visible {
     transform: translateY(0);
   }
 }
+/* ensure full-viewport banner */
+#heroBanner.hero-banner.home-banner {
+  min-height: 100vh;
+  padding: 6em 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+/* adjust background mascot overlay */
+#heroBanner.hero-banner.home-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('tux-icon-banner.png') no-repeat right bottom;
+  background-size: contain;
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 0;
+}
+/* animated fade-in for banner content */
+.banner-content > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+.banner-content img.tux-mobile-top { animation-delay: 0.2s; }
+.banner-content h1                  { animation-delay: 0.4s; }
+.banner-content p                   { animation-delay: 0.6s; }
+.banner-content .search-container   { animation-delay: 0.8s; }
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+/* subtle enhancement to search input */
+.hero-search {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease;
+}
+.hero-search:hover,
+.hero-search:focus {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
