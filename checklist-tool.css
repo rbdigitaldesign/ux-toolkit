@@ -19,7 +19,7 @@ body {
   padding: 0 1em;
 }
 
-/* hide summary, dashboard, chart and output until report is generated */
+/* hide summary, dashboard, chart, and output until report is generated */
 #reportSummary,
 #dashboard,
 #chart,
