@@ -7,9 +7,9 @@ body {
 
 .banner {
   background: #160c50;
-  color: white;
-  text-align: center;
+  color: #fff;
   padding: 2em 1em;
+  text-align: center;
 }
 
 .banner .logo {
@@ -18,13 +18,8 @@ body {
 }
 
 h1 {
-  margin: 0;
+  margin: 0.2em 0;
   font-size: 2.2em;
-}
-
-p.intro {
-  font-size: 1.1em;
-  margin-top: 0.5em;
 }
 
 .form-container {
@@ -35,7 +30,7 @@ p.intro {
 
 label {
   display: block;
-  margin: 1.5em 0 0.5em;
+  margin: 1em 0 0.5em;
   font-weight: bold;
 }
 
@@ -48,44 +43,26 @@ textarea {
   border-radius: 5px;
 }
 
-.category {
-  margin-top: 2em;
-  padding: 1em;
-  border-left: 6px solid #836bff;
-  background: #fff;
+textarea {
+  font-family: monospace;
+}
+
+fieldset {
+  border: 2px solid #836bff;
   border-radius: 8px;
+  padding: 1em;
+  margin-bottom: 2em;
+  background: #fff;
 }
 
-.category h2 {
-  margin-top: 0;
-  color: #1448FF;
-}
-
-.slider-group {
-  margin: 1em 0;
-}
-
-.slider-group label {
-  display: block;
-  font-weight: normal;
-  margin-bottom: 0.3em;
+legend {
+  font-weight: bold;
+  padding: 0 0.5em;
 }
 
 input[type="range"] {
   width: 100%;
-  appearance: none;
-  height: 8px;
-  border-radius: 5px;
-  background: linear-gradient(to right, #ff4e4e 0%, #ffe25a 50%, #36d67b 100%);
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  background: #140F50;
-  border-radius: 50%;
-  cursor: pointer;
+  margin-top: 0.5em;
 }
 
 .primary {
@@ -97,7 +74,6 @@ input[type="range"]::-webkit-slider-thumb {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 2em;
 }
 
 .output-section {
@@ -105,12 +81,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .output-section textarea {
-  width: 100%;
   border: 1px solid #ccc;
   padding: 1em;
-  font-family: monospace;
-  background: #fff;
   border-radius: 5px;
+  background: #fff;
 }
 
 .action-buttons {
@@ -134,7 +108,6 @@ footer {
   background: #140F50;
   color: white;
   padding: 1em;
-  margin-top: 3em;
 }
 
 footer a {
