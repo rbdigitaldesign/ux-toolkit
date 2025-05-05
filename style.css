@@ -558,3 +558,64 @@ footer img {
   margin-bottom: 0.4em;
 }
 
+/* ─── simple, reduced-height banner ─── */
+.hero-banner.simple-banner {
+  background:
+    linear-gradient(to right, rgba(20,15,80,0.9), rgba(131,107,255,0.4)),
+    linear-gradient(135deg, #140F50 40%, #836BFF);
+  padding: 1.5em 1em;
+  min-height: auto;
+  text-align: left;
+}
+.hero-banner.simple-banner .container {
+  display: block;
+}
+.hero-banner.simple-banner h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  color: var(--white);
+}
+.hero-banner.simple-banner::after,
+.hero-banner.simple-banner .tux-mobile-top {
+  display: none !important;
+}
+
+/* ─── boxed look for pure-text sections ─── */
+.method-box {
+  background-color: #fff;
+  border-left: 6px solid var(--north-terrace-purple);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin: 2em 0;
+  box-shadow: 0 2px 8px rgba(20,15,80,0.05);
+}
+.method-box h2 {
+  margin-top: 0;
+  color: var(--dark-blue);
+}
+.method-box p,
+.method-box ul {
+  color: var(--dark-blue);
+  margin-bottom: 0.75em;
+}
+.method-box ul {
+  padding-left: 1.2em;
+}
+.method-box ul li {
+  margin-bottom: 0.5em;
+}
+
+/* ─── Return home button ─── */
+.return-home {
+  display: inline-block;
+  background: var(--bright-blue);
+  color: var(--white);
+  padding: 0.75em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+.return-home:hover {
+  background: var(--north-terrace-purple);
+}
