@@ -1,0 +1,68 @@
+/* home-banner.css */
+
+/* 1) Narrow override so it can't leak onto any other page */
+.hero-banner.home-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 4%;
+  min-height: auto;
+  text-align: left;
+  overflow: visible;
+}
+
+/* 2) Wrap your content in banner-content */
+.hero-banner.home-banner .banner-content {
+  flex: 1 1 50%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 3) Big gradient “TUX” (only on home) */
+.hero-banner.home-banner .banner-content h1 {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0;
+  background: linear-gradient(90deg, #836BFF, #1448FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* 4) Slightly larger subtitle */
+.hero-banner.home-banner .banner-content p {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin: 0.5em 0 0;
+  max-width: 36ch;
+}
+
+/* 5) Ensure search stays inside its column */
+.hero-banner.home-banner .banner-content .search-container {
+  width: 100%;
+  max-width: 450px;
+  margin-top: 1rem;
+}
+
+/* 6) Your mascot on the right */
+.hero-banner.home-banner .banner-visual {
+  flex: 1 1 40%;
+  text-align: right;
+}
+.hero-banner.home-banner .banner-visual img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 7) Stack nicely on small screens */
+@media (max-width: 768px) {
+  .hero-banner.home-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-banner.home-banner .banner-visual {
+    margin-top: 2rem;
+  }
+}
