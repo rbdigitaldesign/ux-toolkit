@@ -454,3 +454,40 @@ footer img {
   background-color: var(--north-terrace-purple);
   transform: scale(1.05);
 }
+/* ─── methodologies page tweaks ─── */
+.method-section {
+  margin: 3em 0;
+}
+.method-section h2 {
+  font-size: 2em;
+  color: var(--bright-blue);
+  margin-bottom: 0.5em;
+}
+.method-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  align-items: center;
+  gap: 2em;
+  margin-top: 1.5em;
+}
+.method-card.left-image .method-img {
+  order: -1;
+}
+.method-img img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(20,15,80,0.1);
+}
+.method-text p {
+  margin-bottom: 0.75em;
+}
+.method-text ul {
+  list-style: disc inside;
+  margin: 0;
+  padding-left: 1em;
+}
+
+/* reuse your existing return-home button style */
+/* .return-container and .return-home already in style.css */
