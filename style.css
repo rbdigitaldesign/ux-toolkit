@@ -407,6 +407,14 @@ h1, h2, h3, h4, .card h2, .highlight h3 {
 .contact-section button[type="submit"]:hover {
   background-color: var(--north-terrace-purple);
 }
+/* ensure form fields stay inside their container */
+.contact-section input,
+.contact-section select,
+.contact-section textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 
 /* Footer */
 footer {
