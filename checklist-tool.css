@@ -49,7 +49,6 @@ input[type="url"] {
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
-  /* no text-transform */
 }
 
 textarea {
@@ -95,9 +94,52 @@ legend {
   color: #140F50;
 }
 
+/* --- NEW SLIDER STYLING --- */
+
 input[type="range"] {
+  -webkit-appearance: none;
   width: 100%;
+  height: 4px;
+  background: transparent;
   margin: 0;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #1448FF;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin-top: -6px; /* center the thumb on the track */
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #1448FF;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-progress {
+  background: #1448FF;
+  height: 4px;
+  border-radius: 2px;
 }
 
 /* slider-container with integrated ticks */
@@ -106,13 +148,6 @@ input[type="range"] {
   margin-top: 0.5em;
 }
 
-.slider-container input[type="range"] {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-}
-
-/* position the ticks at the vertical centre of the track */
 .slider-container .ticks {
   position: absolute;
   left: 0;
@@ -120,7 +155,7 @@ input[type="range"] {
   transform: translateY(-50%);
   width: 100%;
   height: 0;
-  pointer-events: none;  /* let clicks fall through except on the spans */
+  pointer-events: none;
 }
 
 .slider-container .ticks span {
@@ -128,12 +163,12 @@ input[type="range"] {
   top: 0;
   width: 12px;
   height: 12px;
-  border: 2px solid #140F50;
-  border-radius: 50%;
+  border: 2px solid #1448FF;
   background: #fff;
-  transform: translateX(-50%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
-  pointer-events: auto;  /* allow clicking on the circles */
+  pointer-events: auto;
 }
 
 /* four ticks at equal intervals */
@@ -141,7 +176,7 @@ input[type="range"] {
 .slider-container .ticks span:nth-child(2) { left:  33.333%; }
 .slider-container .ticks span:nth-child(3) { left:  66.666%; }
 .slider-container .ticks span:nth-child(4) { left: 100%; }
-
+/* --- END SLIDER STYLING --- */
 
 .range-labels {
   display: flex;
