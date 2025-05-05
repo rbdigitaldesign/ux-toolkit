@@ -410,4 +410,18 @@ footer a { color: var(--white); text-decoration: underline; }
   /* old: clamp(120px, 25vw, 200px); */
   width: clamp(150px, 30vw, 300px);
 }
+/* further enlarge the mascot: clamp(min-size, % of viewport, max-size) */
+.banner-mascot {
+  /* 35vw means 35% of the viewport width */
+  width: clamp(180px, 35vw, 400px);
+}
+
+/* make the dropdown sit flush under the input’s outer border */
+.search-suggestions {
+  /* shift left by the border thickness (3px) */
+  left: -3px;
+  /* widen to cover input + button + 2×border */
+  width: calc(100% + 6px);
+  box-sizing: border-box;
+}
 
