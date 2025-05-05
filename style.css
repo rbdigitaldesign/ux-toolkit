@@ -552,9 +552,10 @@ button:focus,
   to { opacity: 1; transform: translateY(0); }
 }
 .hero-banner .container {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: reveal 0.8s ease-out 0.3s forwards;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2em;
 }
 
 /* ——— ensure heading fallback continues to apply ——— */
