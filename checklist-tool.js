@@ -1,9 +1,6 @@
 // checklist-tool.js
 
-// Descriptor model remains unchanged
-// checklist-tool.js
-
-// Descriptor model with updated, plural-style guidance
+// updated descriptor model with richer, plural-style guidance
 const model = {
   "Clear": {
     description: "Ensures learners can quickly understand where they are and what to do next. Uses consistent headings, logical flow, and clear labels so users never feel lost when navigating the page.",
@@ -52,12 +49,12 @@ const model = {
   }
 };
 
-// Render all fieldsets with checklist and slider
+// render all fieldsets with checklist and slider
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
   Object.entries(model).forEach(([category, info]) => {
-    const fs = document.createElement("fieldset");
-    fs.innerHTML = `
+    const fieldset = document.createElement("fieldset");
+    fieldset.innerHTML = `
       <legend>${category}</legend>
       <p><em>${info.description}</em></p>
       ${info.checklist.map(item =>
@@ -72,23 +69,23 @@ window.onload = () => {
         <span>3 = exemplary</span>
       </div>
     `;
-    container.appendChild(fs);
+    container.appendChild(fieldset);
   });
 };
 
-// Generate the text report and render chart
+// generate the text report and render chart
 function generateReport() {
-  // Gather reviewer info
-  const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
-  const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
-  const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
-  const reviewer  = `${first} ${last}`;
-  const builder   = document.getElementById('builderName').value.trim()         || '[Builder]';
-  const course    = document.getElementById('courseName').value.trim()          || '[Course Name]';
-  const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
-  const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
+  // gather reviewer info
+  const first = document.getElementById('reviewerFirstName').value.trim() || '[First]';
+  const last = document.getElementById('reviewerLastName').value.trim() || '[Last]';
+  const position = document.getElementById('positionDescription').value.trim() || '[Position]';
+  const reviewer = `${first} ${last}`;
+  const builder = document.getElementById('builderName').value.trim() || '[Builder]';
+  const course = document.getElementById('courseName').value.trim() || '[Course Name]';
+  const url = document.getElementById('pageUrl').value.trim() || '[Page URL]';
+  const comments = document.getElementById('comments').value.trim() || '[No comments]';
 
-  // Collect scores and selections
+  // collect scores and selections
   const reportData = {};
   document.querySelectorAll('.slider').forEach(slider => {
     const cat = slider.dataset.label;
@@ -97,51 +94,51 @@ function generateReport() {
   });
   document.querySelectorAll('input[type=checkbox]').forEach(cb => {
     if (!cb.checked) return;
-    const cat  = cb.dataset.cat;
+    const cat = cb.dataset.cat;
     const item = cb.dataset.item;
     reportData[cat].selected.push(item);
   });
 
-  // Build report text
-  let out = `Canvas UX Review Summary\n\n`;
-  out += `Reviewer: ${reviewer}\n`;
-  out += `Position: ${position}\n`;
-  out += `Course Builder: ${builder}\n`;
-  out += `Course: ${course}\n`;
-  out += `Page URL: ${url}\n\n`;
-  out += `This report shows which checklist items were observed, which were not, and each category score.\n`;
+  // build report text
+  let output = `Canvas UX Review Summary\n\n`;
+  output += `Reviewer: ${reviewer}\n`;
+  output += `Position: ${position}\n`;
+  output += `Course Builder: ${builder}\n`;
+  output += `Course: ${course}\n`;
+  output += `Page URL: ${url}\n\n`;
+  output += `This report shows which checklist items were observed, which were not, and each category score.\n`;
 
   const labels = [], scores = [];
   Object.entries(reportData).forEach(([cat, info]) => {
-    const avg   = (info.scores.reduce((a,b) => a + b, 0) / info.scores.length).toFixed(2);
+    const avg = (info.scores.reduce((a, b) => a + b, 0) / info.scores.length).toFixed(2);
     const total = model[cat].checklist.length;
     const count = info.selected.length;
     const others = model[cat].checklist.filter(item => !info.selected.includes(item));
 
-    out += `\n📘 ${cat} (Avg: ${avg}/3)\n`;
+    output += `\n📘 ${cat} (Avg: ${avg}/3)\n`;
     labels.push(cat);
     scores.push(+avg);
 
-    // Observed items
-    out += `\n✔ Observed ${count} of ${total} items:\n`;
+    // observed items
+    output += `\n✔ Observed ${count} of ${total} items:\n`;
     if (count > 0) {
-      info.selected.forEach(i => out += `- ${i}\n`);
+      info.selected.forEach(i => output += `- ${i}\n`);
     } else {
-      out += `- None selected\n`;
+      output += `- None selected\n`;
     }
 
-    // Other items
-    out += `\nℹ️ Other checklist items (confirm applicability):\n`;
-    others.forEach(i => out += `- ${i}\n`);
+    // other items
+    output += `\nℹ️ Other checklist items (confirm applicability):\n`;
+    others.forEach(i => output += `- ${i}\n`);
   });
 
-  out += `\n📝 Comments:\n${comments}\n`;
-  document.getElementById('output').value = out;
+  output += `\n📝 Comments:\n${comments}\n`;
+  document.getElementById('output').value = output;
 
   renderChart(labels, scores);
 }
 
-// Render bar chart using Chart.js
+// render bar chart using Chart.js
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
   if (window.uxChart) window.uxChart.destroy();
@@ -169,14 +166,14 @@ function renderChart(labels, scores) {
   });
 }
 
-// Copy report text to clipboard
+// copy report text to clipboard
 function copyReport() {
-  const t = document.getElementById('output');
-  t.select();
+  const textarea = document.getElementById('output');
+  textarea.select();
   document.execCommand('copy');
 }
 
-// Export report as styled PDF via jsPDF
+// export report as styled PDF via jsPDF
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
@@ -194,6 +191,4 @@ function downloadPDF() {
   });
 
   doc.save('Canvas-UX-Review.pdf');
-}
-
 }
