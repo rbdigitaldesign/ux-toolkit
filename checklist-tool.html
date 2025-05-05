@@ -39,14 +39,28 @@
     <label for="comments">Additional comments or recommendations</label>
     <textarea id="comments" rows="5" placeholder="Summarise key recommendations…"></textarea>
 
+    <div class="strengths-areas">
+      <div class="field-group">
+        <label for="strengths">Key strengths (one per line)</label>
+        <textarea id="strengths" rows="3" placeholder="- Strength 1"></textarea>
+      </div>
+      <div class="field-group">
+        <label for="developments">Areas for development (one per line)</label>
+        <textarea id="developments" rows="3" placeholder="- Area 1"></textarea>
+      </div>
+    </div>
+
     <button class="primary" onclick="generateReport()">Generate report</button>
 
     <div class="output-section">
+      <div id="reportSummary"></div>
+      <div id="dashboard"></div>
       <canvas id="chart" width="400" height="150"></canvas>
       <textarea id="output" rows="20" readonly></textarea>
       <div class="action-buttons">
         <button onclick="copyReport()">Copy report</button>
         <button onclick="downloadPDF()">Export to PDF</button>
+        <button onclick="exportCSV()">Export CSV</button>
       </div>
     </div>
   </main>
