@@ -805,4 +805,32 @@ textarea:focus-visible {
     opacity: 1;
     transform: translateY(0);
   }
+/* ─── Super-bold, gradient “TUX” for home banner ─── */
+.hero-banner.home-banner h1 {
+  /* responsive size: min 3rem, ideal 10vw, max 6rem */
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0;
+  
+  /* gradient text → clip & transparent fill */
+  background: linear-gradient(90deg, #836BFF, #1448FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* subtle shadow for contrast */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
+
+/* ─── Matching, slightly larger sub-line for home banner ─── */
+.hero-banner.home-banner p {
+  /* bump size up a little */
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  max-width: 36ch;
+  margin: 0.75em 0 0;
+  
+  /* keep it fully opaque (if you had any fade-in anims before, cancel them here) */
+  opacity: 1 !important;
+  transform: none !important;
+}
+
