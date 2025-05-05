@@ -57,8 +57,10 @@ const model = {
 // 2) Slider helpers
 function updateSliderColor(slider) {
   const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-  slider.style.background = `linear-gradient(to right, #1448FF 0%, #1448FF ${pct}%, #ddd ${pct}%, #ddd 100%)`;
+  slider.style.background =
+    `linear-gradient(to right, #1448FF 0%, #1448FF ${pct}%, #ddd ${pct}%, #ddd 100%)`;
 }
+
 function updateTicks(slider) {
   slider.closest('.slider-container')
     .querySelectorAll('.ticks span')
@@ -71,9 +73,11 @@ window.onload = () => {
     const el = document.getElementById(id);
     if (el) el.placeholder = '';
   });
+
   const container = document.getElementById("descriptorContainer");
   container.innerHTML = "";
-  Object.entries(model).forEach(([cat,info]) => {
+
+  Object.entries(model).forEach(([cat, info]) => {
     const fs = document.createElement("fieldset");
     fs.innerHTML = `
       <legend>
@@ -119,13 +123,13 @@ window.onload = () => {
   });
 };
 
-// 4) Generate report
+// 4) Generate report, reveal sections, store data
 function generateReport() {
   ['reportSummary','dashboard','chart','output'].forEach(id => {
     document.getElementById(id).style.display = 'block';
   });
 
-  // metadata
+  // gather metadata
   const meta = {
     reviewer: `${document.getElementById('reviewerFirstName').value.trim() || '[First]'} ${document.getElementById('reviewerLastName').value.trim() || '[Last]'}`,
     position: document.getElementById('positionDescription').value.trim() || '[Position]',
@@ -137,7 +141,7 @@ function generateReport() {
     developments: document.getElementById('developments').value.trim().split('\n').filter(l => l)
   };
 
-  // collect data
+  // collect slider scores & checkbox selections
   const reportData = {};
   document.querySelectorAll('.slider').forEach(s => {
     const c = s.dataset.label;
@@ -147,27 +151,29 @@ function generateReport() {
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     if (cb.checked) reportData[cb.dataset.cat].selected.push(cb.dataset.item);
   });
-  Object.values(reportData).forEach(i => i.avg = i.scores.reduce((a,b)=>a+b,0)/i.scores.length);
+  Object.values(reportData).forEach(i => {
+    i.avg = i.scores.reduce((a,b) => a + b, 0) / i.scores.length;
+  });
 
   window.lastReportMeta = meta;
   window.lastReportData = reportData;
 
   // executive summary
   const avgs = Object.values(reportData).map(i => i.avg);
-  const overall = (avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2);
+  const overall = (avgs.reduce((a,b) => a + b, 0) / avgs.length).toFixed(2);
   const urgent = Object.entries(reportData)
-    .sort((a,b)=>a[1].avg - b[1].avg)
+    .sort((a,b) => a[1].avg - b[1].avg)
     .slice(0,2)
-    .map(([k,i])=>`${k} (${i.avg.toFixed(2)})`)
+    .map(([k,i]) => `${k} (${i.avg.toFixed(2)})`)
     .join(', ');
   document.getElementById('reportSummary').innerHTML = `
     <h4>Executive summary</h4>
     <p>Overall average score: <strong>${overall}/3</strong>. Most urgent areas: ${urgent}.</p>
   `;
 
-  // dashboard
+  // dashboard table
   const rows = Object.entries(reportData).map(([cat,info]) => {
-    const avg = info.avg.toFixed(2) + '/3';
+    const avg    = info.avg.toFixed(2) + '/3';
     const status = info.avg >= 2.5 ? 'green' : info.avg >= 1.5 ? 'yellow' : 'red';
     const alert  = info.avg <= 1 ? 'below baseline' : '';
     return `<tr>
@@ -184,28 +190,39 @@ function generateReport() {
     </table>
   `;
 
-  // text report
+  // build text report with contextual "Other checklist items"
   let out = `UX review summary\n\n`;
   out += `This report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.\n\n`;
   out += `Reviewer: ${meta.reviewer}\nPosition: ${meta.position}\nCourse Builder: ${meta.builder}\nCourse: ${meta.course}\nPage URL: ${meta.url}\n\n`;
+
   Object.entries(reportData).forEach(([cat,info]) => {
     const total = model[cat].checklist.length;
     const count = info.selected.length;
     const others = model[cat].checklist.filter(i => !info.selected.includes(i));
     out += `📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
-    out += `Observed ${count} of ${total} items:\n`;
-    if (count) info.selected.forEach(i => out += `- ${i}\n`);
-    else out += `- None selected\n`;
-    out += `Other checklist items:\n`;
+    out += `✔ Observed ${count} of ${total} items:\n`;
+    if (count) {
+      info.selected.forEach(i => out += `- ${i}\n`);
+    } else {
+      out += `- None selected\n`;
+    }
+    out += `\nℹ️ Other checklist items (unticked; may still be present or not applicable—discuss with reviewer):\n`;
     others.forEach(i => out += `- ${i}\n`);
     out += `\n`;
   });
-  out += `Key strengths:\n`;    meta.strengths   .forEach(s => out += `- ${s}\n`);       if (!meta.strengths.length)   out += `- None provided\n`;
-  out += `Areas for development:\n`; meta.developments.forEach(d => out += `- ${d}\n`); if (!meta.developments.length) out += `- None provided\n`;
-  out += `\nComments:\n${meta.comments}\n`;
+
+  out += `💡 Key strengths:\n`;
+  meta.strengths.forEach(s => out += `- ${s}\n`);
+  if (!meta.strengths.length) out += `- None provided\n`;
+
+  out += `🔧 Areas for development:\n`;
+  meta.developments.forEach(d => out += `- ${d}\n`);
+  if (!meta.developments.length) out += `- None provided\n`;
+
+  out += `\n📝 Comments:\n${meta.comments}\n`;
 
   document.getElementById('output').value = out;
-  renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
+  renderChart(Object.keys(reportData), Object.values(reportData).map(i => i.avg));
 }
 
 // 5) Render bar chart
@@ -221,7 +238,9 @@ function renderChart(labels, scores) {
 
 // 6) Copy report
 function copyReport() {
-  const t = document.getElementById('output'); t.select(); document.execCommand('copy');
+  const t = document.getElementById('output');
+  t.select();
+  document.execCommand('copy');
 }
 
 // 7) Export PDF with table, chart, and detailed report
@@ -243,7 +262,7 @@ function downloadPDF() {
   const logo = new Image();
   logo.src = 'au-logo-placeholder.png';
   logo.onload = () => {
-    const w = 40, h = (logo.height/logo.width)*w;
+    const w = 40, h = (logo.height / logo.width) * w;
     doc.addImage(logo, 'PNG', 10, 3, w, h);
 
     // title & timestamp
@@ -263,12 +282,17 @@ function downloadPDF() {
     y += 4;
 
     // metadata
-    [ ['Reviewer','reviewer'], ['Position','position'], ['Course Builder','builder'], ['Course','course'], ['Page URL','url'] ]
-      .forEach(([label,key]) => {
-        if (y > pageH - 20) { doc.addPage(); y = 20; }
-        doc.setFontSize(11).text(`${label}: ${meta[key]}`, 14, y);
-        y += 7;
-      });
+    [
+      ['Reviewer','reviewer'],
+      ['Position','position'],
+      ['Course Builder','builder'],
+      ['Course','course'],
+      ['Page URL','url']
+    ].forEach(([label,key]) => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.setFontSize(11).text(`${label}: ${meta[key]}`, 14, y);
+      y += 7;
+    });
     y += 6;
 
     // dashboard table header
@@ -280,7 +304,7 @@ function downloadPDF() {
     doc.text('Alert',     140, y);
     y += 5;
 
-    // dashboard rows
+    // dashboard table rows
     Object.entries(data).forEach(([cat,info]) => {
       if (y > pageH - 20) { doc.addPage(); y = 20; }
       const avg    = info.avg.toFixed(2) + '/3';
@@ -303,7 +327,7 @@ function downloadPDF() {
     doc.addImage(img, 'PNG', 14, y, imgW, imgH);
     y += imgH + 10;
 
-    // detailed report sections
+    // detailed checklist sections
     Object.entries(data).forEach(([cat,info]) => {
       if (y > pageH - 20) { doc.addPage(); y = 20; }
       doc.setFontSize(12).text(`${cat} (Avg: ${info.avg.toFixed(2)}/3)`, 14, y);
@@ -316,9 +340,10 @@ function downloadPDF() {
           doc.text(`- ${item}`, 16, y); y += 5;
         });
       } else {
-        doc.text(`- None selected`, 16, y); y += 5;
+        doc.text('- None selected', 16, y); y += 5;
       }
-      doc.text(`Other checklist items:`, 14, y); y += 6;
+      doc.setFontSize(11).text('Other checklist items (unticked; may still be present or not applicable—discuss with reviewer):', 14, y);
+      y += 6;
       model[cat].checklist.filter(i => !info.selected.includes(i)).forEach(item => {
         if (y > pageH - 20) { doc.addPage(); y = 20; }
         doc.text(`- ${item}`, 16, y); y += 5;
@@ -326,22 +351,24 @@ function downloadPDF() {
       y += 8;
     });
 
-    // strengths & areas for development
-    [['Key strengths',meta.strengths],['Areas for development',meta.developments]]
-      .forEach(([title,arr]) => {
-        if (y > pageH - 20) { doc.addPage(); y = 20; }
-        doc.setFontSize(12).text(`${title}:`, 14, y); y += 7;
-        doc.setFontSize(11);
-        if (arr.length) {
-          arr.forEach(item => {
-            if (y > pageH - 20) { doc.addPage(); y = 20; }
-            doc.text(`- ${item}`, 16, y); y += 5;
-          });
-        } else {
-          doc.text(`- None provided`, 16, y); y += 5;
-        }
-        y += 8;
-      });
+    // strengths & development
+    [
+      ['Key strengths', meta.strengths],
+      ['Areas for development', meta.developments]
+    ].forEach(([title, arr]) => {
+      if (y > pageH - 20) { doc.addPage(); y = 20; }
+      doc.setFontSize(12).text(`${title}:`, 14, y); y += 7;
+      doc.setFontSize(11);
+      if (arr.length) {
+        arr.forEach(item => {
+          if (y > pageH - 20) { doc.addPage(); y = 20; }
+          doc.text(`- ${item}`, 16, y); y += 5;
+        });
+      } else {
+        doc.text('- None provided', 16, y); y += 5;
+      }
+      y += 8;
+    });
 
     // comments
     if (y > pageH - 20) { doc.addPage(); y = 20; }
