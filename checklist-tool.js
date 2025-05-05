@@ -1,4 +1,3 @@
-// Descriptor categories and sub-criteria
 const descriptors = {
   "Clear": [
     "Accessibility and inclusion",
@@ -33,7 +32,6 @@ const descriptors = {
   ]
 };
 
-// On page load: dynamically render all sliders grouped by descriptor
 window.onload = () => {
   const container = document.getElementById("descriptorContainer");
   for (const [title, items] of Object.entries(descriptors)) {
@@ -67,7 +65,6 @@ window.onload = () => {
   }
 };
 
-// Report generation logic
 function generateReport() {
   const reviewer = document.getElementById('reviewerName').value.trim() || '[Reviewer]';
   const builder = document.getElementById('builderName').value.trim() || '[Builder]';
@@ -110,11 +107,9 @@ function generateReport() {
   renderChart(labels, scores);
 }
 
-// Chart rendering using Chart.js
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if (window.uxChart) window.uxChart.destroy(); // Avoid duplicates
-
+  if (window.uxChart) window.uxChart.destroy();
   window.uxChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -141,14 +136,12 @@ function renderChart(labels, scores) {
   });
 }
 
-// Copy report text
 function copyReport() {
   const text = document.getElementById('output');
   text.select();
   document.execCommand('copy');
 }
 
-// Export to Word using docx.js
 function downloadWord() {
   const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, HeadingLevel } = window.docx;
   const outputText = document.getElementById('output').value;
