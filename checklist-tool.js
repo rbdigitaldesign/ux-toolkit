@@ -1,80 +1,114 @@
-// Grabs values and builds a structured report
-function generateReport() {
-  const designer = document.getElementById('designerName').value.trim();
-  const course = document.getElementById('courseName').value.trim();
-  const url = document.getElementById('pageUrl').value.trim();
-  const builder = document.getElementById('courseBuilder').value.trim();
-  const notes = document.getElementById('notes').value.trim();
+// Course quality descriptors and their criteria
+const criteria = {
+  Clear: [
+    "Accessible and inclusive to all students",
+    "Easy to understand and navigate",
+    "Has defined goals and expectations",
+    "Utilises technology that doesn’t get in the way of learning",
+    "Explains the requirements for interactions"
+  ],
+  Contextual: [
+    "Articulates each activity with purpose and intention",
+    "Contextualises learning in the real world",
+    "Tests learning with varied and suitable assessments",
+    "Delivers content that is contemporary and relevant"
+  ],
+  Interactive: [
+    "Actively constructed learning",
+    "Provides actionable feedback",
+    "Promotes flexible communication",
+    "Facilitates discussion and collaboration"
+  ],
+  Challenging: [
+    "Promotes deeper learning",
+    "Supports creation of new knowledge",
+    "Has consistent teaching support"
+  ],
+  Personalised: [
+    "Adds value to the student",
+    "Respects student time",
+    "Develops professional skills"
+  ]
+};
 
-  const blocks = document.querySelectorAll('.category-block');
-  let report = `Canvas UX & Course Experience Report
+// Dynamically render sliders with scores 0–3
+window.onload = () => {
+  const container = document.getElementById('slidersContainer');
+  Object.entries(criteria).forEach(([category, subs]) => {
+    const block = document.createElement('div');
+    block.className = 'slider-group';
+    const title = document.createElement('h2');
+    title.textContent = category;
+    block.appendChild(title);
 
-Course: ${course || '[Course name]'}
-Page reviewed: ${url || '[Page URL]'}
-Course builder: ${builder || '[Course builder name]'}
-Completed by: ${designer || '[Designer name]'}
+    subs.forEach(sub => {
+      const label = document.createElement('div');
+      label.className = 'slider-label';
+      label.textContent = sub;
 
-`;
+      const wrap = document.createElement('div');
+      wrap.className = 'range-wrap';
 
-  blocks.forEach(block => {
-    const title = block.querySelector('h2').textContent;
-    const sliders = block.querySelectorAll('input[type="range"]');
-    report += `\n🟣 ${title}\n`;
+      const slider = document.createElement('input');
+      slider.type = 'range';
+      slider.min = 0;
+      slider.max = 3;
+      slider.value = 0;
+      slider.step = 1;
 
-    sliders.forEach(slider => {
-      const rating = slider.value;
-      const label = slider.dataset.label;
-      report += `  - ${label}: ${rating}/3\n`;
+      const value = document.createElement('span');
+      value.textContent = '0';
+
+      slider.addEventListener('input', () => {
+        value.textContent = slider.value;
+      });
+
+      wrap.appendChild(slider);
+      wrap.appendChild(value);
+
+      block.appendChild(label);
+      block.appendChild(wrap);
     });
+
+    container.appendChild(block);
+  });
+};
+
+// Generate report for text output
+function generateReport() {
+  const name = document.getElementById('designerName').value.trim();
+  const course = document.getElementById('courseName').value.trim();
+  const lines = [`Canvas Course UX Review by ${name || '[Designer]'} for "${course || '[Course]'}"`, ""];
+
+  document.querySelectorAll('.slider-group').forEach(group => {
+    const category = group.querySelector('h2').textContent;
+    lines.push(`📘 ${category}`);
+    const sliders = group.querySelectorAll('input[type="range"]');
+    const labels = group.querySelectorAll('.slider-label');
+
+    sliders.forEach((s, i) => {
+      lines.push(`- ${labels[i].textContent}: Score ${s.value}/3`);
+    });
+    lines.push("");
   });
 
-  report += `\n📝 Additional notes:\n${notes || '[No additional notes provided]'}\n`;
-
-  document.getElementById('output').value = report.trim();
+  document.getElementById('output').value = lines.join('\n');
 }
 
-// Copies the report to clipboard
+// Copy text report
 function copyReport() {
-  const output = document.getElementById('output');
-  output.select();
+  const text = document.getElementById('output');
+  text.select();
   document.execCommand('copy');
 }
 
-// Exports the report as a styled PDF with a logo header
+// Export PDF with report summary
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-
-  const logo = new Image();
-  logo.src = 'AU logo primary_white.png';
-
-  logo.onload = () => {
-    doc.setFillColor(22, 12, 80); // Header colour
-    doc.rect(0, 0, 210, 30, 'F');
-    doc.addImage(logo, 'PNG', 10, 5, 40, 20);
-
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(14);
-    doc.text('Canvas UX Review Summary', 105, 20, { align: 'center' });
-
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(11);
-
-    const text = document.getElementById('output').value;
-    const lines = doc.splitTextToSize(text, 180);
-    let y = 40;
-
-    lines.forEach(line => {
-      if (y > 280) {
-        doc.addPage();
-        y = 20;
-      }
-      doc.text(line, 15, y);
-      y += 7;
-    });
-
-    doc.save('Canvas-UX-Review.pdf');
-  };
+  const text = document.getElementById('output').value;
+  const lines = doc.splitTextToSize(text, 180);
+  doc.setFontSize(11);
+  doc.text(lines, 15, 20);
+  doc.save("Koalify-Course-Report.pdf");
 }
