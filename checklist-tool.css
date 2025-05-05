@@ -5,23 +5,6 @@ body {
   color: #140F50;
 }
 
-.banner {
-  background: #160c50;
-  color: #fff;
-  padding: 2em 1em;
-  text-align: center;
-}
-
-.banner .logo {
-  max-width: 180px;
-  margin-bottom: 1em;
-}
-
-h1 {
-  margin: 0.2em 0;
-  font-size: 2.2em;
-}
-
 .form-container {
   max-width: 900px;
   margin: 2em auto;
@@ -45,6 +28,7 @@ textarea {
 
 textarea {
   font-family: monospace;
+  min-height: 100px;
 }
 
 fieldset {
@@ -58,6 +42,7 @@ fieldset {
 legend {
   font-weight: bold;
   padding: 0 0.5em;
+  font-size: 1.1em;
 }
 
 input[type="range"] {
@@ -74,10 +59,17 @@ input[type="range"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 1em;
 }
 
 .output-section {
   margin-top: 2em;
+}
+
+.output-section canvas {
+  display: block;
+  margin: 2em auto;
+  max-width: 100%;
 }
 
 .output-section textarea {
@@ -85,32 +77,3 @@ input[type="range"] {
   padding: 1em;
   border-radius: 5px;
   background: #fff;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 1em;
-  margin-top: 1em;
-}
-
-.action-buttons button {
-  background: #836BFF;
-  color: white;
-  font-weight: bold;
-  padding: 0.6em 1.2em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-footer {
-  text-align: center;
-  background: #140F50;
-  color: white;
-  padding: 1em;
-}
-
-footer a {
-  color: white;
-  text-decoration: underline;
-}
