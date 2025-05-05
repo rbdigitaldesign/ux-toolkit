@@ -5,17 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UX review checklist</title>
 
-  <!-- main site styles -->
- <link rel="stylesheet" href="style.css" />
+  <!-- global site styles -->
+  <link rel="stylesheet" href="style.css" />
   <!-- checklist tool styles -->
   <link rel="stylesheet" href="checklist-tool.css" />
 
   <style>
-    /* page-specific banner tweaks */
-    .hero-banner { padding: 2em 1.5em; min-height: auto; }
-    .hero-banner::after { display: none; }
-    /* constrain form width */
-    .container { max-width: 1150px; margin: auto; }
+    /* page-specific overrides */
+    .hero-banner {
+      padding: 2em 1.5em;
+      min-height: auto;
+    }
+    .hero-banner::after {
+      display: none;
+    }
+
+    /* constrain content width */
+    .container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    /* styled intro panel */
+    .intro {
+      background: var(--white);
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(20, 15, 80, 0.06);
+      margin-bottom: 2em;
+      line-height: 1.6;
+    }
+
+    /* “paper” look for the checklist */
+    .paper {
+      background: var(--white);
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2em;
+    }
   </style>
 </head>
 
@@ -29,66 +57,68 @@
   </header>
 
   <main class="container">
-    <!-- framing text -->
+    <!-- improved framing text -->
     <section class="intro">
-      <p>The five descriptors of the experience—Clear, Contextual, Interactive, Challenging and Personalised—provide a framework for aligning the Quality Matters Framework, the University of Adelaide’s learning and teaching strategy and contemporary learning design. The tool provides a failure point (0) and a baseline level (1) for minimum requirements. Levels 2 and 3 offer direction for improvement beyond baseline. This helps define the scope of the student’s learning experience and highlights where targeted enhancements may be most impactful. Balanced courses often include scores from across the 1–2–3 spectrum. Remember, this is a blend with a UX checklist too.</p>
+      <p>This UX review checklist brings together heuristic-based evaluation and the University of Adelaide’s course-quality framework, aligned to the Quality Matters Framework, the university’s learning and teaching strategy, and contemporary learning design. It provides a failure point (0) and a baseline level (1) to ensure minimum requirements are met; levels 2 and 3 offer direction for enhancement and extension beyond baseline. By combining UX principles—such as visible navigation, clear labelling and interactive feedback—with five course descriptors (clear, contextual, interactive, challenging and personalised), the tool helps teams define the scope of the student learning experience and target improvements where they will have the greatest impact. A balanced course will often score across the 1–2–3 spectrum.</p>
     </section>
 
-    <!-- the checklist tool itself -->
+    <!-- checklist tool wrapped in “paper” -->
     <section id="tool">
-      <div class="form-container">
-        <div class="name-fields">
-          <div class="field-group">
-            <label for="reviewerFirstName">First name</label>
-            <input type="text" id="reviewerFirstName" />
-          </div>
-          <div class="field-group">
-            <label for="reviewerLastName">Last name</label>
-            <input type="text" id="reviewerLastName" />
-          </div>
-        </div>
-
-        <label for="positionDescription">Position description</label>
-        <input type="text" id="positionDescription" />
-
-        <label for="builderName">Course builder name</label>
-        <input type="text" id="builderName" />
-
-        <label for="courseName">Course name</label>
-        <input type="text" id="courseName" />
-
-        <label for="pageUrl">Canvas URL being reviewed</label>
-        <input type="url" id="pageUrl" />
-
-        <div id="descriptorContainer"></div>
-
-        <button class="primary" onclick="generateReport()">Generate report</button>
-
-        <div id="reportSummary"></div>
-        <div id="dashboard"></div>
-        <canvas id="chart"></canvas>
-
-        <div class="output-section">
-          <textarea id="output" rows="20" readonly></textarea>
-
-          <div class="strengths-areas">
+      <div class="paper">
+        <div class="form-container">
+          <div class="name-fields">
             <div class="field-group">
-              <label for="strengths">Key strengths</label>
-              <textarea id="strengths" rows="3"></textarea>
+              <label for="reviewerFirstName">First name</label>
+              <input type="text" id="reviewerFirstName" />
             </div>
             <div class="field-group">
-              <label for="developments">Areas for development</label>
-              <textarea id="developments" rows="3"></textarea>
+              <label for="reviewerLastName">Last name</label>
+              <input type="text" id="reviewerLastName" />
             </div>
           </div>
 
-          <label for="comments">Additional comments</label>
-  <textarea id="comments" rows="3"></textarea>
+          <label for="positionDescription">Position description</label>
+          <input type="text" id="positionDescription" />
 
-          <div class="action-buttons">
-            <button onclick="copyReport()">Copy report</button>
-            <button onclick="downloadPDF()">Export to PDF</button>
-            <button onclick="exportCSV()">Export to CSV</button>
+          <label for="builderName">Course builder name</label>
+          <input type="text" id="builderName" />
+
+          <label for="courseName">Course name</label>
+          <input type="text" id="courseName" />
+
+          <label for="pageUrl">Canvas URL being reviewed</label>
+          <input type="url" id="pageUrl" />
+
+          <div id="descriptorContainer"></div>
+
+          <button class="primary" onclick="generateReport()">Generate report</button>
+
+          <div id="reportSummary"></div>
+          <div id="dashboard"></div>
+          <canvas id="chart"></canvas>
+
+          <div class="output-section">
+            <textarea id="output" rows="20" readonly></textarea>
+
+            <div class="strengths-areas">
+              <div class="field-group">
+                <label for="strengths">Key strengths</label>
+                <textarea id="strengths" rows="3"></textarea>
+              </div>
+              <div class="field-group">
+                <label for="developments">Areas for development</label>
+                <textarea id="developments" rows="3"></textarea>
+              </div>
+            </div>
+
+            <label for="comments">Additional comments</label>
+            <textarea id="comments" rows="3"></textarea>
+
+            <div class="action-buttons">
+              <button onclick="copyReport()">Copy report</button>
+              <button onclick="downloadPDF()">Export to PDF</button>
+              <button onclick="exportCSV()">Export to CSV</button>
+            </div>
           </div>
         </div>
       </div>
@@ -96,16 +126,14 @@
   </main>
 
   <footer>
-  <p>
-    © 2025 TUX. <a href="terms.html" style="color: #ffffff; text-decoration: underline;">Terms of use</a>
-  </p>
-  <img src="au-logo-placeholder.png" alt="Adelaide University logo">
-</footer>
+    <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
+    <img src="au-logo-placeholder.png" alt="Adelaide University logo">
+  </footer>
 
   <!-- dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- your checklist tool logic -->
+  <!-- checklist tool logic -->
   <script src="checklist-tool.js"></script>
 </body>
 </html>
