@@ -378,3 +378,25 @@ footer a { color: var(--white); text-decoration: underline; }
 .return-home:hover {
   background: var(--north-terrace-purple);
 }
+/* allow dropdown to overflow the banner */
+.hero-banner {
+  overflow: visible;
+}
+
+/* remove the decorative ::after so only the animated <img> remains */
+.hero-banner::after {
+  display: none;
+}
+
+/* ensure the search container sits above everything */
+.search-container {
+  z-index: 10000;
+}
+
+/* match the dropdown’s border/thickness & make its bottom corners pill-shaped */
+.search-suggestions {
+  border: 3px solid var(--bright-blue);
+  border-top: none;
+  border-radius: 0 0 999px 999px;
+}
+
