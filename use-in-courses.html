@@ -1,102 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Use in courses | TUX</title>
-  <link rel="stylesheet" href="style.css?v=7" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UX review checklist</title>
+
+  <!-- main site styles -->
+  <link rel="stylesheet" href="ux-toolkit.css" />
+  <!-- checklist tool styles -->
+  <link rel="stylesheet" href="checklist-tool.css" />
+
+  <style>
+    /* page-specific banner tweaks */
+    .hero-banner { padding: 2em 1.5em; min-height: auto; }
+    .hero-banner::after { display: none; }
+    /* constrain form width */
+    .container { max-width: 1150px; margin: auto; }
+  </style>
 </head>
+
 <body>
-  <header class="hero-banner no-banner-image">
+  <!-- main site banner -->
+  <header class="hero-banner">
     <div class="container">
-      <h1>UX in courses</h1>
-      <p>Practical guidance for designing clear, accessible, and user-friendly Canvas LMS experiences.</p>
+      <h1>UX review checklist</h1>
+      <p>Use this interactive form to systematically assess and enhance your Canvas course across five key dimensions — Clear, Contextual, Interactive, Challenging and Personalised.</p>
     </div>
   </header>
 
   <main class="container">
-    <section class="method-section">
-      <h2>🧭 Canvas LMS UX design checklist</h2>
-      <p>Use this checklist to improve the usability and accessibility of Canvas course pages. Tick items as you go to track what you've implemented.</p>
+    <!-- framing text -->
+    <section class="intro">
+      <p>The five descriptors of the experience—Clear, Contextual, Interactive, Challenging and Personalised—provide a framework for aligning the Quality Matters Framework, the University of Adelaide’s learning and teaching strategy and contemporary learning design. The tool provides a failure point (0) and a baseline level (1) for minimum requirements. Levels 2 and 3 offer direction for improvement beyond baseline. This helps define the scope of the student’s learning experience and highlights where targeted enhancements may be most impactful. Balanced courses often include scores from across the 1–2–3 spectrum. Remember, this is a blend with a UX checklist too.</p>
+    </section>
 
-      <div class="checklist-grid">
-        <div class="checklist-box">
-          <h3>✅ Make navigation visible and predictable</h3>
-          <ul>
-            <li><input type="checkbox" /> Avoid hiding core links in collapsible menus.</li>
-            <li><input type="checkbox" /> Position core navigation consistently (e.g. left-side modules).</li>
-            <li><input type="checkbox" /> Minimise clutter in global navigation.</li>
-          </ul>
+    <!-- the checklist tool itself -->
+    <section id="tool">
+      <div class="form-container">
+        <div class="name-fields">
+          <div class="field-group">
+            <label for="reviewerFirstName">First name</label>
+            <input type="text" id="reviewerFirstName" />
+          </div>
+          <div class="field-group">
+            <label for="reviewerLastName">Last name</label>
+            <input type="text" id="reviewerLastName" />
+          </div>
         </div>
 
-        <div class="checklist-box">
-          <h3>🧠 Communicate where users are</h3>
-          <ul>
-            <li><input type="checkbox" /> Use clear H1/H2 headings and breadcrumbs.</li>
-            <li><input type="checkbox" /> Highlight the current module/topic visually.</li>
-            <li><input type="checkbox" /> Avoid jumping users to unexpected locations.</li>
-          </ul>
-        </div>
+        <label for="positionDescription">Position description</label>
+        <input type="text" id="positionDescription" />
 
-        <div class="checklist-box">
-          <h3>🧾 Use clear and scannable labels</h3>
-          <ul>
-            <li><input type="checkbox" /> Avoid internal jargon; use familiar terms.</li>
-            <li><input type="checkbox" /> Be concise and front-load keywords.</li>
-            <li><input type="checkbox" /> Standardise terminology across pages.</li>
-          </ul>
-        </div>
+        <label for="builderName">Course builder name</label>
+        <input type="text" id="builderName" />
 
-        <div class="checklist-box">
-          <h3>🎨 Support contrast and visibility</h3>
-          <ul>
-            <li><input type="checkbox" /> Ensure button and link colours meet WCAG standards.</li>
-            <li><input type="checkbox" /> Use bold or headings for emphasis, not just colour.</li>
-            <li><input type="checkbox" /> Limit pages to a single clear call-to-action.</li>
-          </ul>
-        </div>
+        <label for="courseName">Course name</label>
+        <input type="text" id="courseName" />
 
-        <div class="checklist-box">
-          <h3>📱 Design for interaction and accessibility</h3>
-          <ul>
-            <li><input type="checkbox" /> Use click-based reveals (not hover only).</li>
-            <li><input type="checkbox" /> Avoid deeply nested navigation.</li>
-            <li><input type="checkbox" /> Use large tap/click areas on mobile.</li>
-          </ul>
-        </div>
+        <label for="pageUrl">Canvas URL being reviewed</label>
+        <input type="url" id="pageUrl" />
 
-        <div class="checklist-box">
-          <h3>📌 Keep important navigation sticky</h3>
-          <ul>
-            <li><input type="checkbox" /> Use pinned headers or floating menus if possible.</li>
-          </ul>
+        <div id="descriptorContainer"></div>
+
+        <button class="primary" onclick="generateReport()">Generate report</button>
+
+        <div id="reportSummary"></div>
+        <div id="dashboard"></div>
+        <canvas id="chart"></canvas>
+
+        <div class="output-section">
+          <textarea id="output" rows="20" readonly></textarea>
+
+          <div class="strengths-areas">
+            <div class="field-group">
+              <label for="strengths">Key strengths</label>
+              <textarea id="strengths" rows="3"></textarea>
+            </div>
+            <div class="field-group">
+              <label for="developments">Areas for development</label>
+              <textarea id="developments" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button onclick="copyReport()">Copy report</button>
+            <button onclick="downloadPDF()">Export to PDF</button>
+            <button onclick="exportCSV()">Export to CSV</button>
+          </div>
         </div>
       </div>
     </section>
-
-    <div class="return-container">
-      <a href="index.html" class="back-button">← Return to TUX Home</a>
-    </div>
   </main>
 
- <footer>
-  <p>
-    © 2025 TUX. <a href="terms.html" style="color: #ffffff; text-decoration: underline;">Terms of use</a>
-  </p>
-  <img src="au-logo-placeholder.png" alt="Adelaide University logo">
-</footer>
+  <footer>
+    <!-- keep your existing footer markup here -->
+  </footer>
 
-
-  <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
-
-  <script>
-    const topBtn = document.getElementById("topBtn");
-    window.onscroll = function () {
-      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
-    };
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  </script>
+  <!-- dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- your checklist tool logic -->
+  <script src="checklist-tool.js"></script>
 </body>
 </html>
