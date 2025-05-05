@@ -454,3 +454,23 @@ footer img {
   background-color: var(--north-terrace-purple);
   transform: scale(1.05);
 }
+/* global “return home” button */
+.return-container {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.return-home {
+  display: inline-block;
+  background-color: var(--bright-blue);
+  color: var(--white);
+  padding: 0.75em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.return-home:hover {
+  background-color: var(--north-terrace-purple);
+}
