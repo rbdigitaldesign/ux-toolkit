@@ -399,4 +399,15 @@ footer a { color: var(--white); text-decoration: underline; }
   border-top: none;
   border-radius: 0 0 999px 999px;
 }
+/* make the suggestions corners match the input, not a pill shape */
+.search-suggestions {
+  /* match the 8px radius you use elsewhere */
+  border-radius: 0 0 8px 8px;
+}
+
+/* enlarge the floating koala */
+.banner-mascot {
+  /* old: clamp(120px, 25vw, 200px); */
+  width: clamp(150px, 30vw, 300px);
+}
 
