@@ -82,7 +82,6 @@ window.onload = () => {
     fs.innerHTML = `
       <legend>
         ${cat}
-        <a href="${info.helpUrl}" target="_blank" class="help-icon" title="Learn more about ${cat}">?</a>
       </legend>
       <p><em>${info.description}</em></p>
       ${info.checklist.map(item =>
