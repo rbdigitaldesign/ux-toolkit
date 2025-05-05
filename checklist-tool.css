@@ -1,3 +1,11 @@
+/* checklist-tool.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
@@ -11,6 +19,7 @@ body {
   padding: 0 1em;
 }
 
+/* side-by-side name fields */
 .name-fields {
   display: flex;
   gap: 2em;
@@ -21,25 +30,26 @@ body {
   flex: 1;
 }
 
-label {
-  display: block;
-  margin: 1em 0 0.5em;
-  font-weight: bold;
+/* all text inputs and URLs uppercase, full-width */
+input[type="text"],
+input[type="url"] {
+  width: 100%;
+  padding: 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
 
-input[type="text"],
-input[type="url"],
+/* textareas full-width */
 textarea {
   width: 100%;
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-textarea {
   font-family: monospace;
 }
 
+/* strengths & areas side-by-side */
 .strengths-areas {
   display: flex;
   gap: 1em;
@@ -137,8 +147,8 @@ input[type="range"] {
   padding: 1em;
   border-radius: 5px;
   background: #fff;
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .action-buttons {
