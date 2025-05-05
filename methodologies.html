@@ -1,20 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UX Methodologies | TUX</title>
-  <link rel="stylesheet" href="style.css?v=7" />
+  <link rel="stylesheet" href="style.css?v=8" />
 </head>
 <body>
- <header class="hero-banner simple-banner">
-  <div class="container">
-    <h1>UX research methodologies</h1>
-  </div>
-</header>
+  <!--–– Reduced-height banner ––-->
+  <header class="hero-banner simple-banner">
+    <div class="container">
+      <h1>UX Research Methodologies</h1>
+    </div>
+  </header>
 
   <main class="container">
+    <!--–––– Usability testing (unchanged) ––––-->
     <section class="method-section">
       <h2>Usability testing</h2>
       <p>Usability testing involves observing users as they interact with a product to identify issues and opportunities for improvement. It can be conducted in two primary formats:</p>
@@ -48,85 +49,66 @@
       </div>
     </section>
 
+    <!--–––– Card sorting ––––-->
     <section id="card-sorting" class="method-section">
-  <div class="method-box">
-      <h2>Card sorting</h2>
-      <div class="method-card right-image">
-        <div class="method-text">
-          <p>Card sorting helps understand how users categorise information, informing the design of intuitive navigation structures.</p>
-          <ul>
-            <li><strong>Open card sorting:</strong> Participants create their own categories.</li>
-            <li><strong>Closed card sorting:</strong> Participants sort cards into predefined categories.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="tree-testing" class="method-section">
-  <div class="method-box">
-      <h2>Tree testing</h2>
-      <div class="method-card left-image">
-        <div class="method-text">
-          <p>Tree testing evaluates the findability of topics in a website's structure. Participants are given tasks to locate items within a simplified text version of the site hierarchy, helping identify navigation issues.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="method-section" class="method-section">
       <div class="method-box">
-      <h2>User interviews</h2>
-      <div class="method-card right-image">
-        <div class="method-text">
-          <p>User interviews involve one-on-one sessions to gather in-depth insights into users' experiences, motivations, and challenges. They can be structured, semi-structured, or unstructured, depending on the research goals.</p>
-        </div>
+        <h2>Card sorting</h2>
+        <p>Card sorting helps understand how users categorise information, informing the design of intuitive navigation structures.</p>
+        <ul>
+          <li><strong>Open card sorting:</strong> Participants create their own categories.</li>
+          <li><strong>Closed card sorting:</strong> Participants sort cards into predefined categories.</li>
+        </ul>
       </div>
     </section>
 
-    
-      <section id="focus-group" class="method-section">
- <div class="method-box">
-      <h2>Focus groups</h2>
-      <div class="method-card left-image">
-        <div class="method-text">
-          <p>Focus groups bring together a small group of users to discuss their experiences and perceptions. This method is useful for exploring shared attitudes and uncovering diverse viewpoints.</p>
-        </div>
+    <!--–––– Tree testing ––––-->
+    <section id="tree-testing" class="method-section">
+      <div class="method-box">
+        <h2>Tree testing</h2>
+        <p>Tree testing evaluates the findability of topics in a website’s structure. Participants are given tasks to locate items within a simplified text version of the site hierarchy, helping identify navigation issues.</p>
       </div>
     </section>
 
+    <!--–––– User interviews ––––-->
+    <section id="interviews" class="method-section">
+      <div class="method-box">
+        <h2>User interviews</h2>
+        <p>User interviews involve one-on-one sessions to gather in-depth insights into users’ experiences, motivations, and challenges. They can be structured, semi-structured, or unstructured, depending on the research goals.</p>
+      </div>
+    </section>
+
+    <!--–––– Focus groups ––––-->
+    <section id="focus-groups" class="method-section">
+      <div class="method-box">
+        <h2>Focus groups</h2>
+        <p>Focus groups bring together a small group of users to discuss their experiences and perceptions. This method is useful for exploring shared attitudes and uncovering diverse viewpoints.</p>
+      </div>
+    </section>
+
+    <!--–––– Diary studies ––––-->
     <section id="diary-studies" class="method-section">
- <div class="method-box">
-      <h2>Diary studies</h2>
-      <div class="method-card right-image">
-        <div class="method-text">
-          <p>Diary studies involve participants recording their experiences over time, providing longitudinal insights into user behaviours and interactions. This method is valuable for understanding user engagement over extended periods.</p>
-        </div>
+      <div class="method-box">
+        <h2>Diary studies</h2>
+        <p>Diary studies involve participants recording their experiences over time, providing longitudinal insights into user behaviours and interactions. This method is valuable for understanding user engagement over extended periods.</p>
       </div>
     </section>
 
+    <!--–––– Return home button ––––-->
     <div class="return-container">
-  <a href="index.html" class="return-home">Return to TUX home</a>
-</div>
-    
+      <a href="index.html" class="return-home">← Return to TUX Home</a>
+    </div>
   </main>
 
-<footer>
-  <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
-  <nav>
-    <a href="terms.html">Terms and Conditions</a>
-  </nav>
-</footer>
-
+  <footer>
+    <p>&copy; 2025 TUX · Created by Rich Bartlett</p>
+    <nav><a href="terms.html">Terms and Conditions</a></nav>
+  </footer>
 
   <button onclick="scrollToTop()" id="topBtn" title="Go to top">↑ Top</button>
-
   <script>
     const topBtn = document.getElementById("topBtn");
-    window.onscroll = function () {
-      topBtn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
-    };
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    window.onscroll = () => { topBtn.style.display = (window.scrollY>100)?"block":"none"; };
+    function scrollToTop(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   </script>
 </body>
 </html>
