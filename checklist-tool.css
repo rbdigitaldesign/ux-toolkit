@@ -49,7 +49,7 @@ input[type="url"] {
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
-  text-transform: uppercase;
+  /* removed text-transform so input appears as typed */
 }
 
 textarea {
@@ -97,10 +97,9 @@ legend {
 
 input[type="range"] {
   width: 100%;
-  margin: 0; /* slider-container handles spacing */
+  margin: 0;
 }
 
-/* slider-container with clickable ticks */
 .slider-container {
   position: relative;
   margin-top: 0.5em;
@@ -125,7 +124,6 @@ input[type="range"] {
   cursor: pointer;
 }
 
-/* four ticks at equal intervals */
 .slider-container .ticks span:nth-child(1) { left:   0%; }
 .slider-container .ticks span:nth-child(2) { left:  33.333%; }
 .slider-container .ticks span:nth-child(3) { left:  66.666%; }
