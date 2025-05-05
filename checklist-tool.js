@@ -56,37 +56,24 @@ const model = {
 
 // 2) Helpers to style the filled portion and hide underlying tick
 function updateSliderColor(slider) {
-  const min = +slider.min;
-  const max = +slider.max;
-  const val = +slider.value;
-  const pct = ((val - min) / (max - min)) * 100;
-  slider.style.background = `linear-gradient(
-    to right,
-    #1448FF 0%,
-    #1448FF ${pct}%,
-    #ddd ${pct}%,
-    #ddd 100%
-  )`;
+  const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+  slider.style.background = `linear-gradient(to right, #1448FF 0%, #1448FF ${pct}%, #ddd ${pct}%, #ddd 100%)`;
 }
 
 function updateTicks(slider) {
-  const container = slider.closest('.slider-container');
-  container.querySelectorAll('.ticks span').forEach(tick => {
-    tick.style.visibility = tick.dataset.value === slider.value ? 'hidden' : 'visible';
-  });
+  slider.closest('.slider-container')
+    .querySelectorAll('.ticks span')
+    .forEach(t => t.style.visibility = (t.dataset.value === slider.value ? 'hidden' : 'visible'));
 }
 
 // 3) Render all descriptor sections on page load
 window.onload = () => {
-  // clear name placeholders
   ['reviewerFirstName','reviewerLastName'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.placeholder = '';
+    if(el) el.placeholder = '';
   });
-
   const container = document.getElementById("descriptorContainer");
   container.innerHTML = "";
-
   Object.entries(model).forEach(([category, info]) => {
     const fs = document.createElement("fieldset");
     fs.innerHTML = `
@@ -124,80 +111,69 @@ window.onload = () => {
       updateSliderColor(slider);
       updateTicks(slider);
     });
-    fs.querySelectorAll('.ticks span').forEach(tick => {
-      tick.addEventListener('click', () => {
-        slider.value = tick.dataset.value;
+    fs.querySelectorAll('.ticks span').forEach(t => {
+      t.addEventListener('click', () => {
+        slider.value = t.dataset.value;
         slider.dispatchEvent(new Event('input'));
       });
     });
   });
 };
 
-// 4) Generate report, reveal sections, and store data
+// 4) Generate report, reveal sections, store data
 function generateReport() {
   ['reportSummary','dashboard','chart','output'].forEach(id => {
     document.getElementById(id).style.display = 'block';
   });
 
-  // gather metadata
-  const first     = document.getElementById('reviewerFirstName').value.trim()    || '[First]';
-  const last      = document.getElementById('reviewerLastName').value.trim()     || '[Last]';
-  const position  = document.getElementById('positionDescription').value.trim() || '[Position]';
-  const reviewer  = `${first} ${last}`;
-  const builder   = document.getElementById('builderName').value.trim()         || '[Builder]';
-  const course    = document.getElementById('courseName').value.trim()          || '[Course Name]';
-  const url       = document.getElementById('pageUrl').value.trim()             || '[Page URL]';
-  const comments  = document.getElementById('comments').value.trim()            || '[No comments]';
-
-  // strengths & development areas
-  const strengths    = document.getElementById('strengths').value.trim().split('\n').filter(l => l);
-  const developments = document.getElementById('developments').value.trim().split('\n').filter(l => l);
+  // meta
+  const meta = {
+    reviewer: `${document.getElementById('reviewerFirstName').value.trim() || '[First]'} ${document.getElementById('reviewerLastName').value.trim() || '[Last]'}`,
+    position: document.getElementById('positionDescription').value.trim() || '[Position]',
+    builder: document.getElementById('builderName').value.trim() || '[Builder]',
+    course: document.getElementById('courseName').value.trim() || '[Course Name]',
+    url: document.getElementById('pageUrl').value.trim() || '[Page URL]',
+    comments: document.getElementById('comments').value.trim() || '[No comments]',
+    strengths: document.getElementById('strengths').value.trim().split('\n').filter(l=>l),
+    developments: document.getElementById('developments').value.trim().split('\n').filter(l=>l)
+  };
 
   // collect scores & selections
   const reportData = {};
-  document.querySelectorAll('.slider').forEach(slider => {
-    const cat = slider.dataset.label;
-    if (!reportData[cat]) reportData[cat] = { scores: [], selected: [], avg: 0 };
-    reportData[cat].scores.push(+slider.value);
+  document.querySelectorAll('.slider').forEach(s => {
+    const cat = s.dataset.label;
+    reportData[cat] = reportData[cat] || { scores: [], selected: [], avg: 0 };
+    reportData[cat].scores.push(+s.value);
   });
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-    if (cb.checked) {
-      const cat  = cb.dataset.cat;
-      const item = cb.dataset.item;
-      reportData[cat].selected.push(item);
-    }
+    if(cb.checked) reportData[cb.dataset.cat].selected.push(cb.dataset.item);
   });
+  Object.values(reportData).forEach(i => i.avg = i.scores.reduce((a,b)=>a+b,0)/i.scores.length);
 
-  // compute averages
-  Object.values(reportData).forEach(info => {
-    info.avg = info.scores.reduce((a,b) => a + b, 0) / info.scores.length;
-  });
-
-  // store for export
-  window.lastReportMeta = { reviewer, position, builder, course, url, comments, strengths, developments };
+  window.lastReportMeta = meta;
   window.lastReportData = reportData;
 
   // executive summary
-  const avgs       = Object.values(reportData).map(i => i.avg);
-  const overallAvg = (avgs.reduce((a,b) => a + b, 0) / avgs.length).toFixed(2);
-  const urgent     = Object.entries(reportData)
-    .sort((a,b) => a[1].avg - b[1].avg)
-    .slice(0, 2)
-    .map(([k,i]) => `${k} (${i.avg.toFixed(2)})`);
+  const avgs = Object.values(reportData).map(i=>i.avg);
+  const overall = (avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2);
+  const urgent = Object.entries(reportData)
+    .sort((a,b)=>a[1].avg - b[1].avg)
+    .slice(0,2)
+    .map(([k,i])=>`${k} (${i.avg.toFixed(2)})`)
+    .join(', ');
   document.getElementById('reportSummary').innerHTML = `
     <h4>Executive summary</h4>
-    <p>Overall average score: <strong>${overallAvg}/3</strong>. Most urgent areas: ${urgent.join(', ')}.</p>
+    <p>Overall average score: <strong>${overall}/3</strong>. Most urgent areas: ${urgent}.</p>
   `;
 
-  // dashboard table
+  // dashboard
   const rows = Object.entries(reportData).map(([cat,info]) => {
-    const avg    = info.avg;
-    const status = avg >= 2.5 ? '🟢' : avg >= 1.5 ? '🟡' : '🔴';
-    const alert  = avg <= 1 ? '⚠️ below baseline' : '';
-    const cls    = avg <= 1 ? 'low-score' : '';
-    return `<tr class="${cls}">
+    const avg = info.avg.toFixed(2) + '/3';
+    const status = info.avg >= 2.5 ? 'green' : info.avg >= 1.5 ? 'yellow' : 'red';
+    const alert  = info.avg <= 1 ? 'below baseline' : '';
+    return `<tr>
       <td>${cat}</td>
-      <td>${avg.toFixed(2)}/3</td>
+      <td>${avg}</td>
       <td>${status}</td>
       <td>${alert}</td>
     </tr>`;
@@ -210,45 +186,35 @@ function generateReport() {
   `;
 
   // text report
-  let out = `UX review summary\n\n`;
-  out += `This report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.\n\n`;
-  out += `Reviewer: ${reviewer}\n`;
-  out += `Position: ${position}\n`;
-  out += `Course Builder: ${builder}\n`;
-  out += `Course: ${course}\n`;
-  out += `Page URL: ${url}\n\n`;
+  let out = `UX review summary\n\nThis report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.\n\n`;
+  out += `Reviewer: ${meta.reviewer}\nPosition: ${meta.position}\nCourse Builder: ${meta.builder}\nCourse: ${meta.course}\nPage URL: ${meta.url}\n\n`;
   Object.entries(reportData).forEach(([cat,info]) => {
     const total = model[cat].checklist.length;
     const count = info.selected.length;
-    const others = model[cat].checklist.filter(i => !info.selected.includes(i));
-    out += `📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n`;
-    out += `✔ Observed ${count} of ${total} items:\n`;
-    if (count) info.selected.forEach(i => out += `- ${i}\n`);
-    else out += `- None selected\n`;
-    out += `\nℹ️ Other checklist items:\n`;
-    others.forEach(i => out += `- ${i}\n`);
-    out += `\n`;
+    const others = model[cat].checklist.filter(i=>!info.selected.includes(i));
+    out += `📘 ${cat} (Avg: ${info.avg.toFixed(2)}/3)\n✔ Observed ${count} of ${total} items:\n`;
+    if(count) info.selected.forEach(i=> out+=`- ${i}\n`);
+    else out+=`- None selected\n`;
+    out+=`\nℹ️ Other checklist items:\n`;
+    others.forEach(i=> out+=`- ${i}\n`);
+    out+=`\n`;
   });
-  out += `💡 Key strengths:\n`;
-  strengths.forEach(s => out += `- ${s}\n`);
-  if (!strengths.length) out += `- None provided\n`;
-  out += `🔧 Areas for development:\n`;
-  developments.forEach(d => out += `- ${d}\n`);
-  if (!developments.length) out += `- None provided\n`;
-  out += `\n📝 Comments:\n${comments}\n`;
+  out += `💡 Key strengths:\n`; meta.strengths.forEach(s=> out+=`- ${s}\n`); if(!meta.strengths.length) out+=`- None provided\n`;
+  out += `🔧 Areas for development:\n`; meta.developments.forEach(d=> out+=`- ${d}\n`); if(!meta.developments.length) out+=`- None provided\n`;
+  out += `\n📝 Comments:\n${meta.comments}\n`;
   document.getElementById('output').value = out;
 
-  renderChart(Object.keys(reportData), Object.values(reportData).map(i => i.avg));
+  renderChart(Object.keys(reportData), Object.values(reportData).map(i=>i.avg));
 }
 
 // 5) Render bar chart
 function renderChart(labels, scores) {
   const ctx = document.getElementById('chart').getContext('2d');
-  if (window.uxChart) window.uxChart.destroy();
+  if(window.uxChart) window.uxChart.destroy();
   window.uxChart = new Chart(ctx, {
-    type: 'bar',
-    data: { labels, datasets: [{ label: 'Avg score', data: scores, backgroundColor: '#1448FF', borderRadius: 5 }] },
-    options: { responsive: true, scales: { y: { suggestedMin: 0, suggestedMax: 3, ticks: { stepSize: 1 } } } }
+    type:'bar',
+    data:{ labels, datasets:[{ label:'Avg score', data:scores, backgroundColor:'#1448FF', borderRadius:5 }] },
+    options:{ responsive:true, scales:{ y:{ suggestedMin:0, suggestedMax:3, ticks:{ stepSize:1 } } } }
   });
 }
 
@@ -259,13 +225,13 @@ function copyReport() {
   document.execCommand('copy');
 }
 
-// 7) Export PDF with table and chart
+// 7) Export PDF with table, chart and full report text
 function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  const m = window.lastReportMeta;
-  const d = window.lastReportData;
-  if (!m || !d) { alert('Generate report first'); return; }
+  const meta = window.lastReportMeta;
+  const data = window.lastReportData;
+  if(!meta||!data){ alert('Generate report first'); return; }
 
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
@@ -278,71 +244,78 @@ function downloadPDF() {
   const logo = new Image();
   logo.src = 'au-logo-placeholder.png';
   logo.onload = () => {
-    const w = 40;
-    const h = (logo.height / logo.width) * w;
-    doc.addImage(logo, 'PNG', 10, 3, w, h);
+    const w = 40, h = (logo.height/logo.width)*w;
+    doc.addImage(logo,'PNG',10,3,w,h);
 
     // title & timestamp
     doc.setTextColor(255,255,255).setFontSize(16)
-       .text('UX review summary', pageW/2, 15, { align: 'center' });
+       .text('UX review summary', pageW/2,15,{align:'center'});
     doc.setFontSize(9)
-       .text(`Generated: ${new Date().toLocaleString()}`, pageW-10, 20, { align: 'right' });
+       .text(`Generated: ${new Date().toLocaleString()}`, pageW-10,20,{align:'right'});
 
-    // framing text
+    // framing paragraph
     doc.setTextColor(0,0,0).setFontSize(11);
     let y = 30;
     const framing = "This report combines UX heuristics with pedagogical quality descriptors (Clear, Contextual, Interactive, Challenging, Personalised) to provide actionable insights. Scores on a 0–3 scale are backed by observed checklist evidence.";
     doc.splitTextToSize(framing, pageW-28).forEach(line => {
-      if (y > pageH - 20) { doc.addPage(); y = 20; }
-      doc.text(line, 14, y);
-      y += 6;
+      if(y > pageH-20){ doc.addPage(); y=20; }
+      doc.text(line,14,y); y+=6;
     });
-    y += 6;
+    y+=4;
 
     // metadata
-    ['Reviewer','Position','Course Builder','Course','Page URL'].forEach(field => {
-      if (y > pageH - 20) { doc.addPage(); y = 20; }
-      const key = field.toLowerCase().replace(/ /g,'');
-      doc.setFontSize(11).text(`${field}: ${m[key]}`, 14, y);
-      y += 7;
-    });
-    y += 8;
+    [ ['Reviewer', 'reviewer'], ['Position','position'], ['Course Builder','builder'], ['Course','course'], ['Page URL','url'] ]
+      .forEach(([label,key]) => {
+        if(y > pageH-20){ doc.addPage(); y=20; }
+        doc.setFontSize(11).text(`${label}: ${meta[key]}`,14,y);
+        y+=7;
+      });
+    y+=6;
 
     // dashboard table header
-    doc.setFontSize(12).text('Dashboard', 14, y);
-    y += 6;
+    doc.setFontSize(12).text('Dashboard',14,y); y+=6;
     doc.setFontSize(10);
-    doc.text('Descriptor', 14, y);
-    doc.text('Score', 80, y);
-    doc.text('Status', 110, y);
-    doc.text('Alert', 140, y);
-    y += 5;
+    doc.text('Descriptor',14,y);
+    doc.text('Score',80,y);
+    doc.text('Status',110,y);
+    doc.text('Alert',140,y);
+    y+=5;
 
-    // dashboard table rows
-    Object.entries(d).forEach(([cat,info]) => {
-      if (y > pageH - 20) { doc.addPage(); y = 20; }
+    // table rows
+    Object.entries(data).forEach(([cat,info]) => {
+      if(y > pageH-20){ doc.addPage(); y=20; }
       const avg    = info.avg.toFixed(2) + '/3';
-      const status = info.avg >= 2.5 ? '🟢' : info.avg >= 1.5 ? '🟡' : '🔴';
-      const alert  = info.avg <= 1 ? '⚠️ below baseline' : '';
-      doc.text(cat, 14, y);
-      doc.text(avg, 80, y);
-      doc.text(status, 110, y);
-      doc.text(alert, 140, y);
-      y += 6;
+      const status = info.avg >=2.5 ? 'green' : info.avg>=1.5 ? 'yellow' : 'red';
+      const alert  = info.avg<=1 ? 'below baseline' : '';
+      doc.text(cat,14,y);
+      doc.text(avg,80,y);
+      doc.text(status,110,y);
+      doc.text(alert,140,y);
+      y+=6;
     });
-    y += 10;
+    y+=8;
 
     // chart image
     const chartCanvas = document.getElementById('chart');
     const chartImg = chartCanvas.toDataURL('image/png');
-    const chartW = pageW - 28;
+    const chartW = pageW-28;
     const chartH = chartW * 0.4;
-    if (y + chartH > pageH - 20) { doc.addPage(); y = 20; }
-    doc.addImage(chartImg, 'PNG', 14, y, chartW, chartH);
-    y += chartH + 10;
+    if(y + chartH > pageH-20){ doc.addPage(); y=20; }
+    doc.addImage(chartImg,'PNG',14,y,chartW,chartH);
+    y+=chartH+10;
+
+    // full text report
+    const reportText = document.getElementById('output').value;
+    doc.setFontSize(10);
+    doc.splitTextToSize(reportText, pageW-28).forEach(line => {
+      if(y > pageH-20){ doc.addPage(); y=20; }
+      doc.text(line,14,y);
+      y+=5;
+    });
 
     // footer
-    doc.setFontSize(9).text('© 2025 TUX', pageW/2, pageH - 10, { align: 'center' });
+    doc.setFontSize(9).text('© 2025 TUX', pageW/2, pageH-10, {align:'center'});
+
     doc.save('UX-Review-Summary.pdf');
   };
 }
@@ -350,7 +323,7 @@ function downloadPDF() {
 // 8) Export CSV
 function exportCSV() {
   const data = window.lastReportData;
-  if (!data) return alert('Generate report first');
+  if(!data) return alert('Generate report first');
   const rows = ['Descriptor,Item,Selected,Score'];
   Object.entries(data).forEach(([cat,info]) => {
     const score = info.avg.toFixed(2);
@@ -362,7 +335,5 @@ function exportCSV() {
   const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'UX-Review-Summary.csv';
-  a.click();
+  a.href = url; a.download = 'UX-Review-Summary.csv'; a.click();
 }
