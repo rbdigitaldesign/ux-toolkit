@@ -20,10 +20,23 @@
     <label for="pageUrl">Canvas URL being reviewed</label>
     <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/courses/1234/pages/topic-3" />
 
-    <h3>Evaluate each area using the sliders below</h3>
+    <h3>Evaluate each area using the checklist and provide a score</h3>
 
     <section class="sliders">
-      <div id="descriptorContainer"></div>
+      <fieldset>
+        <legend>Clear</legend>
+        <p><em>Use this checklist to assess clarity of structure and presentation.</em></p>
+        <label><input type="checkbox" /> Navigation is visible and predictable</label>
+        <label><input type="checkbox" /> Headings and breadcrumbs indicate user location</label>
+        <label><input type="checkbox" /> Language avoids internal jargon and is concise</label>
+        <label><input type="checkbox" /> Buttons and links use consistent, visible styles</label>
+
+        <label style="margin-top:1em;">Overall score for 'Clear'</label>
+        <input type="range" min="0" max="3" value="0" class="slider" data-label="Clear" />
+        <div class="range-labels">
+          <span>0 = Fails</span><span>1 = Meets</span><span>2 = Progress</span><span>3 = Exemplary</span>
+        </div>
+      </fieldset>
     </section>
 
     <label for="comments">Additional comments or recommendations</label>
@@ -36,7 +49,6 @@
       <textarea id="output" rows="20" readonly></textarea>
       <div class="action-buttons">
         <button onclick="copyReport()">Copy Report</button>
-        <button onclick="downloadWord()">Export to Word</button>
       </div>
     </div>
   </main>
@@ -46,7 +58,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
   <script src="checklist-tool.js"></script>
 </body>
 </html>
