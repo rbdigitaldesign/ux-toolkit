@@ -8,17 +8,23 @@
 </head>
 <body>
   <main class="form-container">
-    <label for="reviewerName">Your name</label>
-    <input type="text" id="reviewerName" placeholder="e.g. Rich Bartlett" />
+    <label for="reviewerFirstName">First name</label>
+    <input type="text" id="reviewerFirstName" placeholder="e.g. Rich" />
+
+    <label for="reviewerLastName">Last name</label>
+    <input type="text" id="reviewerLastName" placeholder="e.g. Bartlett" />
+
+    <label for="positionDescription">Position description</label>
+    <input type="text" id="positionDescription" placeholder="e.g. Learning Designer" />
 
     <label for="builderName">Course builder (academic)</label>
-    <input type="text" id="builderName" placeholder="e.g. Dr. Jane Doe" />
+    <input type="text" id="builderName" placeholder="e.g. Dr Jane Doe" />
 
     <label for="courseName">Course name</label>
     <input type="text" id="courseName" placeholder="e.g. Systems Thinking for a Complex World" />
 
-    <label for="pageUrl">Canvas URL being reviewed</label>
-    <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/courses/1234/pages/topic-3" />
+    <label for="pageUrl">Canvas url being reviewed</label>
+    <input type="url" id="pageUrl" placeholder="e.g. https://canvas.adelaide.edu.au/…" />
 
     <h3>Evaluate each area using the checklist and provide a score</h3>
     <section class="sliders">
@@ -26,9 +32,9 @@
     </section>
 
     <label for="comments">Additional comments or recommendations</label>
-    <textarea id="comments" rows="5" placeholder="Summarise key recommendations..."></textarea>
+    <textarea id="comments" rows="5" placeholder="Summarise key recommendations…"></textarea>
 
-    <button class="primary" onclick="generateReport()">Generate Report</button>
+    <button class="primary" onclick="generateReport()">Generate report</button>
 
     <div class="output-section">
       <canvas id="chart" width="400" height="150"></canvas>
@@ -44,7 +50,6 @@
     <p>© 2025 TUX. <a href="terms.html">Terms of use</a></p>
   </footer>
 
-  <!-- libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="checklist-tool.js"></script>
