@@ -530,4 +530,31 @@ footer img {
 .return-home:hover {
   background-color: var(--north-terrace-purple);
 }
+.method-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border-left: 6px solid var(--north-terrace-purple);
+  padding: 1.5em;
+  margin: 2em 0;
+  box-shadow: 0 2px 8px rgba(20, 15, 80, 0.05);
+}
+
+.method-box h2 {
+  margin-top: 0;
+  color: var(--dark-blue);
+}
+
+.method-box p,
+.method-box ul {
+  margin-bottom: 0.5em;
+  color: var(--dark-blue);
+}
+
+.method-box ul {
+  padding-left: 1.2em;
+}
+
+.method-box ul li {
+  margin-bottom: 0.4em;
+}
 
