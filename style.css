@@ -2,7 +2,10 @@
   font-family: 'Codegun';
   src: url('codegun.ttf') format('truetype');
 }
-
+/* make all elements use border-box so padding/borders stay inside declared widths */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 :root {
   --white: #FFFFFF;
   --dark-blue: #140F50;
