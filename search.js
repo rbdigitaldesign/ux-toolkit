@@ -79,6 +79,8 @@ searchForm.addEventListener('submit', function (e) {
 
 // Email buttons in profile cards
 document.querySelectorAll('.email-button').forEach(btn => {
+  const name = btn.dataset.user.replace('.', ' ');
+  btn.setAttribute('aria-label', `Email ${name}`);
   btn.addEventListener('click', () => {
     const user = btn.dataset.user;
     const domain = btn.dataset.domain;
