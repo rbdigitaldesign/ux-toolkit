@@ -424,4 +424,21 @@ footer a { color: var(--white); text-decoration: underline; }
   width: calc(100% + 6px);
   box-sizing: border-box;
 }
+/* allow mascot to sit outside the normal banner grid */
+.hero-banner {
+  overflow: visible;  /* ensure the absolute‐positioned mascot isn’t clipped */
+  position: relative; /* already set, but just in case */
+}
+
+/* pin the mascot at mid‐height and flush to the right edge */
+.banner-mascot {
+  position: absolute;
+  top: 50%;
+  right: 2%;            /* 2% from the viewport edge (adjust as needed) */
+  transform: translateY(-50%);
+  /* keep your current responsive sizing, or bump it again here: */
+  width: clamp(180px, 35vw, 400px);
+  height: auto;
+  z-index: 1;
+}
 
