@@ -749,4 +749,20 @@ textarea:focus-visible {
   outline: 3px solid var(--bright-blue);
   outline-offset: 2px;
 }
+/* ─────────────────────────────────────────────────────────────────────────────
+   Keep the suggestion list from being cut off or buried under other content
+───────────────────────────────────────────────────────────────────────────── */
+
+.hero-wrapper,
+.hero-banner,
+.search-container {
+  /* allow absolutely‐positioned children to overflow */
+  overflow: visible;
+}
+
+/* lift the dropdown above everything else */
+.search-suggestions {
+  position: absolute;    /* ensure it’s absolutely positioned within .search-container */
+  z-index: 10000 !important;
+}
 
