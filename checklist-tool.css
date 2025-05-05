@@ -1,15 +1,15 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #ffffff;
+  background: #F8EFE0;
   color: #140F50;
 }
 
 .banner {
   background: #160c50;
   color: white;
-  padding: 2em 1em;
   text-align: center;
+  padding: 2em 1em;
 }
 
 .banner .logo {
@@ -19,57 +19,85 @@ body {
 
 h1 {
   margin: 0;
+  font-size: 2.2em;
+}
+
+p.intro {
+  font-size: 1.1em;
+  margin-top: 0.5em;
 }
 
 .form-container {
-  max-width: 960px;
+  max-width: 900px;
   margin: 2em auto;
   padding: 0 1em;
 }
 
 label {
-  font-weight: bold;
-  margin-top: 1em;
   display: block;
+  margin: 1.5em 0 0.5em;
+  font-weight: bold;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="url"],
+textarea {
   width: 100%;
-  padding: 0.6em;
-  margin-bottom: 1em;
-  border-radius: 5px;
+  padding: 0.7em;
   border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.category {
+  margin-top: 2em;
+  padding: 1em;
+  border-left: 6px solid #836bff;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.category h2 {
+  margin-top: 0;
+  color: #1448FF;
 }
 
 .slider-group {
-  margin-bottom: 2em;
-  padding: 1em;
-  background: #f9f9f9;
-  border-left: 5px solid #836bff;
+  margin: 1em 0;
+}
+
+.slider-group label {
+  display: block;
+  font-weight: normal;
+  margin-bottom: 0.3em;
+}
+
+input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 8px;
   border-radius: 5px;
+  background: linear-gradient(to right, #ff4e4e 0%, #ffe25a 50%, #36d67b 100%);
 }
 
-.slider-label {
-  margin-bottom: 0.5em;
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #140F50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.primary {
+  background: #1448FF;
+  color: white;
   font-weight: bold;
-}
-
-.range-wrap {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
-.range-wrap input[type="range"] {
-  flex-grow: 1;
-  margin: 0 1em;
-  accent-color: #1448FF;
-}
-
-.range-wrap span {
-  width: 30px;
-  text-align: center;
-  font-weight: bold;
+  font-size: 1em;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2em;
 }
 
 .output-section {
@@ -78,21 +106,11 @@ input[type="text"] {
 
 .output-section textarea {
   width: 100%;
-  padding: 1em;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 1em;
   font-family: monospace;
-}
-
-.primary {
-  margin-top: 2em;
-  padding: 0.8em 1.2em;
-  background-color: #1448FF;
-  color: white;
-  border: none;
+  background: #fff;
   border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .action-buttons {
@@ -112,10 +130,11 @@ input[type="text"] {
 }
 
 footer {
+  text-align: center;
   background: #140F50;
   color: white;
-  text-align: center;
   padding: 1em;
+  margin-top: 3em;
 }
 
 footer a {
