@@ -1,4 +1,3 @@
-/* General layout */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
@@ -8,9 +7,9 @@ body {
 
 .banner {
   background: #160c50;
-  color: white;
-  text-align: center;
+  color: #fff;
   padding: 2em 1em;
+  text-align: center;
 }
 
 .logo {
@@ -19,14 +18,13 @@ body {
 }
 
 h1 {
+  margin: 0.2em 0;
   font-size: 2.2em;
-  margin: 0.3em 0;
 }
 
 .intro {
   font-size: 1.1em;
-  max-width: 700px;
-  margin: 0 auto;
+  margin-top: 0.5em;
 }
 
 .form-container {
@@ -35,10 +33,9 @@ h1 {
   padding: 0 1em;
 }
 
-/* Form fields */
 label {
   display: block;
-  margin: 1.5em 0 0.5em;
+  margin: 1em 0 0.5em;
   font-weight: bold;
 }
 
@@ -46,49 +43,51 @@ input[type="text"],
 input[type="url"],
 textarea {
   width: 100%;
-  padding: 0.75em;
-  font-size: 1em;
+  padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-/* Checklist slider styles */
+.checklist h2 {
+  font-size: 1.6em;
+  margin-top: 2em;
+}
+
 .checklist fieldset {
   border: 2px solid #836bff;
   border-radius: 8px;
   padding: 1em;
-  margin: 1.5em 0;
+  margin-bottom: 1.5em;
   background: white;
 }
 
-.checklist legend {
-  font-weight: bold;
-  margin-bottom: 0.5em;
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  margin-top: 0.4em;
+  color: #555;
 }
 
 input[type="range"] {
   width: 100%;
-  appearance: none;
-  background: linear-gradient(to right, #ff4b4b, #ffd43b, #32cd32);
-  height: 10px;
-  border-radius: 5px;
-  outline: none;
-  margin: 0.5em 0;
+  margin-top: 0.5em;
+  -webkit-appearance: none;
+  height: 12px;
+  background: linear-gradient(to right, #D43131, #F4B400, #0F9D58);
+  border-radius: 6px;
 }
 
-.rating-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85em;
-  color: #555;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #160c50;
+  cursor: pointer;
 }
 
-/* Notes */
-.notes-section textarea {
-  font-family: inherit;
-}
-
-/* Buttons */
 .primary {
   background: #1448FF;
   color: white;
@@ -107,12 +106,10 @@ input[type="range"] {
 
 .output-section textarea {
   width: 100%;
-  height: auto;
+  border: 1px solid #ccc;
   padding: 1em;
   font-family: monospace;
-  font-size: 0.95em;
   background: #fff;
-  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
@@ -132,7 +129,6 @@ input[type="range"] {
   cursor: pointer;
 }
 
-/* Footer */
 footer {
   text-align: center;
   background: #140F50;
