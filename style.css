@@ -891,3 +891,9 @@ textarea:focus-visible {
   font-style: italic;
   color: #333;
 }
+#heroBanner {
+  scroll-margin-top: 80px; /* adjust to match any sticky header height */
+}
+html {
+  scroll-behavior: smooth;
+}
