@@ -897,3 +897,6 @@ textarea:focus-visible {
 html {
   scroll-behavior: smooth;
 }
+#skipToTiles {
+  scroll-margin-top: 40px; /* Adjust if needed */
+}
